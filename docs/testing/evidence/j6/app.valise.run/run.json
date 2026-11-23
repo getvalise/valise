@@ -1,0 +1,35 @@
+{
+  "journey": "j6",
+  "run": "2026-10-29-1e81a1",
+  "origin": "https://app.valise.run",
+  "label": "app.valise.run",
+  "runner_commit": "4688af537783e1f5ac7ba653d9161cb0e64b44d0",
+  "started_at": "2026-10-29T12:50:03.635Z",
+  "steps": [
+    {
+      "step": "owner routes refuse a member on the server, not only in the nav",
+      "ok": true
+    },
+    {
+      "step": "ids that are not the member's answer as missing",
+      "ok": true,
+      "detail": {
+        "todo": "No active item exists for todo:tdo_<uuid>.",
+        "memory": "No active item exists for memory:mem_<uuid>.",
+        "source": "No active item exists for source:src_<uuid>.",
+        "asset": "No active item exists for asset:ast_<uuid>."
+      }
+    },
+    {
+      "step": "revoking one token stops it and leaves the other working",
+      "ok": true
+    }
+  ],
+  "fixtures": [
+    "todo:tdo_148e9a73-dd2a-452d-87b6-7f9085e9195c"
+  ],
+  "cleanup": [
+    "bearer tokens labelled \"journey j6 solo 2026-10-29-1e81a1\" revoked",
+    "one synthetic to-do left completed in project journey-j6-2026-10-29-1e81a1"
+  ]
+}

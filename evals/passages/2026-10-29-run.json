@@ -1,0 +1,484 @@
+{
+  "book": "On Liberty, John Stuart Mill (Project Gutenberg #34901)",
+  "passages": 129,
+  "labelled": 127,
+  "author": "John Stuart Mill",
+  "queries": 20,
+  "top": 3,
+  "summary": {
+    "lexical": 12,
+    "rewritten": 12,
+    "vector": 17,
+    "hybrid": 18
+  },
+  "models": {
+    "rewrite": "anthropic/claude-haiku-4.5",
+    "embed": "baai/bge-m3"
+  },
+  "spent": {
+    "tokens": 68216,
+    "usd": 0.0029653299999999995
+  },
+  "rows": [
+    {
+      "question": "What does Mill say about when society may rightly use power over someone against their will?",
+      "pages": [11],
+      "terms": "harm to others principle",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["PDF pp. 1–2", "pp. 16–17", "p. 11"]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 14", "p. 11", "p. 66"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["pp. 1–2", "p. 11", "p. 12"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 11", "p. 4", "PDF pp. 1–2"]
+        }
+      }
+    },
+    {
+      "question": "What does Mill say about the danger of rule by the majority?",
+      "pages": [5],
+      "terms": "tyranny of the majority",
+      "top": {
+        "lexical": {
+          "found": false,
+          "labels": ["p. 136", "PDF pp. 1–2", null]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 5"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 78", "p. 5", "pp. 1–2"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 5", "PDF pp. 1–2", "p. 4"]
+        }
+      }
+    },
+    {
+      "question": "Would Mill allow silencing one person who disagrees with everyone else?",
+      "pages": [18],
+      "terms": "Mill harm principle individual liberty",
+      "top": {
+        "lexical": {
+          "found": false,
+          "labels": ["PDF pp. 1–2", null, "pp. 110–111"]
+        },
+        "rewritten": {
+          "found": false,
+          "labels": [null, "PDF pp. 1–2", "p. 14"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 18", "p. 19", "pp. 59–60"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 18", "p. 19", "PDF pp. 1–2"]
+        }
+      }
+    },
+    {
+      "question": "What happens to a true belief that is never questioned, according to Mill?",
+      "pages": [39],
+      "terms": "belief atrophies questioned unexamined",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["p. 48", "pp. 38–39", "p. 25"]
+        },
+        "rewritten": {
+          "found": false,
+          "labels": ["p. 25", "p. 24", "p. 45"]
+        },
+        "vector": {
+          "found": false,
+          "labels": ["p. 46", "p. 49", "p. 37"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["pp. 38–39", "p. 49", "p. 47"]
+        }
+      }
+    },
+    {
+      "question": "Why does Mill think that censoring discussion presumes we cannot be wrong?",
+      "pages": [19],
+      "terms": "infallibility, assumption, certainty, fallible",
+      "top": {
+        "lexical": {
+          "found": false,
+          "labels": ["p. 92", "PDF pp. 1–2", "p. 48"]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 19"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 19", "p. 18", "p. 24"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 19", "p. 24", "p. 37"]
+        }
+      }
+    },
+    {
+      "question": "What does Mill say about the trial and death of Socrates?",
+      "pages": [27],
+      "terms": "Socrates trial death persecution",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["pp. 27–28", "p. 35", "p. 131"]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 35", "pp. 27–28", "p. 32"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 35", "pp. 27–28", null]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["pp. 27–28", "p. 35", null]
+        }
+      }
+    },
+    {
+      "question": "When does Mill think expressing an opinion becomes incitement to an angry mob?",
+      "pages": [65],
+      "terms": "opinion direct incitement violence imminent",
+      "top": {
+        "lexical": {
+          "found": false,
+          "labels": ["p. 66", "PDF pp. 1–2", null]
+        },
+        "rewritten": {
+          "found": false,
+          "labels": ["p. 116", "p. 109", "p. 57"]
+        },
+        "vector": {
+          "found": false,
+          "labels": ["p. 18", "pp. 62–63", "p. 35"]
+        },
+        "hybrid": {
+          "found": false,
+          "labels": ["p. 66", "p. 18", "PDF pp. 1–2"]
+        }
+      }
+    },
+    {
+      "question": "Is human nature a machine built from a model, in Mill's view?",
+      "pages": [70],
+      "terms": "Mill nature machine model",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["p. 70", "p. 80", "p. 137"]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 70", "PDF pp. 1–2", null]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 70", "p. 73", "p. 80"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 70", "p. 80", "p. 74"]
+        }
+      }
+    },
+    {
+      "question": "Why does Mill worry that few people dare to be unusual?",
+      "pages": [79],
+      "terms": "conformity social pressure individuality",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["p. 76", "p. 79", "p. 37"]
+        },
+        "rewritten": {
+          "found": false,
+          "labels": ["p. 76", "p. 15", "p. 82"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 81", "p. 77", "p. 79"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 76", "p. 79", "p. 81"]
+        }
+      }
+    },
+    {
+      "question": "How does custom hold back human progress, according to Mill?",
+      "pages": [82],
+      "terms": "custom stifles individuality progress",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["p. 84", "p. 83", "p. 82"]
+        },
+        "rewritten": {
+          "found": false,
+          "labels": ["p. 83", "p. 35", "p. 84"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 83", "p. 6", "p. 82"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 83", "p. 82", "p. 6"]
+        }
+      }
+    },
+    {
+      "question": "What lesson does Mill draw from the stagnation of China?",
+      "pages": [84],
+      "terms": "China stagnation custom progress",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["p. 84", "PDF pp. 1–2", null]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 84", "p. 83", "p. 85"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 85", "p. 84", "p. 76"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 84", "p. 85", "p. 135"]
+        }
+      }
+    },
+    {
+      "question": "What does Mill say about the persecution of the Mormons?",
+      "pages": [109],
+      "terms": "Mill persecution Mormons religious liberty",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["p. 109", "PDF pp. 1–2", "p. 34"]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 109", null, "PDF pp. 1–2"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 109", "p. 35", "p. 31"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 109", "PDF pp. 1–2", null]
+        }
+      }
+    },
+    {
+      "question": "Should the law restrict amusements on Sundays?",
+      "pages": [107],
+      "terms": "Sunday closing laws amusements",
+      "top": {
+        "lexical": {
+          "found": false,
+          "labels": ["p. 108", "p. 103", "p. 121"]
+        },
+        "rewritten": {
+          "found": false,
+          "labels": ["p. 108", "p. 103", "p. 130"]
+        },
+        "vector": {
+          "found": false,
+          "labels": ["p. 108", "p. 103", "p. 121"]
+        },
+        "hybrid": {
+          "found": false,
+          "labels": ["p. 108", "p. 103", "p. 121"]
+        }
+      }
+    },
+    {
+      "question": "Is banning the sale of alcohol a violation of liberty, according to Mill?",
+      "pages": [114, 120],
+      "terms": "Mill liberty paternalism harm principle",
+      "top": {
+        "lexical": {
+          "found": false,
+          "labels": ["p. 115", null, "PDF pp. 1–2"]
+        },
+        "rewritten": {
+          "found": false,
+          "labels": [null, "PDF pp. 1–2", "p. 122"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 106", "p. 114", "p. 105"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["PDF pp. 1–2", "p. 114", null]
+        }
+      }
+    },
+    {
+      "question": "Can a person freely sell themselves into slavery?",
+      "pages": [123],
+      "terms": "voluntary slavery legal status",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["pp. 38–39", "p. 56", "p. 123"]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 56", "p. 123", "p. 129"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 123", "p. 122", "pp. 110–111"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 123", "p. 56", "p. 113"]
+        }
+      }
+    },
+    {
+      "question": "Why does Mill object to the state running all education?",
+      "pages": [127],
+      "terms": "state monopoly education individuality",
+      "top": {
+        "lexical": {
+          "found": false,
+          "labels": ["pp. 138–139", "PDF pp. 1–2", null]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 127", "p. 126", "p. 128"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 127", "p. 126", "p. 128"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 127", "p. 126", null]
+        }
+      }
+    },
+    {
+      "question": "May someone stop a person from crossing an unsafe bridge?",
+      "pages": [115],
+      "terms": "stop unsafe bridge crossing",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["p. 115", "p. 83", "p. 44"]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 115", "p. 83", "p. 44"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 115", "p. 130", "pp. 95–96"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 115", "pp. 95–96", "p. 118"]
+        }
+      }
+    },
+    {
+      "question": "Should the purchase of poisons be regulated?",
+      "pages": [114, 115],
+      "terms": "poison regulation purchase control laws",
+      "top": {
+        "lexical": {
+          "found": false,
+          "labels": ["p. 116"]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 116", "p. 114", "p. 115"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 115", "p. 114", "p. 120"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 116", "p. 115", "p. 114"]
+        }
+      }
+    },
+    {
+      "question": "Why is it dangerous for government to take over too many functions?",
+      "pages": [132],
+      "terms": "power concentration tyranny individual liberty",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["p. 114", "p. 132", "p. 129"]
+        },
+        "rewritten": {
+          "found": false,
+          "labels": ["p. 5", "pp. 1–2", "p. 79"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 132", "p. 133", "p. 4"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 132", "p. 114", "p. 127"]
+        }
+      }
+    },
+    {
+      "question": "When does Mill think a person may be punished for being drunk?",
+      "pages": [97],
+      "terms": "drunk in public places",
+      "top": {
+        "lexical": {
+          "found": true,
+          "labels": ["p. 117", "p. 97", "PDF pp. 1–2"]
+        },
+        "rewritten": {
+          "found": true,
+          "labels": ["p. 97"]
+        },
+        "vector": {
+          "found": true,
+          "labels": ["p. 117", "p. 97", "p. 121"]
+        },
+        "hybrid": {
+          "found": true,
+          "labels": ["p. 117", "p. 97", "p. 35"]
+        }
+      }
+    }
+  ]
+}

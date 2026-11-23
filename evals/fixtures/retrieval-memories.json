@@ -1,0 +1,375 @@
+{
+  "targets": [
+    {
+      "id": "mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+      "at": "2026-10-14",
+      "type": "decision",
+      "project": "valise",
+      "tags": ["search", "fts", "bm25"],
+      "title": "Valise search runs one BM25 query over a single FTS5 corpus, not per-concept indexes fused with RRF",
+      "body": "BM25 scores are relative to the corpus they come from, so three separate indexes produce scores that cannot be compared. Reciprocal rank fusion would fix the order but triples the row reads against D1's daily limits. One projection table feeds one external-content FTS5 index, and a concept filter is a column predicate. ADR-0001.",
+      "paraphrase": "why don't we keep a separate full-text index for each kind of item",
+      "question": "How are results for skills and to-dos ranked against each other?"
+    },
+    {
+      "id": "mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167",
+      "at": "2026-10-17",
+      "type": "decision",
+      "project": "valise",
+      "tags": ["search", "fts", "query"],
+      "title": "Search falls back to ORed terms only when the ANDed query returns nothing",
+      "body": "A question-shaped query such as \"how should I write a memory\" returned nothing, because every quoted term was joined with AND and no document holds the filler words. The query now runs with AND first and reruns with OR when that is empty, so BM25 ranks partial matches. Pure OR was rejected because it pads every list with filler hits. A stop-word list was rejected as a vocabulary to maintain.",
+      "paraphrase": "what happens when a question contains filler words no document has",
+      "question": "Why does a sentence-shaped lookup still find results?"
+    },
+    {
+      "id": "mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+      "at": "2026-10-17",
+      "type": "insight",
+      "project": "valise",
+      "tags": ["d1", "console", "sqlite"],
+      "title": "Console list filters use instr() instead of LIKE because D1 rejects LIKE patterns over 50 bytes",
+      "body": "A 49-character search term made every console list answer 500. D1 caps a LIKE pattern at 50 bytes, and the padding around the term pushed it over. instr() has no cap and keeps percent and underscore literal. Routing the box through the FTS index was rejected: it matches whole tokens and reorders the list by rank.",
+      "paraphrase": "why did pasting a long title into the filter box crash the page",
+      "question": "What pattern length limit did the database impose?"
+    },
+    {
+      "id": "mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+      "at": "2026-10-13",
+      "type": "fact",
+      "project": "valise",
+      "tags": ["todos", "durable-objects", "claiming"],
+      "title": "To-do state transitions go through the coordinator Durable Object, never a direct UPDATE",
+      "body": "The per-user coordinator owns claim, complete, block and lease expiry, and persists the fencing token floor before it answers. D1 mirrors the state for display. Any UPDATE todos SET state outside app/do/ is a bug. ADR-0002.",
+      "paraphrase": "who is allowed to change whether a ticket is taken or finished",
+      "question": "Where must a claim or a completion be written?"
+    },
+    {
+      "id": "mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+      "at": "2026-10-17",
+      "type": "insight",
+      "project": "valise",
+      "tags": ["evals", "playwright", "workbench"],
+      "title": "Committing a single-case eval run breaks the Playwright test that opens a matrix cell",
+      "body": "The workbench evals tab renders only the newest run in the index. The UI test clicks the memory-preference row, and a run made with --case for one case has no such row, so the test times out. Commit full runs, or delete the partial run files and rebuild the index.",
+      "paraphrase": "why did the browser test time out after I saved a partial run",
+      "question": "Which runs are safe to check in?"
+    },
+    {
+      "id": "mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+      "at": "2026-10-17",
+      "type": "decision",
+      "project": "valise",
+      "tags": ["migrations", "deploy", "d1"],
+      "title": "A migration that drops or renames declares a valise:by-hand line and stops the deploy",
+      "body": "scripts/deploy.sh applies additive migrations before it deploys. A destructive one carries a -- valise:by-hand comment naming what it does, and the build stops instead of applying it, leaving production on the code it already serves. npm run db:audit classifies every file the same way offline inside verify. ADR-0008.",
+      "paraphrase": "how does a destructive schema change reach production",
+      "question": "What happens in the build when a migration removes a column?"
+    },
+    {
+      "id": "mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+      "at": "2026-10-18",
+      "type": "fact",
+      "project": "valise",
+      "tags": ["evals", "cost", "openrouter"],
+      "title": "A full seven-model eval run costs about $1.12, and Sonnet is 58% of it",
+      "body": "Measured on run 2026-10-18T10-39-38, 37 cases, through OpenRouter with usage accounting on. Sonnet costs $0.65, grok $0.18, gemini $0.12, kimi $0.09, gpt-5.4-mini $0.04, haiku $0.03 and gpt-6-luna under a cent. Probe with --models and --case before a whole run.",
+      "paraphrase": "how expensive is running every tool-choice case against all the models",
+      "question": "What does one complete run of the suite cost?"
+    },
+    {
+      "id": "mem_656500ed-e622-4e2f-a6c6-1811add63b65",
+      "at": "2026-10-18",
+      "type": "insight",
+      "project": "valise",
+      "tags": ["evals", "hooks", "nudges"],
+      "title": "gpt-5.4-mini reads capture-this after the Stop hook and then stops, under every wording tried",
+      "body": "In 11 of 12 episodes the model read the skill and made no further call, on both the capture case and the nothing case. The skill ends with \"save nothing\" if nothing is expensive to rediscover, and the hook says \"Otherwise stop\". Two hook rewordings scored over three runs each did not move it. Dead end.",
+      "paraphrase": "which small model never actually saves after the end-of-turn reminder",
+      "question": "Why does the end-of-session prompt fail on the small OpenAI model?"
+    },
+    {
+      "id": "mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+      "at": "2026-10-17",
+      "type": "decision",
+      "project": "valise",
+      "tags": ["skills", "mcp", "surface"],
+      "title": "Skills stay exposed as skill_* tools, because no model searched a registry when told to",
+      "body": "skills-search-both scored 0/28: told to search two registries before saving, no model searched either. The preloaded control, where every skill is its own tool, read the skill in 15/28. Telling a model to search does not make it search; exposing the skill as a tool does for most models.",
+      "paraphrase": "should procedures hide behind a lookup call instead of being listed up front",
+      "question": "Why is every procedure its own entry in the tool list?"
+    },
+    {
+      "id": "mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+      "at": "2026-10-17",
+      "type": "reference",
+      "project": "valise",
+      "tags": ["cloudflare", "logs", "cron"],
+      "title": "Past Worker logs are readable in the Cloudflare dashboard, not with the wrangler OAuth token",
+      "body": "wrangler tail shows only live events, and the observability telemetry API refuses the wrangler OAuth token. The dashboard's Workers logs view holds the nightly cron's trim line and earlier requests. Two dead ends before that.",
+      "paraphrase": "where can I see what the nightly job printed yesterday",
+      "question": "How do I read old log lines from the scheduled trim?"
+    },
+    {
+      "id": "mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+      "at": "2026-10-15",
+      "type": "preference",
+      "project": "valise",
+      "tags": ["github", "workflow"],
+      "title": "Open pull requests ready for review, never as drafts",
+      "body": "The owner reviews from the PR list and skips drafts. Open the PR ready, wait for the verify check, and merge only on green with the branch current with main.",
+      "paraphrase": "should the change start out as a work in progress on GitHub",
+      "question": "How should a new PR be opened?"
+    },
+    {
+      "id": "mem_25f463a7-26a7-40c6-acac-e47b94620780",
+      "at": "2026-10-18",
+      "type": "reference",
+      "project": "valise",
+      "tags": ["skills", "registry", "api"],
+      "title": "The skills.sh leaderboard is readable without auth at /api/skills/all-time/{page}",
+      "body": "The documented /api/v1 needs a Vercel OIDC token. The unauthenticated endpoint returns the all-time ranking a page at a time, and the top list only needs page 0. Trending is the same shape under a different path.",
+      "paraphrase": "how to get the most popular community procedures without a token",
+      "question": "Which endpoint returns the public ranking?"
+    },
+    {
+      "id": "mem_2f68b5ff-3a79-45b3-b80e-e49d981035e1",
+      "at": "2026-10-18",
+      "type": "insight",
+      "project": "valise",
+      "tags": ["react-router", "console", "optimistic-ui"],
+      "title": "On a long console list, fetcher.formData does not paint an optimistic value",
+      "body": "React Router renders fetcher state inside a transition, and on a long list that transition keeps getting superseded, so the posted value never paints. The submit handler writes the value into a small module store read with useSyncExternalStore, which clears when new fetcher data lands.",
+      "paraphrase": "why does an edited field flicker back to the old text on the big page",
+      "question": "Why doesn't the instant update show on long lists?"
+    },
+    {
+      "id": "mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+      "at": "2026-10-17",
+      "type": "decision",
+      "project": "valise",
+      "tags": ["hooks", "startup", "brief"],
+      "title": "The startup brief lists three projects, five to-do titles and three memories instead of the ready queue",
+      "body": "A 15-item list_ready costs 1,500 to 2,600 input tokens before the model does anything, about 175 per to-do. The bounded brief costs 359 to 508 over the reminder alone, and with it 7/7 models asked for blog work by name. Most fetched means fetch calls in the last 30 days.",
+      "paraphrase": "what gets injected when a session begins instead of every open ticket",
+      "question": "What does the session-start summary contain?"
+    },
+    {
+      "id": "mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+      "at": "2026-10-14",
+      "type": "fact",
+      "project": "valise",
+      "tags": ["backups", "d1", "fts"],
+      "title": "D1 cannot export an FTS5 virtual table, so backups name the authoritative tables",
+      "body": "An unflagged d1 export fails by design on search_fts. Backups list the ordinary tables, and restore is scripts/restore.sh followed by reindex --all, which re-runs every project() and rebuilds the index.",
+      "paraphrase": "why does a plain dump of the whole database fail",
+      "question": "How is the index brought back after a restore?"
+    },
+    {
+      "id": "mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+      "at": "2026-10-11",
+      "type": "preference",
+      "project": "acme-docs",
+      "tags": ["docs", "repo-layout"],
+      "title": "Docs content lives in documentation/, and the root docs/ folder is internal planning only",
+      "body": "Published pages go under documentation/. The root docs/ folder holds plans and specs that never ship to the site. A page written into docs/ by mistake builds fine and never appears.",
+      "paraphrase": "where do the published pages go in the repository",
+      "question": "Which folder holds the pages that ship to the site?"
+    },
+    {
+      "id": "mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+      "at": "2026-10-09",
+      "type": "decision",
+      "project": "acme-docs",
+      "tags": ["evals", "retrieval", "llms-txt"],
+      "title": "The docs eval measures findability with BM25 over llms.txt chunks, top three into context",
+      "body": "Phase 3 of the docs eval chunks the llms.txt pages, runs BM25 over them, and puts the top 3 chunks into context. A question the model answers only with the chunks in view is a findability failure in the pages, not in the model.",
+      "paraphrase": "how will we test whether an answer can be located in the pages",
+      "question": "How does the evaluation pick context for each question?"
+    },
+    {
+      "id": "mem_629cd6e2-18d6-4abe-89bd-ca8bfcca3d4d",
+      "at": "2026-10-05",
+      "type": "reference",
+      "project": "acme-docs",
+      "tags": ["slides", "google-drive"],
+      "title": "Copy the team's Google Slides template rather than starting a blank deck",
+      "body": "Talks start from the template 1ExampleSlidesTemplateId_000000000000000000, copied with gws drive files copy. A blank deck loses the brand fonts and the title layouts.",
+      "paraphrase": "which presentation do I duplicate when preparing a talk",
+      "question": "What is the starting point for a new deck?"
+    },
+    {
+      "id": "mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+      "at": "2026-10-03",
+      "type": "preference",
+      "project": "acme-docs",
+      "tags": ["diataxis", "writing"],
+      "title": "Pick the Diátaxis mode first and never mix tutorial and reference in one page",
+      "body": "Decide whether a page is a tutorial, a how-to, a reference or an explanation before writing it. A how-to that stops to explain background turns into two pages done badly.",
+      "paraphrase": "can a step-by-step guide also explain the background",
+      "question": "What is the rule for page types?"
+    },
+    {
+      "id": "mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+      "at": "2026-10-02",
+      "type": "preference",
+      "project": "blog",
+      "tags": ["charts", "design"],
+      "title": "Charts follow Few and Tufte: minimal gridlines, colour only where it carries meaning",
+      "body": "High data-ink ratio, clear axis labels, no decorative colour. Brand colours for work posts, anything for personal ones.",
+      "paraphrase": "how should plots look in posts",
+      "question": "What visual style do figures use?"
+    },
+    {
+      "id": "mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+      "at": "2026-09-28",
+      "type": "fact",
+      "project": "blog",
+      "tags": ["hosting", "cloudflare"],
+      "title": "Personal web apps deploy to Cloudflare, and work apps ship as hosted dashboards",
+      "body": "Side projects go on Cloudflare Workers or Pages. Work dashboards go on the team's hosted warehouse, or Vercel when that does not fit.",
+      "paraphrase": "where do side projects get hosted",
+      "question": "Where do small apps go live?"
+    },
+    {
+      "id": "mem_a1459401-d934-4f4c-a235-42f1eb20969a",
+      "at": "2026-10-06",
+      "type": "decision",
+      "project": "blog",
+      "tags": ["writing", "editing"],
+      "title": "Blog drafts get an unslop pass before publishing",
+      "body": "Every draft is cut for AI tells before it goes out: no throat-clearing, no wrap-up paragraph, no not-just-X-but-Y. The pass runs on the final text, not on an outline.",
+      "paraphrase": "what cleanup happens before a post goes live",
+      "question": "What editing do drafts get?"
+    },
+    {
+      "id": "mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "at": "2026-09-20",
+      "type": "fact",
+      "project": "homelab",
+      "tags": ["nas", "services"],
+      "title": "Prefect, Portainer, SeaweedFS and Postgres run on the home NAS",
+      "body": "The NAS hosts the Prefect server and workers, Portainer for the containers, SeaweedFS as the S3-compatible store, and one Postgres instance shared by Prefect and the side projects.",
+      "paraphrase": "what services are on the storage box at home",
+      "question": "What runs on the home server?"
+    },
+    {
+      "id": "mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+      "at": "2026-09-24",
+      "type": "insight",
+      "project": "homelab",
+      "tags": ["seaweedfs", "s3"],
+      "title": "SeaweedFS answers 404 on bucket calls unless the filer starts with its S3 gateway",
+      "body": "The S3 API is a separate gateway on the filer. Starting the filer without it leaves the master healthy and every bucket call returning 404, which looks like a missing bucket rather than a missing service.",
+      "paraphrase": "why does object storage say the bucket does not exist when it does",
+      "question": "Why do bucket requests return not found?"
+    },
+    {
+      "id": "mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+      "at": "2026-09-30",
+      "type": "preference",
+      "project": "homelab",
+      "tags": ["python", "tooling"],
+      "title": "Use uv for Python, never pip or poetry",
+      "body": "Scripts and flows install and run through uv. A bare python or pip call gets the wrong interpreter on the NAS.",
+      "paraphrase": "how should I install a package for the scheduler scripts",
+      "question": "Which package manager do the flows use?"
+    }
+  ],
+  "contradictions": {
+    "topic": "the embedding model for the docs search prototype",
+    "newest": "mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+    "memories": [
+      {
+        "id": "mem_a3819b6f-46e5-45d6-8f46-d742b5b64281",
+        "at": "2026-09-02",
+        "type": "decision",
+        "project": "acme-docs",
+        "tags": ["docs-search", "embeddings"],
+        "title": "Docs search prototype embeds every page with the bge-small-en-v1.5 embedding model",
+        "body": "The docs search prototype uses bge-small-en-v1.5 as its embedding model. It is small enough to embed every docs page on a laptop in under two minutes, and the prototype only needs to show that semantic search beats keyword search on the docs."
+      },
+      {
+        "id": "mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26",
+        "at": "2026-09-21",
+        "type": "decision",
+        "project": "acme-docs",
+        "tags": ["docs-search", "embeddings"],
+        "title": "Docs search prototype switched its embedding model to bge-base-en-v1.5",
+        "body": "The docs search prototype now embeds pages with bge-base-en-v1.5. The small model missed questions about SQL functions whose names it split badly, and the base model fixed most of them at twice the embedding time."
+      },
+      {
+        "id": "mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+        "at": "2026-10-09",
+        "type": "decision",
+        "project": "acme-docs",
+        "tags": ["docs-search", "embeddings"],
+        "title": "Settled on embeddinggemma-300m for docs search",
+        "body": "For the prototype, embeddinggemma-300m is the embedding model. It answered 112 of the 120 eval questions with the right page in the top three, against 97 for the previous model, and it runs on Workers AI."
+      },
+      {
+        "id": "mem_31f9e204-eecb-4fe7-ac15-1daa6b346186",
+        "at": "2026-09-05",
+        "type": "decision",
+        "project": "acme-docs",
+        "tags": ["docs-search", "chunking"],
+        "title": "Docs search prototype chunks pages by heading, capped at 400 tokens",
+        "body": "Each docs page is split at its h2 and h3 headings, and a section over 400 tokens is split again on paragraphs. Fixed-size windows cut code samples in half."
+      },
+      {
+        "id": "mem_985986b9-4045-41d3-935f-93e433e124ea",
+        "at": "2026-09-12",
+        "type": "fact",
+        "project": "acme-docs",
+        "tags": ["docs-search", "evals"],
+        "title": "The docs search eval set holds 120 questions, each labelled with the page that answers it",
+        "body": "Questions come from support threads and the community Slack, rewritten so they do not quote the page. Each carries one page id as its answer, and the score is whether that page is in the top three results."
+      },
+      {
+        "id": "mem_4a25d0c1-17ff-4f95-aada-3182ea83f669",
+        "at": "2026-09-15",
+        "type": "decision",
+        "project": "acme-docs",
+        "tags": ["docs-search", "duckdb", "vss"],
+        "title": "Docs search vectors live in DuckDB with the vss extension",
+        "body": "The prototype stores page vectors in a DuckDB table with an HNSW index from the vss extension, so the search is one SQL query and the index ships as a single file."
+      },
+      {
+        "id": "mem_6f6794bf-1071-4b71-8e04-3fecb71a751e",
+        "at": "2026-09-18",
+        "type": "decision",
+        "project": "acme-docs",
+        "tags": ["docs-search", "reranking"],
+        "title": "Docs search prototype dropped the cross-encoder reranker",
+        "body": "The reranker moved two questions into the top three and added 300 ms to every query. Not worth it for the prototype."
+      },
+      {
+        "id": "mem_5ed2513e-f2d3-4ebc-969b-bd71e0c2683d",
+        "at": "2026-09-25",
+        "type": "fact",
+        "project": "acme-docs",
+        "tags": ["docs-search", "latency"],
+        "title": "Docs search has a 200 ms latency budget from keystroke to results",
+        "body": "The search box queries on every keystroke after a 150 ms debounce, so the search itself has 200 ms, embedding the query included."
+      },
+      {
+        "id": "mem_97dfc85a-932c-4054-8089-1077b0c3cbed",
+        "at": "2026-09-08",
+        "type": "reference",
+        "project": "acme-docs",
+        "tags": ["docs-search", "llms-txt"],
+        "title": "The docs search prototype indexes llms-full.txt, not the rendered site",
+        "body": "llms-full.txt holds every page as Markdown in one file, which is easier to chunk than the rendered HTML and is rebuilt on every docs deploy."
+      },
+      {
+        "id": "mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb",
+        "at": "2026-09-29",
+        "type": "insight",
+        "project": "acme-docs",
+        "tags": ["docs-search", "embeddings", "sql"],
+        "title": "Embedding models split DuckDB function names into meaningless pieces",
+        "body": "Names such as read_parquet and list_aggregate tokenize into fragments, so a question naming the function scores low against the page about it. Keyword search catches these, which is the case for keeping BM25 next to vectors in the docs search."
+      }
+    ]
+  }
+}

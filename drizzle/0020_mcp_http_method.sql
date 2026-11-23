@@ -1,0 +1,1 @@
+ALTER TABLE `mcp_calls` ADD `http_method` text;

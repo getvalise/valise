@@ -1,0 +1,70 @@
+
+> evals
+> node evals/run.mjs --case asset-*,source-bookmark,search-broad-library-author --repeat 3 --rerank fts --note Asset processing integrated0038: changed asset coverage descriptions; isolated synthetic store; targeted discovery regression
+
+24 tools 4419e66904c2, store a1fc5cb45656, from http://127.0.0.1:4214/mcp, 4 cases, 6 models, 3× each
+pass  anthropic/claude-haiku-5.5  search-broad-library-author #1  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  search-broad-library-author #2  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  search-broad-library-author #3  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  asset-upload-handoff #1  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  asset-upload-handoff #2  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  asset-upload-handoff #3  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  asset-download #1  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  asset-download #2  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  asset-download #3  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  source-bookmark #1  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  source-bookmark #2  → ✓ 1t
+pass  anthropic/claude-haiku-5.5  source-bookmark #3  → ✓ 1t
+pass  openai/gpt-6-luna  search-broad-library-author #1  → ✓ 1t
+pass  openai/gpt-6-luna  search-broad-library-author #2  → ✓ 1t
+pass  openai/gpt-6-luna  search-broad-library-author #3  → ✓ 1t
+pass  openai/gpt-6-luna  asset-upload-handoff #1  → ✓ 1t
+pass  openai/gpt-6-luna  asset-upload-handoff #2  → ✓ 1t
+pass  openai/gpt-6-luna  asset-upload-handoff #3  → ✓ 1t
+pass  openai/gpt-6-luna  asset-download #1  → ✓ 1t
+pass  openai/gpt-6-luna  asset-download #2  → ✓ 1t
+pass  openai/gpt-6-luna  asset-download #3  → ✓ 1t
+pass  openai/gpt-6-luna  source-bookmark #1  → ✓ 1t
+pass  openai/gpt-6-luna  source-bookmark #2  → ✓ 1t
+pass  openai/gpt-6-luna  source-bookmark #3  → ✓ 2t over
+pass  openai/gpt-5.4-mini  search-broad-library-author #1  → ✓ 1t
+pass  openai/gpt-5.4-mini  search-broad-library-author #2  → ✓ 1t
+pass  openai/gpt-5.4-mini  search-broad-library-author #3  → ✓ 1t
+pass  openai/gpt-5.4-mini  asset-upload-handoff #1  → ✓ 1t
+pass  openai/gpt-5.4-mini  asset-upload-handoff #2  → ✓ 1t
+pass  openai/gpt-5.4-mini  asset-upload-handoff #3  → ✓ 1t
+pass  openai/gpt-5.4-mini  asset-download #1  → ✓ 1t
+pass  openai/gpt-5.4-mini  asset-download #2  → ✓ 1t
+pass  openai/gpt-5.4-mini  asset-download #3  → ✓ 1t
+pass  openai/gpt-5.4-mini  source-bookmark #1  → ✓ 1t
+pass  openai/gpt-5.4-mini  source-bookmark #2  → ✓ 1t
+pass  openai/gpt-5.4-mini  source-bookmark #3  → ✓ 1t
+pass  google/gemini-3.8-flash  search-broad-library-author #1  → ✓ 1t
+pass  google/gemini-3.8-flash  search-broad-library-author #2  → ✓ 1t
+pass  google/gemini-3.8-flash  search-broad-library-author #3  → ✓ 1t
+pass  google/gemini-3.8-flash  asset-upload-handoff #1  → ✓ 1t
+pass  google/gemini-3.8-flash  asset-upload-handoff #2  → ✓ 1t
+pass  google/gemini-3.8-flash  asset-upload-handoff #3  → ✓ 1t
+pass  google/gemini-3.8-flash  asset-download #1  → ✓ 1t
+pass  google/gemini-3.8-flash  asset-download #2  → ✓ 1t
+pass  google/gemini-3.8-flash  asset-download #3  → ✓ 1t
+pass  google/gemini-3.8-flash  source-bookmark #1  → ✓ 1t
+pass  google/gemini-3.8-flash  source-bookmark #2  → ✓ 1t
+pass  google/gemini-3.8-flash  source-bookmark #3  → ✓ 1t
+pass  x-ai/grok-4.3  search-broad-library-author #1  → ✓ 1t
+pass  x-ai/grok-4.3  search-broad-library-author #2  → ✓ 1t
+pass  x-ai/grok-4.3  search-broad-library-author #3  → ✓ 1t
+pass  x-ai/grok-4.3  asset-upload-handoff #1  → ✓ 1t
+pass  x-ai/grok-4.3  asset-upload-handoff #2  → ✓ 1t
+pass  x-ai/grok-4.3  asset-upload-handoff #3  → ✓ 1t
+pass  x-ai/grok-4.3  asset-download #1  → ✓ 1t
+pass  x-ai/grok-4.3  asset-download #2  → ✓ 1t
+pass  x-ai/grok-4.3  asset-download #3  → ✓ 1t
+pass  x-ai/grok-4.3  source-bookmark #1  → ✓ 1t
+pass  x-ai/grok-4.3  source-bookmark #2  → ✓ 1t
+pass  x-ai/grok-4.3  source-bookmark #3  → ✓ 1t
+pass  moonshotai/kimi-k2.6  search-broad-library-author #1  → ✓ 1t
+pass  moonshotai/kimi-k2.6  search-broad-library-author #2  → ✓ 1t
+pass  moonshotai/kimi-k2.6  search-broad-library-author #3  → ✓ 1t
+pass  moonshotai/kimi-k2.6  asset-upload-handoff #1  → ✓ 1t
+pass  moonshotai/kimi-k2.6  asset-upload-handoff #2  → ✓ 1t

@@ -1,0 +1,86 @@
+{
+  "book": "On Liberty, John Stuart Mill (Project Gutenberg #34901)",
+  "front_matter_pages": 2,
+  "queries": [
+    {
+      "question": "What does Mill say about when society may rightly use power over someone against their will?",
+      "phrase": "is to prevent harm to others"
+    },
+    {
+      "question": "What does Mill say about the danger of rule by the majority?",
+      "phrase": "the tyranny of the majority"
+    },
+    {
+      "question": "Would Mill allow silencing one person who disagrees with everyone else?",
+      "phrase": "If all mankind minus one"
+    },
+    {
+      "question": "What happens to a true belief that is never questioned, according to Mill?",
+      "phrase": "dead dogma, not a living truth"
+    },
+    {
+      "question": "Why does Mill think that censoring discussion presumes we cannot be wrong?",
+      "phrase": "All silencing of discussion is an assumption of infallibility"
+    },
+    {
+      "question": "What does Mill say about the trial and death of Socrates?",
+      "phrase": "was put to death by his countrymen"
+    },
+    {
+      "question": "When does Mill think expressing an opinion becomes incitement to an angry mob?",
+      "phrase": "corn-dealers are starvers of the poor"
+    },
+    {
+      "question": "Is human nature a machine built from a model, in Mill's view?",
+      "phrase": "Human nature is not a machine"
+    },
+    {
+      "question": "Why does Mill worry that few people dare to be unusual?",
+      "phrase": "That so few now dare to be eccentric"
+    },
+    {
+      "question": "How does custom hold back human progress, according to Mill?",
+      "phrase": "The despotism of custom is everywhere"
+    },
+    {
+      "question": "What lesson does Mill draw from the stagnation of China?",
+      "phrase": "We have a warning example in China"
+    },
+    {
+      "question": "What does Mill say about the persecution of the Mormons?",
+      "phrase": "the language of downright persecution"
+    },
+    {
+      "question": "Should the law restrict amusements on Sundays?",
+      "phrase": "Sabbatarian legislation"
+    },
+    {
+      "question": "Is banning the sale of alcohol a violation of liberty, according to Mill?",
+      "phrase": "the Maine Law"
+    },
+    {
+      "question": "Can a person freely sell themselves into slavery?",
+      "phrase": "should be free not to be free"
+    },
+    {
+      "question": "Why does Mill object to the state running all education?",
+      "phrase": "mere contrivance for moulding people to be exactly like one another"
+    },
+    {
+      "question": "May someone stop a person from crossing an unsafe bridge?",
+      "phrase": "attempting to cross a bridge"
+    },
+    {
+      "question": "Should the purchase of poisons be regulated?",
+      "phrase": "the sale of poisons"
+    },
+    {
+      "question": "Why is it dangerous for government to take over too many functions?",
+      "phrase": "the great evil of adding unnecessarily to its power"
+    },
+    {
+      "question": "When does Mill think a person may be punished for being drunk?",
+      "phrase": "punished simply for being drunk"
+    }
+  ]
+}

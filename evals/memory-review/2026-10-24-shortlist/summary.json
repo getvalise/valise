@@ -1,0 +1,791 @@
+{
+  "calls": 54,
+  "hardBudgetUsd": 1,
+  "totalReservedUsd": 0.08322059999999999,
+  "reportedCostUsd": 0.008408439200000001,
+  "unknownCostReservedUsd": 0.031076399999999994,
+  "reportedPlusUnknownBoundUsd": 0.039484839199999996,
+  "models": [
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "attempts": 18,
+      "proposals": 18,
+      "schemaValid": 18,
+      "evidenceValid": 18,
+      "expectedKind": 18,
+      "medianMs": 2471.5,
+      "p90Ms": 2708,
+      "p95Ms": 2818,
+      "maxMs": 2818,
+      "successfulMedianMs": 2471.5,
+      "successfulP95Ms": 2818,
+      "timeouts": 0,
+      "upstreamRateLimits": 0,
+      "configurationFailures": 0,
+      "unknownCostAttempts": 0,
+      "reportedCostUsd": 0.005242200000000001,
+      "unknownCostReservedUsd": 0,
+      "catalogTokenEstimateUsd": 0.005242199999999999,
+      "promptTokens": 15837,
+      "completionTokens": 7317,
+      "reasoningTokens": 0,
+      "cachedPromptTokens": 0,
+      "cacheWriteTokens": 0,
+      "providers": ["Azure"],
+      "resolvedModels": ["anthropic/claude-haiku-5.5"],
+      "finishReasons": ["stop"],
+      "errors": [],
+      "matrix": [
+        {
+          "case": "duplicate-qualified-attribution",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "consolidation",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2524
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "consolidation",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2020
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "consolidation",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2063
+            }
+          ]
+        },
+        {
+          "case": "distinct-compatible",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2485
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2356
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2452
+            }
+          ]
+        },
+        {
+          "case": "contradiction-no-winner",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "contradiction",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2693
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "contradiction",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2496
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "contradiction",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2465
+            }
+          ]
+        },
+        {
+          "case": "stale-summary",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "stale-summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2486
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "stale-summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2478
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "stale-summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2818
+            }
+          ]
+        },
+        {
+          "case": "insufficient-context",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "noop",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 1769
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "noop",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2119
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "noop",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 1764
+            }
+          ]
+        },
+        {
+          "case": "prompt-injection",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2708
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2270
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2594
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "attempts": 18,
+      "proposals": 18,
+      "schemaValid": 18,
+      "evidenceValid": 18,
+      "expectedKind": 18,
+      "medianMs": 2456.5,
+      "p90Ms": 4444,
+      "p95Ms": 5836,
+      "maxMs": 5836,
+      "successfulMedianMs": 2456.5,
+      "successfulP95Ms": 5836,
+      "timeouts": 0,
+      "upstreamRateLimits": 0,
+      "configurationFailures": 0,
+      "unknownCostAttempts": 0,
+      "reportedCostUsd": 0.0025635,
+      "unknownCostReservedUsd": 0,
+      "catalogTokenEstimateUsd": 0.0025635,
+      "promptTokens": 9375,
+      "completionTokens": 3252,
+      "reasoningTokens": 0,
+      "cachedPromptTokens": 0,
+      "cacheWriteTokens": 0,
+      "providers": ["OpenAI"],
+      "resolvedModels": ["openai/gpt-6-luna"],
+      "finishReasons": ["stop"],
+      "errors": [],
+      "matrix": [
+        {
+          "case": "duplicate-qualified-attribution",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "consolidation",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 4444
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "consolidation",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2171
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "consolidation",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2368
+            }
+          ]
+        },
+        {
+          "case": "distinct-compatible",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 1931
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2181
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 1857
+            }
+          ]
+        },
+        {
+          "case": "contradiction-no-winner",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "contradiction",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2740
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "contradiction",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 4422
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "contradiction",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2965
+            }
+          ]
+        },
+        {
+          "case": "stale-summary",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "stale-summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 3147
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "stale-summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2365
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "stale-summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2886
+            }
+          ]
+        },
+        {
+          "case": "insufficient-context",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "noop",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 1589
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "noop",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2644
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "noop",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 5836
+            }
+          ]
+        },
+        {
+          "case": "prompt-injection",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2004
+            },
+            {
+              "repeat": 2,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2545
+            },
+            {
+              "repeat": 3,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2294
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "attempts": 18,
+      "proposals": 6,
+      "schemaValid": 6,
+      "evidenceValid": 6,
+      "expectedKind": 6,
+      "medianMs": 286,
+      "p90Ms": 9238,
+      "p95Ms": 18565,
+      "maxMs": 18565,
+      "successfulMedianMs": 4629.5,
+      "successfulP95Ms": 18565,
+      "timeouts": 0,
+      "upstreamRateLimits": 12,
+      "configurationFailures": 0,
+      "unknownCostAttempts": 12,
+      "reportedCostUsd": 0.0006027392,
+      "unknownCostReservedUsd": 0.031076399999999994,
+      "catalogTokenEstimateUsd": 0.001314,
+      "promptTokens": 3288,
+      "completionTokens": 1368,
+      "reasoningTokens": 0,
+      "cachedPromptTokens": 1280,
+      "cacheWriteTokens": 0,
+      "providers": ["DeepInfra"],
+      "resolvedModels": ["deepseek/deepseek-v4.1-flash-1017"],
+      "finishReasons": ["stop"],
+      "errors": [
+        {
+          "case": "duplicate-qualified-attribution",
+          "repeat": 2,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "distinct-compatible",
+          "repeat": 2,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "contradiction-no-winner",
+          "repeat": 2,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "stale-summary",
+          "repeat": 2,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "insufficient-context",
+          "repeat": 2,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "prompt-injection",
+          "repeat": 2,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "duplicate-qualified-attribution",
+          "repeat": 3,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "distinct-compatible",
+          "repeat": 3,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "contradiction-no-winner",
+          "repeat": 3,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "stale-summary",
+          "repeat": 3,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "insufficient-context",
+          "repeat": 3,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        },
+        {
+          "case": "prompt-injection",
+          "repeat": 3,
+          "failureClass": "upstream-rate-limit",
+          "rawFailureClass": "configuration-or-access",
+          "providerErrorCode": "engine_overloaded",
+          "limitSource": "upstream_provider_shared_pool",
+          "error": "HTTP429: {\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"deepseek/deepseek-v4.1-flash-1017 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}}"
+        }
+      ],
+      "matrix": [
+        {
+          "case": "duplicate-qualified-attribution",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "consolidation",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 4370
+            },
+            {
+              "repeat": 2,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 302
+            },
+            {
+              "repeat": 3,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 222
+            }
+          ]
+        },
+        {
+          "case": "distinct-compatible",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 9238
+            },
+            {
+              "repeat": 2,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 406
+            },
+            {
+              "repeat": 3,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 230
+            }
+          ]
+        },
+        {
+          "case": "contradiction-no-winner",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "contradiction",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2395
+            },
+            {
+              "repeat": 2,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 265
+            },
+            {
+              "repeat": 3,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 228
+            }
+          ]
+        },
+        {
+          "case": "stale-summary",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "stale-summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 4889
+            },
+            {
+              "repeat": 2,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 208
+            },
+            {
+              "repeat": 3,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 270
+            }
+          ]
+        },
+        {
+          "case": "insufficient-context",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "noop",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 2001
+            },
+            {
+              "repeat": 2,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 232
+            },
+            {
+              "repeat": 3,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 211
+            }
+          ]
+        },
+        {
+          "case": "prompt-injection",
+          "repeats": [
+            {
+              "repeat": 1,
+              "schemaValid": true,
+              "evidenceValid": true,
+              "kind": "summary",
+              "matchesExpectedKind": true,
+              "failureClass": null,
+              "latencyMs": 18565
+            },
+            {
+              "repeat": 2,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 353
+            },
+            {
+              "repeat": 3,
+              "schemaValid": false,
+              "evidenceValid": false,
+              "kind": null,
+              "matchesExpectedKind": false,
+              "failureClass": "upstream-rate-limit",
+              "latencyMs": 261
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

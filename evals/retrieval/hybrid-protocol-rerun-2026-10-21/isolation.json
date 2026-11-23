@@ -1,0 +1,22 @@
+{
+  "generatedConfig": "vector-eval-ae8aa2400ba2.jsonc",
+  "vectorize": [
+    {
+      "binding": "VECTOR_INDEX",
+      "index_name": "valise-rollout-eval-protocol-20261021",
+      "remote": true
+    }
+  ],
+  "namespace": "rollout-eval-protocol-v1",
+  "ai": {
+    "binding": "AI",
+    "remote": true
+  },
+  "localState": ".wrangler/hybrid-protocol-store",
+  "devPort": 4546,
+  "d1Remote": false,
+  "r2Remote": false,
+  "kvRemote": false,
+  "credentials": "Only TYPESAFE_API_KEY copied into ignored mode0600 .wrangler/.dev.vars; no value retained",
+  "productionBindingsUsed": false
+}

@@ -1,0 +1,67 @@
+{
+  "journey": "j8",
+  "run": "2026-10-29-6b60cb",
+  "origin": "http://localhost:54805",
+  "label": "local",
+  "runner_commit": "bcea755958dbae61823a17e0e87e5103d41b9a2c",
+  "started_at": "2026-10-29T10:11:10.711Z",
+  "steps": [
+    {
+      "step": "1. write SKILL.md in the console, preview, add",
+      "ok": true,
+      "detail": {
+        "name": "journey-skill-6b60cb"
+      }
+    },
+    {
+      "step": "2. publish v2 with a bundle file; v1 unchanged",
+      "ok": true
+    },
+    {
+      "step": "3. import preview installs nothing",
+      "ok": true,
+      "detail": {
+        "previewed": "find-skills"
+      }
+    },
+    {
+      "step": "4. fresh client: list, search, read file, tool and prompt",
+      "ok": true,
+      "detail": {
+        "tool": "skill_journey-skill-6b60cb",
+        "prompt": "journey-skill-6b60cb"
+      }
+    },
+    {
+      "step": "5. edit_hook add and remove reach the plugin hook's SessionStart",
+      "ok": true,
+      "detail": {
+        "hookId": "custom-0"
+      }
+    },
+    {
+      "step": "6. disable hides it from a client; delete removes the row",
+      "ok": true,
+      "detail": {
+        "disabledGet": "No active skill exists for journey-skill-6b60cb."
+      }
+    },
+    {
+      "step": "same-name skills stay per tenant",
+      "ok": true,
+      "detail": {
+        "foreign": "tenant B published the same name and sees only its own body"
+      }
+    },
+    {
+      "step": "phone 320px list and write dialog fit",
+      "ok": true
+    }
+  ],
+  "fixtures": ["skill:journey-skill-6b60cb"],
+  "cleanup": [
+    "bearer tokens labelled \"journey j8 2026-10-29-6b60cb\" revoked",
+    "skill journey-skill-6b60cb deleted from the console (restorable under Show deleted)",
+    "hook entry added by the run removed"
+  ]
+}

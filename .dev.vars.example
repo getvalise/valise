@@ -1,0 +1,25 @@
+# `npm run dev` writes .dev.vars from this file when a worktree has none. It
+# copies ~/.valise/dev.vars (VALISE_DEV_VARS moves it), and creates that file
+# from this one the first time: the admin password valise-local-dev-password
+# and two generated secrets. Every worktree on the machine then shares one
+# sign-in. Edit ~/.valise/dev.vars to change it. Never commit .dev.vars.
+VALISE_ADMIN_PASSWORD=replace-with-a-unique-local-password
+SESSION_SECRET=replace-with-a-unique-local-session-secret
+TOKEN_PEPPER=replace-with-a-unique-local-token-pepper
+
+# Google sign-in for the console. VALISE_ADMIN_EMAILS is a comma-separated
+# list of admin Google accounts. The first to sign in reaches the owner
+# account; each other one gets its own admin account. Everyone else needs an
+# invite. Leave it empty to admit invited members only.
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+VALISE_ADMIN_EMAILS=
+
+# Optional. Points the skills.sh import at a different base, the way the
+# `skills` CLI's own SKILLS_API_URL does. Defaults to https://skills.sh.
+# SKILLS_REGISTRY_URL=https://skills.sh
+
+# Optional. Only Jev/hybrid need this key. The hosted config selects hybrid;
+# use VALISE_RERANK=lexical npm run dev for no inference, or clef for Workers AI.
+# Jev sends candidate titles/bodies and the query to TypeSafe. ADR-0013.
+TYPESAFE_API_KEY=

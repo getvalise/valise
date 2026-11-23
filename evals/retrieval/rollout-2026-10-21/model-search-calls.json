@@ -1,0 +1,1562 @@
+[
+  {
+    "results": [
+      {
+        "at": 1792570700861,
+        "args_json": "{\"query\":\"embedding model docs search prototype\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":1721}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_e191fde4-171f-cb4b-e3cd-faaf68e59fbd\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_f1bc144a-4ff7-8ff4-0023-ba7a1a6ed29d\"]"
+      },
+      {
+        "at": 1792570705597,
+        "args_json": "{\"query\":\"embedding model docs search prototype\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":557}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_f1bc144a-4ff7-8ff4-0023-ba7a1a6ed29d\"]"
+      },
+      {
+        "at": 1792570708749,
+        "args_json": "{\"query\":\"embedding model docs search prototype\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":598}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_6fad4457-00ef-56eb-53b1-236a72b6583b\"]"
+      },
+      {
+        "at": 1792570712555,
+        "args_json": "{\"query\":\"embedding model docs search prototype\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":636}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_f1bc144a-4ff7-8ff4-0023-ba7a1a6ed29d\"]"
+      },
+      {
+        "at": 1792570716569,
+        "args_json": "{\"query\":\"embedding model docs search prototype\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":549}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_e191fde4-171f-cb4b-e3cd-faaf68e59fbd\"]"
+      },
+      {
+        "at": 1792570722128,
+        "args_json": "{\"query\":\"where to see nightly job output from yesterday\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":808}",
+        "search_result_ids_json": "[\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_bbe987de-def9-9936-a02e-cebc2902fee6\",\"memory:mem_7bc27e5e-2bf1-c71a-38bf-cbf7022e16ed\",\"memory:mem_330542a9-40db-645d-35a7-c93ce71d1c6b\"]"
+      },
+      {
+        "at": 1792570727060,
+        "args_json": "{\"query\":\"nightly job output where to see what it printed yesterday\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":621}",
+        "search_result_ids_json": "[\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_2c53afc4-4c5c-e1f7-d8bd-b98cbadd2dd2\",\"memory:mem_bbe987de-def9-9936-a02e-cebc2902fee6\",\"memory:mem_7bc27e5e-2bf1-c71a-38bf-cbf7022e16ed\"]"
+      },
+      {
+        "at": 1792570731414,
+        "args_json": "{\"query\":\"nightly job output log yesterday where to see printed output\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":615}",
+        "search_result_ids_json": "[\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_8cb599bb-7f4b-ef50-f4c0-9c104c3a53b5\",\"memory:mem_330542a9-40db-645d-35a7-c93ce71d1c6b\"]"
+      },
+      {
+        "at": 1792570736685,
+        "args_json": "{\"query\":\"why a plain dump of the whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":621}",
+        "search_result_ids_json": "[\"memory:mem_ab465dc3-f954-dcab-fc12-a37d5bf5d982\",\"memory:mem_c6326a96-c204-fcda-0e66-8e38cc00872e\",\"memory:mem_da8dfa5f-2595-5f71-88b3-51fbf1ba254e\",\"memory:mem_12bdd7fb-915c-edc6-f732-74b413976bef\",\"memory:mem_ed286db5-e9db-c658-f638-81adb3d9c21e\",\"memory:mem_f0a5f0d6-b514-e94d-a299-5ba41017f48c\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_31d93a7c-ef43-17df-c67d-d4afd6a9ae58\",\"memory:mem_f0535774-dab8-eeb4-2430-97c90c2f8b76\",\"memory:mem_ca6c93c2-99f9-aafe-42ef-a752e74e19e1\"]"
+      },
+      {
+        "at": 1792570740871,
+        "args_json": "{\"query\":\"why a plain dump of the whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":603}",
+        "search_result_ids_json": "[\"memory:mem_ab465dc3-f954-dcab-fc12-a37d5bf5d982\",\"memory:mem_c6326a96-c204-fcda-0e66-8e38cc00872e\",\"memory:mem_da8dfa5f-2595-5f71-88b3-51fbf1ba254e\",\"memory:mem_12bdd7fb-915c-edc6-f732-74b413976bef\",\"memory:mem_ed286db5-e9db-c658-f638-81adb3d9c21e\",\"memory:mem_31d93a7c-ef43-17df-c67d-d4afd6a9ae58\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_f0535774-dab8-eeb4-2430-97c90c2f8b76\",\"memory:mem_ca6c93c2-99f9-aafe-42ef-a752e74e19e1\",\"memory:mem_5ee279cc-9505-d04c-9f62-1298ae957114\"]"
+      },
+      {
+        "at": 1792570745106,
+        "args_json": "{\"query\":\"why plain dump of whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":646}",
+        "search_result_ids_json": "[\"memory:mem_ab465dc3-f954-dcab-fc12-a37d5bf5d982\",\"memory:mem_c6326a96-c204-fcda-0e66-8e38cc00872e\",\"memory:mem_12bdd7fb-915c-edc6-f732-74b413976bef\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_80537093-52fa-c1d8-663a-4219d65aa616\",\"memory:mem_ed286db5-e9db-c658-f638-81adb3d9c21e\",\"memory:mem_31d93a7c-ef43-17df-c67d-d4afd6a9ae58\",\"memory:mem_b22168ac-0b3c-f9b9-cff2-7275ecad8fcd\",\"memory:mem_ca6c93c2-99f9-aafe-42ef-a752e74e19e1\",\"memory:mem_39596158-747d-5177-969a-a375fed82cc3\"]"
+      },
+      {
+        "at": 1792570749121,
+        "args_json": "{\"query\":\"services running on home storage box\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":597}",
+        "search_result_ids_json": "[\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_30621de7-749b-fb48-6412-ce7214a41351\",\"memory:mem_b04f2265-6a45-cfb1-6b49-e0fcdb19f7a6\",\"memory:mem_f107599a-af38-3a2f-863b-876d0a7e109e\",\"memory:mem_2088b3eb-99a9-5da3-a0f1-d3c000070e23\",\"memory:mem_c294bd4b-6080-1613-fcb2-2f60b2ba218f\",\"memory:mem_941bea2e-d086-9de1-e1e3-721b5074ad51\",\"memory:mem_3e581131-2fb5-3857-7765-061c1f99f496\",\"memory:mem_aeae0df4-cc58-d9e6-8a00-5ca21fc92538\",\"memory:mem_609dc226-1711-9315-5ce1-0f2d222bbcd1\"]"
+      },
+      {
+        "at": 1792570752352,
+        "args_json": "{\"query\":\"services running on home storage box\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":590}",
+        "search_result_ids_json": "[\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_b04f2265-6a45-cfb1-6b49-e0fcdb19f7a6\",\"memory:mem_f107599a-af38-3a2f-863b-876d0a7e109e\",\"memory:mem_30621de7-749b-fb48-6412-ce7214a41351\",\"memory:mem_2088b3eb-99a9-5da3-a0f1-d3c000070e23\",\"memory:mem_c294bd4b-6080-1613-fcb2-2f60b2ba218f\",\"memory:mem_941bea2e-d086-9de1-e1e3-721b5074ad51\",\"memory:mem_aeae0df4-cc58-d9e6-8a00-5ca21fc92538\",\"memory:mem_3e581131-2fb5-3857-7765-061c1f99f496\",\"memory:mem_609dc226-1711-9315-5ce1-0f2d222bbcd1\"]"
+      },
+      {
+        "at": 1792570756407,
+        "args_json": "{\"query\":\"services running on home storage box\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":640}",
+        "search_result_ids_json": "[\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_b04f2265-6a45-cfb1-6b49-e0fcdb19f7a6\",\"memory:mem_30621de7-749b-fb48-6412-ce7214a41351\",\"memory:mem_2088b3eb-99a9-5da3-a0f1-d3c000070e23\",\"memory:mem_f107599a-af38-3a2f-863b-876d0a7e109e\",\"memory:mem_c294bd4b-6080-1613-fcb2-2f60b2ba218f\",\"memory:mem_aeae0df4-cc58-d9e6-8a00-5ca21fc92538\",\"memory:mem_941bea2e-d086-9de1-e1e3-721b5074ad51\",\"memory:mem_3e581131-2fb5-3857-7765-061c1f99f496\",\"memory:mem_609dc226-1711-9315-5ce1-0f2d222bbcd1\"]"
+      },
+      {
+        "at": 1792570759672,
+        "args_json": "{\"query\":\"cost of running every tool-choice case against all models\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":562}",
+        "search_result_ids_json": "[\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1\",\"memory:mem_cc36a4e4-57fb-72ea-252b-749d1799fd77\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_5dd9b84e-a499-13ce-c3c6-2172aa721c1d\",\"memory:mem_cc1a663a-3802-a1c5-8b8e-461529a212d1\",\"memory:mem_9e96b6eb-2594-0d60-c0de-e471c97462b9\",\"memory:mem_f20b287d-c3b7-1fd9-a85d-39aca63cb161\",\"memory:mem_09ac6ada-ca62-8c1e-ed6b-c5573b37505e\"]"
+      },
+      {
+        "at": 1792570763362,
+        "args_json": "{\"query\":\"cost of running every tool-choice case against all models\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":547}",
+        "search_result_ids_json": "[\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_cc36a4e4-57fb-72ea-252b-749d1799fd77\",\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_9e96b6eb-2594-0d60-c0de-e471c97462b9\",\"memory:mem_5dd9b84e-a499-13ce-c3c6-2172aa721c1d\",\"memory:mem_cc1a663a-3802-a1c5-8b8e-461529a212d1\",\"memory:mem_bead5f4a-c313-0e03-6329-77aea568b85e\",\"memory:mem_09ac6ada-ca62-8c1e-ed6b-c5573b37505e\"]"
+      },
+      {
+        "at": 1792570767416,
+        "args_json": "{\"query\":\"cost of running every tool-choice case against all models\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":597}",
+        "search_result_ids_json": "[\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_cc36a4e4-57fb-72ea-252b-749d1799fd77\",\"memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1\",\"memory:mem_9e96b6eb-2594-0d60-c0de-e471c97462b9\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_09ac6ada-ca62-8c1e-ed6b-c5573b37505e\",\"memory:mem_bead5f4a-c313-0e03-6329-77aea568b85e\",\"memory:mem_5dd9b84e-a499-13ce-c3c6-2172aa721c1d\",\"memory:mem_cc1a663a-3802-a1c5-8b8e-461529a212d1\"]"
+      },
+      {
+        "at": 1792570771160,
+        "args_json": "{\"query\":\"reading past Worker logs in the Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":591}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_e83963e2-9227-0c07-3358-3b78d321d740\"]"
+      },
+      {
+        "at": 1792570775832,
+        "args_json": "{\"query\":\"reading past Worker logs in the Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":615}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_106bb1d4-b377-725e-46d8-147c1ad00a1d\"]"
+      },
+      {
+        "at": 1792570780032,
+        "args_json": "{\"query\":\"reading past Worker logs in the Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":577}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_e83963e2-9227-0c07-3358-3b78d321d740\"]"
+      },
+      {
+        "at": 1792570785474,
+        "args_json": "{\"query\":\"docs search prototype embedding model\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570788552,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"todo\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570792370,
+        "args_json": "{\"query\":\"docs search prototype embedding model\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570795142,
+        "args_json": "{\"query\":\"embedding model docs search\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570798160,
+        "args_json": "{\"query\":\"docs search prototype embedding model\",\"type\":\"memory\",\"project\":\"docs search prototype\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570801167,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570804098,
+        "args_json": "{\"query\":\"docs search embeddings\",\"type\":\"memory\",\"project\":\"docs\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570805910,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"project\":\"acme-docs\",\"tags\":[],\"limit\":5}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":859}",
+        "search_result_ids_json": "[\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\"]"
+      },
+      {
+        "at": 1792570810628,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"project\":\"acme-docs\",\"tags\":[],\"limit\":5}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":701}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\"]"
+      },
+      {
+        "at": 1792570815464,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"project\":\"acme-docs\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":603}",
+        "search_result_ids_json": "[\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_7bf6def8-7e52-253c-f8e6-7a3ddc914e86\",\"memory:mem_c4868393-ab25-6d48-d165-050148d37997\"]"
+      },
+      {
+        "at": 1792570823063,
+        "args_json": "{\"query\":\"where I can see what the nightly job printed yesterday\",\"type\":\"memory\",\"project\":\"general\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570825511,
+        "args_json": "{\"query\":\"nightly job printed yesterday\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570828967,
+        "args_json": "{\"query\":\"nightly job\",\"type\":\"memory\",\"project\":\"personal\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570831756,
+        "args_json": "{\"query\":\"nightly\",\"type\":\"memory\",\"project\":\"all\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570834602,
+        "args_json": "{\"query\":\"where see what nightly job printed yesterday\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570836628,
+        "args_json": "{\"query\":\"nightly job printed output yesterday logs\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570838943,
+        "args_json": "{\"query\":\"nightly job\",\"type\":\"memory\",\"project\":\"general\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570841091,
+        "args_json": "{\"query\":\"nightly job output logs\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":100}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570844106,
+        "args_json": "{\"query\":\"where see what the nightly job printed yesterday\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570846322,
+        "args_json": "{\"query\":\"nightly job output printed yesterday logs\",\"type\":\"memory\",\"project\":\"general\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570849391,
+        "args_json": "{\"query\":\"nightly job\",\"type\":\"memory\",\"project\":\"default\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570852465,
+        "args_json": "{\"query\":\"nightly job output\",\"type\":\"memory\",\"project\":\"all\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570854260,
+        "args_json": "{\"query\":\"plain dump whole database fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570857911,
+        "args_json": "{\"query\":\"database dump plain dump fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570860067,
+        "args_json": "{\"query\":\"whole database\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570864018,
+        "args_json": "{\"query\":\"plain dump whole database fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570866829,
+        "args_json": "{\"query\":\"whole database plain dump fails\",\"type\":\"memory\",\"project\":\"unknown\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570869646,
+        "args_json": "{\"query\":\"database dump\",\"type\":\"memory\",\"project\":\"database\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570872023,
+        "args_json": "{\"query\":\"plain dump whole database fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570875114,
+        "args_json": "{\"query\":\"whole database dump fails plain dump\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570877718,
+        "args_json": "{\"query\":\"services on the storage box at home\",\"type\":\"memory\",\"project\":\"general\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570879756,
+        "args_json": "{\"query\":\"storage box home services\",\"type\":\"memory\",\"project\":\"home\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570882696,
+        "args_json": "{\"query\":\"storage box\",\"type\":\"memory\",\"project\":\"homelab\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":646}",
+        "search_result_ids_json": "[\"memory:mem_8da14c2d-d7df-5980-0cf6-809484ba5d48\",\"memory:mem_510c1a2e-4054-4d98-0c9b-3da3c4620b6b\",\"memory:mem_f482a677-d939-c072-0bde-7b1f0589ecac\",\"memory:mem_9d557607-b1b7-d7b4-b75e-31bd7d9379cc\",\"memory:mem_959fe475-2d64-7761-3173-00d25351a501\",\"memory:mem_b803c625-f360-4866-1c09-5c5aad93f218\",\"memory:mem_cf947424-a539-4550-1c08-bab4acb1ad87\",\"memory:mem_41126f94-33d9-d126-fbd8-9048e2c6cf26\",\"memory:mem_de6c0141-8cc4-28f5-ceac-72b3dd9b4db4\",\"memory:mem_2088b3eb-99a9-5da3-a0f1-d3c000070e23\"]"
+      },
+      {
+        "at": 1792570887443,
+        "args_json": "{\"query\":\"services running on home storage box\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570890710,
+        "args_json": "{\"query\":\"home storage box services\",\"type\":\"memory\",\"project\":\"home\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570893491,
+        "args_json": "{\"query\":\"storage box\",\"type\":\"memory\",\"project\":\"general\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570896821,
+        "args_json": "{\"query\":\"services\",\"type\":\"memory\",\"project\":\"storage\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570899618,
+        "args_json": "{\"query\":\"services running on storage box at home\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570902667,
+        "args_json": "{\"query\":\"storage box home services\",\"type\":\"memory\",\"project\":\"home\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570904803,
+        "args_json": "{\"query\":\"storage box home services\",\"type\":\"memory\",\"project\":\"general\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570907625,
+        "args_json": "{\"query\":\"NAS homelab services\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570909423,
+        "args_json": "{\"query\":\"expensive run every tool-choice case against all models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570912817,
+        "args_json": "{\"query\":\"tool choice cases all models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570915298,
+        "args_json": "{\"query\":\"cost expensive run every tool-choice case against all models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570917628,
+        "args_json": "{\"query\":\"tool-choice cases models cost\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570919582,
+        "args_json": "{\"query\":\"every tool choice case all models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570922023,
+        "args_json": "{\"query\":\"expensive run cases across models tool choice\",\"type\":\"memory\",\"project\":\"general\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570923705,
+        "args_json": "{\"query\":\"how expensive to run every tool-choice case against all models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570926543,
+        "args_json": "{\"query\":\"tool-choice cases models cost expensive run matrix\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570930726,
+        "args_json": "{\"query\":\"all models every tool choice test cost\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570933579,
+        "args_json": "{\"query\":\"tool choice\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570935533,
+        "args_json": "{\"query\":\"reading past Worker logs Cloudflare dashboard\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570938225,
+        "args_json": "{\"query\":\"Cloudflare Worker logs dashboard past logs\",\"type\":\"memory\",\"project\":\"Cloudflare\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570941120,
+        "args_json": "{\"query\":\"Worker logs\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570947908,
+        "args_json": "{\"query\":\"past Worker logs\",\"type\":\"memory\",\"project\":\"cloudflare-workers\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570949708,
+        "args_json": "{\"query\":\"reading past Worker logs in Cloudflare dashboard\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570952253,
+        "args_json": "{\"query\":\"Cloudflare dashboard Worker logs past\",\"type\":\"memory\",\"project\":\"Cloudflare\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570954497,
+        "args_json": "{\"query\":\"Worker logs\",\"type\":\"memory\",\"project\":\"cloudflare\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570958995,
+        "args_json": "{\"query\":\"reading past Worker logs in the Cloudflare dashboard\",\"type\":\"memory\",\"project\":\"Cloudflare\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570962329,
+        "args_json": "{\"query\":\"past Worker logs Cloudflare dashboard\",\"type\":\"memory\",\"project\":\"cloudflare\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570964585,
+        "args_json": "{\"query\":\"Worker logs dashboard\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570967134,
+        "args_json": "{\"query\":\"Cloudflare Worker logs past dashboard\",\"type\":\"memory\",\"project\":\"Cloudflare Workers\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570968796,
+        "args_json": "{\"query\":\"docs search prototype embedding model\",\"type\":\"memory\",\"project\":\"docs search prototype\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570971036,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"project\":\"docs search prototype\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570973636,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"project\":\"docs search prototype\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570978125,
+        "args_json": "{\"query\":\"embedding model\",\"type\":\"memory\",\"project\":\"docs search prototype\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570981587,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"project\":\"docs search prototype\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570982969,
+        "args_json": "{\"query\":\"embedding model\",\"type\":\"memory\",\"project\":\"docs search prototype\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570984390,
+        "args_json": "{\"query\":\"docs search prototype\",\"type\":\"todo\",\"project\":\"docs search prototype\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570985972,
+        "args_json": "{\"query\":\"docs search prototype embedding model settled on\",\"type\":\"memory\",\"project\":\"acme-docs\",\"tags\":[\"docs-search\"],\"limit\":5}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":829}",
+        "search_result_ids_json": "[\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\"]"
+      },
+      {
+        "at": 1792570989688,
+        "args_json": "{\"query\":\"docs search prototype embedding model\",\"type\":\"memory\",\"project\":\"acme-docs\",\"tags\":[\"docs-search\"],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":638}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_9476602e-3a68-7c01-2d6d-220e6118b5b0\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_985986b9-4045-41d3-935f-93e433e124ea\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_6bc7c244-5b2a-a41b-a297-6feace19d87e\"]"
+      },
+      {
+        "at": 1792570993002,
+        "args_json": "{\"query\":\"docs search prototype embedding model\",\"type\":\"memory\",\"project\":\"acme-docs\",\"tags\":[\"docs-search\"],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":694}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_9476602e-3a68-7c01-2d6d-220e6118b5b0\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_985986b9-4045-41d3-935f-93e433e124ea\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\"]"
+      },
+      {
+        "at": 1792570996677,
+        "args_json": "{\"query\":\"nightly job printed yesterday where can I see it\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570998264,
+        "args_json": "{\"query\":\"nightly job printed log output yesterday\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792570999948,
+        "args_json": "{\"query\":\"nightly job output log location\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571003020,
+        "args_json": "{\"query\":\"nightly job printed yesterday where can I see it\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571005585,
+        "args_json": "{\"query\":\"nightly job printed yesterday where can I see it\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571007000,
+        "args_json": "{\"query\":\"nightly job printed yesterday\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":50}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571008545,
+        "args_json": "{\"query\":\"printed yesterday logs nightly job\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":50}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571010074,
+        "args_json": "{\"query\":\"nightly job logs\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":50}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571011632,
+        "args_json": "{\"query\":\"plain dump of the whole database fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571013424,
+        "args_json": "{\"query\":\"dump whole database fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571016151,
+        "args_json": "{\"query\":\"database dump fails plain dump\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[\"reference\"],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571019628,
+        "args_json": "{\"query\":\"plain dump of the whole database fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571021588,
+        "args_json": "{\"query\":\"database dump fails plain dump whole database\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571025669,
+        "args_json": "{\"query\":\"plain dump of the whole database fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571027238,
+        "args_json": "{\"query\":\"whole database dump fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571028961,
+        "args_json": "{\"query\":\"database dump fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571032541,
+        "args_json": "{\"query\":\"what services are on the storage box at home\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571033991,
+        "args_json": "{\"query\":\"storage box at home services\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571037588,
+        "args_json": "{\"query\":\"services on the storage box at home\",\"type\":\"memory\",\"project\":\"default\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571039032,
+        "args_json": "{\"query\":\"storage box home services\",\"type\":\"memory\",\"project\":\"default\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571042163,
+        "args_json": "{\"query\":\"services on the storage box at home\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571043610,
+        "args_json": "{\"query\":\"storage box home services\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571045371,
+        "args_json": "{\"query\":\"home storage box services\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571048400,
+        "args_json": "{\"query\":\"expensive run every tool-choice case against all the models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571050154,
+        "args_json": "{\"query\":\"tool-choice models expensive every case\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571051665,
+        "args_json": "{\"query\":\"all the models every tool choice case expensive\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571053238,
+        "args_json": "{\"query\":\"tool-choice case models cost\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":50}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571054703,
+        "args_json": "{\"query\":\"expensive run every tool-choice case against all the models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571056202,
+        "args_json": "{\"query\":\"tool-choice case models expensive\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571058392,
+        "args_json": "{\"query\":\"every tool-choice case against all models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571061648,
+        "args_json": "{\"query\":\"how expensive is it to run every tool-choice case against all the models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571063054,
+        "args_json": "{\"query\":\"tool-choice cases all the models expensive\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571064637,
+        "args_json": "{\"query\":\"run every tool-choice case against all models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571066287,
+        "args_json": "{\"query\":\"tool-choice model cost\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571067832,
+        "args_json": "{\"query\":\"reading past Worker logs in the Cloudflare dashboard\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571069324,
+        "args_json": "{\"query\":\"Cloudflare dashboard Worker logs\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571072401,
+        "args_json": "{\"query\":\"reading past Worker logs Cloudflare dashboard\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571073876,
+        "args_json": "{\"query\":\"Cloudflare dashboard Worker logs past logs\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571079977,
+        "args_json": "{\"query\":\"reading past Worker logs in the Cloudflare dashboard\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571081799,
+        "args_json": "{\"query\":\"Cloudflare dashboard Worker logs\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": null,
+        "search_result_ids_json": "[]"
+      },
+      {
+        "at": 1792571085310,
+        "args_json": "{\"query\":\"embedding model docs search prototype\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":642}",
+        "search_result_ids_json": "[\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_f1bc144a-4ff7-8ff4-0023-ba7a1a6ed29d\"]"
+      },
+      {
+        "at": 1792571106407,
+        "args_json": "{\"query\":\"docs search embedding model\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":746}",
+        "search_result_ids_json": "[\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_e191fde4-171f-cb4b-e3cd-faaf68e59fbd\",\"memory:mem_bf70ce29-0111-ad6c-ec32-ae55ebfebdba\",\"memory:mem_95b83a36-2768-6fdd-3150-412b0b5ed4a5\",\"memory:mem_17715eae-c78b-d5e3-6b0d-08f11e453f78\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_985986b9-4045-41d3-935f-93e433e124ea\",\"memory:mem_33812e0a-4359-8473-ab75-b633fcaeb25c\"]"
+      },
+      {
+        "at": 1792571114964,
+        "args_json": "{\"query\":\"docs search embedding model\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":802}",
+        "search_result_ids_json": "[\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_e191fde4-171f-cb4b-e3cd-faaf68e59fbd\",\"memory:mem_bf70ce29-0111-ad6c-ec32-ae55ebfebdba\",\"memory:mem_95b83a36-2768-6fdd-3150-412b0b5ed4a5\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_17715eae-c78b-d5e3-6b0d-08f11e453f78\",\"memory:mem_985986b9-4045-41d3-935f-93e433e124ea\",\"memory:mem_5372bd96-7301-2237-8ffb-a37a5cfbfce1\"]"
+      },
+      {
+        "at": 1792571133722,
+        "args_json": "{\"type\":\"memory\",\"query\":\"nightly job printed logs\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":832}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7ee4bd87-6236-64a2-1b02-7974eb81a713\",\"memory:mem_69c97ee9-5816-2c7c-17fb-a1c9e7615a1b\",\"memory:mem_67b8564c-cb2f-d0a4-f67e-e711475e0440\"]"
+      },
+      {
+        "at": 1792571147778,
+        "args_json": "{\"type\":\"memory\",\"query\":\"nightly job logs printed\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":818}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_69c294c4-69d6-d04f-6ea7-2bcc7362dbc6\",\"memory:mem_bbe987de-def9-9936-a02e-cebc2902fee6\",\"memory:mem_81886c66-21cb-205e-3c8b-905d9c935ef3\"]"
+      },
+      {
+        "at": 1792571154216,
+        "args_json": "{\"query\":\"nightly job logs printed\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":858}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_69c294c4-69d6-d04f-6ea7-2bcc7362dbc6\",\"memory:mem_bbe987de-def9-9936-a02e-cebc2902fee6\",\"memory:mem_69c97ee9-5816-2c7c-17fb-a1c9e7615a1b\"]"
+      },
+      {
+        "at": 1792571170109,
+        "args_json": "{\"query\":\"plain dump whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":894}",
+        "search_result_ids_json": "[\"memory:mem_5f5a334b-d428-70eb-f862-8ef2c4866913\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_80537093-52fa-c1d8-663a-4219d65aa616\",\"memory:mem_1da9754a-22eb-a55e-578f-316611ff5a97\",\"memory:mem_16bcc1e8-8fff-0dc9-ede1-ca8b81fae48b\",\"memory:mem_88a3f05f-ae50-4678-eb39-094f19ddee83\",\"memory:mem_5ee279cc-9505-d04c-9f62-1298ae957114\",\"memory:mem_0bdb0a78-72cc-9759-51f7-750f7f0ae0c5\",\"memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a\",\"memory:mem_7241a0d7-a362-2b3c-3519-f5f84d646687\"]"
+      },
+      {
+        "at": 1792571201482,
+        "args_json": "{\"type\":\"memory\",\"query\":\"plain dump database fails\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":783}",
+        "search_result_ids_json": "[\"memory:mem_12bdd7fb-915c-edc6-f732-74b413976bef\",\"memory:mem_5f5a334b-d428-70eb-f862-8ef2c4866913\",\"memory:mem_80537093-52fa-c1d8-663a-4219d65aa616\",\"memory:mem_1da9754a-22eb-a55e-578f-316611ff5a97\",\"memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a\",\"memory:mem_88a3f05f-ae50-4678-eb39-094f19ddee83\",\"memory:mem_2f17eb3a-1066-200a-d843-e497bcbea78b\",\"memory:mem_0b2c74e9-53a8-3256-0e77-9fad897618b9\",\"memory:mem_9c4f20e8-a995-ddfe-a5b7-ec1272c39e1e\",\"memory:mem_5ee279cc-9505-d04c-9f62-1298ae957114\"]"
+      },
+      {
+        "at": 1792571208152,
+        "args_json": "{\"type\":\"memory\",\"query\":\"plain dump whole database fails\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":774}",
+        "search_result_ids_json": "[\"memory:mem_5f5a334b-d428-70eb-f862-8ef2c4866913\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_80537093-52fa-c1d8-663a-4219d65aa616\",\"memory:mem_1da9754a-22eb-a55e-578f-316611ff5a97\",\"memory:mem_16bcc1e8-8fff-0dc9-ede1-ca8b81fae48b\",\"memory:mem_5ee279cc-9505-d04c-9f62-1298ae957114\",\"memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a\",\"memory:mem_88a3f05f-ae50-4678-eb39-094f19ddee83\",\"memory:mem_0bdb0a78-72cc-9759-51f7-750f7f0ae0c5\",\"memory:mem_7241a0d7-a362-2b3c-3519-f5f84d646687\"]"
+      },
+      {
+        "at": 1792571235495,
+        "args_json": "{\"type\":\"memory\",\"query\":\"storage box services\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":1276}",
+        "search_result_ids_json": "[\"memory:mem_147ee9f1-bb7d-f881-a9f3-488ba52d3627\",\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_5c2fef11-21ab-b773-8312-410c87218cf8\",\"memory:mem_b04f2265-6a45-cfb1-6b49-e0fcdb19f7a6\",\"memory:mem_30621de7-749b-fb48-6412-ce7214a41351\",\"memory:mem_f107599a-af38-3a2f-863b-876d0a7e109e\",\"memory:mem_aeae0df4-cc58-d9e6-8a00-5ca21fc92538\",\"memory:mem_aa5b6f91-bcbe-e0e2-1fdc-908a5684497e\",\"memory:mem_e1ef7a85-d66b-8321-c968-5c0dfebf5b61\"]"
+      },
+      {
+        "at": 1792571247666,
+        "args_json": "{\"query\":\"storage box services home\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":2003}",
+        "search_result_ids_json": "[\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_46e364fa-43bf-4c1e-8b20-6aee63a1d210\",\"memory:mem_176acf24-aa61-e3ee-1050-0e43d145417b\",\"memory:mem_f7e5aed8-417a-cef9-1e48-701f0c8cd55b\",\"memory:mem_6b5ea9b9-8255-c172-e005-1f53dd846f5a\",\"memory:mem_249a3cf6-3d01-9304-0e99-3ae79d5193ea\",\"memory:mem_e618980c-2b7b-bb4b-f143-db9af04e630d\",\"memory:mem_82fd41bb-282a-7ce5-5e7a-1e73072b77d8\",\"memory:mem_0c9e4f03-40f6-4d66-c0c9-e80c0170d63c\"]"
+      },
+      {
+        "at": 1792571254676,
+        "args_json": "{\"query\":\"storage box services home\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":819}",
+        "search_result_ids_json": "[\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_46e364fa-43bf-4c1e-8b20-6aee63a1d210\",\"memory:mem_f7e5aed8-417a-cef9-1e48-701f0c8cd55b\",\"memory:mem_6b5ea9b9-8255-c172-e005-1f53dd846f5a\",\"memory:mem_0c9e4f03-40f6-4d66-c0c9-e80c0170d63c\",\"memory:mem_e618980c-2b7b-bb4b-f143-db9af04e630d\",\"memory:mem_147ee9f1-bb7d-f881-a9f3-488ba52d3627\",\"memory:mem_aa5b6f91-bcbe-e0e2-1fdc-908a5684497e\",\"memory:mem_249a3cf6-3d01-9304-0e99-3ae79d5193ea\"]"
+      },
+      {
+        "at": 1792571272316,
+        "args_json": "{\"query\":\"expensive tool-choice models\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":857}",
+        "search_result_ids_json": "[\"memory:mem_bc17cebc-e8ea-ae28-092d-fca9ee2d20d3\",\"memory:mem_edd215c4-1037-5c77-28ac-6a4e9ec64a63\",\"memory:mem_b5e29356-fef1-213a-6c71-ca4862bb90ad\",\"memory:mem_568f6870-b38b-8ef8-836d-e808749856b7\",\"memory:mem_ed86c0b0-ee7d-c321-a024-a787dc792da6\",\"memory:mem_5c2fef11-21ab-b773-8312-410c87218cf8\",\"memory:mem_18c034e1-318d-47d3-252b-44c06036adf3\",\"memory:mem_bde6cfce-6f52-a50b-9d3f-3a67fdf61463\",\"memory:mem_ae847065-0712-4c76-5d99-c56c477dddf5\",\"memory:mem_4bd6cebe-c353-6347-747e-0996b380356f\"]"
+      },
+      {
+        "at": 1792571293815,
+        "args_json": "{\"query\":\"tool-choice expensive models\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":765}",
+        "search_result_ids_json": "[\"memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_bc17cebc-e8ea-ae28-092d-fca9ee2d20d3\",\"memory:mem_ae847065-0712-4c76-5d99-c56c477dddf5\",\"memory:mem_a8488a74-a66e-0bc6-e72d-096fa0b3e658\",\"memory:mem_b5e29356-fef1-213a-6c71-ca4862bb90ad\",\"memory:mem_c0962b20-5b1e-3f49-0870-ab0fb2389790\",\"memory:mem_4bd6cebe-c353-6347-747e-0996b380356f\"]"
+      },
+      {
+        "at": 1792571330301,
+        "args_json": "{\"type\":\"memory\",\"query\":\"expensive tool-choice models\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":709}",
+        "search_result_ids_json": "[\"memory:mem_edd215c4-1037-5c77-28ac-6a4e9ec64a63\",\"memory:mem_bc17cebc-e8ea-ae28-092d-fca9ee2d20d3\",\"memory:mem_568f6870-b38b-8ef8-836d-e808749856b7\",\"memory:mem_bde6cfce-6f52-a50b-9d3f-3a67fdf61463\",\"memory:mem_4bd6cebe-c353-6347-747e-0996b380356f\",\"memory:mem_b5e29356-fef1-213a-6c71-ca4862bb90ad\",\"memory:mem_ae847065-0712-4c76-5d99-c56c477dddf5\",\"memory:mem_18c034e1-318d-47d3-252b-44c06036adf3\",\"memory:mem_ed86c0b0-ee7d-c321-a024-a787dc792da6\",\"memory:mem_2429b1f8-5bba-6f0a-99f8-3d7f15e12cb7\"]"
+      },
+      {
+        "at": 1792571334669,
+        "args_json": "{\"query\":\"\\\"tool-choice\\\"\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":622}",
+        "search_result_ids_json": "[\"memory:mem_ed0017c3-9209-fb51-aeff-179e989d8aa1\",\"memory:mem_84d08769-d0da-27ed-4a89-c6911176dfb9\",\"memory:mem_55e87ea4-f000-785c-314b-9e6e363097d7\",\"memory:mem_e440bff3-0037-6e01-c1cc-174d35b53988\",\"memory:mem_b71c7ec4-0542-1e83-6dc3-b753629d9e83\",\"memory:mem_df76730f-4084-1540-7d60-f3babd960a72\",\"memory:mem_80663dec-969e-3a27-5f12-9915f16ad144\",\"memory:mem_4cd35beb-d303-4a3c-612a-4169ca4f0246\",\"memory:mem_79036598-d890-52b2-bca9-d34abe5d220a\",\"memory:mem_523dcce1-71a8-6d97-402c-ab77eca678f7\"]"
+      },
+      {
+        "at": 1792571338163,
+        "args_json": "{\"query\":\"\\\"full run\\\" costs OR \\\"all the models\\\" OR \\\"cases\\\"\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":616}",
+        "search_result_ids_json": "[\"memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1\",\"memory:mem_4ab75057-fedc-4c1d-0dd1-b457178a0894\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_9e96b6eb-2594-0d60-c0de-e471c97462b9\",\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_2429b1f8-5bba-6f0a-99f8-3d7f15e12cb7\",\"memory:mem_cc36a4e4-57fb-72ea-252b-749d1799fd77\",\"memory:mem_f20b287d-c3b7-1fd9-a85d-39aca63cb161\",\"memory:mem_09ac6ada-ca62-8c1e-ed6b-c5573b37505e\"]"
+      },
+      {
+        "at": 1792571344780,
+        "args_json": "{\"query\":\"reading past Worker logs Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":911}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_e83963e2-9227-0c07-3358-3b78d321d740\"]"
+      },
+      {
+        "at": 1792571350691,
+        "args_json": "{\"type\":\"memory\",\"query\":\"reading past Worker logs Cloudflare dashboard\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":902}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_e83963e2-9227-0c07-3358-3b78d321d740\"]"
+      },
+      {
+        "at": 1792571372185,
+        "args_json": "{\"query\":\"reading past Worker logs Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":682}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_e83963e2-9227-0c07-3358-3b78d321d740\"]"
+      },
+      {
+        "at": 1792571392915,
+        "args_json": "{\"query\":\"docs search prototype embedding model\",\"type\":\"memory\",\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":722}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_c5bea782-ad3b-9e0e-4314-da98674a29fd\",\"memory:mem_f1bc144a-4ff7-8ff4-0023-ba7a1a6ed29d\",\"memory:mem_e191fde4-171f-cb4b-e3cd-faaf68e59fbd\",\"memory:mem_95b83a36-2768-6fdd-3150-412b0b5ed4a5\",\"memory:mem_f482a677-d939-c072-0bde-7b1f0589ecac\",\"memory:mem_f2fde22f-1245-9584-53b5-21b6b0ba5b18\"]"
+      },
+      {
+        "at": 1792571397483,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":590}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_f1bc144a-4ff7-8ff4-0023-ba7a1a6ed29d\"]"
+      },
+      {
+        "at": 1792571401868,
+        "args_json": "{\"query\":\"docs search prototype embedding model\",\"type\":\"memory\",\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":614}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_c5bea782-ad3b-9e0e-4314-da98674a29fd\",\"memory:mem_f1bc144a-4ff7-8ff4-0023-ba7a1a6ed29d\",\"memory:mem_f482a677-d939-c072-0bde-7b1f0589ecac\",\"memory:mem_95b83a36-2768-6fdd-3150-412b0b5ed4a5\",\"memory:mem_e191fde4-171f-cb4b-e3cd-faaf68e59fbd\",\"memory:mem_f2fde22f-1245-9584-53b5-21b6b0ba5b18\"]"
+      },
+      {
+        "at": 1792571406630,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"project\":\"acme-docs\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":686}",
+        "search_result_ids_json": "[\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_7bf6def8-7e52-253c-f8e6-7a3ddc914e86\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_6bf76c4b-7d7c-1654-3677-e19bcf2442cc\"]"
+      },
+      {
+        "at": 1792571414474,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"project\":\"acme-docs\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":837}",
+        "search_result_ids_json": "[\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_7bf6def8-7e52-253c-f8e6-7a3ddc914e86\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_6bf76c4b-7d7c-1654-3677-e19bcf2442cc\"]"
+      },
+      {
+        "at": 1792571422979,
+        "args_json": "{\"query\":\"nightly job printed yesterday\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":797}",
+        "search_result_ids_json": "[\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_330542a9-40db-645d-35a7-c93ce71d1c6b\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_81886c66-21cb-205e-3c8b-905d9c935ef3\",\"memory:mem_bbe987de-def9-9936-a02e-cebc2902fee6\",\"memory:mem_69c294c4-69d6-d04f-6ea7-2bcc7362dbc6\"]"
+      },
+      {
+        "at": 1792571439762,
+        "args_json": "{\"query\":\"nightly job printed yesterday\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":1002}",
+        "search_result_ids_json": "[\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_330542a9-40db-645d-35a7-c93ce71d1c6b\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_81886c66-21cb-205e-3c8b-905d9c935ef3\",\"memory:mem_67b8564c-cb2f-d0a4-f67e-e711475e0440\",\"memory:mem_bbe987de-def9-9936-a02e-cebc2902fee6\"]"
+      },
+      {
+        "at": 1792571458348,
+        "args_json": "{\"query\":\"nightly job printed yesterday\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":1184}",
+        "search_result_ids_json": "[\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_330542a9-40db-645d-35a7-c93ce71d1c6b\",\"memory:mem_bbe987de-def9-9936-a02e-cebc2902fee6\",\"memory:mem_81886c66-21cb-205e-3c8b-905d9c935ef3\",\"memory:mem_69c294c4-69d6-d04f-6ea7-2bcc7362dbc6\"]"
+      },
+      {
+        "at": 1792571468191,
+        "args_json": "{\"query\":\"why a plain dump of the whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":1155}",
+        "search_result_ids_json": "[\"memory:mem_ab465dc3-f954-dcab-fc12-a37d5bf5d982\",\"memory:mem_c6326a96-c204-fcda-0e66-8e38cc00872e\",\"memory:mem_da8dfa5f-2595-5f71-88b3-51fbf1ba254e\",\"memory:mem_12bdd7fb-915c-edc6-f732-74b413976bef\",\"memory:mem_ed286db5-e9db-c658-f638-81adb3d9c21e\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_ca6c93c2-99f9-aafe-42ef-a752e74e19e1\",\"memory:mem_31d93a7c-ef43-17df-c67d-d4afd6a9ae58\",\"memory:mem_f0535774-dab8-eeb4-2430-97c90c2f8b76\",\"memory:mem_b22168ac-0b3c-f9b9-cff2-7275ecad8fcd\"]"
+      },
+      {
+        "at": 1792571474771,
+        "args_json": "{\"query\":\"why a plain dump of the whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":769}",
+        "search_result_ids_json": "[\"memory:mem_ab465dc3-f954-dcab-fc12-a37d5bf5d982\",\"memory:mem_c6326a96-c204-fcda-0e66-8e38cc00872e\",\"memory:mem_da8dfa5f-2595-5f71-88b3-51fbf1ba254e\",\"memory:mem_12bdd7fb-915c-edc6-f732-74b413976bef\",\"memory:mem_ed286db5-e9db-c658-f638-81adb3d9c21e\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_31d93a7c-ef43-17df-c67d-d4afd6a9ae58\",\"memory:mem_f0535774-dab8-eeb4-2430-97c90c2f8b76\",\"memory:mem_ca6c93c2-99f9-aafe-42ef-a752e74e19e1\",\"memory:mem_5ee279cc-9505-d04c-9f62-1298ae957114\"]"
+      },
+      {
+        "at": 1792571479628,
+        "args_json": "{\"query\":\"why a plain dump of the whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":812}",
+        "search_result_ids_json": "[\"memory:mem_ab465dc3-f954-dcab-fc12-a37d5bf5d982\",\"memory:mem_c6326a96-c204-fcda-0e66-8e38cc00872e\",\"memory:mem_da8dfa5f-2595-5f71-88b3-51fbf1ba254e\",\"memory:mem_12bdd7fb-915c-edc6-f732-74b413976bef\",\"memory:mem_ed286db5-e9db-c658-f638-81adb3d9c21e\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_ca6c93c2-99f9-aafe-42ef-a752e74e19e1\",\"memory:mem_31d93a7c-ef43-17df-c67d-d4afd6a9ae58\",\"memory:mem_f0535774-dab8-eeb4-2430-97c90c2f8b76\",\"memory:mem_b22168ac-0b3c-f9b9-cff2-7275ecad8fcd\"]"
+      },
+      {
+        "at": 1792571484594,
+        "args_json": "{\"query\":\"services storage box home\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":622}",
+        "search_result_ids_json": "[\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_176acf24-aa61-e3ee-1050-0e43d145417b\",\"memory:mem_82fd41bb-282a-7ce5-5e7a-1e73072b77d8\",\"memory:mem_24394986-8143-ffa3-ffb4-93afe988786c\",\"memory:mem_510c1a2e-4054-4d98-0c9b-3da3c4620b6b\",\"memory:mem_147ee9f1-bb7d-f881-a9f3-488ba52d3627\",\"memory:mem_5c2fef11-21ab-b773-8312-410c87218cf8\",\"memory:mem_30621de7-749b-fb48-6412-ce7214a41351\",\"memory:mem_b04f2265-6a45-cfb1-6b49-e0fcdb19f7a6\"]"
+      },
+      {
+        "at": 1792571489541,
+        "args_json": "{\"query\":\"services storage box home\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":618}",
+        "search_result_ids_json": "[\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_176acf24-aa61-e3ee-1050-0e43d145417b\",\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_24394986-8143-ffa3-ffb4-93afe988786c\",\"memory:mem_82fd41bb-282a-7ce5-5e7a-1e73072b77d8\",\"memory:mem_30621de7-749b-fb48-6412-ce7214a41351\",\"memory:mem_510c1a2e-4054-4d98-0c9b-3da3c4620b6b\",\"memory:mem_d47589c2-78b6-8e9f-ede2-fde3650b65fd\",\"memory:mem_b04f2265-6a45-cfb1-6b49-e0fcdb19f7a6\",\"memory:mem_47dfb5e9-4ac1-17a7-cc03-8f90e8e434dc\"]"
+      },
+      {
+        "at": 1792571494090,
+        "args_json": "{\"query\":\"services storage box home\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":570}",
+        "search_result_ids_json": "[\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_176acf24-aa61-e3ee-1050-0e43d145417b\",\"memory:mem_24394986-8143-ffa3-ffb4-93afe988786c\",\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_82fd41bb-282a-7ce5-5e7a-1e73072b77d8\",\"memory:mem_510c1a2e-4054-4d98-0c9b-3da3c4620b6b\",\"memory:mem_d47589c2-78b6-8e9f-ede2-fde3650b65fd\",\"memory:mem_147ee9f1-bb7d-f881-a9f3-488ba52d3627\",\"memory:mem_47dfb5e9-4ac1-17a7-cc03-8f90e8e434dc\",\"memory:mem_26b10c3e-fdba-5947-6428-70e84c40b245\"]"
+      },
+      {
+        "at": 1792571507563,
+        "args_json": "{\"query\":\"expensive tool-choice case models cost run every\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":934}",
+        "search_result_ids_json": "[\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1\",\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_f20b287d-c3b7-1fd9-a85d-39aca63cb161\",\"memory:mem_9e96b6eb-2594-0d60-c0de-e471c97462b9\",\"memory:mem_09ac6ada-ca62-8c1e-ed6b-c5573b37505e\",\"memory:mem_143c9b00-d628-b529-695f-7662ac675fa1\",\"memory:mem_bead5f4a-c313-0e03-6329-77aea568b85e\",\"memory:mem_4ab75057-fedc-4c1d-0dd1-b457178a0894\"]"
+      },
+      {
+        "at": 1792571512042,
+        "args_json": "{\"query\":\"expensive run every tool-choice case against all models cost\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":false,\"ms\":2512,\"fallback\":\"vector timeout 2500 ms\"}",
+        "search_result_ids_json": "[\"memory:mem_aaa0b6ac-4fe9-6aa5-684c-75b13ed659a4\",\"memory:mem_78fdc864-18b0-3d36-4124-b9c74fe93743\",\"memory:mem_f4d2594b-b753-1a87-2690-902551bc44f4\",\"memory:mem_a1f5d9c5-b6c2-5f3e-4059-b4de2b3daada\",\"memory:mem_77ad8c25-457a-8581-c58f-545c265700e1\",\"memory:mem_0e80ca21-7eb9-3c65-48f8-2f51e39d5994\",\"memory:mem_ae847065-0712-4c76-5d99-c56c477dddf5\",\"memory:mem_7fb11242-0a77-8c94-ea68-d5fe475306e1\",\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_8e5bb3d0-2d5d-2a38-304f-7b39e23ac569\"]"
+      },
+      {
+        "at": 1792571519589,
+        "args_json": "{\"query\":\"how expensive it is to run every tool-choice case against all the models\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":884}",
+        "search_result_ids_json": "[\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1\",\"memory:mem_143c9b00-d628-b529-695f-7662ac675fa1\",\"memory:mem_cc1a663a-3802-a1c5-8b8e-461529a212d1\",\"memory:mem_f20b287d-c3b7-1fd9-a85d-39aca63cb161\",\"memory:mem_9e96b6eb-2594-0d60-c0de-e471c97462b9\",\"memory:mem_09ac6ada-ca62-8c1e-ed6b-c5573b37505e\",\"memory:mem_cc36a4e4-57fb-72ea-252b-749d1799fd77\"]"
+      },
+      {
+        "at": 1792571524827,
+        "args_json": "{\"query\":\"reading past Worker logs in the Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":591}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_e83963e2-9227-0c07-3358-3b78d321d740\"]"
+      },
+      {
+        "at": 1792571529409,
+        "args_json": "{\"query\":\"reading past Worker logs in the Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":575}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_7112aec0-63d7-7057-0acc-87a6d311786e\"]"
+      },
+      {
+        "at": 1792571533846,
+        "args_json": "{\"query\":\"reading past Worker logs in the Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":842}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_106bb1d4-b377-725e-46d8-147c1ad00a1d\"]"
+      },
+      {
+        "at": 1792571539593,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":930}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_6fad4457-00ef-56eb-53b1-236a72b6583b\"]"
+      },
+      {
+        "at": 1792571546058,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":845}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057\"]"
+      },
+      {
+        "at": 1792571551780,
+        "args_json": "{\"query\":\"embedding model docs search prototype\",\"type\":\"memory\",\"limit\":20}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":693}",
+        "search_result_ids_json": "[\"memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281\",\"memory:mem_68d8a5e7-e11e-4de9-817a-fd26f7508a26\",\"memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75\",\"memory:mem_6f6794bf-1071-4b71-8e04-3fecb71a751e\",\"memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb\",\"memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186\",\"memory:mem_7a2f793f-2792-9475-14b8-17e59411e03a\",\"memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed\",\"memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669\",\"memory:mem_e191fde4-171f-cb4b-e3cd-faaf68e59fbd\"]"
+      },
+      {
+        "at": 1792571564601,
+        "args_json": "{\"query\":\"nightly job printed yesterday where to see\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":692}",
+        "search_result_ids_json": "[\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_bbe987de-def9-9936-a02e-cebc2902fee6\",\"memory:mem_330542a9-40db-645d-35a7-c93ce71d1c6b\",\"memory:mem_67b8564c-cb2f-d0a4-f67e-e711475e0440\"]"
+      },
+      {
+        "at": 1792571580162,
+        "args_json": "{\"query\":\"nightly job printed yesterday where see output log\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":847}",
+        "search_result_ids_json": "[\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_330542a9-40db-645d-35a7-c93ce71d1c6b\",\"memory:mem_71140e64-0279-e82c-d6db-abeb92b8313e\"]"
+      },
+      {
+        "at": 1792571586727,
+        "args_json": "{\"query\":\"nightly job printed yesterday where to see output\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":923}",
+        "search_result_ids_json": "[\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_bbe987de-def9-9936-a02e-cebc2902fee6\",\"memory:mem_7bc27e5e-2bf1-c71a-38bf-cbf7022e16ed\",\"memory:mem_01dc542e-a37e-abb4-ea70-8f6d801083cb\"]"
+      },
+      {
+        "at": 1792571597823,
+        "args_json": "{\"query\":\"plain dump whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":709}",
+        "search_result_ids_json": "[\"memory:mem_5f5a334b-d428-70eb-f862-8ef2c4866913\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_80537093-52fa-c1d8-663a-4219d65aa616\",\"memory:mem_1da9754a-22eb-a55e-578f-316611ff5a97\",\"memory:mem_16bcc1e8-8fff-0dc9-ede1-ca8b81fae48b\",\"memory:mem_88a3f05f-ae50-4678-eb39-094f19ddee83\",\"memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a\",\"memory:mem_5ee279cc-9505-d04c-9f62-1298ae957114\",\"memory:mem_2f17eb3a-1066-200a-d843-e497bcbea78b\",\"memory:mem_7241a0d7-a362-2b3c-3519-f5f84d646687\"]"
+      },
+      {
+        "at": 1792571607537,
+        "args_json": "{\"query\":\"plain dump whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":782}",
+        "search_result_ids_json": "[\"memory:mem_5f5a334b-d428-70eb-f862-8ef2c4866913\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_1da9754a-22eb-a55e-578f-316611ff5a97\",\"memory:mem_80537093-52fa-c1d8-663a-4219d65aa616\",\"memory:mem_16bcc1e8-8fff-0dc9-ede1-ca8b81fae48b\",\"memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a\",\"memory:mem_88a3f05f-ae50-4678-eb39-094f19ddee83\",\"memory:mem_5ee279cc-9505-d04c-9f62-1298ae957114\",\"memory:mem_7241a0d7-a362-2b3c-3519-f5f84d646687\",\"memory:mem_2f17eb3a-1066-200a-d843-e497bcbea78b\"]"
+      },
+      {
+        "at": 1792571618082,
+        "args_json": "{\"query\":\"plain dump whole database fails\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":948}",
+        "search_result_ids_json": "[\"memory:mem_5f5a334b-d428-70eb-f862-8ef2c4866913\",\"memory:mem_69cd6937-242b-f75b-e7c1-8287ba4bdb92\",\"memory:mem_80537093-52fa-c1d8-663a-4219d65aa616\",\"memory:mem_1da9754a-22eb-a55e-578f-316611ff5a97\",\"memory:mem_16bcc1e8-8fff-0dc9-ede1-ca8b81fae48b\",\"memory:mem_88a3f05f-ae50-4678-eb39-094f19ddee83\",\"memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a\",\"memory:mem_5ee279cc-9505-d04c-9f62-1298ae957114\",\"memory:mem_7241a0d7-a362-2b3c-3519-f5f84d646687\",\"memory:mem_0bdb0a78-72cc-9759-51f7-750f7f0ae0c5\"]"
+      },
+      {
+        "at": 1792571635186,
+        "args_json": "{\"query\":\"storage box home services\",\"type\":\"memory\",\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":793}",
+        "search_result_ids_json": "[\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_249a3cf6-3d01-9304-0e99-3ae79d5193ea\",\"memory:mem_147ee9f1-bb7d-f881-a9f3-488ba52d3627\",\"memory:mem_6b5ea9b9-8255-c172-e005-1f53dd846f5a\",\"memory:mem_5c2fef11-21ab-b773-8312-410c87218cf8\",\"memory:mem_f7e5aed8-417a-cef9-1e48-701f0c8cd55b\",\"memory:mem_aa5b6f91-bcbe-e0e2-1fdc-908a5684497e\",\"memory:mem_5e53516c-3598-d096-b03d-910b6da605a5\",\"memory:mem_9d4daacd-13c1-ffc4-4596-0a8c59adc0e1\",\"memory:mem_68a8e93f-f0ea-8e24-5e69-87b2109e2301\"]"
+      },
+      {
+        "at": 1792571640674,
+        "args_json": "{\"query\":\"storage box services\",\"type\":\"memory\",\"limit\":10}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":false,\"ms\":2,\"fallback\":\"Error\"}",
+        "search_result_ids_json": "[\"memory:mem_12d7294e-3afb-036a-3790-7da6598f2b3e\",\"memory:mem_6bc7c244-5b2a-a41b-a297-6feace19d87e\",\"memory:mem_176acf24-aa61-e3ee-1050-0e43d145417b\",\"memory:mem_a6c379e5-3a4e-2eaa-ea40-86209c1b5d30\",\"memory:mem_807e58af-15ad-2d7d-a9a3-00ec5f051ca7\",\"memory:mem_ce3b03b9-b7c0-487b-8bc7-b561ae0cc1c7\",\"memory:mem_151db93d-61aa-079f-f046-ac6125364d36\",\"memory:mem_4e64a59d-ba37-961e-8d2b-6a1a9c7ff700\",\"memory:mem_82fd41bb-282a-7ce5-5e7a-1e73072b77d8\",\"memory:mem_aeadf9c2-63d5-8bcc-49a0-9e6050764ca1\"]"
+      },
+      {
+        "at": 1792571644858,
+        "args_json": "{\"query\":\"storage box home services\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":792}",
+        "search_result_ids_json": "[\"memory:mem_147ee9f1-bb7d-f881-a9f3-488ba52d3627\",\"memory:mem_0422bf33-f794-0838-8318-7468203a67d1\",\"memory:mem_249a3cf6-3d01-9304-0e99-3ae79d5193ea\",\"memory:mem_6b5ea9b9-8255-c172-e005-1f53dd846f5a\",\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_5c2fef11-21ab-b773-8312-410c87218cf8\",\"memory:mem_9d4daacd-13c1-ffc4-4596-0a8c59adc0e1\",\"memory:mem_aa5b6f91-bcbe-e0e2-1fdc-908a5684497e\",\"memory:mem_201d9ded-35b9-ba43-80d2-d23189b39e3c\",\"memory:mem_176acf24-aa61-e3ee-1050-0e43d145417b\"]"
+      },
+      {
+        "at": 1792571647480,
+        "args_json": "{\"query\":\"services storage box\",\"type\":\"memory\",\"project\":\"homelab\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":699}",
+        "search_result_ids_json": "[\"memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9\",\"memory:mem_f482a677-d939-c072-0bde-7b1f0589ecac\",\"memory:mem_d0433b0d-d58a-230c-382e-92c780801d09\",\"memory:mem_510c1a2e-4054-4d98-0c9b-3da3c4620b6b\",\"memory:mem_5372bd96-7301-2237-8ffb-a37a5cfbfce1\",\"memory:mem_d61436a2-ba20-9a1e-9168-78600e3fd074\",\"memory:mem_04d83e55-3d5d-44a6-ecd9-a37323a28143\",\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_886b49e2-4917-508d-9f6b-0da2ba71579e\",\"memory:mem_c2220039-5f14-3a34-88af-35d29285ba8b\"]"
+      },
+      {
+        "at": 1792571649900,
+        "args_json": "{\"query\":\"home storage services NAS server\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":650}",
+        "search_result_ids_json": "[\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_ef71b8ff-93b0-ccaa-36ce-33db2baf4271\",\"memory:mem_30621de7-749b-fb48-6412-ce7214a41351\",\"memory:mem_b04f2265-6a45-cfb1-6b49-e0fcdb19f7a6\",\"memory:mem_f107599a-af38-3a2f-863b-876d0a7e109e\",\"memory:mem_2088b3eb-99a9-5da3-a0f1-d3c000070e23\",\"memory:mem_f17c197d-5356-e457-7b48-672c2c88d9fe\",\"memory:mem_aeae0df4-cc58-d9e6-8a00-5ca21fc92538\",\"memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9\",\"memory:mem_d0433b0d-d58a-230c-382e-92c780801d09\"]"
+      },
+      {
+        "at": 1792571654592,
+        "args_json": "{\"query\":\"storage box home services\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":719}",
+        "search_result_ids_json": "[\"memory:mem_147ee9f1-bb7d-f881-a9f3-488ba52d3627\",\"memory:mem_5c2fef11-21ab-b773-8312-410c87218cf8\",\"memory:mem_249a3cf6-3d01-9304-0e99-3ae79d5193ea\",\"memory:mem_cb532f45-06e1-d9b5-ec54-da0474600db9\",\"memory:mem_6b5ea9b9-8255-c172-e005-1f53dd846f5a\",\"memory:mem_aa5b6f91-bcbe-e0e2-1fdc-908a5684497e\",\"memory:mem_9d4daacd-13c1-ffc4-4596-0a8c59adc0e1\",\"memory:mem_5e53516c-3598-d096-b03d-910b6da605a5\",\"memory:mem_8ff59670-9f2c-a78f-81f2-6e432dd8ba3b\",\"memory:mem_0422bf33-f794-0838-8318-7468203a67d1\"]"
+      },
+      {
+        "at": 1792571657270,
+        "args_json": "{\"query\":\"services storage box home server NAS\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":612}",
+        "search_result_ids_json": "[\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"memory:mem_ef71b8ff-93b0-ccaa-36ce-33db2baf4271\",\"memory:mem_f107599a-af38-3a2f-863b-876d0a7e109e\",\"memory:mem_30621de7-749b-fb48-6412-ce7214a41351\",\"memory:mem_b04f2265-6a45-cfb1-6b49-e0fcdb19f7a6\",\"memory:mem_2088b3eb-99a9-5da3-a0f1-d3c000070e23\",\"memory:mem_f17c197d-5356-e457-7b48-672c2c88d9fe\",\"memory:mem_aeae0df4-cc58-d9e6-8a00-5ca21fc92538\",\"memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9\",\"memory:mem_17e060e7-6ff2-c167-a12f-e855c9fc393c\"]"
+      },
+      {
+        "at": 1792571663898,
+        "args_json": "{\"query\":\"expensive run every tool-choice case against all models\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":878}",
+        "search_result_ids_json": "[\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_568f6870-b38b-8ef8-836d-e808749856b7\",\"memory:mem_cc1a663a-3802-a1c5-8b8e-461529a212d1\",\"memory:mem_9960a772-5317-d4bb-23ba-ec9756b8d155\",\"memory:mem_bead5f4a-c313-0e03-6329-77aea568b85e\",\"memory:mem_07050290-4264-dd0e-c57a-8f4a7907f975\",\"memory:mem_78fdc864-18b0-3d36-4124-b9c74fe93743\",\"memory:mem_5ac88aee-0a1a-b232-f10a-f4f887ab16de\"]"
+      },
+      {
+        "at": 1792571673077,
+        "args_json": "{\"query\":\"expensive run every tool-choice case against all models\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":759}",
+        "search_result_ids_json": "[\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_568f6870-b38b-8ef8-836d-e808749856b7\",\"memory:mem_9960a772-5317-d4bb-23ba-ec9756b8d155\",\"memory:mem_cc1a663a-3802-a1c5-8b8e-461529a212d1\",\"memory:mem_07050290-4264-dd0e-c57a-8f4a7907f975\",\"memory:mem_78fdc864-18b0-3d36-4124-b9c74fe93743\",\"memory:mem_2e547a47-fae3-d00e-f6d0-a3aaf0f398d7\",\"memory:mem_bead5f4a-c313-0e03-6329-77aea568b85e\"]"
+      },
+      {
+        "at": 1792571686986,
+        "args_json": "{\"query\":\"expensive to run every tool-choice case against all the models\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":892}",
+        "search_result_ids_json": "[\"memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164\",\"memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6\",\"memory:mem_a38769e7-52b6-da4a-39fb-f863762efdd1\",\"memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1\",\"memory:mem_143c9b00-d628-b529-695f-7662ac675fa1\",\"memory:mem_cc1a663a-3802-a1c5-8b8e-461529a212d1\",\"memory:mem_568f6870-b38b-8ef8-836d-e808749856b7\",\"memory:mem_bead5f4a-c313-0e03-6329-77aea568b85e\",\"memory:mem_cc36a4e4-57fb-72ea-252b-749d1799fd77\",\"memory:mem_18c034e1-318d-47d3-252b-44c06036adf3\"]"
+      },
+      {
+        "at": 1792571696470,
+        "args_json": "{\"query\":\"Cloudflare Worker logs dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":813}",
+        "search_result_ids_json": "[\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_7112aec0-63d7-7057-0acc-87a6d311786e\",\"memory:mem_2865852a-03cf-bea0-6ca8-7a69d7531f79\"]"
+      },
+      {
+        "at": 1792571706372,
+        "args_json": "{\"query\":\"reading past Worker logs Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":723}",
+        "search_result_ids_json": "[\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_e83963e2-9227-0c07-3358-3b78d321d740\"]"
+      },
+      {
+        "at": 1792571714977,
+        "args_json": "{\"query\":\"reading past Worker logs Cloudflare dashboard\",\"type\":\"memory\"}",
+        "outcome": "ok",
+        "error_code": null,
+        "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":851}",
+        "search_result_ids_json": "[\"memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b\",\"memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744\",\"memory:mem_6f2a09a2-3e11-678c-a372-08e3f626b8b0\",\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e\",\"memory:mem_9b740abd-f69a-3c81-0461-b82902aabf26\",\"memory:mem_4136edff-9659-3cda-2755-76e3bdf92427\",\"memory:mem_7bcc47a7-0fd4-b80d-1065-f6d6e00b991e\",\"memory:mem_63abe95a-96c9-2b2a-7c02-3b88768e4d7f\",\"memory:mem_e83963e2-9227-0c07-3358-3b78d321d740\"]"
+      }
+    ],
+    "success": true,
+    "meta": {
+      "duration": 1
+    }
+  }
+]

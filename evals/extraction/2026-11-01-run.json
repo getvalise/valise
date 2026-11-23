@@ -1,0 +1,538 @@
+{
+  "ranAt": "2026-11-01T14:05:54.529Z",
+  "totals": {
+    "detected": 25,
+    "startOk": 23,
+    "endOk": 20,
+    "authorsOk": 16,
+    "publishedOk": 19,
+    "siteOk": 22
+  },
+  "rows": [
+    {
+      "n": 1,
+      "url": "https://martinfowler.com/articles/data-monolith-to-mesh.html",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 6586,
+      "pageWordCount": 6874,
+      "got": {
+        "authors": ["Zhamak Dehghani"],
+        "published": "2019-05-20T00:00:00+00:00",
+        "site": "martinfowler.com"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 2,
+      "url": "https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 2433,
+      "pageWordCount": 2665,
+      "got": {
+        "authors": ["Will Edwards", "Staff Data Engineer"],
+        "published": null,
+        "site": "Spotify Engineering"
+      },
+      "detected": true,
+      "startOk": false,
+      "before": "spotify technology brings our engineering tools under one roof. learn more →",
+      "endOk": true,
+      "after": "",
+      "authorsOk": false,
+      "publishedOk": false,
+      "siteOk": true
+    },
+    {
+      "n": 3,
+      "url": "https://www.revenuecat.com/blog/engineering/data-ingestion-snowflake/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 2155,
+      "pageWordCount": 2505,
+      "got": {
+        "authors": ["Jesús Sánchez"],
+        "published": "2024-04-15T09:48:10Z",
+        "site": "RevenueCat"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 4,
+      "url": "https://roundup.getdbt.com/p/how-ai-will-disrupt-data-engineering",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 2571,
+      "pageWordCount": 3029,
+      "got": {
+        "authors": ["Tristan Handy"],
+        "published": "2025-03-16T12:02:03+01:00",
+        "site": "The Analytics Engineering Roundup"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "it will be hard to compare data engineering in 2024 and data engineering in 2028 and say \"those are the same things.\" credit: dall-e",
+      "endOk": true,
+      "after": "∙",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 5,
+      "url": "https://juhache.substack.com/p/multi-engine-stacks-deserve-to-be",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 1990,
+      "pageWordCount": 2370,
+      "got": {
+        "authors": ["Julien Hurault"],
+        "published": "2024-07-19T00:00:00+00:00",
+        "site": "Substack"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": false,
+      "publishedOk": true,
+      "siteOk": false
+    },
+    {
+      "n": 6,
+      "url": "https://www.oneusefulthing.org/p/how-to-use-ai-to-do-stuff-an-opinionated",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 2782,
+      "pageWordCount": 3150,
+      "got": {
+        "authors": ["Ethan Mollick"],
+        "published": "2023-07-15T13:01:52+02:00",
+        "site": "One Useful Thing"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "∙",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 7,
+      "url": "https://anyblockers.com/posts/postgres-as-a-search-engine",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 5133,
+      "pageWordCount": 2766,
+      "got": {
+        "authors": [],
+        "published": "2024-08-19T18:04:00.000Z",
+        "site": "anyblockers"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": false,
+      "after": "search is hard. critical for many apps, hard to get right. especially rag-pipelines: retrieval quality makes or breaks everything. semantic search is trendy. lexical search is still backbone. semantic",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 8,
+      "url": "https://www.ssp.sh/blog/practical-data-modeling-clickhouse/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 4744,
+      "pageWordCount": 4962,
+      "got": {
+        "authors": ["Simon Späti"],
+        "published": "2025-09-05T09:41:06+02:00",
+        "site": "Data Engineering Blog & Second Brain"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "this article was written as part of my services",
+      "endOk": false,
+      "after": "enjoyed this? get the next one. data engineering insights, note-taking, and reflections & learnings from life. no hype, genuine insights. discuss on bluesky |",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 9,
+      "url": "https://www.langchain.com/blog/how-to-build-a-custom-agent-harness",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 1036,
+      "pageWordCount": 1317,
+      "got": {
+        "authors": ["Sydney Runkle"],
+        "published": "2026-06-03T17:00:00.000Z",
+        "site": "LangChain Blog"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 10,
+      "url": "https://www.digitalocean.com/community/tutorials/how-to-publish-python-packages-to-pypi-using-poetry-on-ubuntu-22-04",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 925,
+      "pageWordCount": 1738,
+      "got": {
+        "authors": ["Tony Tran"],
+        "published": "2022-10-20T08:57:10.150Z",
+        "site": "DigitalOcean"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "introduction",
+      "endOk": false,
+      "after": "thanks for learning with the digitalocean community. check out our offerings for compute, storage, networking, and managed databases. learn more about our products",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 11,
+      "url": "https://www.tasman.ai/news/how-to-build-a-context-layer",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 2850,
+      "pageWordCount": 3163,
+      "got": {
+        "authors": [],
+        "published": null,
+        "site": "Tasman Analytics"
+      },
+      "detected": true,
+      "startOk": false,
+      "before": "news & views adviceengineering semantic layers get agents to the right number; context layers explain why the number is what it is. you cannot buy that second layer - it has to be built from your team",
+      "endOk": true,
+      "after": "",
+      "authorsOk": false,
+      "publishedOk": false,
+      "siteOk": true
+    },
+    {
+      "n": 12,
+      "url": "https://www.rudderstack.com/blog/identity-graph-and-identity-resolution-in-sql/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 2529,
+      "pageWordCount": 2933,
+      "got": {
+        "authors": ["Danika Rockett"],
+        "published": "2025-12-16",
+        "site": "RudderStack"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": false,
+      "after": "published: december 16, 2025",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 13,
+      "url": "https://zachwills.net/how-to-use-claude-code-subagents-to-parallelize-development/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 2199,
+      "pageWordCount": 2424,
+      "got": {
+        "authors": ["Zach Wills"],
+        "published": "2025-09-09T12:15:00+00:00",
+        "site": "zach wills"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "updated 2026-07-10 for the agent-teams era. originally published september 2025.",
+      "endOk": true,
+      "after": "",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 14,
+      "url": "https://blog.wesleyac.com/posts/how-i-run-my-servers",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 1077,
+      "pageWordCount": 1087,
+      "got": {
+        "authors": [],
+        "published": null,
+        "site": "Wesley Aptekar-Cassels"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "↩",
+      "authorsOk": false,
+      "publishedOk": false,
+      "siteOk": true
+    },
+    {
+      "n": 15,
+      "url": "https://www.kschaul.com/post/2023/02/16/how-the-post-is-replacing-mapbox-with-open-source-solutions/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 604,
+      "pageWordCount": 662,
+      "got": {
+        "authors": ["Kevin Schaul"],
+        "published": "2023-02-16T00:00:00-06:00",
+        "site": "Kevin Schaul"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 16,
+      "url": "https://news.mit.edu/2017/how-philosophy-can-solve-your-midlife-crisis-1003",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 1469,
+      "pageWordCount": 2050,
+      "got": {
+        "authors": ["Peter Dizikes"],
+        "published": "2017-10-03T03:59:59Z",
+        "site": "Peter Dizikes"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "mit professor kieran setiya's book \"midlife\" aims to smooth out the rocky road of middle age.",
+      "endOk": false,
+      "after": "wbur wbur contributor jonathan d. fitzgerald spotlights prof. kieran setiya's book, \"midlife: a philosophical guide.\" \"setiya defines and provides a history of the midlife crisis, tracing its origins ",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": false
+    },
+    {
+      "n": 17,
+      "url": "https://simonwillison.net/2024/Sep/15/how-to-succeed-in-mrbeast-production/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 1305,
+      "pageWordCount": 1490,
+      "got": {
+        "authors": ["Simon Willison"],
+        "published": null,
+        "site": "Simon Willison’s Weblog"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "how to succeed in mrbeast production (leaked pdf).",
+      "endOk": true,
+      "after": "",
+      "authorsOk": true,
+      "publishedOk": false,
+      "siteOk": true
+    },
+    {
+      "n": 18,
+      "url": "https://blog.duolingo.com/growth-model-duolingo/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 1873,
+      "pageWordCount": 2088,
+      "got": {
+        "authors": ["Erin Gustafson", "Ph.D."],
+        "published": "2023-02-17T12:00:25.000Z",
+        "site": "Duolingo Blog"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": false,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 19,
+      "url": "https://blog.cloudflare.com/our-unified-data-platform/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 3299,
+      "pageWordCount": 3691,
+      "got": {
+        "authors": [],
+        "published": "2026-05-28T13:00:00.000Z",
+        "site": "Cloudflare Blog"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": false,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 20,
+      "url": "https://hamel.dev/blog/posts/evals-faq/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 12360,
+      "pageWordCount": 18092,
+      "got": {
+        "authors": ["Hamel Husain"],
+        "published": "2026-09-18",
+        "site": "Hamel’s Blog"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "a guide to ai and llm evals for engineers and product managers. learn how to test ai systems, analyze failures, and improve retrieval, agents, and ai products.",
+      "endOk": true,
+      "after": "↩",
+      "authorsOk": false,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 21,
+      "url": "https://noyb.eu/en/noybs-consent-banner-report-how-authorities-actually-decide",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 371,
+      "pageWordCount": 572,
+      "got": {
+        "authors": [],
+        "published": null,
+        "site": "noyb.eu"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": true,
+      "publishedOk": false,
+      "siteOk": true
+    },
+    {
+      "n": 22,
+      "url": "https://www.lesswrong.com/posts/xwdRzJxyqFqgXTWbH/how-does-a-blind-model-see-the-earth",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 1836,
+      "pageWordCount": 4952,
+      "got": {
+        "authors": ["henry"],
+        "published": "2025-08-11T19:58:26.420Z",
+        "site": "LessWrong"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "↩",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 23,
+      "url": "https://jero.zone/posts/reverse-engineering-apis",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 892,
+      "pageWordCount": 910,
+      "got": {
+        "authors": [],
+        "published": "October 21, 2024",
+        "site": "Jerome Paulos"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": false,
+      "publishedOk": true,
+      "siteOk": true
+    },
+    {
+      "n": 24,
+      "url": "https://www.unravelled.dev/how-architecture-diagrams-enable-better-conversations/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 976,
+      "pageWordCount": 1103,
+      "got": {
+        "authors": ["Ken Ross"],
+        "published": "2023-08-17T00:00:00+00:00",
+        "site": "Ken Ross"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "↩",
+      "authorsOk": true,
+      "publishedOk": true,
+      "siteOk": false
+    },
+    {
+      "n": 25,
+      "url": "https://xebia.com/blog/how-to-tame-your-python-codebase/",
+      "status": 200,
+      "extractor": "defuddle-0.19",
+      "wordCount": 1431,
+      "pageWordCount": 2123,
+      "got": {
+        "authors": ["Joachim Bargsten"],
+        "published": "February 3, 2023 T09:00:00+05:30, 2023-02-03T16:26:42+00:00",
+        "site": "Xebia"
+      },
+      "detected": true,
+      "startOk": true,
+      "before": "",
+      "endOk": true,
+      "after": "",
+      "authorsOk": false,
+      "publishedOk": false,
+      "siteOk": true
+    }
+  ]
+}

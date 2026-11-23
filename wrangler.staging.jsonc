@@ -1,0 +1,74 @@
+/**
+ * Valise staging: a second installation restored from a production backup,
+ * for deployed acceptance runs that must not touch production. A whole
+ * config rather than an `env` block, because `scripts/backup.mjs restore`
+ * reads top-level bindings only. Selected with VALISE_CONFIG. Every resource
+ * here is staging's own; see docs/operations/staging.md.
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "valise-staging",
+  "account_id": "cf073c8346e14a9226d271688bb10ee5",
+  "compatibility_date": "2026-07-14",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "main": "./workers/app.ts",
+  "keep_vars": true,
+  // Served only on its custom domain; the workers.dev hostname is off.
+  "workers_dev": false,
+  "routes": [{ "pattern": "staging.valise.run", "custom_domain": true }],
+  // Per-version preview hostnames would serve this real data on a second
+  // origin that an Access policy on the custom domain does not cover.
+  "preview_urls": false,
+  "vars": {
+    "APP_ORIGIN": "https://staging.valise.run",
+    "MCP_RESOURCE_URL": "https://staging.valise.run/mcp",
+    "SKILLS_REGISTRY_URL": "https://skills.sh",
+    // Restore refuses inference reranking and a vector namespace. Attach a
+    // fresh index through docs/operations/vector-rebuild.md before hybrid.
+    "VALISE_RERANK": "lexical",
+    // Google sign-in off: its callback is registered for production only.
+    "GOOGLE_CLIENT_ID": "none"
+  },
+  // EMAIL_API_KEY is deliberately not listed and not set, so staging cannot
+  // send verification or invite email to anyone.
+  "secrets": {
+    "required": ["VALISE_ADMIN_PASSWORD", "SESSION_SECRET", "TOKEN_PEPPER"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "valise-staging",
+      "database_id": "f36b4047-88bc-4504-879d-484a50e7d1f7",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "r2_buckets": [
+    { "binding": "BUNDLES", "bucket_name": "valise-staging-bundles" }
+  ],
+  "kv_namespaces": [
+    { "binding": "OAUTH_KV", "id": "7643d9f18aed496a9308ad2bfbe23edd" }
+  ],
+  "ai": { "binding": "AI" },
+  "ratelimits": [
+    {
+      "name": "MCP_LIMITER",
+      "namespace_id": "26101503",
+      "simple": { "limit": 60, "period": 60 }
+    },
+    {
+      "name": "CAPTURE_LIMITER",
+      "namespace_id": "26110203",
+      "simple": { "limit": 20, "period": 60 }
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      { "name": "TODO_COORDINATOR", "class_name": "TodoCoordinator" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1-todo-coordinator", "new_sqlite_classes": ["TodoCoordinator"] }
+  ],
+  "triggers": { "crons": ["0 4 * * *", "* * * * *"] },
+  "observability": { "enabled": true }
+}

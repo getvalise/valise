@@ -1,0 +1,263 @@
+{
+  "at": "2026-10-21T09:23:14.231Z",
+  "endpoint": "http://localhost:4516/mcp",
+  "memories": 5000,
+  "episodeProtocol": "all-tool-calls-v1",
+  "models": ["openai/gpt-6-luna"],
+  "toolNames": [
+    "skill_capture-this",
+    "read_skill_file",
+    "create_todo",
+    "list_ready",
+    "claim_todo",
+    "update_todo",
+    "complete_todo",
+    "comment_todo",
+    "search",
+    "list_skills",
+    "get_skill",
+    "publish_skill",
+    "fetch",
+    "save_memory",
+    "edit_memory",
+    "list_hooks",
+    "edit_hook"
+  ],
+  "toolsHash": "d1451f8600f0",
+  "toolHashes": {
+    "skill_capture-this": "c997435e252c",
+    "read_skill_file": "03feb25859c8",
+    "create_todo": "b1bf6743b7f3",
+    "list_ready": "cca4c1243538",
+    "claim_todo": "a7b4c441dc47",
+    "update_todo": "22ed5aea076f",
+    "complete_todo": "608d191419b6",
+    "comment_todo": "5ff4e54bb811",
+    "search": "69cc80e77643",
+    "list_skills": "752dac62d24e",
+    "get_skill": "89911fafb1b8",
+    "publish_skill": "b5a07abe7ddf",
+    "fetch": "ed852ab7b5d7",
+    "save_memory": "7326525d1439",
+    "edit_memory": "3b18467191de",
+    "list_hooks": "bead75449926",
+    "edit_hook": "ab5d808e6061"
+  },
+  "storeHash": "96f8afe18b7e",
+  "repeat": 1,
+  "system": "You are an agent connected to Valise, a shared workspace that carries skills, memories, and to-dos between models. Use a Valise tool when one fits the user's turn. If no tool fits, answer in plain text and call nothing.",
+  "cases": [
+    {
+      "id": "retrieval-paraphrase-dump",
+      "prompt": "Open the memory about why a plain dump of the whole database fails.",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "maxRounds": 4,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175"
+      },
+      "why": "The fixture paraphrase of \"D1 cannot export an FTS5 virtual table, so backups name the authoritative tables\", which FTS alone misses at 5000. Passing means the model's query reached the target and it fetched it. The distractor pool holds the same fact from the docs (\"Lane 3: the unfiltered export failed...\"), and a fetch of it scores as wrong id though it answers the question; read the fetched id before counting a miss. Needs --memories."
+    },
+    {
+      "id": "retrieval-paraphrase-cost",
+      "prompt": "Find the memory on how expensive it is to run every tool-choice case against all the models, and open it.",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "maxRounds": 4,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1"
+      },
+      "why": "The fixture paraphrase of \"A full seven-model eval run costs about $1.12, and Sonnet is 58% of it\", which FTS alone misses at 5000. Needs --memories."
+    }
+  ],
+  "rows": [
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-dump",
+      "expected": "fetch",
+      "chose": "search",
+      "route": ["search", "search", "search", "search"],
+      "routeCalls": [
+        {
+          "id": "call_yC2fsHz1QJMBRbQY88EjM5vb",
+          "name": "search",
+          "args": {
+            "query": "plain dump whole database fails",
+            "type": "memory",
+            "project": "*",
+            "tags": [],
+            "limit": 10
+          },
+          "argumentsJson": "{\"query\":\"plain dump whole database fails\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+          "round": 0,
+          "status": "executed"
+        },
+        {
+          "id": "call_Mjdd9IQITVlXLITYHYWsI9PI",
+          "name": "search",
+          "args": {
+            "query": "database dump",
+            "type": "memory",
+            "project": "*",
+            "tags": [],
+            "limit": 10
+          },
+          "argumentsJson": "{\"query\":\"database dump\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+          "round": 1,
+          "status": "executed"
+        },
+        {
+          "id": "call_U7mT5Ixkw6aIP2kqqqFSAgzt",
+          "name": "search",
+          "args": {
+            "query": "plain dump",
+            "type": "memory",
+            "project": "database",
+            "tags": [],
+            "limit": 10
+          },
+          "argumentsJson": "{\"query\":\"plain dump\",\"type\":\"memory\",\"project\":\"database\",\"tags\":[],\"limit\":10}",
+          "round": 2,
+          "status": "executed"
+        },
+        {
+          "id": "call_L1usZEdwwWRDD7eedWxs6dRy",
+          "name": "search",
+          "args": {
+            "query": "dump",
+            "type": "memory",
+            "project": "Valise",
+            "tags": [],
+            "limit": 20
+          },
+          "argumentsJson": "{\"query\":\"dump\",\"type\":\"memory\",\"project\":\"Valise\",\"tags\":[],\"limit\":20}",
+          "round": 3,
+          "status": "executed"
+        }
+      ],
+      "endingIndex": null,
+      "firstPromptTokens": 3479,
+      "args": {
+        "query": "dump",
+        "type": "memory",
+        "project": "Valise",
+        "tags": [],
+        "limit": 20
+      },
+      "toolMatch": false,
+      "viaMissing": null,
+      "missingArgs": [],
+      "wrongArgs": [],
+      "answerMissing": false,
+      "pass": false,
+      "capped": true,
+      "turnBudget": 2,
+      "withinBudget": false,
+      "turns": 4,
+      "promptTokens": 14370,
+      "completionTokens": 196,
+      "reasoningTokens": 55,
+      "costUsd": 0.0006695449999999999,
+      "whyOffered": false,
+      "whyFilled": false,
+      "error": null,
+      "repeat": 0
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-cost",
+      "expected": "fetch",
+      "chose": "search",
+      "route": ["search", "search", "search", "search"],
+      "routeCalls": [
+        {
+          "id": "call_OcZlUjqkUW6oZLK5XTOl4afj",
+          "name": "search",
+          "args": {
+            "query": "expensive run every tool-choice case against all models",
+            "type": "memory",
+            "project": "*",
+            "tags": [],
+            "limit": 10
+          },
+          "argumentsJson": "{\"query\":\"expensive run every tool-choice case against all models\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+          "round": 0,
+          "status": "executed"
+        },
+        {
+          "id": "call_kdQDwB2k167cqqytPpNvUVdV",
+          "name": "search",
+          "args": {
+            "query": "tool-choice cases all models cost expensive",
+            "type": "memory",
+            "project": "*",
+            "tags": [],
+            "limit": 20
+          },
+          "argumentsJson": "{\"query\":\"tool-choice cases all models cost expensive\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+          "round": 1,
+          "status": "executed"
+        },
+        {
+          "id": "call_YQ1l1efjp9jgaIBX81afsTfS",
+          "name": "search",
+          "args": {
+            "query": "tool choice",
+            "type": "memory",
+            "project": "all",
+            "tags": [],
+            "limit": 20
+          },
+          "argumentsJson": "{\"query\":\"tool choice\",\"type\":\"memory\",\"project\":\"all\",\"tags\":[],\"limit\":20}",
+          "round": 2,
+          "status": "executed"
+        },
+        {
+          "id": "call_6eYkFs5s2S8EjafoTn5QdLNv",
+          "name": "search",
+          "args": {
+            "query": "all models tool cases run",
+            "type": "memory",
+            "project": "*",
+            "tags": [],
+            "limit": 20
+          },
+          "argumentsJson": "{\"query\":\"all models tool cases run\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":20}",
+          "round": 3,
+          "status": "executed"
+        }
+      ],
+      "endingIndex": null,
+      "firstPromptTokens": 3488,
+      "args": {
+        "query": "all models tool cases run",
+        "type": "memory",
+        "project": "*",
+        "tags": [],
+        "limit": 20
+      },
+      "toolMatch": false,
+      "viaMissing": null,
+      "missingArgs": [],
+      "wrongArgs": [],
+      "answerMissing": false,
+      "pass": false,
+      "capped": true,
+      "turnBudget": 2,
+      "withinBudget": false,
+      "turns": 4,
+      "promptTokens": 14450,
+      "completionTokens": 256,
+      "reasoningTokens": 102,
+      "costUsd": 0.00030601,
+      "whyOffered": false,
+      "whyFilled": false,
+      "error": null,
+      "repeat": 0
+    }
+  ]
+}

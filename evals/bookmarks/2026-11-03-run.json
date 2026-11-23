@@ -1,0 +1,542 @@
+{
+  "pages": [
+    {
+      "title": "Hedge",
+      "url": "https://en.wikipedia.org/wiki/Hedge",
+      "revision": 1369473697
+    },
+    {
+      "title": "Pollination",
+      "url": "https://en.wikipedia.org/wiki/Pollination",
+      "revision": 1381579351
+    },
+    {
+      "title": "Windbreak",
+      "url": "https://en.wikipedia.org/wiki/Windbreak",
+      "revision": 1380322637
+    },
+    {
+      "title": "Cover crop",
+      "url": "https://en.wikipedia.org/wiki/Cover_crop",
+      "revision": 1378332430
+    },
+    {
+      "title": "Agroforestry",
+      "url": "https://en.wikipedia.org/wiki/Agroforestry",
+      "revision": 1382641604
+    },
+    {
+      "title": "Crop rotation",
+      "url": "https://en.wikipedia.org/wiki/Crop_rotation",
+      "revision": 1382035952
+    },
+    {
+      "title": "Companion planting",
+      "url": "https://en.wikipedia.org/wiki/Companion_planting",
+      "revision": 1373653221
+    },
+    {
+      "title": "Soil erosion",
+      "url": "https://en.wikipedia.org/wiki/Soil_erosion",
+      "revision": 1381896013
+    },
+    {
+      "title": "Beekeeping",
+      "url": "https://en.wikipedia.org/wiki/Beekeeping",
+      "revision": 1382472210
+    },
+    {
+      "title": "Permaculture",
+      "url": "https://en.wikipedia.org/wiki/Permaculture",
+      "revision": 1372441098
+    }
+  ],
+  "passages": 82,
+  "queries": 20,
+  "top": 3,
+  "summary": {
+    "lexical": {
+      "passage": 16,
+      "bookmark": 19
+    },
+    "vector": {
+      "passage": 15,
+      "bookmark": 20
+    },
+    "hybrid": {
+      "passage": 16,
+      "bookmark": 19
+    }
+  },
+  "model": "baai/bge-m3",
+  "spent": {
+    "tokens": 64464,
+    "usd": 0.0006446399999999999
+  },
+  "rows": [
+    {
+      "question": "How can you tell roughly how old a field boundary is from the plants growing in it?",
+      "page": "Hedge",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Hedge · 5", "Hedge · 0", "Hedge · 3"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Hedge · 0", "Crop rotation · 40", "Hedge · 3"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Hedge · 0", "Hedge · 3", "Crop rotation · 40"]
+        }
+      }
+    },
+    {
+      "question": "What is the old craft of cutting stems partway and bending them over to thicken a living fence?",
+      "page": "Hedge",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Hedge · 5", "Hedge · 3", "Hedge · 4"]
+        },
+        "vector": {
+          "passage": false,
+          "bookmark": true,
+          "hits": ["Hedge · 0", "Hedge · 1", "Hedge · 4"]
+        },
+        "hybrid": {
+          "passage": false,
+          "bookmark": true,
+          "hits": ["Hedge · 5", "Hedge · 0", "Hedge · 4"]
+        }
+      }
+    },
+    {
+      "question": "Which English county has the longest total length of turf-faced banks planted with bushes?",
+      "page": "Hedge",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Hedge · 5", "Hedge · 7", "Soil erosion · 52"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Hedge · 5", "Hedge · 7", "Hedge · 0"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Hedge · 5", "Hedge · 7", "Hedge · 0"]
+        }
+      }
+    },
+    {
+      "question": "Can showers carry pollen from one flower to another?",
+      "page": "Pollination",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Pollination · 11", "Pollination · 10", "Pollination · 12"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Pollination · 12", "Pollination · 8", "Pollination · 10"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Pollination · 12", "Pollination · 11", "Pollination · 10"]
+        }
+      }
+    },
+    {
+      "question": "How do plants that live in ponds and rivers move pollen without insects?",
+      "page": "Pollination",
+      "top": {
+        "lexical": {
+          "passage": false,
+          "bookmark": true,
+          "hits": ["Pollination · 10", "Permaculture · 78", "Soil erosion · 52"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Pollination · 11", "Pollination · 10", "Pollination · 12"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Pollination · 10", "Pollination · 11", "Pollination · 8"]
+        }
+      }
+    },
+    {
+      "question": "What is the dollar value of honeybees' contribution to food crops worldwide?",
+      "page": "Pollination",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Pollination · 17", "Pollination · 18", "Crop rotation · 41"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Pollination · 18", "Pollination · 14", "Beekeeping · 73"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Pollination · 18", "Pollination · 17", "Pollination · 14"]
+        }
+      }
+    },
+    {
+      "question": "Why is the gust just past a row of trees sometimes stronger rather than calmer?",
+      "page": "Windbreak",
+      "top": {
+        "lexical": {
+          "passage": false,
+          "bookmark": false,
+          "hits": ["Agroforestry · 33", "Soil erosion · 56", "Hedge · 6"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Soil erosion · 55", "Windbreak · 20", "Soil erosion · 53"]
+        },
+        "hybrid": {
+          "passage": false,
+          "bookmark": false,
+          "hits": ["Hedge · 2", "Agroforestry · 33", "Soil erosion · 54"]
+        }
+      }
+    },
+    {
+      "question": "How does a flattened green layer left after the season keep unwanted plants from sprouting?",
+      "page": "Cover crop",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Cover crop · 24", "Cover crop · 21", "Cover crop · 26"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Cover crop · 24", "Crop rotation · 44", "Permaculture · 77"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Cover crop · 24", "Cover crop · 21", "Crop rotation · 41"]
+        }
+      }
+    },
+    {
+      "question": "Which native farming tradition in the Mexican highlands imitates a productive jungle?",
+      "page": "Agroforestry",
+      "top": {
+        "lexical": {
+          "passage": false,
+          "bookmark": true,
+          "hits": ["Agroforestry · 31", "Permaculture · 78", "Hedge · 1"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": [
+            "Agroforestry · 38",
+            "Agroforestry · 32",
+            "Agroforestry · 35"
+          ]
+        },
+        "hybrid": {
+          "passage": false,
+          "bookmark": true,
+          "hits": [
+            "Agroforestry · 31",
+            "Agroforestry · 29",
+            "Permaculture · 78"
+          ]
+        }
+      }
+    },
+    {
+      "question": "Where do pigs and bulls graze under scattered oaks on the Iberian peninsula?",
+      "page": "Agroforestry",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Agroforestry · 33", "Agroforestry · 37", "Hedge · 2"]
+        },
+        "vector": {
+          "passage": false,
+          "bookmark": true,
+          "hits": ["Agroforestry · 38", "Agroforestry · 32", "Pollination · 11"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Agroforestry · 37", "Agroforestry · 33", "Hedge · 2"]
+        }
+      }
+    },
+    {
+      "question": "Who created a succession-based method of farming with trees in Brazil?",
+      "page": "Agroforestry",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Beekeeping · 62", "Permaculture · 74", "Agroforestry · 32"]
+        },
+        "vector": {
+          "passage": false,
+          "bookmark": true,
+          "hits": [
+            "Agroforestry · 37",
+            "Agroforestry · 35",
+            "Agroforestry · 38"
+          ]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": [
+            "Agroforestry · 37",
+            "Permaculture · 74",
+            "Agroforestry · 32"
+          ]
+        }
+      }
+    },
+    {
+      "question": "How did medieval European farmers divide their land so that one part rested each year?",
+      "page": "Crop rotation",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Beekeeping · 63", "Crop rotation · 40", "Pollination · 18"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Crop rotation · 40", "Hedge · 0", "Hedge · 3"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Crop rotation · 40", "Hedge · 0", "Hedge · 1"]
+        }
+      }
+    },
+    {
+      "question": "Which aristocrat popularised the sequence that let farmers feed animals all year in eighteenth-century Britain?",
+      "page": "Crop rotation",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Crop rotation · 40", "Hedge · 2", "Agroforestry · 37"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": [
+            "Agroforestry · 37",
+            "Crop rotation · 40",
+            "Agroforestry · 29"
+          ]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Crop rotation · 40", "Agroforestry · 37", "Hedge · 3"]
+        }
+      }
+    },
+    {
+      "question": "Which flower do gardeners plant to lure caterpillars away from their kale and broccoli?",
+      "page": "Companion planting",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Companion planting · 48", "Hedge · 5", "Pollination · 10"]
+        },
+        "vector": {
+          "passage": false,
+          "bookmark": true,
+          "hits": ["Companion planting · 49", "Cover crop · 25", "Hedge · 1"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Companion planting · 48", "Pollination · 10", "Hedge · 5"]
+        }
+      }
+    },
+    {
+      "question": "Why do insects struggle to locate their food plant when it is surrounded by other greenery?",
+      "page": "Companion planting",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": [
+            "Companion planting · 48",
+            "Beekeeping · 71",
+            "Permaculture · 77"
+          ]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": [
+            "Companion planting · 48",
+            "Companion planting · 49",
+            "Permaculture · 77"
+          ]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": [
+            "Companion planting · 48",
+            "Permaculture · 77",
+            "Pollination · 17"
+          ]
+        }
+      }
+    },
+    {
+      "question": "Why do ploughed hilltops lose their soil even when rain is not the cause?",
+      "page": "Soil erosion",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Hedge · 2", "Soil erosion · 53", "Beekeeping · 71"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": [
+            "Soil erosion · 55",
+            "Soil erosion · 56",
+            "Soil erosion · 53"
+          ]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": [
+            "Soil erosion · 53",
+            "Soil erosion · 55",
+            "Soil erosion · 52"
+          ]
+        }
+      }
+    },
+    {
+      "question": "Why do apiarists puff fumes at a colony before opening it?",
+      "page": "Beekeeping",
+      "top": {
+        "lexical": {
+          "passage": false,
+          "bookmark": true,
+          "hits": ["Beekeeping · 71", "Beekeeping · 61", "Beekeeping · 63"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Beekeeping · 72", "Beekeeping · 68", "Beekeeping · 61"]
+        },
+        "hybrid": {
+          "passage": false,
+          "bookmark": true,
+          "hits": ["Beekeeping · 72", "Beekeeping · 61", "Beekeeping · 71"]
+        }
+      }
+    },
+    {
+      "question": "How warm does a colony keep its nest, and how does it cool down in summer?",
+      "page": "Beekeeping",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Beekeeping · 72", "Beekeeping · 69", "Beekeeping · 63"]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Beekeeping · 72", "Beekeeping · 69", "Pollination · 19"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Beekeeping · 72", "Beekeeping · 69", "Pollination · 19"]
+        }
+      }
+    },
+    {
+      "question": "Does burying logs under garden beds help them hold moisture through a drought?",
+      "page": "Permaculture",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": [
+            "Permaculture · 78",
+            "Crop rotation · 44",
+            "Agroforestry · 31"
+          ]
+        },
+        "vector": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Permaculture · 78", "Windbreak · 20", "Hedge · 3"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Permaculture · 78", "Hedge · 2", "Crop rotation · 44"]
+        }
+      }
+    },
+    {
+      "question": "How does a design for a homestead decide what goes nearest the house?",
+      "page": "Permaculture",
+      "top": {
+        "lexical": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Permaculture · 77", "Crop rotation · 41", "Beekeeping · 63"]
+        },
+        "vector": {
+          "passage": false,
+          "bookmark": true,
+          "hits": ["Hedge · 0", "Permaculture · 76", "Hedge · 6"]
+        },
+        "hybrid": {
+          "passage": true,
+          "bookmark": true,
+          "hits": ["Permaculture · 77", "Hedge · 6", "Permaculture · 79"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "at": 1792864687314,
+    "args_json": "{\"query\":\"symbiotic\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":844}",
+    "search_result_ids_json": "[]"
+  },
+  {
+    "at": 1792864692511,
+    "args_json": "{\"query\":\"cisterns\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":498}",
+    "search_result_ids_json": "[]"
+  },
+  {
+    "at": 1792864695306,
+    "args_json": "{\"query\":\"spaceflight\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":474}",
+    "search_result_ids_json": "[]"
+  },
+  {
+    "at": 1792864698088,
+    "args_json": "{\"query\":\"Photovoltaic\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":507}",
+    "search_result_ids_json": "[]"
+  },
+  {
+    "at": 1792864712052,
+    "args_json": "{\"query\":\"tree\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":451}",
+    "search_result_ids_json": "[]"
+  },
+  {
+    "at": 1792864794105,
+    "args_json": "{\"query\":\"heat-stressed tropical reefs turning pale\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":557}",
+    "search_result_ids_json": "[]"
+  },
+  {
+    "at": 1792864795024,
+    "args_json": "{\"query\":\"droughtproofing household gardens with captured precipitation\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":500}",
+    "search_result_ids_json": "[]"
+  },
+  {
+    "at": 1792864795894,
+    "args_json": "{\"query\":\"economical orbital transportation using recovered boosters\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":444}",
+    "search_result_ids_json": "[]"
+  },
+  {
+    "at": 1792864796660,
+    "args_json": "{\"query\":\"renewable power output by fiscal period\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":457}",
+    "search_result_ids_json": "[]"
+  },
+  {
+    "at": 1792864797444,
+    "args_json": "{\"query\":\"orchard fruit ready for picking\",\"type\":\"asset\"}",
+    "outcome": "ok",
+    "rerank_json": "{\"backend\":\"jev\",\"reranked\":true,\"ms\":432}",
+    "search_result_ids_json": "[]"
+  }
+]

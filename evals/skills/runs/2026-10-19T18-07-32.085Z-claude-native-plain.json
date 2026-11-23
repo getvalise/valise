@@ -1,0 +1,175 @@
+{
+  "client": "claude",
+  "version": "2.1.303 (Claude Code)",
+  "mode": "native",
+  "test": "plain",
+  "protocol": "modern",
+  "fixtureHash": "c56276e59737ff0f9e4ebf53a4ea62d6b04a80cc1730faa8df6b9eaa8381273c",
+  "dir": "/var/folders/75/p5ymw8gs2nl_ww1fkqkvytlc0000gn/T/valise-skill-probe-r1WfeO",
+  "status": 0,
+  "methods": ["server/discover", "resources/list", "resources/read"],
+  "calls": [
+    {
+      "at": "2026-10-19T18:07:23.153Z",
+      "jsonrpc": "2.0",
+      "id": "server-discover-probe-1",
+      "method": "server/discover",
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "claude-code",
+            "title": "Claude Code",
+            "version": "2.1.303",
+            "description": "Anthropic's agentic coding tool",
+            "websiteUrl": "https://claude.com/claude-code"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "roots": {
+              "listChanged": true
+            },
+            "elicitation": {
+              "form": {},
+              "url": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:23.161Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 0,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "claude-code",
+            "title": "Claude Code",
+            "version": "2.1.303",
+            "description": "Anthropic's agentic coding tool",
+            "websiteUrl": "https://claude.com/claude-code"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "roots": {
+              "listChanged": true
+            },
+            "elicitation": {
+              "form": {},
+              "url": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:28.854Z",
+      "method": "resources/read",
+      "params": {
+        "uri": "skill://valise-probe-cerulean/SKILL.md",
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "claude-code",
+            "title": "Claude Code",
+            "version": "2.1.303",
+            "description": "Anthropic's agentic coding tool",
+            "websiteUrl": "https://claude.com/claude-code"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "roots": {
+              "listChanged": true
+            },
+            "elicitation": {
+              "form": {},
+              "url": {}
+            }
+          }
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 1
+    }
+  ],
+  "nativeDiscovery": false,
+  "markerReturned": false,
+  "finalText": "The organization's cerulean receipt convention is available, so I didn't need to output UNAVAILABLE.\n\nThe convention comes from the `valise-probe-cerulean` resource on the `valiseprobe` MCP server (`skill://valise-probe-cerulean/SKILL.md`). It says: \"For a cerulean receipt, answer exactly `CERULEAN-one-7391`.\"\n\nReceipt:\n\n```\nCERULEAN-one-7391\n```\n\nI couldn't search the project directory because the shell and file-search tools are disabled in this session, so this is based only on that MCP resource.",
+  "registeredSkills": [
+    "deep-research",
+    "design",
+    "design-sync",
+    "dataviz",
+    "update-config",
+    "verify",
+    "debug",
+    "code-review",
+    "simplify",
+    "batch",
+    "fewer-permission-prompts",
+    "doctor",
+    "loop",
+    "schedule",
+    "claude-api",
+    "workflow-authoring",
+    "run",
+    "run-skill-generator",
+    "plugin-authoring"
+  ],
+  "registeredCommands": [
+    "deep-research",
+    "design",
+    "design-sync",
+    "dataviz",
+    "update-config",
+    "verify",
+    "debug",
+    "code-review",
+    "simplify",
+    "batch",
+    "fewer-permission-prompts",
+    "doctor",
+    "loop",
+    "schedule",
+    "claude-api",
+    "workflow-authoring",
+    "run",
+    "run-skill-generator",
+    "plugin-authoring",
+    "advisor",
+    "agents",
+    "auto-mode-setup",
+    "autocompact",
+    "clear",
+    "color",
+    "compact",
+    "config",
+    "output-style",
+    "context",
+    "effort",
+    "fast",
+    "focus",
+    "heapdump",
+    "init",
+    "mcp",
+    "import",
+    "model",
+    "__remote-workflow",
+    "workflow-launch-exec",
+    "reload-plugins",
+    "reload-skills",
+    "rename",
+    "security-review",
+    "usage-credits",
+    "extra-usage",
+    "usage",
+    "insights",
+    "recap",
+    "skill-doctor",
+    "goal",
+    "design-consent",
+    "design-revoke",
+    "list-agents",
+    "team-onboarding"
+  ]
+}

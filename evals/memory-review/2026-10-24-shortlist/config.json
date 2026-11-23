@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "88fe1537aa025e258edfb7bdf7ad16d4015ee86e",
+  "originMain": "62793220374f36b103fad014c3cf66ec2add0174",
+  "sourceHashes": {
+    "app/concepts/memory-review-model.ts": "048fe24e69556cba049d3f48df723497ad7cffb6850b14e3b77a8cd42f8382ad",
+    "app/concepts/memory-review.ts": "50999a596f35b06ea8ee3bff3ec820c4d84d8a9fccc5595c4de5a42d15d86e94"
+  },
+  "fixtureSource": "evals/memory-review/2026-10-24/fixtures.json",
+  "fixtureFileSha256": "05cd94ad9fd700cfd81422d74b3870992752e7d7dbd2e4b7de25bafd16440e99",
+  "fixtureCanonicalSha256": "57a3b69137b12d2b6d0c1bbed69351d591cbd7d482b947866aa59d888c420f41",
+  "promptSha256": "5795f16ddd50ab16201211400e53e8dba732bad90639387c4738543cc0bad6e9",
+  "runnerSha256": "88586f6c058e2af25b3629f91e9f95b03406d39cc95682bc6c2c3405d4e2296c",
+  "syntheticOnly": true,
+  "maxCalls": 54,
+  "repeats": 3,
+  "concurrency": 1,
+  "retries": 0,
+  "hardBudgetUsd": 1,
+  "inputBytes": 24000,
+  "maxOutputTokens": 1536,
+  "timeoutMs": 30000,
+  "responseBytes": 65536,
+  "reasoning": {
+    "enabled": false
+  },
+  "ordering": "Sequential balanced Latin rotation: model position=(repeat-1+caseIndex+offset)%3; each model occupies each within-case position once across repeats. No parallel provider load burst.",
+  "pricing": "Router caps use fetched base rates (October24 weekend). Conservative reservations include every override reachable within24KB, including DeepSeek weekday peak. Cache discounts are not assumed.",
+  "plannedConservativeBoundUsd": 0.0832206
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `skills` ADD `auto_update` integer DEFAULT false NOT NULL;

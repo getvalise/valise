@@ -1,0 +1,59 @@
+{
+  "sourceCommit": "5676edd688a2599aff09b8fde90a0f96610a07a6",
+  "model": "anthropic/claude-haiku-5.5",
+  "promptVersion": "memory-review-1",
+  "source": "Decoded proposal_json retained by the actual application; not an HTTP envelope, invoice or edited replacement",
+  "groups": [
+    {
+      "fixture": "compatible",
+      "groupId": "mrg_b575c109-3cd0-43ab-88a6-698856a8f147",
+      "proposal": {
+        "kind": "contradiction",
+        "title": "Conflicting claims about pear and apple storage from the same grower",
+        "body": "Two attributed claims from fictional grower Ada, both dated 2026-10-24, address different fruit and make incompatible or at least unreconciled statements about storage:\n\n- Ada says pears stay dry during transport.\n- Ada says only ripe apples stay cool, never frozen.\n\nThese do not directly contradict each other, since they concern different fruits and different properties (dryness in transport versus temperature). They are recorded here as a potential conflict only because they come from the same source on the same date and both concern storage conditions. A human should confirm whether these are meant to be read together and whether either claim needs verification. Both remain attributed to Ada; neither is adopted as established fact.",
+        "why": "Both memories are attributed to the same source on the same date and cover storage conditions for fruit. Without further context it is unclear whether they conflict, so the human should review them rather than the system resolving the question.",
+        "evidence": [
+          {
+            "id": "mem_3a0be3a6-28f9-4a0d-8f25-322807890729",
+            "quote": "pears stay dry during transport"
+          },
+          {
+            "id": "mem_4bf6d37d-0784-4f6b-ac2e-bbee51e09f3d",
+            "quote": "only ripe apples stay cool, never frozen"
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "conflicting",
+      "groupId": "mrg_892bf369-733c-44fc-a542-5ab721c9222d",
+      "proposal": {
+        "kind": "contradiction",
+        "title": "Conflicting claims about chilling blue crates on 2026-10-24",
+        "body": "Two fictional growers make incompatible claims about the same date and the same item. **Bo** claims all blue crates must be chilled on 2026-10-24. **Cy** claims all blue crates must never be chilled on 2026-10-24. Neither claim has been verified, so this memo does not decide which, if either, is correct. A human reviewer should check the underlying source for this requirement before relying on either claim.",
+        "why": "Both sources make a direct, mutually exclusive assertion about the same requirement (chilling blue crates on 2026-10-24): one says must be chilled, the other says must never be chilled. Both are attributed to individual growers and both explicitly state their claims are unverified, so neither can be promoted to fact or used to supersede the other.",
+        "evidence": [
+          {
+            "id": "mem_4be7d998-fcc6-4765-b92d-7c3413c0c4cb",
+            "quote": "Fictional grower Bo claims all blue crates must be chilled on 2026-10-24."
+          },
+          {
+            "id": "mem_ff0f9436-59a5-4c27-a203-e4c031109cac",
+            "quote": "Fictional grower Cy claims all blue crates must never be chilled on 2026-10-24."
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "insufficient",
+      "groupId": "mrg_7c3c1e19-262f-4cba-b319-315f8d6ee54b",
+      "proposal": {
+        "kind": "noop",
+        "title": "Two fragments lack the context needed to combine safely",
+        "body": "Both memories are fragments that refer to an unnamed exception or object whose meaning is not stated in either record. Combining them would require inferring the missing context, so no consolidation or summary is proposed. A human should locate the omitted source defining the exception before any merge is considered.",
+        "why": "Each fragment defers to an unnamed exception (\"the unnamed exception might refer to another object\"; \"it is only valid under the unnamed exception; the omitted source defines it\"). Since the defining source is absent, a faithful combined summary cannot be written without inventing facts.",
+        "evidence": []
+      }
+    }
+  ]
+}

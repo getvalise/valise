@@ -1,0 +1,68 @@
+{
+  "journey": "j3",
+  "run": "2026-10-29-4f0c50",
+  "origin": "http://localhost:53682",
+  "label": "local",
+  "runner_commit": "ff74018305015fce3c63f8c67c7990d7de5f9123",
+  "started_at": "2026-10-29T09:09:06.634Z",
+  "steps": [
+    {
+      "step": "member signs in and mints three bearer tokens",
+      "ok": true
+    },
+    {
+      "step": "1. create, filter, open, edit, comment, attach; agent B reads all of it",
+      "ok": true,
+      "detail": {
+        "id": "todo:tdo_40af2cab-4fe2-4cf6-a238-42fbe30f2633",
+        "files": 1
+      }
+    },
+    {
+      "step": "2. parent completes without cascading; prerequisite refuses the claim",
+      "ok": true
+    },
+    {
+      "step": "4. completing the prerequisite leaves the manual blocker",
+      "ok": true
+    },
+    {
+      "step": "3. two-client race: one winner; expiry; old token refused",
+      "ok": true,
+      "detail": {
+        "winner": "journey-agent-b",
+        "mirrorLagMs": 1173
+      }
+    },
+    {
+      "step": "scope and tenant denial",
+      "ok": true,
+      "detail": {
+        "narrow": "todos:read token cannot update",
+        "narrowRefusal": "thrown: InsufficientScopeError: Insufficient scope: required \"todos:write\"",
+        "foreign": "tenant B: fetch, claim and console open all refused"
+      }
+    },
+    {
+      "step": "5. complete and reopen keep row, pane and URL; agent B sees each state",
+      "ok": true
+    },
+    {
+      "step": "tag edit keeps state, blocker and other tags",
+      "ok": true
+    },
+    {
+      "step": "phone 320px and no-script pane render without sideways scroll",
+      "ok": true
+    }
+  ],
+  "fixtures": [
+    "todo:tdo_90cc497e-bee1-4285-bccd-3794898be3c3",
+    "todo:tdo_30d6caf6-1a35-4455-8ad8-e7fa48b5c991",
+    "todo:tdo_40af2cab-4fe2-4cf6-a238-42fbe30f2633"
+  ],
+  "cleanup": [
+    "bearer tokens labelled \"journey j3 2026-10-29-4f0c50\" revoked",
+    "synthetic to-dos remain in project journey-j3-2026-10-29-4f0c50; nothing else touched"
+  ]
+}

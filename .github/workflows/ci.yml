@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      # postinstall runs `wrangler types` and `react-router typegen`, so the
+      # generated types tsc needs exist before any other step.
+      - run: npm ci
+
+      # lint, typecheck, migration audit, D1 tests, MCP tests, client tests.
+      # The Playwright suite is local only: `npm run verify` before a push.
+      - run: npm run verify:ci

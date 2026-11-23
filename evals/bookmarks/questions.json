@@ -1,0 +1,105 @@
+{
+  "note": "Each question avoids the answer's own wording where it can. The phrase is a verbatim span of the answer; truth is the bookmark and the passage(s) holding it.",
+  "queries": [
+    {
+      "question": "How can you tell roughly how old a field boundary is from the plants growing in it?",
+      "page": "Hedge",
+      "phrase": "counting the number of woody species"
+    },
+    {
+      "question": "What is the old craft of cutting stems partway and bending them over to thicken a living fence?",
+      "page": "Hedge",
+      "phrase": "cutting most of the way through the stem"
+    },
+    {
+      "question": "Which English county has the longest total length of turf-faced banks planted with bushes?",
+      "page": "Hedge",
+      "phrase": "approximately 33,000 miles"
+    },
+    {
+      "question": "Can showers carry pollen from one flower to another?",
+      "page": "Pollination",
+      "phrase": "Rain pollination is used by a small percentage"
+    },
+    {
+      "question": "How do plants that live in ponds and rivers move pollen without insects?",
+      "page": "Pollination",
+      "phrase": "hydrophily"
+    },
+    {
+      "question": "What is the dollar value of honeybees' contribution to food crops worldwide?",
+      "page": "Pollination",
+      "phrase": "$235 and $577"
+    },
+    {
+      "question": "Why is the gust just past a row of trees sometimes stronger rather than calmer?",
+      "page": "Windbreak",
+      "phrase": "resulting in a jet of higher wind speed"
+    },
+    {
+      "question": "How does a flattened green layer left after the season keep unwanted plants from sprouting?",
+      "page": "Cover crop",
+      "phrase": "nearly impenetrable mat"
+    },
+    {
+      "question": "Which native farming tradition in the Mexican highlands imitates a productive jungle?",
+      "page": "Agroforestry",
+      "phrase": "Masehual term"
+    },
+    {
+      "question": "Where do pigs and bulls graze under scattered oaks on the Iberian peninsula?",
+      "page": "Agroforestry",
+      "phrase": "dehesa or montado"
+    },
+    {
+      "question": "Who created a succession-based method of farming with trees in Brazil?",
+      "page": "Agroforestry",
+      "phrase": "developed by Ernst Götsch in Brazil"
+    },
+    {
+      "question": "How did medieval European farmers divide their land so that one part rested each year?",
+      "page": "Crop rotation",
+      "phrase": "transitioned from a two-field system to a three-field system"
+    },
+    {
+      "question": "Which aristocrat popularised the sequence that let farmers feed animals all year in eighteenth-century Britain?",
+      "page": "Crop rotation",
+      "phrase": "Charles Townshend"
+    },
+    {
+      "question": "Which flower do gardeners plant to lure caterpillars away from their kale and broccoli?",
+      "page": "Companion planting",
+      "phrase": "nasturtium (Tropaeolum majus)"
+    },
+    {
+      "question": "Why do insects struggle to locate their food plant when it is surrounded by other greenery?",
+      "page": "Companion planting",
+      "phrase": "Insects can see clearly now the weeds have gone"
+    },
+    {
+      "question": "Why do ploughed hilltops lose their soil even when rain is not the cause?",
+      "page": "Soil erosion",
+      "phrase": "Eroded hilltops are actually caused by tillage erosion"
+    },
+    {
+      "question": "Why do apiarists puff fumes at a colony before opening it?",
+      "page": "Beekeeping",
+      "phrase": "smoke masks alarm pheromones"
+    },
+    {
+      "question": "How warm does a colony keep its nest, and how does it cool down in summer?",
+      "page": "Beekeeping",
+      "phrase": "about 35 °C"
+    },
+    {
+      "question": "Does burying logs under garden beds help them hold moisture through a drought?",
+      "page": "Permaculture",
+      "phrase": "burying wood to increase soil water retention"
+    },
+    {
+      "question": "How does a design for a homestead decide what goes nearest the house?",
+      "page": "Permaculture",
+      "phrase": "Frequently manipulated or harvested elements"
+    }
+  ]
+}

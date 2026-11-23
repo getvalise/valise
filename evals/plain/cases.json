@@ -1,0 +1,25 @@
+{
+  "rule": "Write so the user can follow you on the first read. Define any name you introduce, such as a code identifier or a label you made up, the first time you use it, or use plain words instead. Name the repo, file, or person instead of \"it\", \"the job\", or \"the repo\". Answer the question asked first, in short plain sentences, then give detail.",
+  "cases": [
+    {
+      "id": "pr-84-explain",
+      "fixture": "evals/plain/pr-84.md",
+      "prompt": "That's the description of a PR that merged while I was out. What does it change for me?"
+    },
+    {
+      "id": "pr-89-run",
+      "fixture": "evals/plain/pr-89.md",
+      "prompt": "That PR merged while I was out. I want to run the evals through Claude Code now. What do I do, and how do I read the results?"
+    },
+    {
+      "id": "adr-0002-lease",
+      "fixture": "docs/adr/0002-claiming-semantics.md",
+      "prompt": "An agent told me my to-do is leased with fencing token 3. What does that mean, and can I still edit the to-do from the console?"
+    },
+    {
+      "id": "adr-0013-search",
+      "fixture": "docs/adr/0013-no-embeddings-for-search.md",
+      "prompt": "Why doesn't search use embeddings, and what would make us add them?"
+    }
+  ]
+}

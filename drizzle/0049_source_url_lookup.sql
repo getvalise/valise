@@ -1,0 +1,1 @@
+CREATE INDEX `sources_user_url` ON `sources` (`user_id`,`url`);

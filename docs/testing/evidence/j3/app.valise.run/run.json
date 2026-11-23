@@ -1,0 +1,68 @@
+{
+  "journey": "j3",
+  "run": "2026-11-01-9f0ac3",
+  "origin": "https://app.valise.run",
+  "label": "app.valise.run",
+  "runner_commit": "b156d39a6434e9cb0a9c706e5ddbcbf48c169ddf",
+  "started_at": "2026-11-01T17:04:02.709Z",
+  "steps": [
+    {
+      "step": "member signs in and mints three bearer tokens",
+      "ok": true
+    },
+    {
+      "step": "1. create, filter, open, edit, comment, attach; agent B reads all of it",
+      "ok": true,
+      "detail": {
+        "id": "todo:tdo_49d2549a-08d7-47dd-85a0-fc6352956386",
+        "files": 1
+      }
+    },
+    {
+      "step": "2. parent completes without cascading; prerequisite refuses the claim",
+      "ok": true
+    },
+    {
+      "step": "4. completing the prerequisite leaves the manual blocker",
+      "ok": true
+    },
+    {
+      "step": "3. two-client race: one winner; expiry; old token refused",
+      "ok": true,
+      "detail": {
+        "winner": "journey-agent-b",
+        "mirrorLagMs": 1218
+      }
+    },
+    {
+      "step": "scope and tenant denial",
+      "ok": true,
+      "detail": {
+        "narrow": "todos:read token cannot update",
+        "narrowRefusal": "thrown: InsufficientScopeError: Insufficient scope: required \"todos:write\"",
+        "foreign": "tenant B: fetch, claim and console open all refused"
+      }
+    },
+    {
+      "step": "5. complete and reopen keep row, pane and URL; agent B sees each state",
+      "ok": true
+    },
+    {
+      "step": "tag edit keeps state, blocker and other tags",
+      "ok": true
+    },
+    {
+      "step": "phone 320px and no-script pane render without sideways scroll",
+      "ok": true
+    }
+  ],
+  "fixtures": [
+    "todo:tdo_16c9342d-0b4e-44dd-8e7e-1717389f5df2",
+    "todo:tdo_05313b0b-1546-4935-9d5a-1b5bf206457a",
+    "todo:tdo_49d2549a-08d7-47dd-85a0-fc6352956386"
+  ],
+  "cleanup": [
+    "bearer tokens labelled \"journey j3 2026-11-01-9f0ac3\" revoked",
+    "synthetic to-dos remain in project journey-j3-2026-11-01-9f0ac3; nothing else touched"
+  ]
+}

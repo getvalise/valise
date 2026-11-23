@@ -1,0 +1,221 @@
+[
+  {
+    "url": "https://martinfowler.com/articles/data-monolith-to-mesh.html",
+    "lead": "Many enterprises are investing in their next generation data lake, with the hope of democratizing data at scale to provide business insights and ultimately make automated intelligent decisions. Data platforms based on the data lake architecture have common failure modes that lead to unfulfilled promises at scale. To address these failure modes we need to shift from the centralized paradigm of a lake, or its predecessor data warehouse. We need to shift to a paradigm that draws from modern distributed architecture: considering domains as the first class concern, applying platform thinking to create self-serve data infrastructure, and treating data as a product.",
+    "start": "Becoming a data-driven organization remains one of the top strategic goals of many companies I work with.",
+    "end": "Let's break down the big data monolith into a harmonized, collaborative and distributed ecosystem of data mesh.",
+    "authors": ["Zhamak Dehghani"],
+    "published": "2019-05-20",
+    "site": "martinfowler.com"
+  },
+  {
+    "url": "https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries",
+    "start": "Companies like Spotify need vast quantities of data accessible at low latency",
+    "end": "The same storage serves both analytical and interactive workloads — one dataset, two access patterns.",
+    "authors": ["Will Edwards"],
+    "published": "2026-07-27",
+    "site": ["Spotify Engineering", "Spotify"]
+  },
+  {
+    "url": "https://www.revenuecat.com/blog/engineering/data-ingestion-snowflake/",
+    "start": "At RevenueCat, we replicate our production data to Snowflake",
+    "end": "If you are using Postgresql and logical replication, this post is worth a read",
+    "authors": ["Jesús Sánchez"],
+    "published": "2024-04-15",
+    "site": "RevenueCat"
+  },
+  {
+    "url": "https://roundup.getdbt.com/p/how-ai-will-disrupt-data-engineering",
+    "lead": [
+      "It will be hard to compare data engineering in 2024 and data engineering in 2028 and say “those are the same things.”",
+      "It will be hard to compare data engineering in 2024 and data engineering in 2028 and say “those are the same things.” Credit: Dall-E"
+    ],
+    "start": "Last time I wrote I dove into a bunch of AI advancements",
+    "end": "I’m excited to disrupt the decade-long status quo and build something better. - Tristan",
+    "authors": ["Tristan Handy"],
+    "published": "2025-03-16",
+    "site": "The Analytics Engineering Roundup"
+  },
+  {
+    "url": "https://juhache.substack.com/p/multi-engine-stacks-deserve-to-be",
+    "lead": "Ju Data Engineering Weekly - Ep 69",
+    "start": "We, Julien Hurault and Sung Won Chung, have been imagining what’s possible with multiengine workflows",
+    "end": "P.S. You can reply to this email; it will get to me.",
+    "authors": ["Julien Hurault", "Sung Won Chung"],
+    "published": "2024-07-19",
+    "site": "Boring Data & AI"
+  },
+  {
+    "url": "https://www.oneusefulthing.org/p/how-to-use-ai-to-do-stuff-an-opinionated",
+    "lead": "Covering the state of play as of Summer, 2023",
+    "start": "Increasingly powerful AI systems are being released at an increasingly rapid pace.",
+    "end": "This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
+    "authors": ["Ethan Mollick"],
+    "published": "2023-07-15",
+    "site": "One Useful Thing"
+  },
+  {
+    "url": "https://anyblockers.com/posts/postgres-as-a-search-engine",
+    "start": "Search is hard. It’s a critical part of many apps",
+    "end": "Let me know if I missed anything! :)",
+    "authors": [],
+    "published": "2024-08-19",
+    "site": "anyblockers"
+  },
+  {
+    "url": "https://www.ssp.sh/blog/practical-data-modeling-clickhouse/",
+    "lead": "This article was written as part of my services",
+    "start": "Querying billions of weather records and getting results in under 200 milliseconds",
+    "end": "Full article published at Rilldata.com - written as part of my services",
+    "authors": ["Simon Späti"],
+    "published": "2025-09-05",
+    "site": ["ssp.sh", "Data Engineering Blog & Second Brain", "sspaeti"]
+  },
+  {
+    "url": "https://www.langchain.com/blog/how-to-build-a-custom-agent-harness",
+    "lead": "Key Takeaways A harness is the scaffolding around the model that connects it to the real world. How well a harness fits the task at hand determines how useful an agent is. LangChain's create_agent is the easiest way to build a custom harness tailored to a given task.",
+    "start": "Building useful agents is largely about customization",
+    "end": "Thanks to @hwchase17, @huntlovell, @masondrxy, and @Vtrivedy10 for their thoughtful review and feedback.",
+    "authors": ["Sydney Runkle"],
+    "published": "2026-06-03",
+    "site": ["LangChain Blog", "LangChain"]
+  },
+  {
+    "url": "https://www.digitalocean.com/community/tutorials/how-to-publish-python-packages-to-pypi-using-poetry-on-ubuntu-22-04",
+    "lead": "Introduction",
+    "start": "Poetry is a dependency manager for Python that is also capable of building and packaging your Python projects",
+    "end": "Next, you may want to delve more deeply into Python by checking out our How To Code in Python tutorial series.",
+    "authors": ["Tony Tran"],
+    "published": "2022-10-20",
+    "site": "DigitalOcean"
+  },
+  {
+    "url": "https://www.tasman.ai/news/how-to-build-a-context-layer",
+    "lead": [
+      "Semantic layers get agents to the right number; context layers explain why the number is what it is. You cannot buy that second layer — it has to be built from your team’s own decisions and history. Here is how.",
+      "Semantic layers get agents to the right number; context layers explain why the number is what it is. You cannot buy that second layer — it has to be built from your team’s own decisions and history. Here is how. Why context layers exist (and how they differ from semantic layers)"
+    ],
+    "start": "Semantic layers won the argument.",
+    "end": "Getting there costs a few tables, a directory of markdown, and a habit.",
+    "authors": ["Thomas in't Veld"],
+    "published": "2026-07-09",
+    "site": ["Tasman Analytics", "Tasman"]
+  },
+  {
+    "url": "https://www.rudderstack.com/blog/identity-graph-and-identity-resolution-in-sql/",
+    "start": "Imagine the challenge of understanding customer actions when they are spread across various devices and channels.",
+    "end": "teams can apply consistent controls across destinations instead of relying on one-off fixes in every tool.",
+    "authors": ["Danika Rockett"],
+    "published": "2025-12-16",
+    "site": "RudderStack"
+  },
+  {
+    "url": "https://zachwills.net/how-to-use-claude-code-subagents-to-parallelize-development/",
+    "lead": "Updated 2026-07-10 for the agent-teams era. Originally published September 2025.",
+    "start": "A subagent in Claude Code is a separate agent your session spawns",
+    "end": "The whole pattern is one habit anyway: stop doing the work in the window where you keep the plan.",
+    "authors": ["Zach Wills"],
+    "published": "2025-09-09",
+    "site": "zach wills"
+  },
+  {
+    "url": "https://blog.wesleyac.com/posts/how-i-run-my-servers",
+    "start": "I've been writing recently about servers and internet infrastructure",
+    "end": "some changes to the directory structure, and the logline format, and that's basically it.",
+    "authors": ["Wesley Aptekar-Cassels"],
+    "published": "2022-01-21",
+    "site": "Wesley Aptekar-Cassels"
+  },
+  {
+    "url": "https://www.kschaul.com/post/2023/02/16/how-the-post-is-replacing-mapbox-with-open-source-solutions/",
+    "start": "Last week I published a story for The Washington Post that required an interactive slippy map.",
+    "end": "Hopefully in the near future I can share more about some custom tooling that strings these projects together.",
+    "authors": ["Kevin Schaul"],
+    "published": "2023-02-16",
+    "site": "Kevin Schaul"
+  },
+  {
+    "url": "https://news.mit.edu/2017/how-philosophy-can-solve-your-midlife-crisis-1003",
+    "lead": "MIT professor Kieran Setiya’s book “Midlife” aims to smooth out the rocky road of middle age.",
+    "start": "A few years ago, a man experienced a midlife crisis.",
+    "end": "“I hope it will be of use to a wider range of people than just 40- or 50-somethings.”",
+    "authors": ["Peter Dizikes"],
+    "published": "2017-10-02",
+    "site": ["MIT News", "MIT News | Massachusetts Institute of Technology"]
+  },
+  {
+    "url": "https://simonwillison.net/2024/Sep/15/how-to-succeed-in-mrbeast-production/",
+    "lead": "How to succeed in MrBeast production (leaked PDF).",
+    "start": "Whether or not you enjoy MrBeast’s format of YouTube videos",
+    "end": "as an honest peek under the hood of a weirdly shaped and absurdly ambitious enterprise it’s legitimately fascinating.",
+    "authors": ["Simon Willison"],
+    "published": "2024-09-15",
+    "site": "Simon Willison’s Weblog"
+  },
+  {
+    "url": "https://blog.duolingo.com/growth-model-duolingo/",
+    "lead": "Let’s explore The Growth Model, aka the framework that helped grow DAUs by 4x!",
+    "start": "Many companies grow through paid marketing, but at Duolingo, our strategy is a little different!",
+    "end": "+ ResurrectedUsert-1 * (1-SURRt)",
+    "authors": ["Erin Gustafson"],
+    "published": "2023-02-17",
+    "site": ["Duolingo Blog", "Duolingo"]
+  },
+  {
+    "url": "https://blog.cloudflare.com/our-unified-data-platform/",
+    "start": "Cloudflare processes more than a billion events every second.",
+    "end": "Town Lake is how we make sure they can find it.",
+    "authors": ["Brian Brunner", "Dmitry Alexeenko", "Matt Moen"],
+    "published": "2026-05-28",
+    "site": ["Cloudflare Blog", "The Cloudflare Blog"]
+  },
+  {
+    "url": "https://hamel.dev/blog/posts/evals-faq/",
+    "lead": "A guide to AI and LLM evals for engineers and product managers. Learn how to test AI systems, analyze failures, and improve retrieval, agents, and AI products.",
+    "start": "This document curates the most common questions",
+    "end": "Who Validates the Validators? Aligning LLM-Assisted Evaluation of LLM Outputs with Human Preferences”",
+    "authors": ["Hamel Husain", "Shreya Shankar"],
+    "published": "2026-09-18",
+    "site": ["Hamel’s Blog", "Hamel Husain"]
+  },
+  {
+    "url": "https://noyb.eu/en/noybs-consent-banner-report-how-authorities-actually-decide",
+    "start": "Following several hundred noyb complaints against companies that use questionable consent banners",
+    "end": "Below is an overview of the different positions taken by national DPAs compared to the recommendations of the EDPB taskforce:",
+    "authors": [],
+    "published": "2024-07-11",
+    "site": ["noyb.eu", "noyb"]
+  },
+  {
+    "url": "https://www.lesswrong.com/posts/xwdRzJxyqFqgXTWbH/how-does-a-blind-model-see-the-earth",
+    "start": "Sometimes I'm saddened remembering that we've viewed the Earth from space.",
+    "end": "1.5 Pro is MoE, and 1.5 Flash is a dense distillation of 1.5 Pro. See: gemini_v1_5_report.pdf",
+    "authors": ["henry"],
+    "published": "2025-08-11",
+    "site": "LessWrong"
+  },
+  {
+    "url": "https://jero.zone/posts/reverse-engineering-apis",
+    "start": "I’ve built a lot of unofficial software for my schools",
+    "end": "the most effective reverse-engineers are curious, deeply knowledgable about how web apps work, and follow their gut.",
+    "authors": ["Jerome Paulos"],
+    "published": "2024-10-21",
+    "site": "Jerome Paulos"
+  },
+  {
+    "url": "https://www.unravelled.dev/how-architecture-diagrams-enable-better-conversations/",
+    "start": "Earlier this year myself and a couple others at DrDoctor did some training in C4 Architecture modelling",
+    "end": "See c4model.com for details about the C4 model for visualising software architecture",
+    "authors": ["Ken Ross"],
+    "published": "2023-08-17",
+    "site": "Unravelled Development"
+  },
+  {
+    "url": "https://xebia.com/blog/how-to-tame-your-python-codebase/",
+    "start": "You start out really small, perhaps a Proof of Concept",
+    "end": "Photo by Amiya Chaturvedi on Unsplash",
+    "authors": ["Joachim Bargsten", "Arjan Molenaar"],
+    "published": "2023-02-03",
+    "site": "Xebia"
+  }
+]

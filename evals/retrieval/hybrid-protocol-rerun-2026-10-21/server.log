@@ -1,0 +1,42 @@
+
+> dev
+> node scripts/dev.mjs --port 4546 --strictPort
+
+≈ tailwindcss v4.3.3
+
+Done in 43ms
+≈ tailwindcss v4.3.3
+
+Done in 183ms
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/vector-eval-config" without a file extension (vite.config.ts:4:34). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/vector-eval-config" without a file extension (vite.config.ts:4:34). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+Default inspector port 9229 not available, using 9230 instead
+
+⎔ Establishing remote connection...
+Using secrets defined in .wrangler/.dev.vars
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mMissing required secrets: VALISE_ADMIN_PASSWORD, SESSION_SECRET, TOKEN_PEPPER, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, VALISE_ADMIN_EMAILS. Add them to .dev.vars, .env, or set as environment variables.[0m
+
+
+  ➜  Local:   http://localhost:4546/
+  ➜  Network: use --host to expose
+  ➜  Debug:   http://localhost:4546/__debug
+
+The Cloudflare Vite plugin detected this dev session is running in an AI agent.
+The Local Explorer API is available at http://localhost:4546/cdn-cgi/local/explorer/api
+Useful routes:
+  GET http://localhost:4546/cdn-cgi/local/explorer/api/local/workers - local Workers and bindings
+  POST http://localhost:4546/cdn-cgi/local/explorer/api/local/scheduled?worker=<name> - invoke a Worker's scheduled handler; cron is required (see the OpenAPI schema for the full request)
+  GET http://localhost:4546/cdn-cgi/local/explorer/api/storage/kv/namespaces - KV namespaces
+  GET http://localhost:4546/cdn-cgi/local/explorer/api/d1/database - D1 databases
+  GET http://localhost:4546/cdn-cgi/local/explorer/api/r2/buckets - R2 buckets
+  GET http://localhost:4546/cdn-cgi/local/explorer/api/workers/durable_objects/namespaces - Durable Object namespaces
+  GET http://localhost:4546/cdn-cgi/local/explorer/api/workflows - Workflows
+  POST http://localhost:4546/cdn-cgi/local/explorer/api/local/observability/query - run a read-only SQL query (SELECT/WITH only) over captured request traces and console logs. Tables: spans, logs (read attributes via json(attributes)). Example:
+    curl -X POST http://localhost:4546/cdn-cgi/local/explorer/api/local/observability/query -H 'Content-Type: application/json' -d '{"sql":"SELECT service, name, outcome, duration_ms FROM spans WHERE parent_id IS NULL LIMIT 20"}'
+  POST http://localhost:4546/cdn-cgi/local/explorer/api/local/observability/clear - clear all captured traces and logs
+If the routes above don't cover what you need, fetch the full OpenAPI schema (large - use only as a last resort):
+  GET http://localhost:4546/cdn-cgi/local/explorer/api - OpenAPI schema

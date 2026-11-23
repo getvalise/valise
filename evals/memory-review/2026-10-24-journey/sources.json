@@ -1,0 +1,53 @@
+{
+  "sourceCommit": "5676edd688a2599aff09b8fde90a0f96610a07a6",
+  "provenance": {
+    "agent": "synthetic-j2-source-client",
+    "client": "j2-acceptance",
+    "session": null
+  },
+  "note": "Synthetic source fields copied from the application's actual sources_json snapshots. Full stamps/fingerprints remain in the retained private report.",
+  "sources": [
+    {
+      "id": "mem_4bf6d37d-0784-4f6b-ac2e-bbee51e09f3d",
+      "project": "synthetic-j2-compatible",
+      "revision": 2,
+      "title": "Synthetic j2compatible orchard evidence, attributed qualification retained",
+      "body": "According to fictional grower Ada on 2026-10-24, only ripe apples stay cool, never frozen."
+    },
+    {
+      "id": "mem_3a0be3a6-28f9-4a0d-8f25-322807890729",
+      "project": "synthetic-j2-compatible",
+      "revision": 1,
+      "title": "Synthetic j2compatible orchard evidence",
+      "body": "According to fictional grower Ada on 2026-10-24, pears stay dry during transport; this is her claim, not the user's judgment."
+    },
+    {
+      "id": "mem_4be7d998-fcc6-4765-b92d-7c3413c0c4cb",
+      "project": "synthetic-j2-conflicting",
+      "revision": 1,
+      "title": "Synthetic j2conflicting orchard evidence",
+      "body": "Fictional grower Bo claims all blue crates must be chilled on 2026-10-24."
+    },
+    {
+      "id": "mem_ff0f9436-59a5-4c27-a203-e4c031109cac",
+      "project": "synthetic-j2-conflicting",
+      "revision": 1,
+      "title": "Synthetic j2conflicting orchard evidence",
+      "body": "Fictional grower Cy claims all blue crates must never be chilled on 2026-10-24. Neither grower's claim has been verified."
+    },
+    {
+      "id": "mem_c7994d67-1905-4a04-a682-4dc59ee2a1a2",
+      "project": "synthetic-j2-insufficient",
+      "revision": 1,
+      "title": "Synthetic j2insufficient orchard evidence",
+      "body": "Fictional fragment: it is only valid under the unnamed exception; the omitted source defines it."
+    },
+    {
+      "id": "mem_2cfe3fa9-d355-4be3-ab4b-bf72a567d0c8",
+      "project": "synthetic-j2-insufficient",
+      "revision": 1,
+      "title": "Synthetic j2insufficient orchard evidence",
+      "body": "Fictional fragment: the unnamed exception might refer to another object. The full context is missing; do not infer its meaning."
+    }
+  ]
+}

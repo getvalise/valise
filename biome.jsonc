@@ -1,0 +1,67 @@
+{
+  "$schema": "node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.wrangler",
+      "!.react-router",
+      "!build",
+      "!test-results",
+      "!playwright-report",
+      "!drizzle",
+      "!.context",
+      "!public/valise.css",
+      // Generated: eval runs are machine-written evidence.
+      "!evals/runs",
+      // Generated: a trimmed, scrubbed index the evals tab falls back to.
+      "!evals/fixtures/runs-index.sample.json",
+      // Generated: journey runs write their own evidence.
+      "!docs/testing/evidence",
+      "!worker-configuration.d.ts"
+    ]
+  },
+  "css": { "parser": { "tailwindDirectives": true } },
+  "formatter": { "enabled": true, "indentStyle": "space", "indentWidth": 2 },
+  "linter": {
+    "enabled": true,
+    "rules": { "preset": "none" }
+  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  // Domain modules own their contracts; MCP adapts to them, never the reverse.
+  // The console may still name MCP surfaces (a skill's tool name and URI).
+  "overrides": [
+    {
+      "includes": [
+        "app/auth/**",
+        "app/backup/**",
+        "app/components/**",
+        "app/concepts/**",
+        "app/db/**",
+        "app/do/**",
+        "app/features/**",
+        "app/lib/**",
+        "app/r2/**",
+        "app/search/**",
+        "app/store/**"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["~/mcp/**", "**/mcp/**"],
+                    "message": "Domain code must not import the MCP adapter. Put the contract in app/concepts and have app/mcp/contracts.ts adapt to it."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

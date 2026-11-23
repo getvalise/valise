@@ -1,0 +1,98 @@
+{
+  "client": "opencode",
+  "version": "opencode v2.0.32",
+  "mode": "all",
+  "test": "explicit",
+  "dir": "/var/folders/75/p5ymw8gs2nl_ww1fkqkvytlc0000gn/T/valise-skill-probe-XONroe",
+  "status": 0,
+  "methods": [
+    "initialize",
+    "notifications/initialized",
+    "tools/list",
+    "prompts/list",
+    "resources/list",
+    "resources/templates/list",
+    "resources/list",
+    "resources/templates/list",
+    "resources/list",
+    "resources/templates/list"
+  ],
+  "calls": [
+    {
+      "at": "2026-10-19T18:06:33.541Z",
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "elicitation": {
+            "form": {},
+            "url": {}
+          },
+          "roots": {}
+        },
+        "clientInfo": {
+          "name": "opencode",
+          "version": "2.0.32"
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 0
+    },
+    {
+      "at": "2026-10-19T18:06:33.557Z",
+      "method": "tools/list",
+      "jsonrpc": "2.0",
+      "id": 1
+    },
+    {
+      "at": "2026-10-19T18:06:33.560Z",
+      "method": "prompts/list",
+      "jsonrpc": "2.0",
+      "id": 2
+    },
+    {
+      "at": "2026-10-19T18:06:33.581Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 3
+    },
+    {
+      "at": "2026-10-19T18:06:33.581Z",
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 4
+    },
+    {
+      "at": "2026-10-19T18:06:33.581Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 5
+    },
+    {
+      "at": "2026-10-19T18:06:33.581Z",
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 6
+    },
+    {
+      "at": "2026-10-19T18:06:33.581Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 7
+    },
+    {
+      "at": "2026-10-19T18:06:33.581Z",
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 8
+    }
+  ],
+  "nativeDiscovery": false,
+  "markerReturned": false,
+  "registry": [
+    {
+      "name": "valiseprobe:valise-probe-cerulean",
+      "description": "Format a cerulean receipt using the organization's exact receipt convention."
+    }
+  ]
+}

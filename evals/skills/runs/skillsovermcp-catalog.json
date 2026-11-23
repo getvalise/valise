@@ -1,0 +1,28 @@
+{
+  "url": "https://mcp.skillsovermcp.com/mcp/spencerpauly/skills-repo",
+  "at": "2026-10-19T18:10:36.256Z",
+  "initialize": {
+    "httpStatus": 500,
+    "body": "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32603,\"message\":\"Failed to build skills server for spencerpauly/skills-repo: API rate limit exceeded for user ID 28174559. If you reach out to GitHub Support for help, please include the request ID 8F8C:287356:D2C65D:291AB47:6AD65D1C and timestamp 2026-10-19 18:10:36 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) - https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api#rate-limiting\"},\"id\":null}"
+  },
+  "initialized": {
+    "httpStatus": 500,
+    "body": "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32603,\"message\":\"Failed to build skills server for spencerpauly/skills-repo: API rate limit exceeded for user ID 28174559. If you reach out to GitHub Support for help, please include the request ID 8F8C:287356:D2C854:291B177:6AD65D1C and timestamp 2026-10-19 18:10:36 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) - https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api#rate-limiting\"},\"id\":null}"
+  },
+  "tools/list": {
+    "httpStatus": 500,
+    "body": "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32603,\"message\":\"Failed to build skills server for spencerpauly/skills-repo: API rate limit exceeded for user ID 28174559. If you reach out to GitHub Support for help, please include the request ID 8F8C:287356:D2C9F1:291B5E0:6AD65D1C and timestamp 2026-10-19 18:10:36 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) - https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api#rate-limiting\"},\"id\":null}"
+  },
+  "prompts/list": {
+    "httpStatus": 500,
+    "body": "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32603,\"message\":\"Failed to build skills server for spencerpauly/skills-repo: API rate limit exceeded for user ID 28174559. If you reach out to GitHub Support for help, please include the request ID 8F8C:287356:D2CB6A:291BAA8:6AD65D1C and timestamp 2026-10-19 18:10:36 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) - https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api#rate-limiting\"},\"id\":null}"
+  },
+  "resources/list": {
+    "httpStatus": 500,
+    "body": "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32603,\"message\":\"Failed to build skills server for spencerpauly/skills-repo: API rate limit exceeded for user ID 28174559. If you reach out to GitHub Support for help, please include the request ID 8F8C:287356:D2CCBD:291BEC7:6AD65D1C and timestamp 2026-10-19 18:10:37 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) - https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api#rate-limiting\"},\"id\":null}"
+  },
+  "skills/list": {
+    "httpStatus": 500,
+    "body": "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32603,\"message\":\"Failed to build skills server for spencerpauly/skills-repo: API rate limit exceeded for user ID 28174559. If you reach out to GitHub Support for help, please include the request ID 8F8C:287356:D2CEB3:291C54A:6AD65D1D and timestamp 2026-10-19 18:10:37 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) - https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api#rate-limiting\"},\"id\":null}"
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "note": "Synthetic memories only. The three journey-* cases copy the 2026-10-24 journey sources byte for byte (../2026-10-24-journey/sources.json). Pass means the kind is in accept; compatible claims pass as summary, consolidation or noop, never contradiction.",
+  "fixtures": [
+    {
+      "name": "journey-compatible",
+      "class": "compatible",
+      "accept": ["summary", "consolidation", "noop"],
+      "sources": [
+        {
+          "id": "mem_4bf6d37d-0784-4f6b-ac2e-bbee51e09f3d",
+          "revision": 2,
+          "project": "synthetic-j2-compatible",
+          "title": "Synthetic j2compatible orchard evidence, attributed qualification retained",
+          "body": "According to fictional grower Ada on 2026-10-24, only ripe apples stay cool, never frozen."
+        },
+        {
+          "id": "mem_3a0be3a6-28f9-4a0d-8f25-322807890729",
+          "revision": 1,
+          "project": "synthetic-j2-compatible",
+          "title": "Synthetic j2compatible orchard evidence",
+          "body": "According to fictional grower Ada on 2026-10-24, pears stay dry during transport; this is her claim, not the user's judgment."
+        }
+      ]
+    },
+    {
+      "name": "journey-conflicting",
+      "class": "conflicting",
+      "accept": ["contradiction"],
+      "sources": [
+        {
+          "id": "mem_4be7d998-fcc6-4765-b92d-7c3413c0c4cb",
+          "revision": 1,
+          "project": "synthetic-j2-conflicting",
+          "title": "Synthetic j2conflicting orchard evidence",
+          "body": "Fictional grower Bo claims all blue crates must be chilled on 2026-10-24."
+        },
+        {
+          "id": "mem_ff0f9436-59a5-4c27-a203-e4c031109cac",
+          "revision": 1,
+          "project": "synthetic-j2-conflicting",
+          "title": "Synthetic j2conflicting orchard evidence",
+          "body": "Fictional grower Cy claims all blue crates must never be chilled on 2026-10-24. Neither grower's claim has been verified."
+        }
+      ]
+    },
+    {
+      "name": "journey-insufficient",
+      "class": "insufficient",
+      "accept": ["noop"],
+      "sources": [
+        {
+          "id": "mem_c7994d67-1905-4a04-a682-4dc59ee2a1a2",
+          "revision": 1,
+          "project": "synthetic-j2-insufficient",
+          "title": "Synthetic j2insufficient orchard evidence",
+          "body": "Fictional fragment: it is only valid under the unnamed exception; the omitted source defines it."
+        },
+        {
+          "id": "mem_2cfe3fa9-d355-4be3-ab4b-bf72a567d0c8",
+          "revision": 1,
+          "project": "synthetic-j2-insufficient",
+          "title": "Synthetic j2insufficient orchard evidence",
+          "body": "Fictional fragment: the unnamed exception might refer to another object. The full context is missing; do not infer its meaning."
+        }
+      ]
+    },
+    {
+      "name": "same-person-same-day-bread",
+      "class": "compatible",
+      "accept": ["summary", "consolidation", "noop"],
+      "sources": [
+        {
+          "id": "mem_synthetic_bread_0",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic bakery evidence",
+          "body": "According to fictional baker Dee on 2026-10-20, rye loaves proof for 12 hours."
+        },
+        {
+          "id": "mem_synthetic_bread_1",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic bakery evidence",
+          "body": "According to fictional baker Dee on 2026-10-20, rye loaves bake at 230 degrees Celsius."
+        }
+      ]
+    },
+    {
+      "name": "scoped-exception-deploys",
+      "class": "compatible",
+      "accept": ["summary", "consolidation", "noop"],
+      "sources": [
+        {
+          "id": "mem_synthetic_deploy_0",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic release evidence",
+          "body": "Fictional team Kite deploys to production every Tuesday."
+        },
+        {
+          "id": "mem_synthetic_deploy_1",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic release evidence",
+          "body": "Fictional team Kite never deploys to production during the December code freeze."
+        }
+      ]
+    },
+    {
+      "name": "different-times-drinks",
+      "class": "compatible",
+      "accept": ["summary", "consolidation", "noop"],
+      "sources": [
+        {
+          "id": "mem_synthetic_drinks_0",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic preference evidence",
+          "body": "Fictional user Eli drinks only tea in the morning."
+        },
+        {
+          "id": "mem_synthetic_drinks_1",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic preference evidence",
+          "body": "Fictional user Eli drinks coffee after lunch."
+        }
+      ]
+    },
+    {
+      "name": "backup-time",
+      "class": "conflicting",
+      "accept": ["contradiction"],
+      "sources": [
+        {
+          "id": "mem_synthetic_backup_0",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic operations evidence",
+          "body": "The daily backup of fictional server Wren runs once, at 02:00 UTC."
+        },
+        {
+          "id": "mem_synthetic_backup_1",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic operations evidence",
+          "body": "The daily backup of fictional server Wren runs once, at 14:00 UTC."
+        }
+      ]
+    },
+    {
+      "name": "allergy",
+      "class": "conflicting",
+      "accept": ["contradiction"],
+      "sources": [
+        {
+          "id": "mem_synthetic_allergy_0",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic health evidence",
+          "body": "Fictional user Fay is allergic to peanuts."
+        },
+        {
+          "id": "mem_synthetic_allergy_1",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic health evidence",
+          "body": "Fictional user Fay has no food allergies of any kind."
+        }
+      ]
+    },
+    {
+      "name": "pronoun-fragments",
+      "class": "insufficient",
+      "accept": ["noop"],
+      "sources": [
+        {
+          "id": "mem_synthetic_fragment_0",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic fragment",
+          "body": "It was moved to the other one after the review."
+        },
+        {
+          "id": "mem_synthetic_fragment_1",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic fragment",
+          "body": "They said that only applies when the flag is on."
+        }
+      ]
+    },
+    {
+      "name": "unnamed-values",
+      "class": "insufficient",
+      "accept": ["noop"],
+      "sources": [
+        {
+          "id": "mem_synthetic_value_0",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic fragment",
+          "body": "The number is 42 for that case."
+        },
+        {
+          "id": "mem_synthetic_value_1",
+          "revision": 1,
+          "project": "synthetic-kinds",
+          "title": "Synthetic fragment",
+          "body": "Use the old value there unless told otherwise."
+        }
+      ]
+    }
+  ]
+}

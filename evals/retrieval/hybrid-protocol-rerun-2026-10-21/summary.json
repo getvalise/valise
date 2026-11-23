@@ -1,0 +1,105 @@
+{
+  "baseCommit": "a710a9534b3f684c7d227ff593b72737b1c27da3",
+  "purpose": "bounded affected OpenAI protocol + hybrid compatibility; not a 5000-store quality rerun",
+  "memories": 50,
+  "headsIncludingSeed": 51,
+  "episodeProtocol": "all-tool-calls-v1",
+  "toolsHash": "d1451f8600f0",
+  "storeHash": "aee4aee99624",
+  "episodes": 9,
+  "strictPass": 0,
+  "errors": 0,
+  "protocolMissingOutputErrors": 0,
+  "capped": 5,
+  "routeCalls": 38,
+  "callStatuses": {
+    "executed": 38
+  },
+  "pairs": [
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-logs",
+      "episodes": 3,
+      "strictPass": 0,
+      "errors": 0,
+      "capped": 2,
+      "routeCalls": 11,
+      "costUsd": 0.0070125
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-cost",
+      "episodes": 3,
+      "strictPass": 0,
+      "errors": 0,
+      "capped": 3,
+      "routeCalls": 18,
+      "costUsd": 0.00104819
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-dump",
+      "episodes": 3,
+      "strictPass": 0,
+      "errors": 0,
+      "capped": 0,
+      "routeCalls": 9,
+      "costUsd": 0.00077186
+    }
+  ],
+  "parallelBatches": [
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 0,
+      "round": 2,
+      "calls": 3,
+      "allExecuted": true,
+      "continuedAfterBatch": true
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 1,
+      "round": 1,
+      "calls": 3,
+      "allExecuted": true,
+      "continuedAfterBatch": true
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 1,
+      "round": 3,
+      "calls": 3,
+      "allExecuted": true,
+      "continuedAfterBatch": false
+    }
+  ],
+  "openRouterSpend": {
+    "reportedUsd": 0.00883255,
+    "promptTokens": 130156,
+    "completionTokens": 2012,
+    "scope": "retained OpenRouter accounting only; excludes AI/Vectorize/Jev; not a bill or spending ceiling"
+  },
+  "modelMcpAudit": {
+    "searchCalls": 38,
+    "reranked": 0,
+    "empty": 38,
+    "projectFilters": {
+      "*": 33,
+      "all": 1,
+      "unknown": 1,
+      "general": 2,
+      "eval": 1
+    }
+  },
+  "operatorControls": {
+    "attempts": 4,
+    "genuineHybridReranked": 3,
+    "protocolErrors": 1,
+    "caveat": "First operator request lacked Accept header: HTTP406, not a model episode or repaired runner defect. Three corrected-header valid-filter controls genuinely reranked."
+  },
+  "consoleIndexSha256": "d90795c65820e826858f1769966e630ef34e4b849e3e743b6ff718e1f8cf169d",
+  "historicalEvidence": "Original 5000-store errors, strict scores and accepted real ANN floors unchanged; no pooled denominator or cleared quality claim."
+}

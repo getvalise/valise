@@ -1,0 +1,14 @@
+{
+  "source": "npx wrangler vectorize info valise-rollout-eval-20261021",
+  "index": "valise-rollout-eval-20261021",
+  "dimensions": 1024,
+  "vectorCount": 5115,
+  "processedUpToMutation": "c55143af-fb39-4ea1-9db7-c3ec206bc3be",
+  "processedUpToDatetime": "2026-10-21T08:09:11.074Z",
+  "expected": {
+    "fiftyStoreHeads": 51,
+    "scaleStoreHeads": 5001,
+    "prefilterContract": 61,
+    "earlierProviderContract": 2
+  }
+}

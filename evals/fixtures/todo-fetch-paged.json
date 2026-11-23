@@ -1,0 +1,90 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"id\":\"todo:tdo_eval_overnight_coordination\",\"title\":\"Overnight coordination\",\"text\":\"Coordinate the overnight agents and record what each one shipped.\",\"metadata\":{\"status\":\"Handing off: the status line to-do is the only open item.\",\"status_at\":1792923400,\"tags\":[\"coordination\"],\"files\":[],\"refs\":[],\"project\":\"valise\",\"state\":\"claimed\",\"lease_holder\":\"https://opencode.ai\",\"lease_expires_at\":1792940000,\"fencing_token\":1,\"blocked_on\":null,\"source_agent\":\"https://opencode.ai\",\"created_at\":1792899400,\"updated_at\":1792899400,\"completed_at\":null,\"update_count\":14,\"last_update_at\":1792923400,\"last_update_kind\":\"progress\",\"last_update_author\":\"https://opencode.ai\",\"last_update_summary\":\"Handing off: the status line to-do is the only open item.\",\"updates\":[{\"kind\":\"progress\",\"body\":\"Handing off: the status line to-do is the only open item.\",\"created_at\":1792923400},{\"kind\":\"progress\",\"body\":\"Queue is clear except the status line work.\",\"created_at\":1792921600},{\"kind\":\"progress\",\"body\":\"J1 journey doc rewritten in PR #194.\",\"created_at\":1792919800},{\"kind\":\"progress\",\"summary\":\"Library reading view landed in PR #193.\",\"created_at\":1792918000},{\"kind\":\"progress\",\"summary\":\"Phone bottom sheet landed in PR #192.\",\"created_at\":1792916200},{\"kind\":\"progress\",\"summary\":\"Merged PR #191 for the J4 eval harness.\",\"created_at\":1792914400},{\"kind\":\"progress\",\"summary\":\"J4 writeback dry run passed with no provider calls.\",\"created_at\":1792912600},{\"kind\":\"progress\",\"summary\":\"Merged PR #190; Workers Build deployed it.\",\"created_at\":1792910800},{\"kind\":\"progress\",\"summary\":\"Verify passed locally on 11f01cd.\",\"created_at\":1792909000},{\"kind\":\"progress\",\"summary\":\"Opened PR #190 for the review model default.\",\"created_at\":1792907200}],\"next_cursor\":\"tdu_eval_05\",\"updates_note\":\"7 of these updates carry a summary only; fetch with full: true for their bodies. 4 older updates are on later pages; fetch with cursor: \\\"tdu_eval_05\\\" for the next 4.\"},\"url\":\"https://app.valise.run/todos?open=todo%3Atdo_eval_overnight_coordination\"}"
+    }
+  ],
+  "structuredContent": {
+    "id": "todo:tdo_eval_overnight_coordination",
+    "title": "Overnight coordination",
+    "text": "Coordinate the overnight agents and record what each one shipped.",
+    "metadata": {
+      "status": "Handing off: the status line to-do is the only open item.",
+      "status_at": 1792923400,
+      "tags": ["coordination"],
+      "files": [],
+      "refs": [],
+      "project": "valise",
+      "state": "claimed",
+      "lease_holder": "https://opencode.ai",
+      "lease_expires_at": 1792940000,
+      "fencing_token": 1,
+      "blocked_on": null,
+      "source_agent": "https://opencode.ai",
+      "created_at": 1792899400,
+      "updated_at": 1792899400,
+      "completed_at": null,
+      "update_count": 14,
+      "last_update_at": 1792923400,
+      "last_update_kind": "progress",
+      "last_update_author": "https://opencode.ai",
+      "last_update_summary": "Handing off: the status line to-do is the only open item.",
+      "updates": [
+        {
+          "kind": "progress",
+          "body": "Handing off: the status line to-do is the only open item.",
+          "created_at": 1792923400
+        },
+        {
+          "kind": "progress",
+          "body": "Queue is clear except the status line work.",
+          "created_at": 1792921600
+        },
+        {
+          "kind": "progress",
+          "body": "J1 journey doc rewritten in PR #194.",
+          "created_at": 1792919800
+        },
+        {
+          "kind": "progress",
+          "summary": "Library reading view landed in PR #193.",
+          "created_at": 1792918000
+        },
+        {
+          "kind": "progress",
+          "summary": "Phone bottom sheet landed in PR #192.",
+          "created_at": 1792916200
+        },
+        {
+          "kind": "progress",
+          "summary": "Merged PR #191 for the J4 eval harness.",
+          "created_at": 1792914400
+        },
+        {
+          "kind": "progress",
+          "summary": "J4 writeback dry run passed with no provider calls.",
+          "created_at": 1792912600
+        },
+        {
+          "kind": "progress",
+          "summary": "Merged PR #190; Workers Build deployed it.",
+          "created_at": 1792910800
+        },
+        {
+          "kind": "progress",
+          "summary": "Verify passed locally on 11f01cd.",
+          "created_at": 1792909000
+        },
+        {
+          "kind": "progress",
+          "summary": "Opened PR #190 for the review model default.",
+          "created_at": 1792907200
+        }
+      ],
+      "next_cursor": "tdu_eval_05",
+      "updates_note": "7 of these updates carry a summary only; fetch with full: true for their bodies. 4 older updates are on later pages; fetch with cursor: \"tdu_eval_05\" for the next 4."
+    },
+    "url": "https://app.valise.run/todos?open=todo%3Atdo_eval_overnight_coordination"
+  }
+}

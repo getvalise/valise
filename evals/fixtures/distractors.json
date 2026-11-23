@@ -1,0 +1,1552 @@
+{
+  "servers": [
+    {
+      "name": "memory",
+      "tools": [
+        {
+          "name": "remember",
+          "description": "Store a fact, preference, or piece of context about the user or their work so it can be recalled in future conversations. Call this whenever the user shares something worth keeping.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string",
+                "description": "The memory to store, as a self-contained statement."
+              },
+              "tags": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["content"]
+          }
+        },
+        {
+          "name": "recall",
+          "description": "Retrieve stored memories relevant to a query. Use this at the start of a task or whenever earlier context, preferences, or decisions might help.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "limit": { "type": "integer", "default": 5 }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "list_memories",
+          "description": "List the most recent stored memories, newest first.",
+          "parameters": {
+            "type": "object",
+            "properties": { "limit": { "type": "integer", "default": 20 } }
+          }
+        },
+        {
+          "name": "update_memory",
+          "description": "Replace the content of an existing memory by id.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "memory_id": { "type": "string" },
+              "content": { "type": "string" }
+            },
+            "required": ["memory_id", "content"]
+          }
+        },
+        {
+          "name": "forget",
+          "description": "Delete a stored memory by id.",
+          "parameters": {
+            "type": "object",
+            "properties": { "memory_id": { "type": "string" } },
+            "required": ["memory_id"]
+          }
+        },
+        {
+          "name": "memory_stats",
+          "description": "Return how many memories are stored and when the last one was added.",
+          "parameters": { "type": "object", "properties": {} }
+        }
+      ]
+    },
+    {
+      "name": "web",
+      "tools": [
+        {
+          "name": "brave_web_search",
+          "description": "Performs a web search using the Brave Search API, ideal for general queries, news, articles, and online content. Use this for broad information gathering, recent events, or when you need diverse web sources. Supports pagination and freshness controls.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string",
+                "description": "Search query (max 400 chars, 50 words)"
+              },
+              "count": {
+                "type": "number",
+                "description": "Number of results (1-20, default 10)"
+              },
+              "offset": { "type": "number" }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "fetch_url",
+          "description": "Fetches a URL from the internet and extracts its contents as markdown. Use this to read a web page the user links or a search result.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "url": { "type": "string" },
+              "max_length": { "type": "integer", "default": 5000 }
+            },
+            "required": ["url"]
+          }
+        },
+        {
+          "name": "brave_news_search",
+          "description": "Searches news articles using the Brave News Search API. Use for current events, breaking news, and recent developments.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "count": { "type": "number" }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "brave_local_search",
+          "description": "Searches for local businesses and places using Brave's Local Search API. Best for queries related to physical locations, businesses, restaurants, services.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "count": { "type": "number" }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "brave_image_search",
+          "description": "Searches for images using the Brave Image Search API.",
+          "parameters": {
+            "type": "object",
+            "properties": { "query": { "type": "string" } },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "brave_summarizer",
+          "description": "Returns an AI-generated summary of web search results for a query.",
+          "parameters": {
+            "type": "object",
+            "properties": { "query": { "type": "string" } },
+            "required": ["query"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "issues",
+      "tools": [
+        {
+          "name": "create_issue",
+          "description": "Create a new issue in a team. Provide a title and optionally a description in markdown, a priority (0 none, 1 urgent, 2 high, 3 medium, 4 low), labels, a project, and an assignee.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "team": { "type": "string", "description": "Team name or key" },
+              "description": { "type": "string" },
+              "priority": { "type": "integer" },
+              "labels": { "type": "array", "items": { "type": "string" } },
+              "project": { "type": "string" },
+              "assignee": { "type": "string" }
+            },
+            "required": ["title", "team"]
+          }
+        },
+        {
+          "name": "list_my_issues",
+          "description": "List issues assigned to the current user, ordered by priority. Filter by state to see what is in progress or still todo.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string",
+                "enum": ["backlog", "todo", "in_progress", "done"]
+              },
+              "limit": { "type": "integer", "default": 25 }
+            }
+          }
+        },
+        {
+          "name": "assign_issue",
+          "description": "Assign an issue to a user, or to yourself with \"me\". Assigning yourself an issue moves it to In Progress.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "issue_id": {
+                "type": "string",
+                "description": "Issue identifier such as ENG-123"
+              },
+              "assignee": { "type": "string" }
+            },
+            "required": ["issue_id", "assignee"]
+          }
+        },
+        {
+          "name": "get_issue",
+          "description": "Retrieve an issue by identifier, with its description, state, assignee, labels, and comments.",
+          "parameters": {
+            "type": "object",
+            "properties": { "issue_id": { "type": "string" } },
+            "required": ["issue_id"]
+          }
+        },
+        {
+          "name": "search_issues",
+          "description": "Search issues by text across titles and descriptions, with optional filters for team, state, label, and assignee.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "team": { "type": "string" },
+              "state": { "type": "string" }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "update_issue",
+          "description": "Update an existing issue's title, description, priority, labels, project, or state.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "issue_id": { "type": "string" },
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "priority": { "type": "integer" },
+              "state": { "type": "string" }
+            },
+            "required": ["issue_id"]
+          }
+        },
+        {
+          "name": "add_issue_comment",
+          "description": "Add a markdown comment to an issue.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "issue_id": { "type": "string" },
+              "body": { "type": "string" }
+            },
+            "required": ["issue_id", "body"]
+          }
+        },
+        {
+          "name": "set_issue_state",
+          "description": "Move an issue to a workflow state such as Todo, In Progress, In Review, Done, or Canceled.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "issue_id": { "type": "string" },
+              "state": { "type": "string" }
+            },
+            "required": ["issue_id", "state"]
+          }
+        },
+        {
+          "name": "list_projects",
+          "description": "List projects in the workspace with their lead, status, and target date.",
+          "parameters": {
+            "type": "object",
+            "properties": { "team": { "type": "string" } }
+          }
+        },
+        {
+          "name": "list_teams",
+          "description": "List the teams in the workspace with their keys.",
+          "parameters": { "type": "object", "properties": {} }
+        },
+        {
+          "name": "list_cycles",
+          "description": "List the current and upcoming cycles for a team.",
+          "parameters": {
+            "type": "object",
+            "properties": { "team": { "type": "string" } },
+            "required": ["team"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "notes",
+      "tools": [
+        {
+          "name": "search_notes",
+          "description": "Full-text search across all notes in the vault. Returns matching note paths with the surrounding context.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "limit": { "type": "integer", "default": 10 }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "create_note",
+          "description": "Create a new markdown note in the vault. Use this to write down ideas, meeting notes, decisions, or anything the user wants to keep.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "Path relative to the vault root, ending in .md"
+              },
+              "content": { "type": "string" },
+              "tags": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["path", "content"]
+          }
+        },
+        {
+          "name": "read_note",
+          "description": "Read the full content of a note by path.",
+          "parameters": {
+            "type": "object",
+            "properties": { "path": { "type": "string" } },
+            "required": ["path"]
+          }
+        },
+        {
+          "name": "append_to_note",
+          "description": "Append markdown to the end of an existing note.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "content": { "type": "string" }
+            },
+            "required": ["path", "content"]
+          }
+        },
+        {
+          "name": "list_notes",
+          "description": "List notes in a folder of the vault.",
+          "parameters": {
+            "type": "object",
+            "properties": { "folder": { "type": "string" } }
+          }
+        },
+        {
+          "name": "update_note",
+          "description": "Replace the content of a note.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "content": { "type": "string" }
+            },
+            "required": ["path", "content"]
+          }
+        },
+        {
+          "name": "get_daily_note",
+          "description": "Open today's daily note, creating it from the template if it does not exist.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "description": "YYYY-MM-DD, default today"
+              }
+            }
+          }
+        },
+        {
+          "name": "list_tags",
+          "description": "List every tag used in the vault with its note count.",
+          "parameters": { "type": "object", "properties": {} }
+        },
+        {
+          "name": "get_backlinks",
+          "description": "List the notes that link to a given note.",
+          "parameters": {
+            "type": "object",
+            "properties": { "path": { "type": "string" } },
+            "required": ["path"]
+          }
+        },
+        {
+          "name": "delete_note",
+          "description": "Move a note to the vault's trash.",
+          "parameters": {
+            "type": "object",
+            "properties": { "path": { "type": "string" } },
+            "required": ["path"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tasks",
+      "tools": [
+        {
+          "name": "add_task",
+          "description": "Add a task to the user's task list, with an optional due date, priority, and project.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "content": { "type": "string" },
+              "due_string": {
+                "type": "string",
+                "description": "Natural language due date, such as \"tomorrow 9am\""
+              },
+              "priority": {
+                "type": "integer",
+                "description": "1 (normal) to 4 (urgent)"
+              },
+              "project": { "type": "string" }
+            },
+            "required": ["content"]
+          }
+        },
+        {
+          "name": "list_tasks",
+          "description": "List open tasks, optionally filtered by project or a filter query such as \"today | overdue\".",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "project": { "type": "string" },
+              "filter": { "type": "string" }
+            }
+          }
+        },
+        {
+          "name": "complete_task",
+          "description": "Mark a task as done.",
+          "parameters": {
+            "type": "object",
+            "properties": { "task_id": { "type": "string" } },
+            "required": ["task_id"]
+          }
+        },
+        {
+          "name": "update_task",
+          "description": "Change a task's content, due date, or priority.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "task_id": { "type": "string" },
+              "content": { "type": "string" },
+              "due_string": { "type": "string" },
+              "priority": { "type": "integer" }
+            },
+            "required": ["task_id"]
+          }
+        },
+        {
+          "name": "list_task_projects",
+          "description": "List the user's task projects.",
+          "parameters": { "type": "object", "properties": {} }
+        }
+      ]
+    },
+    {
+      "name": "filesystem",
+      "tools": [
+        {
+          "name": "read_text_file",
+          "description": "Read the complete contents of a file from the file system as text. Handles various text encodings and provides detailed error messages if the file cannot be read. Only works within allowed directories.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "head": { "type": "number" },
+              "tail": { "type": "number" }
+            },
+            "required": ["path"]
+          }
+        },
+        {
+          "name": "write_file",
+          "description": "Create a new file or completely overwrite an existing file with new content. Use with caution as it will overwrite existing files without warning. Only works within allowed directories.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "content": { "type": "string" }
+            },
+            "required": ["path", "content"]
+          }
+        },
+        {
+          "name": "edit_file",
+          "description": "Make line-based edits to a text file. Each edit replaces exact line sequences with new content. Returns a git-style diff showing the changes made. Only works within allowed directories.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "edits": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "oldText": { "type": "string" },
+                    "newText": { "type": "string" }
+                  },
+                  "required": ["oldText", "newText"]
+                }
+              },
+              "dryRun": { "type": "boolean", "default": false }
+            },
+            "required": ["path", "edits"]
+          }
+        },
+        {
+          "name": "search_files",
+          "description": "Recursively search for files and directories matching a pattern. Searches through all subdirectories from the starting path. Only searches within allowed directories.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "pattern": { "type": "string" },
+              "excludePatterns": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "required": ["path", "pattern"]
+          }
+        },
+        {
+          "name": "list_directory",
+          "description": "Get a detailed listing of all files and directories in a specified path. Results clearly distinguish between files and directories with [FILE] and [DIR] prefixes.",
+          "parameters": {
+            "type": "object",
+            "properties": { "path": { "type": "string" } },
+            "required": ["path"]
+          }
+        },
+        {
+          "name": "read_multiple_files",
+          "description": "Read the contents of multiple files simultaneously. More efficient than reading files one by one when you need to analyze or compare multiple files.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "paths": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["paths"]
+          }
+        },
+        {
+          "name": "create_directory",
+          "description": "Create a new directory or ensure a directory exists. Can create multiple nested directories in one operation.",
+          "parameters": {
+            "type": "object",
+            "properties": { "path": { "type": "string" } },
+            "required": ["path"]
+          }
+        },
+        {
+          "name": "directory_tree",
+          "description": "Get a recursive tree view of files and directories as a JSON structure.",
+          "parameters": {
+            "type": "object",
+            "properties": { "path": { "type": "string" } },
+            "required": ["path"]
+          }
+        },
+        {
+          "name": "move_file",
+          "description": "Move or rename files and directories. Fails if the destination exists.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "source": { "type": "string" },
+              "destination": { "type": "string" }
+            },
+            "required": ["source", "destination"]
+          }
+        },
+        {
+          "name": "get_file_info",
+          "description": "Retrieve detailed metadata about a file or directory: size, creation time, last modified time, permissions, and type.",
+          "parameters": {
+            "type": "object",
+            "properties": { "path": { "type": "string" } },
+            "required": ["path"]
+          }
+        },
+        {
+          "name": "list_allowed_directories",
+          "description": "Returns the list of directories that this server is allowed to access.",
+          "parameters": { "type": "object", "properties": {} }
+        }
+      ]
+    },
+    {
+      "name": "knowledge-graph",
+      "tools": [
+        {
+          "name": "create_entities",
+          "description": "Create multiple new entities in the knowledge graph, each with a name, an entity type, and a list of observations.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "entities": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "entityType": { "type": "string" },
+                    "observations": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  },
+                  "required": ["name", "entityType", "observations"]
+                }
+              }
+            },
+            "required": ["entities"]
+          }
+        },
+        {
+          "name": "search_nodes",
+          "description": "Search for nodes in the knowledge graph based on a query. Matches entity names, types, and observation content.",
+          "parameters": {
+            "type": "object",
+            "properties": { "query": { "type": "string" } },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "add_observations",
+          "description": "Add new observations to existing entities in the knowledge graph.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "observations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "entityName": { "type": "string" },
+                    "contents": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  },
+                  "required": ["entityName", "contents"]
+                }
+              }
+            },
+            "required": ["observations"]
+          }
+        },
+        {
+          "name": "create_relations",
+          "description": "Create multiple new relations between entities in the knowledge graph. Relations should be in active voice.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "relations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "from": { "type": "string" },
+                    "to": { "type": "string" },
+                    "relationType": { "type": "string" }
+                  },
+                  "required": ["from", "to", "relationType"]
+                }
+              }
+            },
+            "required": ["relations"]
+          }
+        },
+        {
+          "name": "open_nodes",
+          "description": "Open specific nodes in the knowledge graph by their names.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "names": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["names"]
+          }
+        },
+        {
+          "name": "read_graph",
+          "description": "Read the entire knowledge graph.",
+          "parameters": { "type": "object", "properties": {} }
+        },
+        {
+          "name": "delete_entities",
+          "description": "Delete multiple entities and their associated relations from the knowledge graph.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "entityNames": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["entityNames"]
+          }
+        },
+        {
+          "name": "delete_observations",
+          "description": "Delete specific observations from entities in the knowledge graph.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "deletions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "entityName": { "type": "string" },
+                    "observations": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            },
+            "required": ["deletions"]
+          }
+        },
+        {
+          "name": "delete_relations",
+          "description": "Delete multiple relations from the knowledge graph.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "relations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "from": { "type": "string" },
+                    "to": { "type": "string" },
+                    "relationType": { "type": "string" }
+                  }
+                }
+              }
+            },
+            "required": ["relations"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "github",
+      "tools": [
+        {
+          "name": "search_code",
+          "description": "Search for code across GitHub repositories using GitHub's code search syntax.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "q": { "type": "string" },
+              "per_page": { "type": "number" }
+            },
+            "required": ["q"]
+          }
+        },
+        {
+          "name": "get_file_contents",
+          "description": "Get the contents of a file or directory from a GitHub repository.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "owner": { "type": "string" },
+              "repo": { "type": "string" },
+              "path": { "type": "string" },
+              "branch": { "type": "string" }
+            },
+            "required": ["owner", "repo", "path"]
+          }
+        },
+        {
+          "name": "create_pull_request",
+          "description": "Create a new pull request in a GitHub repository.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "owner": { "type": "string" },
+              "repo": { "type": "string" },
+              "title": { "type": "string" },
+              "head": { "type": "string" },
+              "base": { "type": "string" },
+              "body": { "type": "string" },
+              "draft": { "type": "boolean" }
+            },
+            "required": ["owner", "repo", "title", "head", "base"]
+          }
+        },
+        {
+          "name": "list_pull_requests",
+          "description": "List and filter repository pull requests.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "owner": { "type": "string" },
+              "repo": { "type": "string" },
+              "state": { "type": "string", "enum": ["open", "closed", "all"] }
+            },
+            "required": ["owner", "repo"]
+          }
+        },
+        {
+          "name": "get_pull_request",
+          "description": "Get details of a specific pull request, including its merge state.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "owner": { "type": "string" },
+              "repo": { "type": "string" },
+              "pull_number": { "type": "number" }
+            },
+            "required": ["owner", "repo", "pull_number"]
+          }
+        },
+        {
+          "name": "search_repositories",
+          "description": "Search for GitHub repositories.",
+          "parameters": {
+            "type": "object",
+            "properties": { "query": { "type": "string" } },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "list_commits",
+          "description": "Get a list of commits of a branch in a GitHub repository.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "owner": { "type": "string" },
+              "repo": { "type": "string" },
+              "sha": { "type": "string" }
+            },
+            "required": ["owner", "repo"]
+          }
+        },
+        {
+          "name": "create_branch",
+          "description": "Create a new branch in a GitHub repository.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "owner": { "type": "string" },
+              "repo": { "type": "string" },
+              "branch": { "type": "string" },
+              "from_branch": { "type": "string" }
+            },
+            "required": ["owner", "repo", "branch"]
+          }
+        },
+        {
+          "name": "create_or_update_file",
+          "description": "Create or update a single file in a GitHub repository.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "owner": { "type": "string" },
+              "repo": { "type": "string" },
+              "path": { "type": "string" },
+              "content": { "type": "string" },
+              "message": { "type": "string" },
+              "branch": { "type": "string" }
+            },
+            "required": [
+              "owner",
+              "repo",
+              "path",
+              "content",
+              "message",
+              "branch"
+            ]
+          }
+        },
+        {
+          "name": "merge_pull_request",
+          "description": "Merge a pull request in a GitHub repository.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "owner": { "type": "string" },
+              "repo": { "type": "string" },
+              "pull_number": { "type": "number" },
+              "merge_method": {
+                "type": "string",
+                "enum": ["merge", "squash", "rebase"]
+              }
+            },
+            "required": ["owner", "repo", "pull_number"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "slack",
+      "tools": [
+        {
+          "name": "slack_post_message",
+          "description": "Post a new message to a Slack channel.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "channel_id": { "type": "string" },
+              "text": { "type": "string" }
+            },
+            "required": ["channel_id", "text"]
+          }
+        },
+        {
+          "name": "slack_search_messages",
+          "description": "Search messages across the Slack workspace the user can see.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "count": { "type": "number" }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "slack_list_channels",
+          "description": "List public channels in the workspace with pagination.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "limit": { "type": "number" },
+              "cursor": { "type": "string" }
+            }
+          }
+        },
+        {
+          "name": "slack_reply_to_thread",
+          "description": "Reply to a specific message thread in Slack.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "channel_id": { "type": "string" },
+              "thread_ts": { "type": "string" },
+              "text": { "type": "string" }
+            },
+            "required": ["channel_id", "thread_ts", "text"]
+          }
+        },
+        {
+          "name": "slack_get_channel_history",
+          "description": "Get recent messages from a channel.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "channel_id": { "type": "string" },
+              "limit": { "type": "number" }
+            },
+            "required": ["channel_id"]
+          }
+        },
+        {
+          "name": "slack_get_thread_replies",
+          "description": "Get all replies in a message thread.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "channel_id": { "type": "string" },
+              "thread_ts": { "type": "string" }
+            },
+            "required": ["channel_id", "thread_ts"]
+          }
+        },
+        {
+          "name": "slack_add_reaction",
+          "description": "Add a reaction emoji to a message.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "channel_id": { "type": "string" },
+              "timestamp": { "type": "string" },
+              "reaction": { "type": "string" }
+            },
+            "required": ["channel_id", "timestamp", "reaction"]
+          }
+        },
+        {
+          "name": "slack_get_users",
+          "description": "Get a list of all users in the workspace with their basic profile information.",
+          "parameters": {
+            "type": "object",
+            "properties": { "limit": { "type": "number" } }
+          }
+        },
+        {
+          "name": "slack_get_user_profile",
+          "description": "Get detailed profile information for a specific user.",
+          "parameters": {
+            "type": "object",
+            "properties": { "user_id": { "type": "string" } },
+            "required": ["user_id"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "docs",
+      "tools": [
+        {
+          "name": "notion_search",
+          "description": "Search pages and databases in the connected Notion workspace by title and content. Use this to find documents, wikis, and meeting notes the team has written.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "filter": { "type": "string", "enum": ["page", "database"] }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "notion_create_page",
+          "description": "Create a new Notion page under a parent page or database, with markdown content.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "parent_id": { "type": "string" },
+              "title": { "type": "string" },
+              "content": { "type": "string" }
+            },
+            "required": ["title"]
+          }
+        },
+        {
+          "name": "notion_fetch_page",
+          "description": "Retrieve a Notion page or database by URL or id, as markdown.",
+          "parameters": {
+            "type": "object",
+            "properties": { "id": { "type": "string" } },
+            "required": ["id"]
+          }
+        },
+        {
+          "name": "notion_update_page",
+          "description": "Update a Notion page's properties or replace its content.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "page_id": { "type": "string" },
+              "content": { "type": "string" }
+            },
+            "required": ["page_id"]
+          }
+        },
+        {
+          "name": "notion_append_blocks",
+          "description": "Append markdown blocks to the end of a Notion page.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "page_id": { "type": "string" },
+              "content": { "type": "string" }
+            },
+            "required": ["page_id", "content"]
+          }
+        },
+        {
+          "name": "notion_query_database",
+          "description": "Query a Notion database with filters and sorts.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "database_id": { "type": "string" },
+              "filter": { "type": "object" }
+            },
+            "required": ["database_id"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "tools": [
+        {
+          "name": "list_events",
+          "description": "List events on the user's calendar in a time range.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "time_min": { "type": "string" },
+              "time_max": { "type": "string" },
+              "calendar_id": { "type": "string", "default": "primary" }
+            }
+          }
+        },
+        {
+          "name": "create_event",
+          "description": "Create a calendar event with a title, start and end time, attendees, and an optional description.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "summary": { "type": "string" },
+              "start": { "type": "string" },
+              "end": { "type": "string" },
+              "attendees": { "type": "array", "items": { "type": "string" } },
+              "description": { "type": "string" }
+            },
+            "required": ["summary", "start", "end"]
+          }
+        },
+        {
+          "name": "find_free_time",
+          "description": "Find free slots across one or more calendars within a time range.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "attendees": { "type": "array", "items": { "type": "string" } },
+              "duration_minutes": { "type": "integer" },
+              "time_min": { "type": "string" },
+              "time_max": { "type": "string" }
+            },
+            "required": ["duration_minutes"]
+          }
+        },
+        {
+          "name": "update_event",
+          "description": "Change an existing event's time, title, attendees, or description.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "event_id": { "type": "string" },
+              "start": { "type": "string" },
+              "end": { "type": "string" },
+              "summary": { "type": "string" }
+            },
+            "required": ["event_id"]
+          }
+        },
+        {
+          "name": "delete_event",
+          "description": "Delete a calendar event.",
+          "parameters": {
+            "type": "object",
+            "properties": { "event_id": { "type": "string" } },
+            "required": ["event_id"]
+          }
+        },
+        {
+          "name": "respond_to_event",
+          "description": "Accept, decline, or tentatively accept an event invitation.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "event_id": { "type": "string" },
+              "response": {
+                "type": "string",
+                "enum": ["accepted", "declined", "tentative"]
+              }
+            },
+            "required": ["event_id", "response"]
+          }
+        },
+        {
+          "name": "list_calendars",
+          "description": "List the calendars the user can see.",
+          "parameters": { "type": "object", "properties": {} }
+        }
+      ]
+    },
+    {
+      "name": "database",
+      "tools": [
+        {
+          "name": "query",
+          "description": "Run a read-only SQL query against the connected database and return the rows.",
+          "parameters": {
+            "type": "object",
+            "properties": { "sql": { "type": "string" } },
+            "required": ["sql"]
+          }
+        },
+        {
+          "name": "list_tables",
+          "description": "List the tables in a schema.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "schema": { "type": "string", "default": "public" }
+            }
+          }
+        },
+        {
+          "name": "describe_table",
+          "description": "Show a table's columns, types, and constraints.",
+          "parameters": {
+            "type": "object",
+            "properties": { "table": { "type": "string" } },
+            "required": ["table"]
+          }
+        },
+        {
+          "name": "list_schemas",
+          "description": "List the schemas in the connected database.",
+          "parameters": { "type": "object", "properties": {} }
+        },
+        {
+          "name": "explain_query",
+          "description": "Return the query plan for a SQL statement without running it.",
+          "parameters": {
+            "type": "object",
+            "properties": { "sql": { "type": "string" } },
+            "required": ["sql"]
+          }
+        },
+        {
+          "name": "list_databases",
+          "description": "List the databases on the connected server.",
+          "parameters": { "type": "object", "properties": {} }
+        }
+      ]
+    },
+    {
+      "name": "browser",
+      "tools": [
+        {
+          "name": "browser_navigate",
+          "description": "Navigate to a URL.",
+          "parameters": {
+            "type": "object",
+            "properties": { "url": { "type": "string" } },
+            "required": ["url"]
+          }
+        },
+        {
+          "name": "browser_snapshot",
+          "description": "Capture an accessibility snapshot of the current page. This is better than a screenshot for deciding what to click.",
+          "parameters": { "type": "object", "properties": {} }
+        },
+        {
+          "name": "browser_click",
+          "description": "Perform a click on a web page element.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "element": {
+                "type": "string",
+                "description": "Human-readable element description"
+              },
+              "ref": {
+                "type": "string",
+                "description": "Exact target element reference from the page snapshot"
+              }
+            },
+            "required": ["element", "ref"]
+          }
+        },
+        {
+          "name": "browser_type",
+          "description": "Type text into an editable element.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "element": { "type": "string" },
+              "ref": { "type": "string" },
+              "text": { "type": "string" },
+              "submit": { "type": "boolean" }
+            },
+            "required": ["element", "ref", "text"]
+          }
+        },
+        {
+          "name": "browser_take_screenshot",
+          "description": "Take a screenshot of the current page.",
+          "parameters": {
+            "type": "object",
+            "properties": { "fullPage": { "type": "boolean" } }
+          }
+        },
+        {
+          "name": "browser_evaluate",
+          "description": "Evaluate a JavaScript expression on the page or an element.",
+          "parameters": {
+            "type": "object",
+            "properties": { "function": { "type": "string" } },
+            "required": ["function"]
+          }
+        },
+        {
+          "name": "browser_press_key",
+          "description": "Press a key on the keyboard.",
+          "parameters": {
+            "type": "object",
+            "properties": { "key": { "type": "string" } },
+            "required": ["key"]
+          }
+        },
+        {
+          "name": "browser_wait_for",
+          "description": "Wait for text to appear or disappear, or a specified time to pass.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": { "type": "string" },
+              "time": { "type": "number" }
+            }
+          }
+        },
+        {
+          "name": "browser_select_option",
+          "description": "Select an option in a dropdown.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "element": { "type": "string" },
+              "ref": { "type": "string" },
+              "values": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["element", "ref", "values"]
+          }
+        },
+        {
+          "name": "browser_close",
+          "description": "Close the page.",
+          "parameters": { "type": "object", "properties": {} }
+        }
+      ]
+    },
+    {
+      "name": "git",
+      "tools": [
+        {
+          "name": "git_status",
+          "description": "Shows the working tree status.",
+          "parameters": {
+            "type": "object",
+            "properties": { "repo_path": { "type": "string" } },
+            "required": ["repo_path"]
+          }
+        },
+        {
+          "name": "git_log",
+          "description": "Shows the commit logs.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "repo_path": { "type": "string" },
+              "max_count": { "type": "integer", "default": 10 }
+            },
+            "required": ["repo_path"]
+          }
+        },
+        {
+          "name": "git_diff",
+          "description": "Shows differences between branches or commits.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "repo_path": { "type": "string" },
+              "target": { "type": "string" }
+            },
+            "required": ["repo_path", "target"]
+          }
+        },
+        {
+          "name": "git_commit",
+          "description": "Records changes to the repository.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "repo_path": { "type": "string" },
+              "message": { "type": "string" }
+            },
+            "required": ["repo_path", "message"]
+          }
+        },
+        {
+          "name": "git_add",
+          "description": "Adds file contents to the staging area.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "repo_path": { "type": "string" },
+              "files": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["repo_path", "files"]
+          }
+        },
+        {
+          "name": "git_diff_unstaged",
+          "description": "Shows changes in the working directory that are not yet staged.",
+          "parameters": {
+            "type": "object",
+            "properties": { "repo_path": { "type": "string" } },
+            "required": ["repo_path"]
+          }
+        },
+        {
+          "name": "git_diff_staged",
+          "description": "Shows changes that are staged for commit.",
+          "parameters": {
+            "type": "object",
+            "properties": { "repo_path": { "type": "string" } },
+            "required": ["repo_path"]
+          }
+        },
+        {
+          "name": "git_create_branch",
+          "description": "Creates a new branch from an optional base branch.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "repo_path": { "type": "string" },
+              "branch_name": { "type": "string" },
+              "base_branch": { "type": "string" }
+            },
+            "required": ["repo_path", "branch_name"]
+          }
+        },
+        {
+          "name": "git_checkout",
+          "description": "Switches branches.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "repo_path": { "type": "string" },
+              "branch_name": { "type": "string" }
+            },
+            "required": ["repo_path", "branch_name"]
+          }
+        },
+        {
+          "name": "git_show",
+          "description": "Shows the contents of a commit.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "repo_path": { "type": "string" },
+              "revision": { "type": "string" }
+            },
+            "required": ["repo_path", "revision"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "mail",
+      "tools": [
+        {
+          "name": "search_emails",
+          "description": "Search the user's mailbox with Gmail search syntax and return matching threads.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "max_results": { "type": "integer" }
+            },
+            "required": ["query"]
+          }
+        },
+        {
+          "name": "send_email",
+          "description": "Send an email to one or more recipients.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "to": { "type": "array", "items": { "type": "string" } },
+              "subject": { "type": "string" },
+              "body": { "type": "string" }
+            },
+            "required": ["to", "subject", "body"]
+          }
+        },
+        {
+          "name": "read_email",
+          "description": "Read a single email message by id.",
+          "parameters": {
+            "type": "object",
+            "properties": { "message_id": { "type": "string" } },
+            "required": ["message_id"]
+          }
+        },
+        {
+          "name": "draft_email",
+          "description": "Create a draft email without sending it.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "to": { "type": "array", "items": { "type": "string" } },
+              "subject": { "type": "string" },
+              "body": { "type": "string" }
+            },
+            "required": ["to", "subject", "body"]
+          }
+        },
+        {
+          "name": "label_email",
+          "description": "Add or remove labels on a message.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "message_id": { "type": "string" },
+              "add": { "type": "array", "items": { "type": "string" } },
+              "remove": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["message_id"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "utilities",
+      "tools": [
+        {
+          "name": "get_current_time",
+          "description": "Get the current time in a specific IANA timezone.",
+          "parameters": {
+            "type": "object",
+            "properties": { "timezone": { "type": "string" } },
+            "required": ["timezone"]
+          }
+        },
+        {
+          "name": "sequentialthinking",
+          "description": "A detailed tool for dynamic and reflective problem-solving through thoughts. Each thought can build on, question, or revise previous insights as understanding deepens.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "thought": { "type": "string" },
+              "nextThoughtNeeded": { "type": "boolean" },
+              "thoughtNumber": { "type": "integer" },
+              "totalThoughts": { "type": "integer" }
+            },
+            "required": [
+              "thought",
+              "nextThoughtNeeded",
+              "thoughtNumber",
+              "totalThoughts"
+            ]
+          }
+        },
+        {
+          "name": "convert_time",
+          "description": "Convert a time between timezones.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "source_timezone": { "type": "string" },
+              "time": { "type": "string" },
+              "target_timezone": { "type": "string" }
+            },
+            "required": ["source_timezone", "time", "target_timezone"]
+          }
+        }
+      ]
+    }
+  ]
+}

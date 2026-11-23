@@ -1,0 +1,1 @@
+ALTER TABLE `asset_processing_outputs` ADD `passages_json` text;

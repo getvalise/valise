@@ -1,0 +1,257 @@
+{
+  "kind": "operator controls; NOT model episodes and NOT strict-score repairs",
+  "at": "2026-10-21T09:46:07.546Z",
+  "namespace": "rollout-eval-protocol-v1",
+  "initialAttempt": "Missing Accept header produced HTTP406; retained in mcp-calls-before-controls.json. Corrected only the operator request headers, not runtime.",
+  "controls": [
+    {
+      "case": "retrieval-paraphrase-logs",
+      "query": "We saved a memory about where I can see what the nightly job printed yesterday. Find it and open the whole thing.",
+      "httpStatus": 200,
+      "response": {
+        "result": {
+          "_meta": {
+            "valise/rerank": {
+              "backend": "jev",
+              "reranked": true,
+              "ms": 1660
+            }
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"results\":[{\"id\":\"memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5\",\"type\":\"memory\",\"title\":\"Past Worker logs are readable in the Cloudflare dashboard, not with the wrangler OAuth token\",\"snippet\":\"…[The] dashboard's Workers logs view holds [the] [nightly] cron's trim line [and] earlier requests. Two dead ends before…\",\"score\":0.93,\"metadata\":{\"project\":\"valise\",\"updated_at\":1792238400}},{\"id\":\"memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940\",\"type\":\"memory\",\"title\":\"Prefect, Portainer, SeaweedFS and Postgres run on the home NAS\",\"snippet\":\"[The] NAS hosts [the] Prefect server [and] workers, Portainer for [the] containers, SeaweedFS as [the] S3-compatible store, [and] one…\",\"score\":0.24,\"metadata\":{\"project\":\"homelab\",\"updated_at\":1789905600}},{\"id\":\"memory:mem_d4d817d5-4140-f33c-6221-c1be33d1c514\",\"type\":\"memory\",\"title\":\"`save_memory` is the second, and it is easy to miss, because the\",\"snippet\":\"Write [the] key into `payload`, update [the] zod schema, ship. [The] remove contract is worth copying exactly once.\",\"score\":0.08,\"metadata\":{\"project\":\"valise\",\"updated_at\":1788605525}},{\"id\":\"memory:mem_724834b3-8cc3-54ad-716c-2fb2dfa0a76f\",\"type\":\"memory\",\"title\":\"The runner on its own changed these routes\",\"snippet\":\"…[it] is ever read by anything but [a] person looking at [the] logs tab, that is [a] new ADR [and]…\",\"score\":0.06,\"metadata\":{\"project\":\"valise\",\"updated_at\":1788446917}},{\"id\":\"memory:mem_seed_duckdb_default\",\"type\":\"memory\",\"title\":\"Query the warehouse through its MCP, not ad hoc scripts\",\"snippet\":\"The team queries its DuckDB warehouse through the warehouse's MCP or CLI rather than ad hoc Python scripts. Prefer those paths when a question…\",\"score\":0.06,\"metadata\":{\"project\":\"valise\",\"updated_at\":1792575570}}]}"
+            }
+          ],
+          "structuredContent": {
+            "results": [
+              {
+                "id": "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+                "type": "memory",
+                "title": "Past Worker logs are readable in the Cloudflare dashboard, not with the wrangler OAuth token",
+                "snippet": "…[The] dashboard's Workers logs view holds [the] [nightly] cron's trim line [and] earlier requests. Two dead ends before…",
+                "score": 0.93,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1792238400
+                }
+              },
+              {
+                "id": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+                "type": "memory",
+                "title": "Prefect, Portainer, SeaweedFS and Postgres run on the home NAS",
+                "snippet": "[The] NAS hosts [the] Prefect server [and] workers, Portainer for [the] containers, SeaweedFS as [the] S3-compatible store, [and] one…",
+                "score": 0.24,
+                "metadata": {
+                  "project": "homelab",
+                  "updated_at": 1789905600
+                }
+              },
+              {
+                "id": "memory:mem_d4d817d5-4140-f33c-6221-c1be33d1c514",
+                "type": "memory",
+                "title": "`save_memory` is the second, and it is easy to miss, because the",
+                "snippet": "Write [the] key into `payload`, update [the] zod schema, ship. [The] remove contract is worth copying exactly once.",
+                "score": 0.08,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1788605525
+                }
+              },
+              {
+                "id": "memory:mem_724834b3-8cc3-54ad-716c-2fb2dfa0a76f",
+                "type": "memory",
+                "title": "The runner on its own changed these routes",
+                "snippet": "…[it] is ever read by anything but [a] person looking at [the] logs tab, that is [a] new ADR [and]…",
+                "score": 0.06,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1788446917
+                }
+              },
+              {
+                "id": "memory:mem_seed_duckdb_default",
+                "type": "memory",
+                "title": "Query the warehouse through its MCP, not ad hoc scripts",
+                "snippet": "The team queries its DuckDB warehouse through the warehouse's MCP or CLI rather than ad hoc Python scripts. Prefer those paths when a question…",
+                "score": 0.06,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1792575570
+                }
+              }
+            ]
+          }
+        },
+        "jsonrpc": "2.0",
+        "id": "retrieval-paraphrase-logs"
+      }
+    },
+    {
+      "case": "retrieval-paraphrase-dump",
+      "query": "Open the memory about why a plain dump of the whole database fails.",
+      "httpStatus": 200,
+      "response": {
+        "result": {
+          "_meta": {
+            "valise/rerank": {
+              "backend": "jev",
+              "reranked": true,
+              "ms": 687
+            }
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"results\":[{\"id\":\"memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175\",\"type\":\"memory\",\"title\":\"D1 cannot export an FTS5 virtual table, so backups name the authoritative tables\",\"snippet\":\"An unflagged d1 export [fails] by design on search_fts. Backups list [the] ordinary tables, and restore is scripts/restore…\",\"score\":0.95,\"metadata\":{\"project\":\"valise\",\"updated_at\":1791979200}},{\"id\":\"memory:mem_b19f2b29-784d-cc63-45b6-bbec62f7f497\",\"type\":\"memory\",\"title\":\"D1 cannot export an FTS5 virtual table, so backups name the authoritative tables\",\"snippet\":\"An unflagged d2 export [fails] by design on search_fts. Backups list [the] ordinary tables, and restore is scripts/restore…\",\"score\":0.69,\"metadata\":{\"project\":\"valise\",\"updated_at\":1789041600}},{\"id\":\"memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9\",\"type\":\"memory\",\"title\":\"That made a checkbox impossible and left a to-do an agent claimed\",\"snippet\":\"…Every published skill is also registered as `skill_{name}`, [a] twelfth family that grows with [the] corpus, and [the] `skill…\",\"score\":0.35,\"metadata\":{\"project\":\"homelab\",\"updated_at\":1789542406}},{\"id\":\"memory:mem_0975dd1f-81a9-d671-1572-5456da525c98\",\"type\":\"memory\",\"title\":\"Provenance columns record who wrote it; in-body pointers record where the material\",\"snippet\":\"…every row reads `oauth` because [the] non-tool branch records only [a] resource uri. Hono or [plain] router, React Router…\",\"score\":0.17,\"metadata\":{\"project\":\"valise\",\"updated_at\":1790499016}},{\"id\":\"memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c\",\"type\":\"memory\",\"title\":\"Console list filters use instr() instead of LIKE because D1 rejects LIKE patterns over 50 bytes\",\"snippet\":\"…Routing [the] box through [the] FTS index was rejected: it matches [whole] tokens and reorders [the] list by rank.\",\"score\":0.16,\"metadata\":{\"project\":\"valise\",\"updated_at\":1792238400}}]}"
+            }
+          ],
+          "structuredContent": {
+            "results": [
+              {
+                "id": "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+                "type": "memory",
+                "title": "D1 cannot export an FTS5 virtual table, so backups name the authoritative tables",
+                "snippet": "An unflagged d1 export [fails] by design on search_fts. Backups list [the] ordinary tables, and restore is scripts/restore…",
+                "score": 0.95,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1791979200
+                }
+              },
+              {
+                "id": "memory:mem_b19f2b29-784d-cc63-45b6-bbec62f7f497",
+                "type": "memory",
+                "title": "D1 cannot export an FTS5 virtual table, so backups name the authoritative tables",
+                "snippet": "An unflagged d2 export [fails] by design on search_fts. Backups list [the] ordinary tables, and restore is scripts/restore…",
+                "score": 0.69,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1789041600
+                }
+              },
+              {
+                "id": "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+                "type": "memory",
+                "title": "That made a checkbox impossible and left a to-do an agent claimed",
+                "snippet": "…Every published skill is also registered as `skill_{name}`, [a] twelfth family that grows with [the] corpus, and [the] `skill…",
+                "score": 0.35,
+                "metadata": {
+                  "project": "homelab",
+                  "updated_at": 1789542406
+                }
+              },
+              {
+                "id": "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+                "type": "memory",
+                "title": "Provenance columns record who wrote it; in-body pointers record where the material",
+                "snippet": "…every row reads `oauth` because [the] non-tool branch records only [a] resource uri. Hono or [plain] router, React Router…",
+                "score": 0.17,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1790499016
+                }
+              },
+              {
+                "id": "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+                "type": "memory",
+                "title": "Console list filters use instr() instead of LIKE because D1 rejects LIKE patterns over 50 bytes",
+                "snippet": "…Routing [the] box through [the] FTS index was rejected: it matches [whole] tokens and reorders [the] list by rank.",
+                "score": 0.16,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1792238400
+                }
+              }
+            ]
+          }
+        },
+        "jsonrpc": "2.0",
+        "id": "retrieval-paraphrase-dump"
+      }
+    },
+    {
+      "case": "retrieval-paraphrase-cost",
+      "query": "Find the memory on how expensive it is to run every tool-choice case against all the models, and open it.",
+      "httpStatus": 200,
+      "response": {
+        "result": {
+          "_meta": {
+            "valise/rerank": {
+              "backend": "jev",
+              "reranked": true,
+              "ms": 585
+            }
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"results\":[{\"id\":\"memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1\",\"type\":\"memory\",\"title\":\"A full seven-model eval run costs about $1.12, and Sonnet is 58% of it\",\"snippet\":\"…Probe with --[models] [and] --[case] before a whole [run].\",\"score\":0.92,\"metadata\":{\"project\":\"valise\",\"updated_at\":1792324800}},{\"id\":\"memory:mem_66ec8e24-334a-e7b2-c2ab-a5ea0227f6fc\",\"type\":\"memory\",\"title\":\"The cost is 219 characters, about 61 tokens, 1.5% of the surface\",\"snippet\":\"…[Every] `create_todo` from [every] client failed [on] a D1 error for three hours, until [the] migration was applied by…\",\"score\":0.45,\"metadata\":{\"project\":\"acme-docs\",\"updated_at\":1792122521}},{\"id\":\"memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3\",\"type\":\"memory\",\"title\":\"A PR is verified only when its unit and live boxes are\",\"snippet\":\"…[the] JSON result, [and] score [the] calls that session made [against] [the] same `[cases].json`. [It] costs no [model] tokens…\",\"score\":0.13,\"metadata\":{\"project\":\"valise\",\"updated_at\":1787110604}},{\"id\":\"memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e\",\"type\":\"memory\",\"title\":\"The startup brief lists three projects, five to-do titles and three memories instead of the ready queue\",\"snippet\":\"…[The] bounded brief costs 359 [to] 508 over [the] reminder alone, [and] with [it] 7/7 [models] asked for blog…\",\"score\":0.12,\"metadata\":{\"project\":\"valise\",\"updated_at\":1792238400}},{\"id\":\"memory:mem_985986b9-4045-41d3-935f-93e433e124ea\",\"type\":\"memory\",\"title\":\"The docs search eval set holds 120 questions, each labelled with the page that answers it\",\"snippet\":\"…Each carries [one] page id as [its] answer, [and] [the] score [is] whether that page [is] in [the] top three…\",\"score\":0.06,\"metadata\":{\"project\":\"acme-docs\",\"updated_at\":1789214400}}]}"
+            }
+          ],
+          "structuredContent": {
+            "results": [
+              {
+                "id": "memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+                "type": "memory",
+                "title": "A full seven-model eval run costs about $1.12, and Sonnet is 58% of it",
+                "snippet": "…Probe with --[models] [and] --[case] before a whole [run].",
+                "score": 0.92,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1792324800
+                }
+              },
+              {
+                "id": "memory:mem_66ec8e24-334a-e7b2-c2ab-a5ea0227f6fc",
+                "type": "memory",
+                "title": "The cost is 219 characters, about 61 tokens, 1.5% of the surface",
+                "snippet": "…[Every] `create_todo` from [every] client failed [on] a D1 error for three hours, until [the] migration was applied by…",
+                "score": 0.45,
+                "metadata": {
+                  "project": "acme-docs",
+                  "updated_at": 1792122521
+                }
+              },
+              {
+                "id": "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+                "type": "memory",
+                "title": "A PR is verified only when its unit and live boxes are",
+                "snippet": "…[the] JSON result, [and] score [the] calls that session made [against] [the] same `[cases].json`. [It] costs no [model] tokens…",
+                "score": 0.13,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1787110604
+                }
+              },
+              {
+                "id": "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+                "type": "memory",
+                "title": "The startup brief lists three projects, five to-do titles and three memories instead of the ready queue",
+                "snippet": "…[The] bounded brief costs 359 [to] 508 over [the] reminder alone, [and] with [it] 7/7 [models] asked for blog…",
+                "score": 0.12,
+                "metadata": {
+                  "project": "valise",
+                  "updated_at": 1792238400
+                }
+              },
+              {
+                "id": "memory:mem_985986b9-4045-41d3-935f-93e433e124ea",
+                "type": "memory",
+                "title": "The docs search eval set holds 120 questions, each labelled with the page that answers it",
+                "snippet": "…Each carries [one] page id as [its] answer, [and] [the] score [is] whether that page [is] in [the] top three…",
+                "score": 0.06,
+                "metadata": {
+                  "project": "acme-docs",
+                  "updated_at": 1789214400
+                }
+              }
+            ]
+          }
+        },
+        "jsonrpc": "2.0",
+        "id": "retrieval-paraphrase-cost"
+      }
+    }
+  ]
+}

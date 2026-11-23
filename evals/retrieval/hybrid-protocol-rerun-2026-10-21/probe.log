@@ -1,0 +1,4 @@
+{"event":"delivery","configured":true,"delivered":20,"attemptedFailed":0,"total":51,"pending":31,"failed":0,"due":31,"oldestPendingSeconds":5,"lastAcceptedAt":1792575575}
+{"event":"delivery","configured":true,"delivered":20,"attemptedFailed":0,"total":51,"pending":11,"failed":0,"due":11,"oldestPendingSeconds":21,"lastAcceptedAt":1792575591}
+{"event":"delivery","configured":true,"delivered":11,"attemptedFailed":0,"total":51,"pending":0,"failed":0,"due":0,"oldestPendingSeconds":0,"lastAcceptedAt":1792575604}
+{"tally":{"exact-title":{"top5":25,"total":25},"paraphrase":{"top5":25,"total":25},"project-question":{"top5":25,"total":25}},"scoped":25,"acceptanceToObservedVisibilityMs":116715}

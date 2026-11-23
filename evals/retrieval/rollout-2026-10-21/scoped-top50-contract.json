@@ -1,0 +1,498 @@
+{
+  "index": "valise-rollout-eval-20261021",
+  "namespace": "rollout-scope-contract",
+  "accepted": {
+    "index": "valise-rollout-eval-20261021",
+    "count": 61
+  },
+  "observedMs": 102014,
+  "target": "d66db8d2e989ef28ec4c50e3acd86c585ef96ac8f92a57632d3f29b200fa1915",
+  "projectsDifferAfterUtf8Byte": 297,
+  "unscoped": {
+    "count": 50,
+    "matches": [
+      {
+        "id": "ffe12cd6cb7f69f0038d5176aa1ac0c50d36d6e827f32ac30ac4fd883b7016e9",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-24",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "fd2363bda830c5fc185a4c8635041cda9c5ade28f726ad4449a11563ea8e94ed",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-2",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "fb345ccedb8ad3428ac34905b36879b10a4c9a68fe31f48c686fdc2dc60ce520",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-42",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "f7e4513157a815fb35fd65005545d772e4ce50ae96a7a74bf3603dcb3ae5a206",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-38",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "f67734243f1e8fac6985592b29e90dc5482108b0bfc325880d331756e38ad2fb",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-36",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "f1e707a3c9fdf33e0a43980526d5d6e83a2b0f394500aad92a1d2f8061d2c518",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-50",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "f1e2c7bfc07217cd38fcfa7864bd1d82a996b563760fb6e84f5187d67eba22fd",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-30",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "f1292fe4f94de7767ca48a22d1b3b18b5bc497f0d1a4abc0ddda8e70503f3cce",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-34",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "edbf6251fd53f2689da4cd537b778856885f40cc9aa53af03694177b83b4e544",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-0",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "ed80af500bd5a587c13c3f58b6ac327e4a84370113d03091a68c5008116bafbb",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-49",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "ed30ad3a6a6ff2ce2562a83da8b0863bc2cbadd42ae1ff38573e3c0435af9310",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-22",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "e9ec10778c083a4761ce6a57f40db3a8f3b59ea1b337f7fb2312a7329ec54b5e",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-19",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "e819504017c4d882eef1b497b1259d898bf1e93a909d618289bd6c9237e3e78f",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-33",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "e6867b20486cc224c5306a92da5a2ab26087205db0a426225e16342c06ec526b",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-48",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "e2b3ac1d161a6a6a1d8a1a06a2a4d370fad0fd243eba46943bf763583d915b3c",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-32",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "dfb1c15442e424c17856b22a3abaca8175b5478db7c6eeb7f586768fbca7c572",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-28",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "ded3c0ad08b2120e0bd750ed0299915fcf4b05d8beee19fc5ca12f1fa4883f48",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-27",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "dcdcc7621455f93bf1d03ba47db2553cefb837fcc0bdbcc436044eabb61d5986",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-18",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "d7e711a6f7593701b7b35a3b74c19ccf65aa8d330b43376fcea574d011a7028d",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-9",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "d72af3496c3a3de30de4907956cb4733ab0ca8c8d8fe67d7bef90e24d8fd2f58",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-11",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "d5dbe4d61175f8c11ce04692369aa4ceebcee1fcd20aab87eb42d2243ec1789f",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-54",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "cfcf575c6584bf98a14c7130866cbd5926fbb9615ae36caf6dc0da575bfcc034",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-6",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "cc83614b62abd1a425d6398f907e2ffd08c9f7b052cb0a609c685392f2762981",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-7",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "ca62ffa456afc837527c49b98c77e7c88bcf4cbe99592be62987c7ffb6248190",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-16",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "b827778cac3796dc8af38988e3cc99d8f018f76bf14d9dd08d1af2e70356d683",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-59",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "b622cc40def13371e3236b57503f847d9611ec4dcc1e42c6d84c9ccedf9fd8fe",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-37",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "b54a663741f98b118027f63c21be950d71175445d3745748b7037dac2c1bc5e9",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-53",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "af64faa1fbd701dea90182be433901bf49234df3066c10f1eeaf7d9a52fe2f4d",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-58",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "a3e1b1eee46667eff5f76b5252eb1c19141a2bc2a320c4f9bc3f2e824a274086",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-43",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "9d9fa2f45a83b429276517cb01e53dcd48bafcfb88bafc9a7c85a59bcf122963",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-20",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "991037d4b32c460bd112fcb7649f9514d3e4dd239b212f0377e8ba5a8f00e24c",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-3",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "95fd1d383b5ce166c641b7415198460d7f64c5e8d938b9096d93d3a30432b027",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-14",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "95f3a83c4f5907b6e04775f45100ece20acedacd0ffb504a65a0fe2173c186d6",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-4",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "8b1f6846bf006e3ae3a99b8273788ba460f0b5ca72d07deb2b5f900a229bc549",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-15",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "6fdaa061da9ac034ad206fc624076d1f0c731db19aa46d5440f46508f5aa0645",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-41",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "6c02a62d3255c314f8cca85a36c7535dd210a20d506ff3c9faa475ea0acc5415",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-12",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "6b59507a4648ce5d1ab6c9ccf08cbdc62ee0d0308f2e1e6c31a44d7fd9a9e8dc",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-45",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "6808e692085729aafcd054b6d333f670406758670dcd9ff7facdb1dedeebc0fc",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-13",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "62f7ef749c351688846a03ef2930c0af81270eec24e82f75315c3901a567260d",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-23",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "61f7ec6c63a2c8ac3f26f96bc3413de32c1ee79a047314440e730a155004b3f9",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-17",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "5fe5ca61db98c0d1a60236f931da3739b66e46d6ff33dc8ca143c64daa22d7f2",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-57",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "5f328d66888f71acccd9c4cc26770aceb0d483cf47c0db4c4b240f1085c014e8",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-5",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "5a0727587cd8a808a43fc73012eede1257b2607dace79b814af21b69968ad366",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-39",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "566c2e398ed32ecb3aa2d854fcc61add93a819f83add18993d612e847e9213b0",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-1",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "563e6c720d2fa668c647e8b6ce007712289774fa6d9916770053fa6f74b3c1bd",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-8",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "5505ffc43a76f0c313f5a8d549f7996f4d2c96ff8513ece1e6421fb7365d3c37",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-55",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "4e80cea74b9f1a21cca5166db1ae2dc6ce88f743dc8b10463adfe9b8771075f2",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-35",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "4965bfbfbb5377c96cddb5751ca32e58f6e56596a356963117f217d57016d3e9",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-40",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "48a4f35bd5daf07059b241a2560811aec77aa18edcb5fa6fa1f5c7571133dc61",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-10",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      },
+      {
+        "id": "3f994cbe107822948d1878c1298d693534176a94b9de368b477c3c5d8a3f92b2",
+        "score": 1,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-foreign-46",
+          "project": "deffeeca21f423438695c647fb7bd2b81520a97de06c33ee5594a72ae029cd17"
+        }
+      }
+    ]
+  },
+  "scoped": {
+    "count": 1,
+    "matches": [
+      {
+        "id": "d66db8d2e989ef28ec4c50e3acd86c585ef96ac8f92a57632d3f29b200fa1915",
+        "score": 0.4994972,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-target",
+          "project": "a54bc3c465f70b7ff0d3c82839def0618ed303f560321c715e0cd5a4e85631c7"
+        }
+      }
+    ]
+  },
+  "both": {
+    "count": 1,
+    "matches": [
+      {
+        "id": "d66db8d2e989ef28ec4c50e3acd86c585ef96ac8f92a57632d3f29b200fa1915",
+        "score": 0.4994972,
+        "namespace": "rollout-scope-contract",
+        "metadata": {
+          "docKey": "memory:scope-target",
+          "project": "a54bc3c465f70b7ff0d3c82839def0618ed303f560321c715e0cd5a4e85631c7"
+        }
+      }
+    ]
+  },
+  "wrong": {
+    "count": 0,
+    "matches": []
+  }
+}

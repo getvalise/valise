@@ -1,0 +1,13 @@
+{
+  "name": "valise",
+  "owner": {
+    "name": "getvalise"
+  },
+  "description": "Valise: one MCP endpoint that carries your skills, memories, and to-dos between agents.",
+  "plugins": [
+    {
+      "name": "valise",
+      "source": "./clients/valise"
+    }
+  ]
+}

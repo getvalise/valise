@@ -1,0 +1,5 @@
+{
+  "claim_todo": "As you work, post each finding, attempt, or change of plan with update_todo and this token, before you move on. Those posts and the comments are the to-do's history: the next agent and the person in the console read it to see where the work stands.",
+  "complete_todo": "If this to-do produced a decision, insight, or dead end another session would pay to rediscover, save it with save_memory following the capture-this skill. Otherwise carry on.",
+  "save_memory": "The memories in similar were saved earlier and may hold the same claim. If this memory fully replaces one, call edit_memory with this id and relates: [{id: the older id, kind: supersedes}]. Use related for overlap without replacement. These links are suggestions until the user confirms them in the console. If this is a new claim, carry on."
+}

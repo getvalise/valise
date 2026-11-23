@@ -1,0 +1,145 @@
+{
+  "at": "2026-10-21T09:23:28.839Z",
+  "endpoint": "http://localhost:4516/mcp",
+  "memories": 5000,
+  "episodeProtocol": "all-tool-calls-v1",
+  "models": ["openai/gpt-5.4-mini"],
+  "toolNames": [
+    "skill_capture-this",
+    "read_skill_file",
+    "create_todo",
+    "list_ready",
+    "claim_todo",
+    "update_todo",
+    "complete_todo",
+    "comment_todo",
+    "search",
+    "list_skills",
+    "get_skill",
+    "publish_skill",
+    "fetch",
+    "save_memory",
+    "edit_memory",
+    "list_hooks",
+    "edit_hook"
+  ],
+  "toolsHash": "d1451f8600f0",
+  "toolHashes": {
+    "skill_capture-this": "c997435e252c",
+    "read_skill_file": "03feb25859c8",
+    "create_todo": "b1bf6743b7f3",
+    "list_ready": "cca4c1243538",
+    "claim_todo": "a7b4c441dc47",
+    "update_todo": "22ed5aea076f",
+    "complete_todo": "608d191419b6",
+    "comment_todo": "5ff4e54bb811",
+    "search": "69cc80e77643",
+    "list_skills": "752dac62d24e",
+    "get_skill": "89911fafb1b8",
+    "publish_skill": "b5a07abe7ddf",
+    "fetch": "ed852ab7b5d7",
+    "save_memory": "7326525d1439",
+    "edit_memory": "3b18467191de",
+    "list_hooks": "bead75449926",
+    "edit_hook": "ab5d808e6061"
+  },
+  "storeHash": "96f8afe18b7e",
+  "repeat": 1,
+  "system": "You are an agent connected to Valise, a shared workspace that carries skills, memories, and to-dos between models. Use a Valise tool when one fits the user's turn. If no tool fits, answer in plain text and call nothing.",
+  "cases": [
+    {
+      "id": "retrieval-paraphrase-logs",
+      "prompt": "We saved a memory about where I can see what the nightly job printed yesterday. Find it and open the whole thing.",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "maxRounds": 4,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5"
+      },
+      "why": "The user's words are the fixture paraphrase of \"Past Worker logs are readable in the Cloudflare dashboard, not with the wrangler OAuth token\", which FTS alone misses at 5000 memories. Passing means the model's own search query bridged the vocabulary gap and it fetched the target. Pairs with retrieval-title-logs. Needs --memories."
+    }
+  ],
+  "rows": [
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-logs",
+      "expected": "fetch",
+      "chose": "search",
+      "route": ["search", "search", "search"],
+      "routeCalls": [
+        {
+          "id": "call_IGR3ekJvMqSn20xN9oRTQ0YC",
+          "name": "search",
+          "args": {
+            "query": "nightly job printed yesterday where I can see",
+            "type": "memory",
+            "project": "*",
+            "tags": [],
+            "limit": 10
+          },
+          "argumentsJson": "{\"query\":\"nightly job printed yesterday where I can see\", \"type\":\"memory\", \"project\":\"*\", \"tags\":[],\"limit\":10}",
+          "round": 0,
+          "status": "executed"
+        },
+        {
+          "id": "call_g3S3ssDCGwp8rUHygVmnCRld",
+          "name": "search",
+          "args": {
+            "query": "nightly job printed logs yesterday output see",
+            "type": "memory",
+            "project": "*",
+            "tags": [],
+            "limit": 20
+          },
+          "argumentsJson": "{\"query\":\"nightly job printed logs yesterday output see\", \"type\":\"memory\", \"project\":\"*\", \"tags\":[], \"limit\":20}",
+          "round": 1,
+          "status": "executed"
+        },
+        {
+          "id": "call_cPRDsap0tCrfPWSOyWjZW8VP",
+          "name": "search",
+          "args": {
+            "query": "nightly job printed",
+            "type": "memory",
+            "project": "*",
+            "tags": [],
+            "limit": 50
+          },
+          "argumentsJson": "{\"query\":\"nightly job printed\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":50}",
+          "round": 2,
+          "status": "executed"
+        }
+      ],
+      "endingIndex": null,
+      "firstPromptTokens": 3489,
+      "args": {
+        "query": "nightly job printed",
+        "type": "memory",
+        "project": "*",
+        "tags": [],
+        "limit": 50
+      },
+      "toolMatch": false,
+      "viaMissing": null,
+      "missingArgs": [],
+      "wrongArgs": [],
+      "answerMissing": false,
+      "pass": false,
+      "capped": false,
+      "turnBudget": 2,
+      "withinBudget": false,
+      "turns": 4,
+      "promptTokens": 14381,
+      "completionTokens": 192,
+      "reasoningTokens": 0,
+      "costUsd": 0.00473775,
+      "whyOffered": false,
+      "whyFilled": false,
+      "error": null,
+      "answer": "I couldn’t find a matching memory with those searches.\n\nIf you want, I can try broader searches for things like:\n- “logs”\n- “nightly”\n- “yesterday”\n- “job output”\n- “where to view prints”\n\nOr, if you remember even part of the title, I can look it up more precisely.",
+      "repeat": 0
+    }
+  ]
+}

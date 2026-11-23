@@ -1,0 +1,192 @@
+{
+  "startedAt": "2026-10-24T17:58:02.689Z",
+  "namespace": "rollout-eval-asset1024",
+  "index": "valise-rollout-eval-asset1024",
+  "files": [
+    {
+      "format": "pdf",
+      "id": "asset:ast_217bdb7f-7354-47d8-a679-b203cf28cd71",
+      "sha256": "a197f148384d5ba95a8eaba4eb4f9a6beb7b9294217295c144058701fdd9d416",
+      "extraction": {
+        "processing_id": "apr_d152c269-bf44-4027-8512-1d22379510f1",
+        "processor_version": "valise-extract-1",
+        "extractor": "workers-ai-toMarkdown-text",
+        "original_sha256": "a197f148384d5ba95a8eaba4eb4f9a6beb7b9294217295c144058701fdd9d416",
+        "truncated": false,
+        "max_text_bytes": 65536
+      },
+      "query": "heat-stressed tropical reefs turning pale"
+    },
+    {
+      "format": "epub",
+      "id": "asset:ast_f388d6b5-6766-4016-9d26-5352c79a66be",
+      "sha256": "2593efd1ab7a4060328eb28523f745a29a2e295fa548f712085839ff7c01eb93",
+      "extraction": {
+        "processing_id": "apr_586eb434-1c2a-4bbf-b2e0-4f04975c54e1",
+        "processor_version": "valise-extract-1",
+        "extractor": "bounded-epub-text-1",
+        "original_sha256": "2593efd1ab7a4060328eb28523f745a29a2e295fa548f712085839ff7c01eb93",
+        "truncated": false,
+        "max_text_bytes": 65536
+      },
+      "query": "droughtproofing household gardens with captured precipitation"
+    },
+    {
+      "format": "pptx",
+      "id": "asset:ast_ecac84c9-ad43-4898-901b-c0fba5d970fa",
+      "sha256": "1064cc629f17fb9d20859ee7d28d82cb6bc68d752de31b3807563abf26695b05",
+      "extraction": {
+        "processing_id": "apr_640b8c59-7318-485c-aa48-62f91d0ed815",
+        "processor_version": "valise-extract-1",
+        "extractor": "bounded-pptx-text-1",
+        "original_sha256": "1064cc629f17fb9d20859ee7d28d82cb6bc68d752de31b3807563abf26695b05",
+        "truncated": false,
+        "max_text_bytes": 65536
+      },
+      "query": "economical orbital transportation using recovered boosters"
+    },
+    {
+      "format": "xlsx",
+      "id": "asset:ast_73b05b6c-3855-4d4f-8d04-cf19d7c413ae",
+      "sha256": "a371ef319d6880280e7d447b9cdb2d398298b0da3c5a422aa5fd21bd1a7171e2",
+      "extraction": {
+        "processing_id": "apr_d3e93185-d30d-4c06-98b2-c24c1358d313",
+        "processor_version": "valise-extract-1",
+        "extractor": "workers-ai-toMarkdown-text",
+        "original_sha256": "a371ef319d6880280e7d447b9cdb2d398298b0da3c5a422aa5fd21bd1a7171e2",
+        "truncated": false,
+        "max_text_bytes": 65536
+      },
+      "query": "renewable power output by fiscal period"
+    },
+    {
+      "format": "png",
+      "id": "asset:ast_ca93fc73-c3e5-4320-86cc-a343671367bc",
+      "sha256": "749953ee6a72d96164877b4304ba184967c881d02243c2e5f680e207ad39b01a",
+      "extraction": {
+        "processing_id": "apr_2e73d082-fb50-430b-9a2b-c246fa2741f0",
+        "processor_version": "valise-extract-1",
+        "extractor": "workers-ai-toMarkdown-image-description",
+        "original_sha256": "749953ee6a72d96164877b4304ba184967c881d02243c2e5f680e207ad39b01a",
+        "truncated": false,
+        "max_text_bytes": 65536
+      },
+      "query": "orchard fruit ready for picking"
+    }
+  ],
+  "deliveries": [
+    {
+      "at": "2026-10-24T17:58:37.325Z",
+      "configured": true,
+      "delivered": 4,
+      "failed": 0
+    },
+    {
+      "at": "2026-10-24T17:58:38.172Z",
+      "configured": true,
+      "delivered": 1,
+      "failed": 0
+    },
+    {
+      "at": "2026-10-24T17:58:38.179Z",
+      "configured": true,
+      "delivered": 0,
+      "failed": 0
+    }
+  ],
+  "queries": [
+    {
+      "format": "pdf",
+      "rank": 1,
+      "publicIds": [
+        "asset:ast_217bdb7f-7354-47d8-a679-b203cf28cd71",
+        "asset:ast_f388d6b5-6766-4016-9d26-5352c79a66be",
+        "asset:ast_73b05b6c-3855-4d4f-8d04-cf19d7c413ae",
+        "asset:ast_ca93fc73-c3e5-4320-86cc-a343671367bc",
+        "asset:ast_ecac84c9-ad43-4898-901b-c0fba5d970fa"
+      ]
+    },
+    {
+      "format": "epub",
+      "rank": 1,
+      "publicIds": [
+        "asset:ast_f388d6b5-6766-4016-9d26-5352c79a66be",
+        "asset:ast_ca93fc73-c3e5-4320-86cc-a343671367bc",
+        "asset:ast_73b05b6c-3855-4d4f-8d04-cf19d7c413ae",
+        "asset:ast_ecac84c9-ad43-4898-901b-c0fba5d970fa",
+        "asset:ast_217bdb7f-7354-47d8-a679-b203cf28cd71"
+      ]
+    },
+    {
+      "format": "pptx",
+      "rank": 1,
+      "publicIds": [
+        "asset:ast_ecac84c9-ad43-4898-901b-c0fba5d970fa",
+        "asset:ast_73b05b6c-3855-4d4f-8d04-cf19d7c413ae",
+        "asset:ast_217bdb7f-7354-47d8-a679-b203cf28cd71",
+        "asset:ast_ca93fc73-c3e5-4320-86cc-a343671367bc",
+        "asset:ast_f388d6b5-6766-4016-9d26-5352c79a66be"
+      ]
+    },
+    {
+      "format": "xlsx",
+      "rank": 1,
+      "publicIds": [
+        "asset:ast_73b05b6c-3855-4d4f-8d04-cf19d7c413ae",
+        "asset:ast_ecac84c9-ad43-4898-901b-c0fba5d970fa",
+        "asset:ast_f388d6b5-6766-4016-9d26-5352c79a66be",
+        "asset:ast_ca93fc73-c3e5-4320-86cc-a343671367bc",
+        "asset:ast_217bdb7f-7354-47d8-a679-b203cf28cd71"
+      ]
+    },
+    {
+      "format": "png",
+      "rank": 1,
+      "publicIds": [
+        "asset:ast_ca93fc73-c3e5-4320-86cc-a343671367bc",
+        "asset:ast_f388d6b5-6766-4016-9d26-5352c79a66be",
+        "asset:ast_ecac84c9-ad43-4898-901b-c0fba5d970fa",
+        "asset:ast_217bdb7f-7354-47d8-a679-b203cf28cd71",
+        "asset:ast_73b05b6c-3855-4d4f-8d04-cf19d7c413ae"
+      ]
+    }
+  ],
+  "publicHybridRequired": true,
+  "complete": true,
+  "explicitRealTitleAcceptance": true,
+  "visibility": [
+    {
+      "elapsedMs": 375,
+      "visible": false
+    },
+    {
+      "elapsedMs": 10873,
+      "visible": false
+    },
+    {
+      "elapsedMs": 21505,
+      "visible": false
+    },
+    {
+      "elapsedMs": 32700,
+      "visible": false
+    },
+    {
+      "elapsedMs": 43205,
+      "visible": false
+    },
+    {
+      "elapsedMs": 53772,
+      "visible": false
+    },
+    {
+      "elapsedMs": 64302,
+      "visible": false
+    },
+    {
+      "elapsedMs": 75599,
+      "visible": true
+    }
+  ],
+  "finishedAt": "2026-10-24T17:59:57.883Z"
+}

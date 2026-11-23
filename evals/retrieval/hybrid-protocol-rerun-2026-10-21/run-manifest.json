@@ -1,0 +1,50 @@
+[
+  {
+    "model": "openai/gpt-5.4-mini",
+    "cases": ["retrieval-paraphrase-logs"],
+    "command": [
+      "node",
+      "--import",
+      "./scripts/vector-eval-freeze.mjs",
+      "evals/run.mjs",
+      "--memories",
+      "50",
+      "--rerank",
+      "hybrid",
+      "--repeat",
+      "3",
+      "--models",
+      "openai/gpt-5.4-mini",
+      "--case",
+      "retrieval-paraphrase-logs"
+    ],
+    "exitCode": 0,
+    "artifacts": ["2026-10-21T09-43-52.json", "2026-10-21T09-43-52.md"],
+    "generatedIndexSha256": "ef2df04f9196165b7e520547fd0cdb1311b5634f09a17e66202eb51eb589652a",
+    "restoredIndexSha256": "d90795c65820e826858f1769966e630ef34e4b849e3e743b6ff718e1f8cf169d"
+  },
+  {
+    "model": "openai/gpt-6-luna",
+    "cases": ["retrieval-paraphrase-cost", "retrieval-paraphrase-dump"],
+    "command": [
+      "node",
+      "--import",
+      "./scripts/vector-eval-freeze.mjs",
+      "evals/run.mjs",
+      "--memories",
+      "50",
+      "--rerank",
+      "hybrid",
+      "--repeat",
+      "3",
+      "--models",
+      "openai/gpt-6-luna",
+      "--case",
+      "retrieval-paraphrase-cost,retrieval-paraphrase-dump"
+    ],
+    "exitCode": 0,
+    "artifacts": ["2026-10-21T09-44-56.json", "2026-10-21T09-44-56.md"],
+    "generatedIndexSha256": "b4704bdffb6d431a9686d7c2bd633d64ced19a6209350daa73967c9a391ddbfc",
+    "restoredIndexSha256": "d90795c65820e826858f1769966e630ef34e4b849e3e743b6ff718e1f8cf169d"
+  }
+]

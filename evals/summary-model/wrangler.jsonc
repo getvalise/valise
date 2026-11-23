@@ -1,0 +1,9 @@
+// A loopback probe for `run.mjs`: real page fetches and real Workers AI, no D1.
+{
+  "name": "valise-summary-model-probe",
+  "main": "probe.ts",
+  "tsconfig": "tsconfig.json",
+  "compatibility_date": "2026-07-14",
+  "compatibility_flags": ["nodejs_compat"],
+  "ai": { "binding": "AI", "remote": true }
+}

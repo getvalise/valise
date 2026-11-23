@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Capture to Valise</title>
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="valise.css">
+    <script type="module" src="popup.mjs"></script>
+  </head>
+  <body>
+    <main class="auth-card capture-popup">
+      <header class="capture-header">
+        <p id="eyebrow" class="eyebrow">Valise · Capture</p>
+        <fieldset id="mode" class="capture-mode" hidden>
+          <legend class="sr-only">Save as</legend>
+          <label><input type="radio" name="mode" value="bookmark" checked><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>Bookmark</label>
+          <label><input type="radio" name="mode" value="todo"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>To-do</label>
+        </fieldset>
+        <div class="capture-tools">
+          <a id="library" class="button ghost capture-icon" hidden target="_blank" rel="noopener noreferrer" aria-label="Open Library" title="Open Library"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></svg></a>
+          <button id="settings" type="button" class="ghost capture-icon" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></button>
+        </div>
+      </header>
+      <section id="sign-in" aria-labelledby="sign-in-title" hidden>
+        <h2 id="sign-in-title">Connect to Valise</h2>
+        <p>Sign in once to save articles, pages and highlights to your Library. Valise at <strong id="sign-in-host">app.valise.run</strong> asks you to approve the extension.</p>
+        <button id="connect" type="button">Connect to Valise</button>
+      </section>
+      <section id="capture" class="capture-view" aria-labelledby="page-title" aria-busy="true" hidden>
+        <header id="page" class="capture-page">
+          <h2 id="page-title">Active page</h2>
+          <p id="page-host" class="muted"></p>
+          <p id="saved" class="capture-state capture-saved" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <a id="saved-link" target="_blank" rel="noopener noreferrer"></a>
+            <a id="archive-link" target="_blank" rel="noopener noreferrer" hidden>Open archived page</a>
+          </p>
+          <p id="check-failed" class="capture-state capture-check-failed" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg><span>Could not check with <span id="check-host"></span> whether this page is saved</span></p>
+          <p id="not-saved" class="capture-state" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.1 2.18a9.93 9.93 0 0 1 3.8 0"/><path d="M17.6 3.71a9.95 9.95 0 0 1 2.69 2.7"/><path d="M21.82 10.1a9.93 9.93 0 0 1 0 3.8"/><path d="M20.29 17.6a9.95 9.95 0 0 1-2.7 2.69"/><path d="M13.9 21.82a9.94 9.94 0 0 1-3.8 0"/><path d="M6.4 20.29a9.95 9.95 0 0 1-2.69-2.7"/><path d="M2.18 13.9a9.93 9.93 0 0 1 0-3.8"/><path d="M3.71 6.4a9.95 9.95 0 0 1 2.7-2.69"/></svg>Not saved</p>
+        </header>
+        <section id="article" class="capture-article" aria-label="Article" aria-busy="true">
+          <p id="article-byline" class="muted" hidden></p>
+          <blockquote id="article-excerpt" hidden></blockquote>
+          <p id="no-article" class="muted" hidden>No article on this page</p>
+        </section>
+        <div class="capture-controls">
+          <div id="todo-fields" class="capture-todo" hidden>
+            <label for="todo-title">Title</label>
+            <input id="todo-title" type="text" maxlength="500" autocomplete="off">
+            <label for="todo-description">Description</label>
+            <textarea id="todo-description" rows="2" maxlength="16384" placeholder="What to do, for example book an appointment"></textarea>
+          </div>
+          <section id="todo-reconnect" class="capture-reconnect" aria-label="Reconnect" hidden>
+            <p>Adding to-dos needs one more permission. Reconnect to Valise to allow it.</p>
+            <button id="reconnect" type="button"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/></svg>Reconnect to Valise</button>
+          </section>
+          <div id="labels" class="capture-controls">
+            <div class="capture-combobox">
+              <label for="project" id="project-label">Project</label>
+              <input id="project" type="text" maxlength="200" autocomplete="off">
+              <ul id="project-list" class="combobox-list" aria-label="Projects" hidden></ul>
+            </div>
+            <div class="tag-input">
+              <ul id="tags" class="tags" aria-label="Tags"></ul>
+              <div class="field-row">
+                <div class="capture-combobox">
+                  <label for="tag">Tag</label>
+                  <input id="tag" type="text" maxlength="100" autocomplete="off">
+                  <ul id="tag-list" class="combobox-list" aria-label="Your tags" hidden></ul>
+                </div>
+                <button id="add-tag" type="button" class="ghost"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add tag</button>
+              </div>
+            </div>
+          </div>
+          <div id="note-field" class="capture-note" hidden>
+            <label for="note">Note</label>
+            <textarea id="note" rows="1" maxlength="16384" placeholder="Why you saved it" disabled></textarea>
+          </div>
+          <section id="selection" class="capture-selection" aria-label="Selected text" hidden>
+            <blockquote id="selection-quote"></blockquote>
+            <button id="save-selection" type="button" class="ghost" disabled><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></svg>Save highlight</button>
+          </section>
+          <div id="bookmark-actions" class="capture-actions">
+            <button id="add-note" type="button" class="ghost" title="Add a note" aria-controls="note-field" aria-expanded="false" disabled><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg>Note</button>
+            <button id="archive" type="button" class="ghost" disabled><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg><span id="archive-label">Archive full page</span></button>
+            <button id="save" type="button" disabled><svg id="save-article-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><svg id="save-bookmark-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg><span id="save-label">Save bookmark</span></button>
+          </div>
+          <div id="todo-actions" class="capture-actions" hidden>
+            <button id="add-todo" type="button" disabled><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>Add to-do</button>
+          </div>
+          <p id="todo-added" class="capture-state capture-saved capture-todo-added" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>To-do added <a id="todo-link" target="_blank" rel="noopener noreferrer"></a></p>
+        </div>
+      </section>
+      <p id="status" role="status" aria-live="polite"></p>
+      <p id="error" role="alert" hidden></p>
+    </main>
+  </body>
+</html>

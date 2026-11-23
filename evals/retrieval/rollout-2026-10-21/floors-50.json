@@ -1,0 +1,1559 @@
+{
+  "size": 50,
+  "startedAt": "2026-10-21T07:24:04.786Z",
+  "deliveries": [
+    {
+      "configured": true,
+      "delivered": 0,
+      "attemptedFailed": 0,
+      "total": 51,
+      "pending": 0,
+      "failed": 0,
+      "due": 0,
+      "oldestPendingSeconds": 0,
+      "lastAcceptedAt": 1792567133
+    }
+  ],
+  "queries": [
+    {
+      "kind": "exact-title",
+      "query": "Valise search runs one BM25 query over a single FTS5 corpus, not per-concept indexes fused with RRF",
+      "expect": "mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 1113
+      },
+      "ids": [
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+        "memory:mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "why don't we keep a separate full-text index for each kind of item",
+      "expect": "mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 601
+      },
+      "ids": [
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+        "skill:skl_seed_capture_this",
+        "todo:tdo_seed_rank_calibration"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "How are results for skills and to-dos ranked against each other?",
+      "project": "valise",
+      "expect": "mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 567
+      },
+      "ids": [
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "todo:tdo_seed_rank_calibration",
+        "memory:mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167",
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Search falls back to ORed terms only when the ANDed query returns nothing",
+      "expect": "mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 800
+      },
+      "ids": [
+        "memory:mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167",
+        "memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb",
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "what happens when a question contains filler words no document has",
+      "expect": "mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 602
+      },
+      "ids": [
+        "memory:mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167",
+        "memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb",
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Why does a sentence-shaped lookup still find results?",
+      "project": "valise",
+      "expect": "mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 614
+      },
+      "ids": [
+        "memory:mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167",
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+        "skill:skl_seed_capture_this",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Console list filters use instr() instead of LIKE because D1 rejects LIKE patterns over 50 bytes",
+      "expect": "mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 569
+      },
+      "ids": [
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+        "memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "why did pasting a long title into the filter box crash the page",
+      "expect": "mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 545
+      },
+      "ids": [
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+        "memory:mem_2f68b5ff-3a79-45b3-b80e-e49d981035e1",
+        "memory:mem_5ed2513e-f2d3-4ebc-969b-bd71e0c2683d",
+        "memory:mem_0647e131-3b10-ccf3-4976-12b2e3b0f74b",
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "What pattern length limit did the database impose?",
+      "project": "valise",
+      "expect": "mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 637
+      },
+      "ids": [
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a",
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+        "memory:mem_b19f2b29-784d-cc63-45b6-bbec62f7f497"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "To-do state transitions go through the coordinator Durable Object, never a direct UPDATE",
+      "expect": "mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 593
+      },
+      "ids": [
+        "memory:mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+        "memory:mem_2b4d6ee9-20a8-e1e9-dc79-ab5d3f84f2a4",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_66ec8e24-334a-e7b2-c2ab-a5ea0227f6fc",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "who is allowed to change whether a ticket is taken or finished",
+      "expect": "mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 589
+      },
+      "ids": [
+        "memory:mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+        "memory:mem_2b4d6ee9-20a8-e1e9-dc79-ab5d3f84f2a4",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_724834b3-8cc3-54ad-716c-2fb2dfa0a76f"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Where must a claim or a completion be written?",
+      "project": "valise",
+      "expect": "mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 565
+      },
+      "ids": [
+        "memory:mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+        "skill:skl_seed_capture_this",
+        "memory:mem_724834b3-8cc3-54ad-716c-2fb2dfa0a76f",
+        "memory:mem_2b4d6ee9-20a8-e1e9-dc79-ab5d3f84f2a4",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Committing a single-case eval run breaks the Playwright test that opens a matrix cell",
+      "expect": "mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+      "rank": 2,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 630
+      },
+      "ids": [
+        "memory:mem_eeabb103-adfa-779e-3705-83163dcbfbc3",
+        "memory:mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+        "memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_724834b3-8cc3-54ad-716c-2fb2dfa0a76f"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "why did the browser test time out after I saved a partial run",
+      "expect": "mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 670
+      },
+      "ids": [
+        "memory:mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+        "memory:mem_eeabb103-adfa-779e-3705-83163dcbfbc3",
+        "memory:mem_0647e131-3b10-ccf3-4976-12b2e3b0f74b",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Which runs are safe to check in?",
+      "project": "valise",
+      "expect": "mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 784
+      },
+      "ids": [
+        "memory:mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+        "memory:mem_eeabb103-adfa-779e-3705-83163dcbfbc3",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+        "memory:mem_e180a52b-90aa-3b2d-f1b2-0be278e9c3d1"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "A migration that drops or renames declares a valise:by-hand line and stops the deploy",
+      "expect": "mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 581
+      },
+      "ids": [
+        "memory:mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+        "memory:mem_66ec8e24-334a-e7b2-c2ab-a5ea0227f6fc",
+        "memory:mem_e180a52b-90aa-3b2d-f1b2-0be278e9c3d1",
+        "memory:mem_2b4d6ee9-20a8-e1e9-dc79-ab5d3f84f2a4",
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "how does a destructive schema change reach production",
+      "expect": "mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 550
+      },
+      "ids": [
+        "memory:mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+        "memory:mem_66ec8e24-334a-e7b2-c2ab-a5ea0227f6fc",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_2b4d6ee9-20a8-e1e9-dc79-ab5d3f84f2a4",
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "What happens in the build when a migration removes a column?",
+      "project": "valise",
+      "expect": "mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 722
+      },
+      "ids": [
+        "memory:mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+        "memory:mem_e180a52b-90aa-3b2d-f1b2-0be278e9c3d1",
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+        "memory:mem_724834b3-8cc3-54ad-716c-2fb2dfa0a76f",
+        "memory:mem_d4d817d5-4140-f33c-6221-c1be33d1c514"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "A full seven-model eval run costs about $1.12, and Sonnet is 58% of it",
+      "expect": "mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 546
+      },
+      "ids": [
+        "memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+        "memory:mem_eeabb103-adfa-779e-3705-83163dcbfbc3",
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "how expensive is running every tool-choice case against all the models",
+      "expect": "mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 597
+      },
+      "ids": [
+        "memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_985986b9-4045-41d3-935f-93e433e124ea",
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+        "memory:mem_5ed2513e-f2d3-4ebc-969b-bd71e0c2683d"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "What does one complete run of the suite cost?",
+      "project": "valise",
+      "expect": "mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 639
+      },
+      "ids": [
+        "memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+        "memory:mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "gpt-5.4-mini reads capture-this after the Stop hook and then stops, under every wording tried",
+      "expect": "mem_656500ed-e622-4e2f-a6c6-1811add63b65",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 570
+      },
+      "ids": [
+        "memory:mem_656500ed-e622-4e2f-a6c6-1811add63b65",
+        "memory:mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+        "memory:mem_d4d817d5-4140-f33c-6221-c1be33d1c514",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "which small model never actually saves after the end-of-turn reminder",
+      "expect": "mem_656500ed-e622-4e2f-a6c6-1811add63b65",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 544
+      },
+      "ids": [
+        "memory:mem_656500ed-e622-4e2f-a6c6-1811add63b65",
+        "skill:skl_seed_capture_this",
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+        "memory:mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Why does the end-of-session prompt fail on the small OpenAI model?",
+      "project": "valise",
+      "expect": "mem_656500ed-e622-4e2f-a6c6-1811add63b65",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 590
+      },
+      "ids": [
+        "memory:mem_656500ed-e622-4e2f-a6c6-1811add63b65",
+        "memory:mem_0647e131-3b10-ccf3-4976-12b2e3b0f74b",
+        "skill:skl_seed_capture_this",
+        "memory:mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Skills stay exposed as skill_* tools, because no model searched a registry when told to",
+      "expect": "mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 578
+      },
+      "ids": [
+        "memory:mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_656500ed-e622-4e2f-a6c6-1811add63b65",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "should procedures hide behind a lookup call instead of being listed up front",
+      "expect": "mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 655
+      },
+      "ids": [
+        "memory:mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_2b4d6ee9-20a8-e1e9-dc79-ab5d3f84f2a4",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Why is every procedure its own entry in the tool list?",
+      "project": "valise",
+      "expect": "mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 543
+      },
+      "ids": [
+        "memory:mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a",
+        "memory:mem_2b4d6ee9-20a8-e1e9-dc79-ab5d3f84f2a4",
+        "memory:mem_e180a52b-90aa-3b2d-f1b2-0be278e9c3d1",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Past Worker logs are readable in the Cloudflare dashboard, not with the wrangler OAuth token",
+      "expect": "mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 568
+      },
+      "ids": [
+        "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+        "memory:mem_2b4d6ee9-20a8-e1e9-dc79-ab5d3f84f2a4",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a",
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "where can I see what the nightly job printed yesterday",
+      "expect": "mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 534
+      },
+      "ids": [
+        "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "How do I read old log lines from the scheduled trim?",
+      "project": "valise",
+      "expect": "mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 548
+      },
+      "ids": [
+        "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_b19f2b29-784d-cc63-45b6-bbec62f7f497",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Open pull requests ready for review, never as drafts",
+      "expect": "mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 547
+      },
+      "ids": [
+        "memory:mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "should the change start out as a work in progress on GitHub",
+      "expect": "mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 549
+      },
+      "ids": [
+        "memory:mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "How should a new PR be opened?",
+      "project": "valise",
+      "expect": "mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 535
+      },
+      "ids": [
+        "memory:mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_e180a52b-90aa-3b2d-f1b2-0be278e9c3d1",
+        "memory:mem_724834b3-8cc3-54ad-716c-2fb2dfa0a76f"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "The skills.sh leaderboard is readable without auth at /api/skills/all-time/{page}",
+      "expect": "mem_25f463a7-26a7-40c6-acac-e47b94620780",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 547
+      },
+      "ids": [
+        "memory:mem_25f463a7-26a7-40c6-acac-e47b94620780",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad",
+        "memory:mem_07a291bc-e963-3fe9-3514-34281accd7a0"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "how to get the most popular community procedures without a token",
+      "expect": "mem_25f463a7-26a7-40c6-acac-e47b94620780",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 553
+      },
+      "ids": [
+        "memory:mem_25f463a7-26a7-40c6-acac-e47b94620780",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+        "memory:mem_07a291bc-e963-3fe9-3514-34281accd7a0",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Which endpoint returns the public ranking?",
+      "project": "valise",
+      "expect": "mem_25f463a7-26a7-40c6-acac-e47b94620780",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 580
+      },
+      "ids": [
+        "memory:mem_25f463a7-26a7-40c6-acac-e47b94620780",
+        "todo:tdo_seed_rank_calibration",
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "On a long console list, fetcher.formData does not paint an optimistic value",
+      "expect": "mem_2f68b5ff-3a79-45b3-b80e-e49d981035e1",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 560
+      },
+      "ids": [
+        "memory:mem_2f68b5ff-3a79-45b3-b80e-e49d981035e1",
+        "memory:mem_0647e131-3b10-ccf3-4976-12b2e3b0f74b",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "why does an edited field flicker back to the old text on the big page",
+      "expect": "mem_2f68b5ff-3a79-45b3-b80e-e49d981035e1",
+      "rank": 2,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 581
+      },
+      "ids": [
+        "memory:mem_0647e131-3b10-ccf3-4976-12b2e3b0f74b",
+        "memory:mem_2f68b5ff-3a79-45b3-b80e-e49d981035e1",
+        "memory:mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Why doesn't the instant update show on long lists?",
+      "project": "valise",
+      "expect": "mem_2f68b5ff-3a79-45b3-b80e-e49d981035e1",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 811
+      },
+      "ids": [
+        "memory:mem_2f68b5ff-3a79-45b3-b80e-e49d981035e1",
+        "memory:mem_0647e131-3b10-ccf3-4976-12b2e3b0f74b",
+        "memory:mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a",
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "The startup brief lists three projects, five to-do titles and three memories instead of the ready queue",
+      "expect": "mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 565
+      },
+      "ids": [
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+        "memory:mem_66ec8e24-334a-e7b2-c2ab-a5ea0227f6fc",
+        "memory:mem_724834b3-8cc3-54ad-716c-2fb2dfa0a76f",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad",
+        "memory:mem_30403e9f-353c-468c-a53d-497cb99d7ae0"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "what gets injected when a session begins instead of every open ticket",
+      "expect": "mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 619
+      },
+      "ids": [
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_2b4d6ee9-20a8-e1e9-dc79-ab5d3f84f2a4",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_d4d817d5-4140-f33c-6221-c1be33d1c514"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "What does the session-start summary contain?",
+      "project": "valise",
+      "expect": "mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 540
+      },
+      "ids": [
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+        "skill:skl_seed_capture_this",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_724834b3-8cc3-54ad-716c-2fb2dfa0a76f"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "D1 cannot export an FTS5 virtual table, so backups name the authoritative tables",
+      "expect": "mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 537
+      },
+      "ids": [
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+        "memory:mem_b19f2b29-784d-cc63-45b6-bbec62f7f497",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "why does a plain dump of the whole database fail",
+      "expect": "mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 900
+      },
+      "ids": [
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+        "memory:mem_b19f2b29-784d-cc63-45b6-bbec62f7f497",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "How is the index brought back after a restore?",
+      "project": "valise",
+      "expect": "mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 542
+      },
+      "ids": [
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+        "memory:mem_b19f2b29-784d-cc63-45b6-bbec62f7f497",
+        "memory:mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+        "memory:mem_eeabb103-adfa-779e-3705-83163dcbfbc3",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Docs content lives in documentation/, and the root docs/ folder is internal planning only",
+      "expect": "mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 757
+      },
+      "ids": [
+        "memory:mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+        "memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed",
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "where do the published pages go in the repository",
+      "expect": "mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 604
+      },
+      "ids": [
+        "memory:mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+        "memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed",
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+        "memory:mem_0729d7c4-d26d-427a-8e60-a323ce62b841"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Which folder holds the pages that ship to the site?",
+      "project": "acme-docs",
+      "expect": "mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 494
+      },
+      "ids": [
+        "memory:mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+        "memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed",
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+        "memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186",
+        "memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "The docs eval measures findability with BM25 over llms.txt chunks, top three into context",
+      "expect": "mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 1893
+      },
+      "ids": [
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+        "memory:mem_985986b9-4045-41d3-935f-93e433e124ea",
+        "memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186",
+        "memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed",
+        "memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "how will we test whether an answer can be located in the pages",
+      "expect": "mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+      "rank": 2,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 600
+      },
+      "ids": [
+        "memory:mem_985986b9-4045-41d3-935f-93e433e124ea",
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3",
+        "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "How does the evaluation pick context for each question?",
+      "project": "acme-docs",
+      "expect": "mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 532
+      },
+      "ids": [
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+        "memory:mem_985986b9-4045-41d3-935f-93e433e124ea",
+        "memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186",
+        "memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed",
+        "memory:mem_e63f8b04-ae32-4d96-8a06-c6fb6d94afdb"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Copy the team's Google Slides template rather than starting a blank deck",
+      "expect": "mem_629cd6e2-18d6-4abe-89bd-ca8bfcca3d4d",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 564
+      },
+      "ids": [
+        "memory:mem_629cd6e2-18d6-4abe-89bd-ca8bfcca3d4d",
+        "memory:mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+        "memory:mem_seed_duckdb_default"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "which presentation do I duplicate when preparing a talk",
+      "expect": "mem_629cd6e2-18d6-4abe-89bd-ca8bfcca3d4d",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 587
+      },
+      "ids": [
+        "memory:mem_629cd6e2-18d6-4abe-89bd-ca8bfcca3d4d",
+        "memory:mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+        "memory:mem_d4d817d5-4140-f33c-6221-c1be33d1c514"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "What is the starting point for a new deck?",
+      "project": "acme-docs",
+      "expect": "mem_629cd6e2-18d6-4abe-89bd-ca8bfcca3d4d",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 512
+      },
+      "ids": [
+        "memory:mem_629cd6e2-18d6-4abe-89bd-ca8bfcca3d4d",
+        "memory:mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+        "memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186",
+        "memory:mem_a3819b6f-46e5-45d6-8f46-d742b5b64281",
+        "memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Pick the Diátaxis mode first and never mix tutorial and reference in one page",
+      "expect": "mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 599
+      },
+      "ids": [
+        "memory:mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+        "memory:mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+        "memory:mem_0975dd1f-81a9-d671-1572-5456da525c98",
+        "memory:mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+        "memory:mem_seed_duckdb_default"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "can a step-by-step guide also explain the background",
+      "expect": "mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 568
+      },
+      "ids": [
+        "memory:mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+        "skill:skl_seed_capture_this",
+        "memory:mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+        "memory:mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+        "memory:mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "What is the rule for page types?",
+      "project": "acme-docs",
+      "expect": "mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 623
+      },
+      "ids": [
+        "memory:mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+        "memory:mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+        "memory:mem_97dfc85a-932c-4054-8089-1077b0c3cbed",
+        "memory:mem_985986b9-4045-41d3-935f-93e433e124ea",
+        "memory:mem_31f9e204-eecb-4fe7-ac15-1daa6b346186"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Charts follow Few and Tufte: minimal gridlines, colour only where it carries meaning",
+      "expect": "mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 693
+      },
+      "ids": [
+        "memory:mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+        "memory:mem_a1459401-d934-4f4c-a235-42f1eb20969a",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "how should plots look in posts",
+      "expect": "mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 563
+      },
+      "ids": [
+        "memory:mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+        "memory:mem_07a291bc-e963-3fe9-3514-34281accd7a0",
+        "memory:mem_e180a52b-90aa-3b2d-f1b2-0be278e9c3d1",
+        "memory:mem_629cd6e2-18d6-4abe-89bd-ca8bfcca3d4d",
+        "memory:mem_05039586-346a-95a4-8fb2-28c2881cfaf3"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "What visual style do figures use?",
+      "project": "blog",
+      "expect": "mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 511
+      },
+      "ids": [
+        "memory:mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad",
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+        "memory:mem_a1459401-d934-4f4c-a235-42f1eb20969a"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Personal web apps deploy to Cloudflare, and work apps ship as hosted dashboards",
+      "expect": "mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 614
+      },
+      "ids": [
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+        "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+        "memory:mem_seed_duckdb_default",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "where do side projects get hosted",
+      "expect": "mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 553
+      },
+      "ids": [
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_25f463a7-26a7-40c6-acac-e47b94620780",
+        "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Where do small apps go live?",
+      "project": "blog",
+      "expect": "mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 593
+      },
+      "ids": [
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+        "memory:mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad",
+        "memory:mem_a1459401-d934-4f4c-a235-42f1eb20969a"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Blog drafts get an unslop pass before publishing",
+      "expect": "mem_a1459401-d934-4f4c-a235-42f1eb20969a",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 560
+      },
+      "ids": [
+        "memory:mem_a1459401-d934-4f4c-a235-42f1eb20969a",
+        "memory:mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+        "memory:mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "what cleanup happens before a post goes live",
+      "expect": "mem_a1459401-d934-4f4c-a235-42f1eb20969a",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 638
+      },
+      "ids": [
+        "memory:mem_a1459401-d934-4f4c-a235-42f1eb20969a",
+        "memory:mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+        "memory:mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_e180a52b-90aa-3b2d-f1b2-0be278e9c3d1"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "What editing do drafts get?",
+      "project": "blog",
+      "expect": "mem_a1459401-d934-4f4c-a235-42f1eb20969a",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 551
+      },
+      "ids": [
+        "memory:mem_a1459401-d934-4f4c-a235-42f1eb20969a",
+        "memory:mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad",
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Prefect, Portainer, SeaweedFS and Postgres run on the home NAS",
+      "expect": "mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 585
+      },
+      "ids": [
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+        "memory:mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "what services are on the storage box at home",
+      "expect": "mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 573
+      },
+      "ids": [
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+        "memory:mem_4a25d0c1-17ff-4f95-aada-3182ea83f669",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "What runs on the home server?",
+      "project": "homelab",
+      "expect": "mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 755
+      },
+      "ids": [
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+        "memory:mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "SeaweedFS answers 404 on bucket calls unless the filer starts with its S3 gateway",
+      "expect": "mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 663
+      },
+      "ids": [
+        "memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_25f463a7-26a7-40c6-acac-e47b94620780"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "why does object storage say the bucket does not exist when it does",
+      "expect": "mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 619
+      },
+      "ids": [
+        "memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a",
+        "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Why do bucket requests return not found?",
+      "project": "homelab",
+      "expect": "mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 529
+      },
+      "ids": [
+        "memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_5e9b40a4-6414-498e-a4e5-992996ff774c"
+      ]
+    },
+    {
+      "kind": "exact-title",
+      "query": "Use uv for Python, never pip or poetry",
+      "expect": "mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 565
+      },
+      "ids": [
+        "memory:mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_seed_duckdb_default",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_ae253634-e9b5-dce6-0812-d5ab3f4ef9ad"
+      ]
+    },
+    {
+      "kind": "paraphrase",
+      "query": "how should I install a package for the scheduler scripts",
+      "expect": "mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 547
+      },
+      "ids": [
+        "memory:mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+        "memory:mem_a37548bb-bbc8-702f-5549-c1f8be6d8350",
+        "memory:mem_c744b517-5c8a-c136-8826-28074919066a"
+      ]
+    },
+    {
+      "kind": "project-question",
+      "query": "Which package manager do the flows use?",
+      "project": "homelab",
+      "expect": "mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+      "rank": 1,
+      "rerank": {
+        "backend": "jev",
+        "reranked": true,
+        "ms": 756
+      },
+      "ids": [
+        "memory:mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+        "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+        "memory:mem_28c32c24-1adb-989d-fa12-772bfa0be6a9",
+        "memory:mem_d26da45c-2f7b-455f-9977-fe866dd766c9"
+      ]
+    }
+  ],
+  "fallbacks": [],
+  "complete": true,
+  "namespace": "rollout-eval-v1",
+  "acceptanceToObservedVisibilityMs": 647,
+  "scoped": [
+    {
+      "id": "mem_fa7b5866-fc6b-476d-8a71-517587d07057",
+      "project": "valise",
+      "tags": ["search", "fts", "bm25"],
+      "returned": 1
+    },
+    {
+      "id": "mem_c0a0fdb3-ef3d-4b1d-94fb-02c97f3fa167",
+      "project": "valise",
+      "tags": ["search", "fts", "query"],
+      "returned": 1
+    },
+    {
+      "id": "mem_bca1fda9-ce70-41e7-adbf-6390260a516c",
+      "project": "valise",
+      "tags": ["d1", "console", "sqlite"],
+      "returned": 1
+    },
+    {
+      "id": "mem_30403e9f-353c-468c-a53d-497cb99d7ae0",
+      "project": "valise",
+      "tags": ["todos", "durable-objects", "claiming"],
+      "returned": 1
+    },
+    {
+      "id": "mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58",
+      "project": "valise",
+      "tags": ["evals", "playwright", "workbench"],
+      "returned": 2
+    },
+    {
+      "id": "mem_0729d7c4-d26d-427a-8e60-a323ce62b841",
+      "project": "valise",
+      "tags": ["migrations", "deploy", "d1"],
+      "returned": 1
+    },
+    {
+      "id": "mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+      "project": "valise",
+      "tags": ["evals", "cost", "openrouter"],
+      "returned": 1
+    },
+    {
+      "id": "mem_656500ed-e622-4e2f-a6c6-1811add63b65",
+      "project": "valise",
+      "tags": ["evals", "hooks", "nudges"],
+      "returned": 1
+    },
+    {
+      "id": "mem_04da87d5-fe6e-4678-a9d0-1628314c52e9",
+      "project": "valise",
+      "tags": ["skills", "mcp", "surface"],
+      "returned": 1
+    },
+    {
+      "id": "mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+      "project": "valise",
+      "tags": ["cloudflare", "logs", "cron"],
+      "returned": 1
+    },
+    {
+      "id": "mem_4f869c6e-0ad2-439d-ad1b-375d62a1ed48",
+      "project": "valise",
+      "tags": ["github", "workflow"],
+      "returned": 1
+    },
+    {
+      "id": "mem_25f463a7-26a7-40c6-acac-e47b94620780",
+      "project": "valise",
+      "tags": ["skills", "registry", "api"],
+      "returned": 1
+    },
+    {
+      "id": "mem_2f68b5ff-3a79-45b3-b80e-e49d981035e1",
+      "project": "valise",
+      "tags": ["react-router", "console", "optimistic-ui"],
+      "returned": 2
+    },
+    {
+      "id": "mem_eabb93ec-63fe-4eab-87e5-513fad0bbe9e",
+      "project": "valise",
+      "tags": ["hooks", "startup", "brief"],
+      "returned": 1
+    },
+    {
+      "id": "mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175",
+      "project": "valise",
+      "tags": ["backups", "d1", "fts"],
+      "returned": 2
+    },
+    {
+      "id": "mem_b6558b67-10a9-442a-b804-ffc4192b7a22",
+      "project": "acme-docs",
+      "tags": ["docs", "repo-layout"],
+      "returned": 1
+    },
+    {
+      "id": "mem_2cd93da5-43ac-4509-8ccd-48b86ed5749a",
+      "project": "acme-docs",
+      "tags": ["evals", "retrieval", "llms-txt"],
+      "returned": 1
+    },
+    {
+      "id": "mem_629cd6e2-18d6-4abe-89bd-ca8bfcca3d4d",
+      "project": "acme-docs",
+      "tags": ["slides", "google-drive"],
+      "returned": 1
+    },
+    {
+      "id": "mem_7d106a31-dd4f-48fe-9f02-1d2e71236810",
+      "project": "acme-docs",
+      "tags": ["diataxis", "writing"],
+      "returned": 1
+    },
+    {
+      "id": "mem_a32416f3-9c6a-42d4-bcd5-d8bec5b98bc1",
+      "project": "blog",
+      "tags": ["charts", "design"],
+      "returned": 1
+    },
+    {
+      "id": "mem_9e8609f2-e7ea-490d-8d9b-b666ebb5b1e4",
+      "project": "blog",
+      "tags": ["hosting", "cloudflare"],
+      "returned": 1
+    },
+    {
+      "id": "mem_a1459401-d934-4f4c-a235-42f1eb20969a",
+      "project": "blog",
+      "tags": ["writing", "editing"],
+      "returned": 1
+    },
+    {
+      "id": "mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "project": "homelab",
+      "tags": ["nas", "services"],
+      "returned": 1
+    },
+    {
+      "id": "mem_d26da45c-2f7b-455f-9977-fe866dd766c9",
+      "project": "homelab",
+      "tags": ["seaweedfs", "s3"],
+      "returned": 1
+    },
+    {
+      "id": "mem_5e9b40a4-6414-498e-a4e5-992996ff774c",
+      "project": "homelab",
+      "tags": ["python", "tooling"],
+      "returned": 1
+    }
+  ],
+  "tally": {
+    "exact-title": {
+      "top5": 25,
+      "total": 25
+    },
+    "paraphrase": {
+      "top5": 25,
+      "total": 25
+    },
+    "project-question": {
+      "top5": 25,
+      "total": 25
+    }
+  },
+  "finishedAt": "2026-10-21T07:25:02.012Z"
+}

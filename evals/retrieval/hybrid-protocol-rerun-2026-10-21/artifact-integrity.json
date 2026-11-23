@@ -1,0 +1,95 @@
+{
+  "operation": "Biome JSON whitespace formatting only; no field, score, exact argument string or route changed",
+  "files": [
+    {
+      "file": "summary.json",
+      "beforeSha256": "b8d4abbf503888be49fb8b891f4dd6a5c3313a49493ac2b89bf4de0cc5052421",
+      "afterSha256": "b8d4abbf503888be49fb8b891f4dd6a5c3313a49493ac2b89bf4de0cc5052421",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "remaining-indexes.json",
+      "beforeSha256": "5c45cacbc0a049831f24625b01096a1d4d4d38356b8bcf1dd46ad4d936137ce1",
+      "afterSha256": "5c45cacbc0a049831f24625b01096a1d4d4d38356b8bcf1dd46ad4d936137ce1",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "index-created.json",
+      "beforeSha256": "2892f8114a027af44470656067ae30bf58ad900c45bffe0686fb8995869dbc81",
+      "afterSha256": "2892f8114a027af44470656067ae30bf58ad900c45bffe0686fb8995869dbc81",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "final-vector-status.json",
+      "beforeSha256": "b035b772c8b537689d294936a17dda8c7b88924c5ac811637d21d6700cb83c8f",
+      "afterSha256": "b035b772c8b537689d294936a17dda8c7b88924c5ac811637d21d6700cb83c8f",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "cleanup.json",
+      "beforeSha256": "2a3402066754c6a0cd98d93e51b870e91ec500c7a6ac06dcbf122ea5b42d308d",
+      "afterSha256": "8711363199f5650d26c801d6674664006e6bd601f266105a589f7ad1f342da6e",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "2026-10-21T09-44-56.json",
+      "beforeSha256": "8b5a28ee5a65b83961f04b1b91ca70d2548a33621099a427d5c8e7ccf526525c",
+      "afterSha256": "27d77b56f1f768ecd6a706a4afeba7407b78079517e719e32f75daee9de6e9e6",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "2026-10-21T09-43-52.json",
+      "beforeSha256": "969b84e733f0beda66466b30c0064df58007a85300c8f1ad6c6578b7666d20b8",
+      "afterSha256": "d05607a588a30b60c51a5533bb8193786d518ec64b0e9aebf451c0cc39ceefb4",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "mcp-calls-before-controls.json",
+      "beforeSha256": "7f63e02c043752bac5200af1e1449b12dd71070371ccd4cf846b3c9092a0c5c0",
+      "afterSha256": "7f63e02c043752bac5200af1e1449b12dd71070371ccd4cf846b3c9092a0c5c0",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "selection.json",
+      "beforeSha256": "256b08982122a9c4597b7785e3ac4b967fedd1c14acc934c3222167bae3c06d3",
+      "afterSha256": "256b08982122a9c4597b7785e3ac4b967fedd1c14acc934c3222167bae3c06d3",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "isolation.json",
+      "beforeSha256": "5a8931180f528b2a3f299e39ce423c214526d61f149d9e4bd793dda38c19f728",
+      "afterSha256": "5a8931180f528b2a3f299e39ce423c214526d61f149d9e4bd793dda38c19f728",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "operator-mcp-controls.json",
+      "beforeSha256": "fdfc7db1fa418e9271440d163e89bc6765cf3a5b96fa6592a1bc4437210ff4cd",
+      "afterSha256": "fdfc7db1fa418e9271440d163e89bc6765cf3a5b96fa6592a1bc4437210ff4cd",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "floors-50.json",
+      "beforeSha256": "76d8fe3ebdae1fb766c9fcdce297e1e5a90497a64b0f1dfe4a5c1641ffb47f48",
+      "afterSha256": "33e16b51ced318246b9987e5f13af3cfcd008cd58ff4514ddc36c9b4361857c2",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "run-manifest.json",
+      "beforeSha256": "2406179da08ecac800f11cb4e6b7a9bc087659d1da296f7936f8d12f4837d057",
+      "afterSha256": "abe97783b1c160cb6508a1dee90e8551f099690b4157dacb69e6982ebe708d07",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "metadata-indexes.json",
+      "beforeSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "afterSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "jsonValueUnchanged": true
+    },
+    {
+      "file": "mcp-calls.json",
+      "beforeSha256": "d758d0156f87dcdd4b2500d47037f99b2feddd785d0a845d1de3f62d7c5075f2",
+      "afterSha256": "d758d0156f87dcdd4b2500d47037f99b2feddd785d0a845d1de3f62d7c5075f2",
+      "jsonValueUnchanged": true
+    }
+  ]
+}

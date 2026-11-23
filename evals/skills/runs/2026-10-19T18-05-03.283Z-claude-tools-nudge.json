@@ -1,0 +1,97 @@
+{
+  "client": "claude",
+  "version": "2.1.303 (Claude Code)",
+  "mode": "tools",
+  "test": "nudge",
+  "dir": "/var/folders/75/p5ymw8gs2nl_ww1fkqkvytlc0000gn/T/valise-skill-probe-9PcUBo",
+  "status": 0,
+  "methods": [
+    "server/discover",
+    "initialize",
+    "notifications/initialized",
+    "tools/list",
+    "resources/list",
+    "tools/call"
+  ],
+  "calls": [
+    {
+      "at": "2026-10-19T18:04:57.214Z",
+      "jsonrpc": "2.0",
+      "id": "server-discover-probe-1",
+      "method": "server/discover",
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "claude-code",
+            "title": "Claude Code",
+            "version": "2.1.303",
+            "description": "Anthropic's agentic coding tool",
+            "websiteUrl": "https://claude.com/claude-code"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "roots": {
+              "listChanged": true
+            },
+            "elicitation": {
+              "form": {},
+              "url": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:04:57.218Z",
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "roots": {
+            "listChanged": true
+          },
+          "elicitation": {
+            "form": {},
+            "url": {}
+          }
+        },
+        "clientInfo": {
+          "name": "claude-code",
+          "title": "Claude Code",
+          "version": "2.1.303",
+          "description": "Anthropic's agentic coding tool",
+          "websiteUrl": "https://claude.com/claude-code"
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 0
+    },
+    {
+      "at": "2026-10-19T18:04:57.232Z",
+      "method": "tools/list",
+      "jsonrpc": "2.0",
+      "id": 1
+    },
+    {
+      "at": "2026-10-19T18:04:57.232Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 2
+    },
+    {
+      "at": "2026-10-19T18:05:00.010Z",
+      "method": "tools/call",
+      "params": {
+        "name": "skill_valise-probe-cerulean",
+        "arguments": {},
+        "_meta": {
+          "claudecode/toolUseId": "toolu_01E6muFT2rfQ1s2st8ygy34q",
+          "progressToken": 3
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 3
+    }
+  ],
+  "markerReturned": true
+}

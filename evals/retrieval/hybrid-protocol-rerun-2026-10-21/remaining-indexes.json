@@ -1,0 +1,12 @@
+[
+  {
+    "created_on": "2026-10-21T07:07:46.766925Z",
+    "modified_on": "2026-10-21T07:07:46.766925Z",
+    "name": "valise-memories-v1",
+    "description": "Valise production memory revisions; valise-prod-v1 and h:valise-prod-v1",
+    "config": {
+      "dimensions": 1024,
+      "metric": "cosine"
+    }
+  }
+]

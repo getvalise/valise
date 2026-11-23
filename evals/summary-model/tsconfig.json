@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../..",
+    "paths": { "~/*": ["app/*"] },
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "bundler"
+  }
+}

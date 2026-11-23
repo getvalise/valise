@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "valise": {
+      "type": "http",
+      "url": "https://app.valise.run/mcp",
+      "http_headers": {
+        "X-Valise-Plugin": "valise/0.12.0"
+      }
+    }
+  }
+}

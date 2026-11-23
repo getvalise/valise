@@ -1,0 +1,87 @@
+{
+  "client": "codex",
+  "version": "codex-cli 0.163.0",
+  "mode": "native",
+  "test": "plain",
+  "dir": "/var/folders/75/p5ymw8gs2nl_ww1fkqkvytlc0000gn/T/valise-skill-probe-ADAJS9",
+  "status": 0,
+  "methods": [
+    "initialize",
+    "notifications/initialized",
+    "tools/list",
+    "resources/list",
+    "resources/templates/list",
+    "resources/read"
+  ],
+  "calls": [
+    {
+      "at": "2026-10-19T18:04:31.162Z",
+      "jsonrpc": "2.0",
+      "id": 0,
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-06-18",
+        "capabilities": {
+          "experimental": {
+            "codex/auth-change": {}
+          },
+          "elicitation": {
+            "form": {},
+            "url": {}
+          }
+        },
+        "clientInfo": {
+          "name": "codex-mcp-client",
+          "title": "Codex",
+          "version": "0.163.0"
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:04:31.165Z",
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "tools/list",
+      "params": {
+        "_meta": {
+          "progressToken": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:04:46.269Z",
+      "jsonrpc": "2.0",
+      "id": 2,
+      "method": "resources/list",
+      "params": {
+        "_meta": {
+          "progressToken": 1
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:04:46.600Z",
+      "jsonrpc": "2.0",
+      "id": 3,
+      "method": "resources/templates/list",
+      "params": {
+        "_meta": {
+          "progressToken": 2
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:04:48.899Z",
+      "jsonrpc": "2.0",
+      "id": 4,
+      "method": "resources/read",
+      "params": {
+        "_meta": {
+          "progressToken": 3
+        },
+        "uri": "skill://valise-probe-cerulean/SKILL.md"
+      }
+    }
+  ],
+  "markerReturned": true
+}

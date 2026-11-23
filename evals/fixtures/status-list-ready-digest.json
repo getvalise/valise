@@ -1,0 +1,33 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"todos\":[{\"id\":\"todo:tdo_eval_dark_mode_tokens\",\"title\":\"Audit the dark-mode tokens on /workbench\",\"status\":null,\"status_at\":null,\"project\":\"valise\"},{\"id\":\"todo:tdo_eval_oauth_roundtrip\",\"title\":\"Run npm run oauth:roundtrip against production after the scope rename\",\"status\":null,\"status_at\":null,\"project\":\"valise\"},{\"id\":\"todo:tdo_eval_managed_assets\",\"title\":\"Add Valise-managed assets: HTTP upload, retry-safe finalize, signed downloads\",\"status\":\"All four slices pass npm run verify on feat/assets-finalize; merge waits on review of PR #153.\",\"status_at\":1792652400,\"project\":\"valise\"}]}"
+    }
+  ],
+  "structuredContent": {
+    "todos": [
+      {
+        "id": "todo:tdo_eval_dark_mode_tokens",
+        "title": "Audit the dark-mode tokens on /workbench",
+        "status": null,
+        "status_at": null,
+        "project": "valise"
+      },
+      {
+        "id": "todo:tdo_eval_oauth_roundtrip",
+        "title": "Run npm run oauth:roundtrip against production after the scope rename",
+        "status": null,
+        "status_at": null,
+        "project": "valise"
+      },
+      {
+        "id": "todo:tdo_eval_managed_assets",
+        "title": "Add Valise-managed assets: HTTP upload, retry-safe finalize, signed downloads",
+        "status": "All four slices pass npm run verify on feat/assets-finalize; merge waits on review of PR #153.",
+        "status_at": 1792652400,
+        "project": "valise"
+      }
+    ]
+  }
+}

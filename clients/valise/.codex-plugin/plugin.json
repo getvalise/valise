@@ -1,0 +1,10 @@
+{
+  "name": "valise",
+  "version": "0.12.0",
+  "description": "The Valise connector for Codex: skills, memories, and to-dos over MCP, with hooks that nudge capture and recall.",
+  "author": {
+    "name": "getvalise"
+  },
+  "license": "Apache-2.0",
+  "mcpServers": "./.codex.mcp.json"
+}

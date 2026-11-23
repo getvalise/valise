@@ -1,0 +1,57 @@
+{
+  "journey": "j9",
+  "run": "2026-11-01-ac4e68",
+  "origin": "https://app.valise.run",
+  "label": "app.valise.run",
+  "runner_commit": "b156d39a6434e9cb0a9c706e5ddbcbf48c169ddf",
+  "started_at": "2026-11-01T17:08:39.287Z",
+  "steps": [
+    {
+      "step": "agents A and B write while the person is away",
+      "ok": true
+    },
+    {
+      "step": "the trail leads with outcomes and groups by agent",
+      "ok": true,
+      "detail": {
+        "outcomes": "In the last 7 days, in journey-j9-2026-11-01-ac4e68: 1 to-do completed, 2 to-dos created, 1 to-do blocked, 1 memory saved, 1 skill version published."
+      }
+    },
+    {
+      "step": "trail lines open the to-do and the memory",
+      "ok": true
+    },
+    {
+      "step": "an empty day says so",
+      "ok": true
+    },
+    {
+      "step": "a member cannot open the workbench logs",
+      "ok": true,
+      "detail": {
+        "status": 404
+      }
+    },
+    {
+      "step": "trail is tenant-private",
+      "ok": true,
+      "detail": {
+        "foreign": "tenant B's trail shows none of A's writes"
+      }
+    },
+    {
+      "step": "phone 320px with and without scripts",
+      "ok": true
+    }
+  ],
+  "fixtures": [
+    "todo:tdo_f798d5bf-0f41-4a28-bc0e-ab6029e05972",
+    "todo:tdo_dc644e7d-4160-4a58-b206-a1a962d98f02",
+    "memory:mem_7fa859d6-b3e9-41d8-ac2e-fd641aaab4fc",
+    "skill:journey-j9-ac4e68"
+  ],
+  "cleanup": [
+    "bearer tokens labelled \"journey j9 2026-11-01-ac4e68\" revoked",
+    "synthetic to-dos, memory and skill remain in project journey-j9-2026-11-01-ac4e68"
+  ]
+}

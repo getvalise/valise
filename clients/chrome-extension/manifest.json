@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Valise capture",
+  "version": "0.9.0",
+  "description": "Archive the active page to Valise with its styles and images, save its article or selected text with a note, or add it as a to-do.",
+  "permissions": ["activeTab", "identity", "scripting", "storage"],
+  "host_permissions": ["https://app.valise.run/*"],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Capture to Valise"
+  },
+  "options_ui": { "page": "settings.html", "open_in_tab": true },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
+  }
+}

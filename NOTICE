@@ -1,0 +1,9 @@
+Valise
+Copyright 2026 getvalise
+
+Everything in this repository outside clients/ is licensed under the GNU
+Affero General Public License, version 3 only (AGPL-3.0-only); the full text
+is in LICENSE. Each package under clients/ carries its own Apache-2.0 LICENSE.
+
+"Valise" is the project's name. Neither license grants permission to use it;
+see "Name and trademark" in README.md.

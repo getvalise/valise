@@ -1,0 +1,39 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"todos\":[{\"id\":\"todo:tdo_eval_dark_mode_tokens\",\"title\":\"Audit the dark-mode tokens on /workbench\",\"project\":\"valise\",\"tags\":[\"console\",\"design\"],\"refs\":[{\"kind\":\"file\",\"value\":\"styles/valise.css\"}],\"updated_at\":1792648800},{\"id\":\"todo:tdo_eval_oauth_roundtrip\",\"title\":\"Run npm run oauth:roundtrip against production after the scope rename\",\"project\":\"valise\",\"tags\":[\"oauth\"],\"refs\":[{\"kind\":\"file\",\"value\":\"scripts/oauth-roundtrip.mjs\"}],\"updated_at\":1792645200},{\"id\":\"todo:tdo_eval_managed_assets\",\"title\":\"Add Valise-managed assets: HTTP upload, retry-safe finalize, signed downloads\",\"project\":\"valise\",\"tags\":[\"assets\",\"mcp\"],\"refs\":[{\"kind\":\"doc\",\"value\":\"docs/adr/0015-assets-and-sources.md\"},{\"kind\":\"repo\",\"value\":\"getvalise/valise\"}],\"updated_at\":1792400000}]}"
+    }
+  ],
+  "structuredContent": {
+    "todos": [
+      {
+        "id": "todo:tdo_eval_dark_mode_tokens",
+        "title": "Audit the dark-mode tokens on /workbench",
+        "project": "valise",
+        "tags": ["console", "design"],
+        "refs": [{ "kind": "file", "value": "styles/valise.css" }],
+        "updated_at": 1792648800
+      },
+      {
+        "id": "todo:tdo_eval_oauth_roundtrip",
+        "title": "Run npm run oauth:roundtrip against production after the scope rename",
+        "project": "valise",
+        "tags": ["oauth"],
+        "refs": [{ "kind": "file", "value": "scripts/oauth-roundtrip.mjs" }],
+        "updated_at": 1792645200
+      },
+      {
+        "id": "todo:tdo_eval_managed_assets",
+        "title": "Add Valise-managed assets: HTTP upload, retry-safe finalize, signed downloads",
+        "project": "valise",
+        "tags": ["assets", "mcp"],
+        "refs": [
+          { "kind": "doc", "value": "docs/adr/0015-assets-and-sources.md" },
+          { "kind": "repo", "value": "getvalise/valise" }
+        ],
+        "updated_at": 1792400000
+      }
+    ]
+  }
+}

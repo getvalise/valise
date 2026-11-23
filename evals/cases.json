@@ -1,0 +1,3861 @@
+{
+  "turnBudget": 1,
+  "system": "You are an agent connected to Valise, a shared workspace that carries skills, memories, and to-dos between models. Use a Valise tool when one fits the user's turn. If no tool fits, answer in plain text and call nothing.",
+  "cases": [
+    {
+      "id": "todo-tags-priority",
+      "prompt": "Set todo:tdo_review to P1 in Valise instead of its current priority:4. Keep its library and design tags, and do not claim the task or change its state.",
+      "tool": "edit_todo_tags",
+      "requiredArgs": ["id", "add_tags", "remove_tags"],
+      "expectArgs": { "id": "todo:tdo_review" },
+      "absentArgs": ["token", "body", "state"],
+      "why": "Priority changes must atomically remove the old tag and add the new one without recreating the task or taking its lease. Manually inspect array values; the runner scores top-level primitives only."
+    },
+    {
+      "id": "todo-tags-remove",
+      "prompt": "Remove only the obsolete tag from todo:tdo_review in Valise. Leave its other tags and the agent currently working on it alone.",
+      "tool": "edit_todo_tags",
+      "requiredArgs": ["id", "remove_tags"],
+      "expectArgs": { "id": "todo:tdo_review" },
+      "absentArgs": ["token", "body", "state", "add_tags"],
+      "why": "Removing a tag is not deleting a task, completing it, or appending a progress update. Inspect remove_tags manually."
+    },
+    {
+      "id": "todo-relations-reconcile",
+      "prompt": "Valise says the dependency edit on todo:tdo_integration has an unknown outcome and claims are unavailable. Reconcile that interrupted relation write only. Do not retry the dependency addition and do not claim any task.",
+      "tool": "update_todo",
+      "requiredArgs": ["id", "relations"],
+      "expectArgs": { "id": "todo:tdo_integration" },
+      "absentArgs": ["token", "body", "blocked_on"],
+      "why": "Explicit recovery fences late writes without replaying a relation edit or granting a claim. Inspect relations.reconcile manually; nested-value scoring is outside the runner's primitive checks."
+    },
+    {
+      "id": "todo-related-create",
+      "prompt": "Create a Valise task titled Integrate processing in project valise. Its independently claimable parent is todo:tdo_parent and it must depend on the tenant-boundary task todo:tdo_boundary. These IDs are already known. Do not use Markdown checklist steps for either relation.",
+      "tool": "create_todo",
+      "requiredArgs": ["title", "project", "parent", "depends_on"],
+      "expectArgs": {
+        "parent": "todo:tdo_parent"
+      },
+      "why": "Structured parent/dependency creation must not degrade into prose refs or checklist steps. IDs are fixtures; writes are not executed on the OpenRouter lane. Inspect depends_on manually: the runner scores top-level primitive values only."
+    },
+    {
+      "id": "todo-relation-only-edit",
+      "prompt": "In Valise make todo:tdo_integration depend on todo:tdo_boundary. Both are pending, neither is claimed, and I do not want you to take either task. Only add the dependency.",
+      "tool": "update_todo",
+      "requiredArgs": ["id", "relations"],
+      "expectArgs": {
+        "id": "todo:tdo_integration"
+      },
+      "absentArgs": ["token", "body", "blocked_on"],
+      "why": "Relation-only editing needs no claim and must not invent a fence or overwrite a manual reason. Inspect add_depends_on inside relations manually; deterministic MCP tests assert the nested shape."
+    },
+    {
+      "id": "orientation-hookless",
+      "prompt": "I'm starting a fresh session without hooks. Give me a bounded orientation for project valise: available work, active claims, blockers, recent completions and changed context. Don't search by guessed keywords.",
+      "tool": "get_brief",
+      "absentArgs": ["since"],
+      "expectArgs": { "project": "valise" },
+      "why": "A hookless client needs one bounded mixed-concept orientation rather than a keyword search or only the ready queue."
+    },
+    {
+      "id": "orientation-completed-window",
+      "prompt": "List all Valise project valise tasks completed since Unix second 1792627200. Paginate if necessary; use completion time, not last edit time.",
+      "tool": "list_todos",
+      "expectArgs": {
+        "project": "valise",
+        "completed_since": 1792627200
+      },
+      "why": "Completion-window enumeration needs an explicit filter and continuation, not a bounded activity sample."
+    },
+    {
+      "id": "orientation-completed-exact-window",
+      "prompt": "Which Valise project valise tasks were completed in the UTC interval [2026-10-22T00:00:00Z, 2026-10-23T00:00:00Z)? Use completion time, not last edit time.",
+      "tool": "list_todos",
+      "expectArgs": {
+        "project": "valise",
+        "completed_since": 1792627200,
+        "completed_before": 1792713600
+      },
+      "why": "A closed completion window needs its exclusive upper bound in the query; without completed_before a model has to filter by hand and the 2026-10-24 outcome runs kept the task completed exactly at the end."
+    },
+    {
+      "id": "search-broad-library-author",
+      "prompt": "What do I have on Vaclav Smil in Valise?",
+      "tool": "search",
+      "requiredArgs": ["query", "include_library"],
+      "expectArgs": { "include_library": true },
+      "absentArgs": ["type", "project", "author"],
+      "why": "A broad author question must include uploaded books and saved sources, not silently search only memories and to-dos. author would narrow it to bookmarks and miss the books."
+    },
+    {
+      "id": "search-author-says",
+      "prompt": "What does Luke Wroblewski say about form labels in the articles I saved to Valise?",
+      "tool": "search",
+      "requiredArgs": ["query", "author"],
+      "absentArgs": ["project"],
+      "why": "A question about what one person wrote should narrow to that author's sources, not match the name anywhere in the library."
+    },
+    {
+      "id": "search-saved-books",
+      "prompt": "Find the books and PDFs I saved about energy transitions in Valise.",
+      "tool": "search",
+      "requiredArgs": ["query", "type"],
+      "expectArgs": { "type": "asset" },
+      "absentArgs": ["project"],
+      "why": "An explicitly file-only request should keep precise asset filtering rather than broadening every search."
+    },
+    {
+      "id": "skill-file-needed",
+      "prompt": "I already loaded the capture-this skill. It says the exact formatting rule I need is in references/format.md, listed in its files manifest. Retrieve that supporting file so we can use the rule.",
+      "tool": "read_skill_file",
+      "requiredArgs": ["name", "path"],
+      "why": "An already-loaded skill's referenced file should use the supporting-file reader, not reload the instructions."
+    },
+    {
+      "id": "skill-file-unneeded",
+      "prompt": "I already loaded a receipt skill. Its full instruction is: output RECEIPT-42 exactly. It also lists optional references/examples.md for unusual receipts, but this is an ordinary receipt. Produce it now.",
+      "tool": null,
+      "why": "Sufficient loaded instructions should not trigger speculative supporting-file reads."
+    },
+    {
+      "id": "memory-preference",
+      "prompt": "Remember this for next time: I always query DuckDB through the team's hosted warehouse rather than ad hoc scripts.",
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "body", "tags"],
+      "why": "An explicit durable preference is the canonical save_memory turn."
+    },
+    {
+      "id": "memory-decision",
+      "prompt": "We decided to keep the search projection rebuildable instead of authoritative. Don't let me forget that.",
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "body", "tags"],
+      "why": "A decision worth surviving the session, phrased without the word memory. Reading capture-this first is fine; the route still has to end at save_memory."
+    },
+    {
+      "id": "capture-human-decision",
+      "history": [
+        {
+          "role": "user",
+          "content": "Should every warehouse migration guide repeat the common steps, or should those live on the hub?"
+        },
+        {
+          "role": "assistant",
+          "content": "A hub avoids duplicate validation and cutover instructions drifting across source guides. Each source guide can hold only source-specific steps. The tradeoff is that readers need two pages."
+        },
+        {
+          "role": "user",
+          "content": "Go with the hub. Put shared steps there and only source-specific steps in each source guide. I approve that layout."
+        },
+        {
+          "role": "assistant",
+          "content": "Implemented on branch migration-guides, PR acme/docs#412."
+        }
+      ],
+      "prompt": "Capture this for the acme-docs project, following capture-this.",
+      "tool": "save_memory",
+      "via": "skill_capture-this",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags", "project"],
+      "expectArgs": { "type": "decision", "project": "acme-docs" },
+      "why": "Explicit user approval warrants decision. The score checks type and the skill read. Review title and first body line for the applicable hub rule, then attribution to the user's approval and the PR pointer. A release-history title is a miss under that manual rubric."
+    },
+    {
+      "id": "capture-agent-insight",
+      "history": [
+        {
+          "role": "user",
+          "content": "Restructure the warehouse migration docs so the instructions do not repeat."
+        },
+        {
+          "role": "assistant",
+          "content": "I put shared validation and cutover steps on the hub and left only source-specific steps in each source guide. Repeating them would drift as sources are added. Readers need two pages. Implemented on branch migration-guides, PR acme/docs#412."
+        }
+      ],
+      "prompt": "Capture this for the acme-docs project, following capture-this.",
+      "tool": "save_memory",
+      "via": "skill_capture-this",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags", "project"],
+      "expectArgs": { "type": "insight", "project": "acme-docs" },
+      "why": "The same useful layout claim without human approval. An implementation request and a later capture request do not approve the agent's specific choice. Review the body for invented approval as well as the scored type."
+    },
+    {
+      "id": "capture-shipped-fact",
+      "history": [
+        {
+          "role": "user",
+          "content": "Did the Snowflake migration guide URL change ship?"
+        },
+        {
+          "role": "assistant",
+          "content": "Yes. PR acme/docs#412 merged. static/docs-routing.json redirects /docs/guides/migrating-from-snowflake and its subpaths to the guide under /docs/guides/warehouse-migration/migrating-from-snowflake."
+        }
+      ],
+      "prompt": "Save the live redirect location for the acme-docs project, following capture-this, so the next session can find it.",
+      "tool": "save_memory",
+      "via": "skill_capture-this",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags", "project"],
+      "expectArgs": { "type": "fact", "project": "acme-docs" },
+      "why": "Shipped state with a durable lookup value is a fact. Merging work is not evidence of a user-approved rule. Review that the body states the redirect and its file, rather than inventing design rationale."
+    },
+    {
+      "id": "search-recall",
+      "prompt": "What did we work out about DuckDB ranking earlier? Check the shared workspace.",
+      "tool": "search",
+      "requiredArgs": ["query"],
+      "why": "Cross-session recall should reach for search, not for a listing tool."
+    },
+    {
+      "id": "fetch-by-id",
+      "prompt": "Pull up the full item with id memory:mem_seed_duckdb_default.",
+      "tool": "fetch",
+      "requiredArgs": ["id"],
+      "why": "An id in hand is the fetch contract; a model that searches instead is wasting a call."
+    },
+    {
+      "id": "transcript-message-link",
+      "prompt": "Read this message from one of my sessions and tell me what the agent decided there: https://app.valise.run/activity/transcripts?open=transcript%3Atrn_eval_4d1c9b2e&turns=0#t-42",
+      "tool": "fetch",
+      "requiredArgs": ["id"],
+      "why": "The console's copy button gives a link to one message. fetch takes that link, or transcript:<id>#t-<n>, and returns the message with five turns either side; searching for the session, or asking for the whole transcript, spends calls and tokens on what the link already names."
+    },
+    {
+      "id": "transcript-message-ref",
+      "prompt": "What was going on around transcript:trn_eval_4d1c9b2e#t-97? I only need that part.",
+      "tool": "fetch",
+      "requiredArgs": ["id"],
+      "why": "A message reference in hand is a fetch, the same contract as any id; the description says a message reference returns its neighbours, so no paging or search is needed first."
+    },
+    {
+      "id": "todo-create",
+      "prompt": "File a ticket on the valise project so another agent can pick it up: calibrate the cross-concept BM25 weights.",
+      "tool": "create_todo",
+      "requiredArgs": ["title", "project"],
+      "why": "create_todo requires project, so this also measures whether the schema is readable."
+    },
+    {
+      "id": "todo-facet",
+      "prompt": "Add a to-do for the valise project: the search box crashes when I paste a long title. Priority 1, and it's in the search area.",
+      "tool": "create_todo",
+      "requiredArgs": ["title", "project", "tags"],
+      "why": "Whether the tags description gets a model to write priority and area as key:value facets, such as priority:1, rather than prose in the body."
+    },
+    {
+      "id": "todo-subtasks",
+      "prompt": "Create a to-do on the valise project with some subtasks: rename the eval runner's output folder, update the README path, and rebuild the runs index.",
+      "tool": "create_todo",
+      "requiredArgs": ["title", "project", "body"],
+      "why": "Whether a model puts subtasks in one to-do's body as `- [ ]` lines, rather than filing a to-do per step or dropping them. Read the body in the run file: the score only checks that one was sent."
+    },
+    {
+      "id": "todo-list-ready",
+      "prompt": "I have a free slot. What work is waiting that nobody has picked up?",
+      "tool": "list_ready",
+      "requiredArgs": [],
+      "why": "The ready queue, not search."
+    },
+    {
+      "id": "todo-claim",
+      "prompt": "Take todo:tdo_seed_rank_calibration. I am starting on it now.",
+      "tool": "claim_todo",
+      "requiredArgs": ["id"],
+      "why": "Claiming before working is the rule ADR-0002 encodes in the surface."
+    },
+    {
+      "id": "todo-claim-done",
+      "prompt": "todo:tdo_seed_rank_calibration was closed yesterday, but the calibration never covered the long queries. Reopen it; I'm picking it up now.",
+      "tool": "claim_todo",
+      "requiredArgs": ["id"],
+      "why": "Claiming a done to-do reopens it (ADR-0002, 2026-11-06 amendment). No other tool reopens over MCP, so reaching for update_todo or create_todo means the claim_todo description did not say done to-dos are claimable.",
+      "alsoAccept": ["fetch"]
+    },
+    {
+      "id": "todo-claim-blocked",
+      "prompt": "PR #32 merged, and that was the only thing todo:tdo_seed_rank_calibration was blocked on. Pick it back up.",
+      "tool": "claim_todo",
+      "requiredArgs": ["id"],
+      "why": "Claiming a blocked to-do reopens it (ADR-0002, 2026-10-17 amendment). update_todo needs a token the model does not hold, so reaching for it here means the claim_todo description did not say blocked to-dos are claimable.",
+      "alsoAccept": ["fetch"]
+    },
+    {
+      "id": "todo-list-blocked",
+      "prompt": "A few PRs merged today. Is any to-do still sitting blocked on something that has probably cleared by now?",
+      "tool": "list_ready",
+      "requiredArgs": ["include_blocked"],
+      "why": "list_ready hides blocked to-dos by default (ADR-0002), so a model with no id in hand has to pass include_blocked. search finds a blocked to-do only by guessing words from its blocker."
+    },
+    {
+      "id": "skill-direct",
+      "prompt": "Save this the way this workspace wants it done, following the house procedure: I apply migrations with wrangler, never with drizzle-kit push.",
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "body", "tags"],
+      "why": "The point of one tool per skill: the model reaches the skill without a list_skills round trip, reads it, and then does the work it names. The route has to pass through the skill and end at the action.",
+      "via": "skill_capture-this"
+    },
+    {
+      "id": "save-uncued",
+      "prompt": "Save this: I apply migrations with wrangler, never with drizzle-kit push.",
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "body", "tags"],
+      "why": "skill-direct without the cue toward the house procedure, which is what a real save turn looks like: the production log has a capture-this read before 6 of 37 saves. No `via`, because a save without the read is still a save, and requiring the read would make the pass rate the read rate. The read rate is the report's `Read a skill` column; the gap to skill-direct is what the cue does."
+    },
+    {
+      "id": "skill-publish",
+      "prompt": "Here is a SKILL.md I want in the shared workspace:\n---\nname: review-diff\ndescription: Review a diff against the team checklist.\n---\nRead the diff, then the checklist.",
+      "tool": "publish_skill",
+      "requiredArgs": ["body"],
+      "why": "Publishing is a write, and must not be confused with saving a memory."
+    },
+    {
+      "id": "hooks-add",
+      "prompt": "Change my Valise hooks so every new session starts with a reminder to write British spelling.",
+      "tool": "edit_hook",
+      "turnBudget": 2,
+      "requiredArgs": ["action", "event", "text"],
+      "live": ["list_hooks"],
+      "why": "Whether a request to change what the hooks say ends on edit_hook rather than save_memory. list_hooks runs for real, because reading the entries before adding one is a fair route."
+    },
+    {
+      "id": "hooks-remove",
+      "prompt": "Take the custom line about running the tests out of my Valise Stop hook.",
+      "tool": "list_hooks",
+      "why": "Removing an entry needs its id, so the route has to read the entries first rather than guess one."
+    },
+    {
+      "id": "no-tool-chitchat",
+      "prompt": "Thanks, that is all for now.",
+      "tool": null,
+      "requiredArgs": [],
+      "why": "A surface that fires on everything is worse than one that fires on nothing."
+    },
+    {
+      "id": "no-tool-general",
+      "prompt": "What is the capital of Portugal?",
+      "tool": null,
+      "requiredArgs": [],
+      "why": "General knowledge must not pull a workspace tool."
+    },
+    {
+      "id": "no-tool-local-scratch",
+      "prompt": "Add a line to my local scratch file at ./notes.txt.",
+      "tool": null,
+      "requiredArgs": [],
+      "why": "Local work is the native task system's job, not Valise's."
+    },
+    {
+      "id": "todo-comment",
+      "prompt": "Someone else is working on todo:tdo_seed_rank_calibration. Ask them on the to-do whether the rebuild has to wait for the migration.",
+      "tool": "comment_todo",
+      "requiredArgs": ["id", "body"],
+      "why": "A question on a to-do another agent holds is a comment. claim_todo would steal the lease, and update_todo needs a token the asker does not have.",
+      "alsoAccept": ["fetch"]
+    },
+    {
+      "id": "todo-update-needs-claim",
+      "prompt": "Add a note to todo:tdo_seed_rank_calibration saying the index rebuild finished.",
+      "tool": "comment_todo",
+      "requiredArgs": ["id"],
+      "why": "update_todo needs a fencing token the model does not hold. Since comment_todo exists, a note on a to-do nobody here holds is a comment, which needs none; claiming or reading first is still defensible. What this case catches is update_todo called with an invented token.",
+      "alsoAccept": ["claim_todo", "fetch"]
+    },
+    {
+      "id": "status-project-activity",
+      "prompt": "What is going on in project valise right now?",
+      "tool": "list_ready",
+      "requiredArgs": ["activity"],
+      "alsoAccept": ["fetch", "get_brief"],
+      "why": "A status question needs progress-bearing activity or a bounded brief, not just the ready queue. The new brief exposes each state's latest activity and its omission bounds. This tool-choice case alone does not prove that a model consumed the evidence."
+    },
+    {
+      "id": "status-pending-updates-digest",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is going on in project valise right now?"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_ready",
+              "type": "function",
+              "function": {
+                "name": "list_ready",
+                "arguments": "{\"project\": \"valise\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_ready",
+          "content": "{{fixture:status-list-ready-digest.json}}"
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["fetch"],
+      "expectAnswer": ["#153", "assets-finalize", "four slices"],
+      "why": "The same question after list_ready already ran, with each to-do's status in the structured rows the default list_ready now sends. The answer has to say where the pending managed-assets to-do stands (its latest update names PR #153 and the branch), or fetch it. Answering from titles, as if pending meant idle, is the miss. Pair with status-pending-updates-today."
+    },
+    {
+      "id": "status-pending-updates-today",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is going on in project valise right now?"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_ready",
+              "type": "function",
+              "function": {
+                "name": "list_ready",
+                "arguments": "{\"project\": \"valise\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_ready",
+          "content": "{{fixture:status-list-ready-today.json}}"
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["fetch"],
+      "expectAnswer": ["#153", "assets-finalize", "four slices"],
+      "why": "Control for status-pending-updates-digest: the list_ready result as it was before 2026-10-22, with no status anywhere. Only a fetch can pass, because nothing in the result names the status; the gap between the pair is what the status adds."
+    },
+    {
+      "id": "todo-fetch-older-page",
+      "history": [
+        {
+          "role": "user",
+          "content": "What has happened on todo:tdo_eval_overnight_coordination?"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_fetch",
+              "type": "function",
+              "function": {
+                "name": "fetch",
+                "arguments": "{\"id\": \"todo:tdo_eval_overnight_coordination\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_fetch",
+          "content": "{{fixture:todo-fetch-paged.json}}"
+        }
+      ],
+      "prompt": "And what did its oldest updates say, from the start of the night?",
+      "tool": "fetch",
+      "requiredArgs": ["id", "cursor"],
+      "expectArgs": {
+        "id": "todo:tdo_eval_overnight_coordination",
+        "cursor": "tdu_eval_05"
+      },
+      "why": "fetch pages a to-do's updates newest first, ten at a time, since a 127-update thread filled a context on 2026-10-25. The fixture is the first page of a 14-update to-do with next_cursor tdu_eval_05. Asking for the oldest updates has to follow that cursor; refetching without it returns the same page, and answering from the page's summaries invents the four it does not hold."
+    },
+    {
+      "id": "search-typed",
+      "prompt": "Find to-dos in the shared workspace that mention DuckDB.",
+      "tool": "search",
+      "alsoAccept": ["list_ready"],
+      "requiredArgs": ["query"],
+      "why": "search carries a type filter; reaching for list_ready instead loses the term."
+    },
+    {
+      "id": "asset-upload-handoff",
+      "prompt": "Put ./checkout-error.png (48213 bytes, a screenshot of the failing checkout page) in Valise so my other laptop can pick it up.",
+      "tool": "upload_asset",
+      "requiredArgs": ["file_name", "size"],
+      "why": "A file handed to another machine is an asset upload. save_memory with the bytes or a path in the body loses the file. ADR-0015."
+    },
+    {
+      "id": "asset-download",
+      "prompt": "Grab the original file for asset:ast_0d2c4b8e-5f71-4a3b-9c62-7e1f0a9b3d45 so I can open it here.",
+      "tool": "get_asset_download",
+      "alsoAccept": ["fetch"],
+      "requiredArgs": ["id"],
+      "why": "An asset id in hand and a need for the bytes is a download URL; fetch returns metadata only and is a fair first look."
+    },
+    {
+      "id": "source-bookmark",
+      "prompt": "Bookmark https://duckdb.org/docs/stable/guides/performance/indexing in Valise, with a note that ART indexes only help point lookups, so I can find it from my other machine.",
+      "tool": "save_source",
+      "requiredArgs": ["kind", "title", "url"],
+      "why": "A link kept with notes is a source. save_memory files it as a claim and loses the bookmark's identity and revision history. ADR-0015."
+    },
+    {
+      "id": "procedure-not-memory",
+      "prompt": "Make this the house procedure everyone follows for reviewing a diff: read the diff, then read the checklist, then comment. Put it in the shared workspace.",
+      "tool": "publish_skill",
+      "requiredArgs": ["body"],
+      "why": "A reusable procedure is a skill, not a memory. This is the pair most likely to be confused."
+    },
+    {
+      "id": "no-tool-already-answered",
+      "prompt": "Good, summarise what you just said in one line.",
+      "tool": null,
+      "requiredArgs": [],
+      "why": "A turn about the conversation itself must not reach for the workspace."
+    },
+    {
+      "id": "stop-nudge-capture",
+      "history": [
+        {
+          "role": "user",
+          "content": "Why does the console's to-do list return a 500 when I paste a long title into search?"
+        },
+        {
+          "role": "assistant",
+          "content": "Found it. D1 caps a LIKE pattern at 50 bytes, and the list wraps the term in two % wildcards, so any term of 49 characters or more fails with 'LIKE or GLOB pattern too complex'. I switched the filter to instr(lower(title), lower(?)) > 0, which has no limit and keeps % and _ literal. I considered routing the lists through the FTS index instead and rejected it: FTS matches whole tokens, so 'dash' would stop finding 'dashboard', and BM25 order would replace the list's sort. Tests now cover 48 and 49 characters."
+        }
+      ],
+      "prompt": "Stop hook feedback:\n{{hook:Stop}}",
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "Tier 1, a hook-capable harness: the plugin's Stop text after a session that found a root cause and rejected an alternative. The capture should happen."
+    },
+    {
+      "id": "stop-nudge-nothing",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is 17 times 23?"
+        },
+        {
+          "role": "assistant",
+          "content": "391."
+        }
+      ],
+      "prompt": "Stop hook feedback:\n{{hook:Stop}}",
+      "tool": null,
+      "turnBudget": 2,
+      "alsoAccept": ["skill_capture-this"],
+      "requiredArgs": [],
+      "why": "The same Stop text after a session with nothing worth keeping. A nudge that triggers a save here is noise in every store it reaches; reading the skill and then saving nothing is not."
+    },
+    {
+      "id": "stop-nudge-capture-call-first",
+      "history": [
+        {
+          "role": "user",
+          "content": "Why does the console's to-do list return a 500 when I paste a long title into search?"
+        },
+        {
+          "role": "assistant",
+          "content": "Found it. D1 caps a LIKE pattern at 50 bytes, and the list wraps the term in two % wildcards, so any term of 49 characters or more fails with 'LIKE or GLOB pattern too complex'. I switched the filter to instr(lower(title), lower(?)) > 0, which has no limit and keeps % and _ literal. I considered routing the lists through the FTS index instead and rejected it: FTS matches whole tokens, so 'dash' would stop finding 'dashboard', and BM25 order would replace the list's sort. Tests now cover 48 and 49 characters."
+        }
+      ],
+      "prompt": "Stop hook feedback:\n{{hook:Stop}}",
+      "nudges": {
+        "hook:Stop": "If this session produced a decision, insight, or dead end another session would pay to rediscover, call save_memory now with the claim as the title and the conclusion first in the body; the capture-this skill has the shape. If nothing qualifies, stop."
+      },
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "stop-nudge-capture under a Stop text that names save_memory as the call and the skill as the shape, against the shipped text that names the skill as the step."
+    },
+    {
+      "id": "stop-nudge-nothing-call-first",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is 17 times 23?"
+        },
+        {
+          "role": "assistant",
+          "content": "391."
+        }
+      ],
+      "prompt": "Stop hook feedback:\n{{hook:Stop}}",
+      "nudges": {
+        "hook:Stop": "If this session produced a decision, insight, or dead end another session would pay to rediscover, call save_memory now with the claim as the title and the conclusion first in the body; the capture-this skill has the shape. If nothing qualifies, stop."
+      },
+      "tool": null,
+      "turnBudget": 2,
+      "alsoAccept": ["skill_capture-this"],
+      "requiredArgs": [],
+      "why": "The control for stop-nudge-capture-call-first: a text that says 'call save_memory now' must not save after arithmetic."
+    },
+    {
+      "id": "stop-nudge-capture-read-then-save",
+      "history": [
+        {
+          "role": "user",
+          "content": "Why does the console's to-do list return a 500 when I paste a long title into search?"
+        },
+        {
+          "role": "assistant",
+          "content": "Found it. D1 caps a LIKE pattern at 50 bytes, and the list wraps the term in two % wildcards, so any term of 49 characters or more fails with 'LIKE or GLOB pattern too complex'. I switched the filter to instr(lower(title), lower(?)) > 0, which has no limit and keeps % and _ literal. I considered routing the lists through the FTS index instead and rejected it: FTS matches whole tokens, so 'dash' would stop finding 'dashboard', and BM25 order would replace the list's sort. Tests now cover 48 and 49 characters."
+        }
+      ],
+      "prompt": "Stop hook feedback:\n{{hook:Stop}}",
+      "nudges": {
+        "hook:Stop": "If this session produced a decision, insight, or dead end another session would pay to rediscover, read the capture-this skill, then call save_memory with what it asks for. Reading the skill does not save anything. If nothing qualifies, stop."
+      },
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "stop-nudge-capture under a Stop text that keeps the skill read and names save_memory as the step after it, for the models that read the skill and stop."
+    },
+    {
+      "id": "stop-nudge-nothing-read-then-save",
+      "history": [
+        {
+          "role": "user",
+          "content": "What is 17 times 23?"
+        },
+        {
+          "role": "assistant",
+          "content": "391."
+        }
+      ],
+      "prompt": "Stop hook feedback:\n{{hook:Stop}}",
+      "nudges": {
+        "hook:Stop": "If this session produced a decision, insight, or dead end another session would pay to rediscover, read the capture-this skill, then call save_memory with what it asks for. Reading the skill does not save anything. If nothing qualifies, stop."
+      },
+      "tool": null,
+      "turnBudget": 2,
+      "alsoAccept": ["skill_capture-this"],
+      "requiredArgs": [],
+      "why": "The control for stop-nudge-capture-read-then-save: the read-then-save text must not save after arithmetic."
+    },
+    {
+      "id": "todo-release",
+      "history": [
+        {
+          "role": "user",
+          "content": "Pick up todo:tdo_44, the long-search 500s."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_claim",
+              "type": "function",
+              "function": {
+                "name": "claim_todo",
+                "arguments": "{\"id\":\"todo:tdo_44\",\"ttl_seconds\":14400}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_claim",
+          "content": "{\"id\":\"todo:tdo_44\",\"token\":2,\"expires_at\":1792460000}\n\n{{server:claim_todo}}"
+        },
+        {
+          "role": "assistant",
+          "content": "Claimed. The 500s only hit queries over 50 bytes, which points at the LIKE fallback."
+        },
+        {
+          "role": "user",
+          "content": "I have to stop and won't get back to this today. The fix is moving that fallback to FTS MATCH; nobody has started it. Hand it back so someone else can take it now."
+        }
+      ],
+      "tool": "update_todo",
+      "turnBudget": 2,
+      "requiredArgs": ["id", "token", "release", "body"],
+      "expectArgs": { "id": "todo:tdo_44", "token": 2, "release": true },
+      "absentArgs": ["blocked_on", "renew_ttl_seconds"],
+      "why": "Work stops unfinished with nothing outside blocking it. update_todo with release returns it to the ready queue at once, the note first; complete_todo would close unfinished work, blocked_on would hide it, and doing nothing leaves it claimed for four hours."
+    },
+    {
+      "id": "claim-nudge-progress",
+      "history": [
+        {
+          "role": "user",
+          "content": "Pick up todo:tdo_44, the long-search 500s. I'll paste the worker log once you have it."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_claim",
+              "type": "function",
+              "function": {
+                "name": "claim_todo",
+                "arguments": "{\"id\":\"todo:tdo_44\",\"ttl_seconds\":3600}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_claim",
+          "content": "{\"id\":\"todo:tdo_44\",\"token\":2,\"expires_at\":1792450000}\n\n{{server:claim_todo}}"
+        },
+        {
+          "role": "assistant",
+          "content": "Claimed. Paste the log when you have it."
+        },
+        {
+          "role": "user",
+          "content": "Here: every search over 50 bytes fails with `D1_ERROR: LIKE or GLOB pattern too complex`, and shorter ones work. What do you make of it?"
+        }
+      ],
+      "tool": "update_todo",
+      "turnBudget": 2,
+      "requiredArgs": ["id", "token", "body"],
+      "why": "Tier 2 for progress: the line claim_todo appends, then a finding arrives with the person leaving. The finding belongs on the to-do's history as update_todo, with the token the claim returned."
+    },
+    {
+      "id": "claim-nudge-progress-bare",
+      "history": [
+        {
+          "role": "user",
+          "content": "Pick up todo:tdo_44, the long-search 500s. I'll paste the worker log once you have it."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_claim",
+              "type": "function",
+              "function": {
+                "name": "claim_todo",
+                "arguments": "{\"id\":\"todo:tdo_44\",\"ttl_seconds\":3600}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_claim",
+          "content": "{\"id\":\"todo:tdo_44\",\"token\":2,\"expires_at\":1792450000}\n\n{{server:claim_todo}}"
+        },
+        {
+          "role": "assistant",
+          "content": "Claimed. Paste the log when you have it."
+        },
+        {
+          "role": "user",
+          "content": "Here: every search over 50 bytes fails with `D1_ERROR: LIKE or GLOB pattern too complex`, and shorter ones work. What do you make of it?"
+        }
+      ],
+      "nudges": {
+        "server:claim_todo": ""
+      },
+      "tool": "update_todo",
+      "turnBudget": 2,
+      "requiredArgs": ["id", "token", "body"],
+      "why": "The control for claim-nudge-progress: the same turn with no line on the claim. The gap between the two is what the nudge buys."
+    },
+    {
+      "id": "complete-nudge-capture",
+      "history": [
+        {
+          "role": "user",
+          "content": "The PR for todo:tdo_42 merged. It turned out the long-search 500 was D1's 50-byte LIKE pattern limit; we fixed it with instr() and decided against moving the lists onto the FTS index because token matching would change what the box finds. Close the to-do."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_complete",
+              "type": "function",
+              "function": {
+                "name": "complete_todo",
+                "arguments": "{\"id\":\"todo:tdo_42\",\"token\":3,\"summary\":\"Merged. Root cause: D1 caps LIKE patterns at 50 bytes. Fixed with instr(); FTS rejected because token matching changes results.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_complete",
+          "content": "{\"id\":\"todo:tdo_42\",\"token\":3,\"expires_at\":null}\n\n{{server:complete_todo}}"
+        }
+      ],
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "Tier 2, a chat client with no hooks: the line complete_todo appends, after work that produced a decision. The capture should happen."
+    },
+    {
+      "id": "complete-unclaimed",
+      "prompt": "todo:tdo_45, the broken docs link, was already fixed in PR #12 last week. Close it.",
+      "tool": "complete_todo",
+      "turnBudget": 1,
+      "requiredArgs": ["id", "summary"],
+      "expectArgs": { "id": "todo:tdo_45" },
+      "absentArgs": ["token"],
+      "why": "The work finished elsewhere and nobody holds the to-do. complete_todo without a token closes it in one call; claiming first only to complete adds a round trip, and handing the close back to the user is the failure this case guards."
+    },
+    {
+      "id": "complete-nudge-nothing",
+      "history": [
+        {
+          "role": "user",
+          "content": "I fixed the typo in the README myself. Close todo:tdo_43."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_complete",
+              "type": "function",
+              "function": {
+                "name": "complete_todo",
+                "arguments": "{\"id\":\"todo:tdo_43\",\"token\":1,\"summary\":\"Typo fixed in README.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_complete",
+          "content": "{\"id\":\"todo:tdo_43\",\"token\":1,\"expires_at\":null}\n\n{{server:complete_todo}}"
+        }
+      ],
+      "tool": null,
+      "turnBudget": 2,
+      "alsoAccept": ["skill_capture-this"],
+      "requiredArgs": [],
+      "why": "The tier-2 line after a typo fix. Saving here means the nudge reads as an order rather than a question; reading the skill and then saving nothing does not."
+    },
+    {
+      "id": "complete-nudge-capture-question",
+      "nudges": {
+        "server:complete_todo": "Did this to-do settle something another session would otherwise rediscover? If so, call save_memory now: title the claim in one sentence, conclusion first in the body. Otherwise carry on."
+      },
+      "history": [
+        {
+          "role": "user",
+          "content": "The PR for todo:tdo_42 merged. It turned out the long-search 500 was D1's 50-byte LIKE pattern limit; we fixed it with instr() and decided against moving the lists onto the FTS index because token matching would change what the box finds. Close the to-do."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_complete",
+              "type": "function",
+              "function": {
+                "name": "complete_todo",
+                "arguments": "{\"id\":\"todo:tdo_42\",\"token\":3,\"summary\":\"Merged. Root cause: D1 caps LIKE patterns at 50 bytes. Fixed with instr(); FTS rejected because token matching changes results.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_complete",
+          "content": "{\"id\":\"todo:tdo_42\",\"token\":3,\"expires_at\":null}\n\n{{server:complete_todo}}"
+        }
+      ],
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "complete-nudge-capture with a candidate tier-2 line in place of the shipped one. Leads with the question and names the call."
+    },
+    {
+      "id": "complete-nudge-nothing-question",
+      "nudges": {
+        "server:complete_todo": "Did this to-do settle something another session would otherwise rediscover? If so, call save_memory now: title the claim in one sentence, conclusion first in the body. Otherwise carry on."
+      },
+      "history": [
+        {
+          "role": "user",
+          "content": "I fixed the typo in the README myself. Close todo:tdo_43."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_complete",
+              "type": "function",
+              "function": {
+                "name": "complete_todo",
+                "arguments": "{\"id\":\"todo:tdo_43\",\"token\":1,\"summary\":\"Typo fixed in README.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_complete",
+          "content": "{\"id\":\"todo:tdo_43\",\"token\":1,\"expires_at\":null}\n\n{{server:complete_todo}}"
+        }
+      ],
+      "tool": null,
+      "turnBudget": 2,
+      "requiredArgs": [],
+      "why": "complete-nudge-nothing with a candidate tier-2 line in place of the shipped one. Leads with the question and names the call."
+    },
+    {
+      "id": "complete-nudge-capture-noskill",
+      "nudges": {
+        "server:complete_todo": "If this to-do produced a decision, insight, or dead end another session would pay to rediscover, save it with save_memory. Otherwise carry on."
+      },
+      "history": [
+        {
+          "role": "user",
+          "content": "The PR for todo:tdo_42 merged. It turned out the long-search 500 was D1's 50-byte LIKE pattern limit; we fixed it with instr() and decided against moving the lists onto the FTS index because token matching would change what the box finds. Close the to-do."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_complete",
+              "type": "function",
+              "function": {
+                "name": "complete_todo",
+                "arguments": "{\"id\":\"todo:tdo_42\",\"token\":3,\"summary\":\"Merged. Root cause: D1 caps LIKE patterns at 50 bytes. Fixed with instr(); FTS rejected because token matching changes results.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_complete",
+          "content": "{\"id\":\"todo:tdo_42\",\"token\":3,\"expires_at\":null}\n\n{{server:complete_todo}}"
+        }
+      ],
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "complete-nudge-capture with a candidate tier-2 line in place of the shipped one. The shipped line without \"following the capture-this skill\"."
+    },
+    {
+      "id": "complete-nudge-nothing-noskill",
+      "nudges": {
+        "server:complete_todo": "If this to-do produced a decision, insight, or dead end another session would pay to rediscover, save it with save_memory. Otherwise carry on."
+      },
+      "history": [
+        {
+          "role": "user",
+          "content": "I fixed the typo in the README myself. Close todo:tdo_43."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_complete",
+              "type": "function",
+              "function": {
+                "name": "complete_todo",
+                "arguments": "{\"id\":\"todo:tdo_43\",\"token\":1,\"summary\":\"Typo fixed in README.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_complete",
+          "content": "{\"id\":\"todo:tdo_43\",\"token\":1,\"expires_at\":null}\n\n{{server:complete_todo}}"
+        }
+      ],
+      "tool": null,
+      "turnBudget": 2,
+      "requiredArgs": [],
+      "why": "complete-nudge-nothing with a candidate tier-2 line in place of the shipped one. The shipped line without \"following the capture-this skill\"."
+    },
+    {
+      "id": "complete-nudge-capture-you",
+      "nudges": {
+        "server:complete_todo": "Save what you settled here with save_memory now: the decision, insight, or dead end another session would otherwise rediscover. If you settled nothing like that, carry on."
+      },
+      "history": [
+        {
+          "role": "user",
+          "content": "The PR for todo:tdo_42 merged. It turned out the long-search 500 was D1's 50-byte LIKE pattern limit; we fixed it with instr() and decided against moving the lists onto the FTS index because token matching would change what the box finds. Close the to-do."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_complete",
+              "type": "function",
+              "function": {
+                "name": "complete_todo",
+                "arguments": "{\"id\":\"todo:tdo_42\",\"token\":3,\"summary\":\"Merged. Root cause: D1 caps LIKE patterns at 50 bytes. Fixed with instr(); FTS rejected because token matching changes results.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_complete",
+          "content": "{\"id\":\"todo:tdo_42\",\"token\":3,\"expires_at\":null}\n\n{{server:complete_todo}}"
+        }
+      ],
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "complete-nudge-capture with a candidate tier-2 line in place of the shipped one. Second-person order, with the condition after it."
+    },
+    {
+      "id": "complete-nudge-nothing-you",
+      "nudges": {
+        "server:complete_todo": "Save what you settled here with save_memory now: the decision, insight, or dead end another session would otherwise rediscover. If you settled nothing like that, carry on."
+      },
+      "history": [
+        {
+          "role": "user",
+          "content": "I fixed the typo in the README myself. Close todo:tdo_43."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_complete",
+              "type": "function",
+              "function": {
+                "name": "complete_todo",
+                "arguments": "{\"id\":\"todo:tdo_43\",\"token\":1,\"summary\":\"Typo fixed in README.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_complete",
+          "content": "{\"id\":\"todo:tdo_43\",\"token\":1,\"expires_at\":null}\n\n{{server:complete_todo}}"
+        }
+      ],
+      "tool": null,
+      "turnBudget": 2,
+      "requiredArgs": [],
+      "why": "complete-nudge-nothing with a candidate tier-2 line in place of the shipped one. Second-person order, with the condition after it."
+    },
+    {
+      "id": "save-similar-duplicate",
+      "history": [
+        {
+          "role": "user",
+          "content": "Save this for next time: only commit full eval runs. The workbench matrix test clicks the memory-preference row of the newest run, so a single-case run committed last makes it time out."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_save",
+              "type": "function",
+              "function": {
+                "name": "save_memory",
+                "arguments": "{\"type\": \"insight\", \"project\": \"valise\", \"tags\": [\"evals\", \"playwright\", \"workbench\"], \"title\": \"Only commit full eval runs: the workbench matrix UI test fails when the newest committed run is a single case\", \"body\": \"The evals tab renders the newest run in evals/runs/index.json, and the Playwright case that opens a matrix cell clicks the memory-preference row. A run from `node evals/run.mjs --case <one>` has no such row, so the test times out. Delete per-case run files and rebuild the index with `npm run evals:index`, or run the full suite last.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_save",
+          "content": "{\"id\": \"memory:mem_6223bc7d-1de2-4bff-8fdc-504bcf288b0c\", \"title\": \"Only commit full eval runs: the workbench matrix UI test fails when the newest committed run is a single case\", \"text\": \"The evals tab renders the newest run in evals/runs/index.json, and the Playwright case that opens a matrix cell clicks the memory-preference row. A run from `node evals/run.mjs --case <one>` has no such row, so the test times out. Delete per-case run files and rebuild the index with `npm run evals:index`, or run the full suite last.\", \"metadata\": {\"type\": \"insight\", \"tags\": [\"evals\", \"playwright\", \"workbench\"], \"project\": \"valise\", \"created_at\": 1792338577}, \"similar\": [{\"id\": \"memory:mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}, {\"id\": \"memory:mem_eeabb103-adfa-779e-3705-83163dcbfbc3\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}, {\"id\": \"memory:mem_5fee1c78-20e8-cb14-0e83-5766a76f7f8b\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}]}\n\n{{server:save_memory}}"
+        }
+      ],
+      "tool": "edit_memory",
+      "requiredArgs": ["id", "relates"],
+      "why": "The save restates a claim the store already holds. edit_memory can assert a supersedes or related link without changing the claim; MCP links remain suggestions until a person confirms them. A second save is not the action. The save-similar-new control should carry on without linking unrelated claims."
+    },
+    {
+      "id": "save-similar-new",
+      "history": [
+        {
+          "role": "user",
+          "content": "Worth saving: when a cell on the evals tab says 2/3, clicking it only shows the first miss's route. The other repeats are in the run JSON."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_save",
+              "type": "function",
+              "function": {
+                "name": "save_memory",
+                "arguments": "{\"type\": \"fact\", \"project\": \"valise\", \"tags\": [\"evals\", \"workbench\"], \"title\": \"Opening a matrix cell on the evals tab shows the route of the first miss only, not every repeat of the eval run\", \"body\": \"With --repeat above 1 a per-case cell reads k/N, and clicking it opens the case with the route of the first failing repeat. The other repeats' routes are only in the per-run JSON under evals/runs/, so read that file when the misses ended in different ways.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_save",
+          "content": "{\"id\": \"memory:mem_41022106-26ce-4547-8695-9ed620fd5b6c\", \"title\": \"Opening a matrix cell on the evals tab shows the route of the first miss only, not every repeat of the eval run\", \"text\": \"With --repeat above 1 a per-case cell reads k/N, and clicking it opens the case with the route of the first failing repeat. The other repeats' routes are only in the per-run JSON under evals/runs/, so read that file when the misses ended in different ways.\", \"metadata\": {\"type\": \"fact\", \"tags\": [\"evals\", \"workbench\"], \"project\": \"valise\", \"created_at\": 1792338623}, \"similar\": [{\"id\": \"memory:mem_eeabb103-adfa-779e-3705-83163dcbfbc3\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}, {\"id\": \"memory:mem_5fee1c78-20e8-cb14-0e83-5766a76f7f8b\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}, {\"id\": \"memory:mem_b04c3ec0-3dce-191b-a091-2ff84eb2df4e\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}]}\n\n{{server:save_memory}}"
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["fetch"],
+      "why": "The control: a new claim whose similar list shares its nouns (eval run, matrix cell) with three copies of a different claim, as the server returned it on the same store. Passing means the model carries on; a second save_memory is the over-reaction this case catches. Read the answer for a duplicate claimed where there is none."
+    },
+    {
+      "id": "save-similar-duplicate-listonly",
+      "history": [
+        {
+          "role": "user",
+          "content": "Save this for next time: only commit full eval runs. The workbench matrix test clicks the memory-preference row of the newest run, so a single-case run committed last makes it time out."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_save",
+              "type": "function",
+              "function": {
+                "name": "save_memory",
+                "arguments": "{\"type\": \"insight\", \"project\": \"valise\", \"tags\": [\"evals\", \"playwright\", \"workbench\"], \"title\": \"Only commit full eval runs: the workbench matrix UI test fails when the newest committed run is a single case\", \"body\": \"The evals tab renders the newest run in evals/runs/index.json, and the Playwright case that opens a matrix cell clicks the memory-preference row. A run from `node evals/run.mjs --case <one>` has no such row, so the test times out. Delete per-case run files and rebuild the index with `npm run evals:index`, or run the full suite last.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_save",
+          "content": "{\"id\": \"memory:mem_6223bc7d-1de2-4bff-8fdc-504bcf288b0c\", \"title\": \"Only commit full eval runs: the workbench matrix UI test fails when the newest committed run is a single case\", \"text\": \"The evals tab renders the newest run in evals/runs/index.json, and the Playwright case that opens a matrix cell clicks the memory-preference row. A run from `node evals/run.mjs --case <one>` has no such row, so the test times out. Delete per-case run files and rebuild the index with `npm run evals:index`, or run the full suite last.\", \"metadata\": {\"type\": \"insight\", \"tags\": [\"evals\", \"playwright\", \"workbench\"], \"project\": \"valise\", \"created_at\": 1792338577}, \"similar\": [{\"id\": \"memory:mem_b2f1dc65-5b7f-4054-ac02-5c4d0625ba58\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}, {\"id\": \"memory:mem_eeabb103-adfa-779e-3705-83163dcbfbc3\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}, {\"id\": \"memory:mem_5fee1c78-20e8-cb14-0e83-5766a76f7f8b\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}]}\n\n{{server:save_memory}}"
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["fetch"],
+      "expectAnswer": ["b2f1dc65", "eeabb103", "5fee1c78"],
+      "nudges": {
+        "server:save_memory": ""
+      },
+      "why": "save-similar-duplicate with the similar list and no line, so the gap between the two is what the line adds over the list alone."
+    },
+    {
+      "id": "save-similar-new-listonly",
+      "history": [
+        {
+          "role": "user",
+          "content": "Worth saving: when a cell on the evals tab says 2/3, clicking it only shows the first miss's route. The other repeats are in the run JSON."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_save",
+              "type": "function",
+              "function": {
+                "name": "save_memory",
+                "arguments": "{\"type\": \"fact\", \"project\": \"valise\", \"tags\": [\"evals\", \"workbench\"], \"title\": \"Opening a matrix cell on the evals tab shows the route of the first miss only, not every repeat of the eval run\", \"body\": \"With --repeat above 1 a per-case cell reads k/N, and clicking it opens the case with the route of the first failing repeat. The other repeats' routes are only in the per-run JSON under evals/runs/, so read that file when the misses ended in different ways.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_save",
+          "content": "{\"id\": \"memory:mem_41022106-26ce-4547-8695-9ed620fd5b6c\", \"title\": \"Opening a matrix cell on the evals tab shows the route of the first miss only, not every repeat of the eval run\", \"text\": \"With --repeat above 1 a per-case cell reads k/N, and clicking it opens the case with the route of the first failing repeat. The other repeats' routes are only in the per-run JSON under evals/runs/, so read that file when the misses ended in different ways.\", \"metadata\": {\"type\": \"fact\", \"tags\": [\"evals\", \"workbench\"], \"project\": \"valise\", \"created_at\": 1792338623}, \"similar\": [{\"id\": \"memory:mem_eeabb103-adfa-779e-3705-83163dcbfbc3\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}, {\"id\": \"memory:mem_5fee1c78-20e8-cb14-0e83-5766a76f7f8b\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}, {\"id\": \"memory:mem_b04c3ec0-3dce-191b-a091-2ff84eb2df4e\", \"title\": \"Committing a single-case eval run breaks the Playwright test that opens a matrix cell\"}]}\n\n{{server:save_memory}}"
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["fetch"],
+      "nudges": {
+        "server:save_memory": ""
+      },
+      "why": "save-similar-new with the similar list and no line."
+    },
+    {
+      "id": "recall-reminder",
+      "context": "{{hook:SessionStart}}",
+      "prompt": "Let's pick up the cross-concept BM25 weight calibration where we left off.",
+      "tool": "search",
+      "alsoAccept": ["list_ready"],
+      "requiredArgs": ["query"],
+      "why": "The SessionStart text, then a turn that names prior work. Read against recall-control: the gap between them is what the reminder buys."
+    },
+    {
+      "id": "recall-control",
+      "prompt": "Let's pick up the cross-concept BM25 weight calibration where we left off.",
+      "tool": "search",
+      "alsoAccept": ["list_ready"],
+      "requiredArgs": ["query"],
+      "why": "recall-reminder without the SessionStart text, as a chat-only client sees it."
+    },
+    {
+      "id": "recall-reminder-implicit",
+      "context": "{{hook:SessionStart}}",
+      "prompt": "The console's list search should rank results instead of sorting by date. How would you change it?",
+      "tool": "search",
+      "alsoAccept": ["list_ready"],
+      "requiredArgs": ["query"],
+      "why": "The SessionStart text, then a turn that does not mention prior work but has some in the store. This is where the reminder has to earn its tokens."
+    },
+    {
+      "id": "recall-control-implicit",
+      "prompt": "The console's list search should rank results instead of sorting by date. How would you change it?",
+      "tool": "search",
+      "alsoAccept": ["list_ready"],
+      "requiredArgs": ["query"],
+      "why": "recall-reminder-implicit without the SessionStart text. A miss here and a hit there is the reminder working."
+    },
+    {
+      "id": "recall-on-error-control",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "A stacked PR's merge fails on a conflict two stored memories already explain, and nothing in the turn names Valise. No startup text: what a model does with the error alone. The case scores the first move, so another bash call ends the route as a miss. No id is in the turn, so a fetch is a guess; read its arguments."
+    },
+    {
+      "id": "recall-on-error-neither",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-control after the recall reminder alone, no failed-command sentence and no hook line: the floor the sentence and the hook are each measured against.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+      }
+    },
+    {
+      "id": "recall-on-error-neither-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The over-fire control for recall-on-error-neither: the npm typo after the recall reminder alone, with no failed-command sentence and no hook line.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+      }
+    },
+    {
+      "id": "recall-on-error-neither-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-neither: how often a model searches on EADDRINUSE with no failed-command text at all.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+      }
+    },
+    {
+      "id": "recall-on-error-reminder",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main{{shipped:PostToolUseFailure}}"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-control under the shipped defaults: the SessionStart text, whose last sentence names a failed command as the moment to search, and the PostToolUseFailure hook line after the failed merge when recall-on-error ships enabled. The gap to the control is what a plugin user gets mid-task, when the turn is about an error rather than prior work."
+    },
+    {
+      "id": "recall-on-error-reminder-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run{{shipped:PostToolUseFailure}}"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "A failed command whose fix is in the error itself, under the shipped defaults: the SessionStart text, and the hook line when recall-on-error ships enabled. Rerunning the right script passes, and so does answering; a search is the failed-command text firing on a typo nobody would store."
+    },
+    {
+      "id": "recall-on-error-hook",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-control after the shipped SessionStart text and the PostToolUseFailure hook line, with the hook on whatever its shipped default. The line sits after the failed merge, where Claude Code puts it."
+    },
+    {
+      "id": "recall-on-error-hook-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The over-fire control for recall-on-error-hook: the hook fires on every failed command, including a typo whose fix is in the error. Rerunning passes; a search is the hook text overriding an error that explains itself."
+    },
+    {
+      "id": "recall-on-error-hook-broad",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-hook under the wording first proposed, with no exception for a typo. It moved the conflict to 20/21 and searched on the typo in 9/21.",
+      "nudges": {
+        "hook:PostToolUseFailure": "This command failed. Before trying something else, search Valise for the error text; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-broad-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "recall-on-error-hook-typo under the wording first proposed, with no exception for a typo. It moved the conflict to 20/21 and searched on the typo in 9/21.",
+      "nudges": {
+        "hook:PostToolUseFailure": "This command failed. Before trying something else, search Valise for the error text; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-only",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-hook with the SessionStart text cut back to the reminder, without its failed-command sentence: whether the hook does the sentence's work alone.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-only-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "recall-on-error-hook-typo with the SessionStart text cut back to the reminder, without its failed-command sentence: whether the hook does the sentence's work alone.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+      }
+    },
+    {
+      "id": "recall-on-error-reminder-unclear",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-control after a SessionStart text whose failed-command sentence is conditioned on the fix not being obvious, rather than on the message explaining it, and no hook line. Arm 2 of the wording comparison.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not immediately clear from the output, search Valise for the error text before trying something else."
+      }
+    },
+    {
+      "id": "recall-on-error-reminder-unclear-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The typo over-fire control for recall-on-error-reminder-unclear.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not immediately clear from the output, search Valise for the error text before trying something else."
+      }
+    },
+    {
+      "id": "recall-on-error-reminder-unclear-short",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-control after a SessionStart text whose failed-command sentence is conditioned on the fix not being obvious, rather than on the message explaining it, and no hook line. Arm 2 of the wording comparison.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not obvious, search Valise for the error text first."
+      }
+    },
+    {
+      "id": "recall-on-error-reminder-unclear-short-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The typo over-fire control for recall-on-error-reminder-unclear-short.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not obvious, search Valise for the error text first."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-unclear",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-hook with both the sentence and the hook line conditioned on the fix not being obvious. Arm 4 of the wording comparison.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not immediately clear from the output, search Valise for the error text before trying something else.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-unclear-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The typo over-fire control for recall-on-error-hook-unclear.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not immediately clear from the output, search Valise for the error text before trying something else.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-unclear-short",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-hook with both the sentence and the hook line conditioned on the fix not being obvious. Arm 4 of the wording comparison.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not obvious, search Valise for the error text first.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious, search Valise for the error text first."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-unclear-short-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The typo over-fire control for recall-on-error-hook-unclear-short.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not obvious, search Valise for the error text first.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious, search Valise for the error text first."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-unclear-line",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-hook with the shipped SessionStart sentence and only the hook line conditioned on the fix not being obvious: arm 4 with the one text that moved typo searches changed.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails with an error the message itself does not explain how to fix, search Valise for the error text before trying something else.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-unclear-line-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The typo over-fire control for recall-on-error-hook-unclear-line.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails with an error the message itself does not explain how to fix, search Valise for the error text before trying something else.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-unclear-line-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-hook-unclear-line.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails with an error the message itself does not explain how to fix, search Valise for the error text before trying something else.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-only-unclear",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-hook-only with the hook line conditioned on the fix not being obvious. Arm 3 of the wording comparison.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-only-unclear-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The typo over-fire control for recall-on-error-hook-only-unclear.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-only-unclear-short",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-hook-only with the hook line conditioned on the fix not being obvious. Arm 3 of the wording comparison.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious, search Valise for the error text first."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-only-unclear-short-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The typo over-fire control for recall-on-error-hook-only-unclear-short.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious, search Valise for the error text first."
+      }
+    },
+    {
+      "id": "recall-on-error-reminder-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0{{shipped:PostToolUseFailure}}"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-reminder: EADDRINUSE names no fix, but the fix is another port or stopping the old server. Rerunning or answering passes; a search fails."
+    },
+    {
+      "id": "recall-on-error-hook-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-hook: EADDRINUSE names no fix, but the fix is another port or stopping the old server. Rerunning or answering passes; a search fails."
+    },
+    {
+      "id": "recall-on-error-hook-only-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-hook-only: EADDRINUSE names no fix, but the fix is another port or stopping the old server. Rerunning or answering passes; a search fails.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+      }
+    },
+    {
+      "id": "recall-on-error-reminder-unclear-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-reminder-unclear: EADDRINUSE names no fix, but the fix is another port or stopping the old server. Rerunning or answering passes; a search fails.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not immediately clear from the output, search Valise for the error text before trying something else."
+      }
+    },
+    {
+      "id": "recall-on-error-reminder-unclear-short-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-reminder-unclear-short: EADDRINUSE names no fix, but the fix is another port or stopping the old server. Rerunning or answering passes; a search fails.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not obvious, search Valise for the error text first."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-unclear-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-hook-unclear: EADDRINUSE names no fix, but the fix is another port or stopping the old server. Rerunning or answering passes; a search fails.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not immediately clear from the output, search Valise for the error text before trying something else.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-unclear-short-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-hook-unclear-short: EADDRINUSE names no fix, but the fix is another port or stopping the old server. Rerunning or answering passes; a search fails.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not obvious, search Valise for the error text first.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious, search Valise for the error text first."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-only-unclear-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-hook-only-unclear: EADDRINUSE names no fix, but the fix is another port or stopping the old server. Rerunning or answering passes; a search fails.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-only-unclear-short-port",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Start the API server so I can try the new endpoint."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_serve",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"node server.js\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_serve",
+          "content": "node:events:497\n      throw er; // Unhandled 'error' event\n      ^\n\nError: listen EADDRINUSE: address already in use :::3000\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Object.<anonymous> (/Users/me/app/server.js:14:8)\nEmitted 'error' event on Server instance at:\n    at emitErrorNT (node:net:1944:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '::',\n  port: 3000\n}\n\nNode.js v22.11.0\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "The port-in-use over-fire control for recall-on-error-hook-only-unclear-short: EADDRINUSE names no fix, but the fix is another port or stopping the old server. Rerunning or answering passes; a search fails.",
+      "nudges": {
+        "hook:SessionStart": "Valise is connected. Before re-deriving prior work, search it for decisions and skills.",
+        "hook:PostToolUseFailure": "This command failed. If the fix is not obvious, search Valise for the error text first."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-split",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_merge",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"gh pr merge 91 --squash\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_merge",
+          "content": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "stopOn": ["bash"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-hook under a wording that lost: an error that names its own fix gets the fix, anything else a search. It kept the typo at 1/21 and lost haiku, gpt-6-luna and kimi on the conflict.",
+      "nudges": {
+        "hook:PostToolUseFailure": "This command failed. If the error names its own fix, such as a typo or a missing flag, apply it. Otherwise search Valise for the error text before trying something else; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-hook-split-typo",
+      "context": "{{hook:SessionStart}}",
+      "history": [
+        {
+          "role": "user",
+          "content": "Run the tests before I push."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_test",
+              "type": "function",
+              "function": {
+                "name": "bash",
+                "arguments": "{\"command\":\"npm run tset\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_test",
+          "content": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\n\n<system-reminder>\nPostToolUseFailure:Bash hook additional context: {{hook:PostToolUseFailure}}\n</system-reminder>"
+        }
+      ],
+      "harnessTools": [
+        {
+          "name": "bash",
+          "description": "Run a shell command in the user's repository and return its output.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": ["command"]
+          }
+        }
+      ],
+      "tool": null,
+      "alsoAccept": ["bash"],
+      "stopOn": ["search", "fetch"],
+      "requiredArgs": [],
+      "why": "recall-on-error-hook-typo under a wording that lost: an error that names its own fix gets the fix, anything else a search. It kept the typo at 1/21 and lost haiku, gpt-6-luna and kimi on the conflict.",
+      "nudges": {
+        "hook:PostToolUseFailure": "This command failed. If the error names its own fix, such as a typo or a missing flag, apply it. Otherwise search Valise for the error text before trying something else; a stored memory may explain it."
+      }
+    },
+    {
+      "id": "recall-on-error-live",
+      "prompt": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next with `gh pr merge 91 --squash`.",
+      "shell": {
+        "gh": {
+          "stderr": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main",
+          "exit": 1
+        }
+      },
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "requiredArgs": ["query"],
+      "why": "Harness lane only, on the shipped hook config. The merge runs for real against a stubbed gh that fails with the conflict, so the plugin's PostToolUseFailure hook fires when recall-on-error ships enabled, and the row's session.injected shows its text. Passes when the session searches Valise at any point."
+    },
+    {
+      "id": "recall-on-error-live-off",
+      "prompt": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next with `gh pr merge 91 --squash`.",
+      "shell": {
+        "gh": {
+          "stderr": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main",
+          "exit": 1
+        }
+      },
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-live with the PostToolUseFailure hook turned off, so the SessionStart sentence is all that names a failed command. The control for the live case.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails with an error the message itself does not explain how to fix, search Valise for the error text before trying something else."
+        },
+        "recall-on-error": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "id": "recall-on-error-live-hook-only",
+      "prompt": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next with `gh pr merge 91 --squash`.",
+      "shell": {
+        "gh": {
+          "stderr": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main",
+          "exit": 1
+        }
+      },
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-live with the failed-command sentence cut from the SessionStart reminder, so the hook line is the only text that names a failed command.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+        },
+        "recall-on-error": {
+          "enabled": true
+        }
+      }
+    },
+    {
+      "id": "recall-on-error-live-neither",
+      "prompt": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next with `gh pr merge 91 --squash`.",
+      "shell": {
+        "gh": {
+          "stderr": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main",
+          "exit": 1
+        }
+      },
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-live with the hook off and the failed-command sentence cut from the SessionStart reminder: the floor in real Claude Code.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+        },
+        "recall-on-error": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "id": "recall-on-error-live-typo",
+      "prompt": "Run the tests before I push: `npm run tset`.",
+      "shell": {
+        "npm": {
+          "args": "run tset",
+          "stderr": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run",
+          "exit": 1
+        }
+      },
+      "tool": null,
+      "requiredArgs": [],
+      "why": "Harness lane only, the over-fire control for recall-on-error-live, on the shipped hook config. A stubbed npm fails on `run tset` with the npm typo error and succeeds on anything else, so the hook fires on an error that names its own fix. Passes when the session makes no Valise call."
+    },
+    {
+      "id": "recall-on-error-live-off-typo",
+      "prompt": "Run the tests before I push: `npm run tset`.",
+      "shell": {
+        "npm": {
+          "args": "run tset",
+          "stderr": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run",
+          "exit": 1
+        }
+      },
+      "tool": null,
+      "requiredArgs": [],
+      "why": "recall-on-error-live-typo with the hook off: what the SessionStart failed-command sentence alone does on a self-explaining typo in real Claude Code.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails with an error the message itself does not explain how to fix, search Valise for the error text before trying something else."
+        },
+        "recall-on-error": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "id": "recall-on-error-live-hook-only-typo",
+      "prompt": "Run the tests before I push: `npm run tset`.",
+      "shell": {
+        "npm": {
+          "args": "run tset",
+          "stderr": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run",
+          "exit": 1
+        }
+      },
+      "tool": null,
+      "requiredArgs": [],
+      "why": "recall-on-error-live-typo with the failed-command sentence cut from the SessionStart reminder, so the hook line is the only text that names a failed command.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+        },
+        "recall-on-error": {
+          "enabled": true
+        }
+      }
+    },
+    {
+      "id": "recall-on-error-live-neither-typo",
+      "prompt": "Run the tests before I push: `npm run tset`.",
+      "shell": {
+        "npm": {
+          "args": "run tset",
+          "stderr": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run",
+          "exit": 1
+        }
+      },
+      "tool": null,
+      "requiredArgs": [],
+      "why": "recall-on-error-live-typo with the hook off and the failed-command sentence cut from the SessionStart reminder: the floor in real Claude Code.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+        },
+        "recall-on-error": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "id": "recall-on-error-live-unclear",
+      "prompt": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next with `gh pr merge 91 --squash`.",
+      "shell": {
+        "gh": {
+          "stderr": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main",
+          "exit": 1
+        }
+      },
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-live with both the SessionStart sentence and the hook line conditioned on the fix not being obvious: arm 4 of the wording comparison.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not immediately clear from the output, search Valise for the error text before trying something else."
+        },
+        "recall-on-error": {
+          "enabled": true,
+          "text": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+        }
+      }
+    },
+    {
+      "id": "recall-on-error-live-unclear-typo",
+      "prompt": "Run the tests before I push: `npm run tset`.",
+      "shell": {
+        "npm": {
+          "args": "run tset",
+          "stderr": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run",
+          "exit": 1
+        }
+      },
+      "tool": null,
+      "requiredArgs": [],
+      "why": "The typo over-fire control for recall-on-error-live-unclear.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills. When a command fails and the fix is not immediately clear from the output, search Valise for the error text before trying something else."
+        },
+        "recall-on-error": {
+          "enabled": true,
+          "text": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+        }
+      }
+    },
+    {
+      "id": "recall-on-error-live-hook-only-unclear",
+      "prompt": "#87 just squash-merged into main. #91 was stacked on it, so land #91 next with `gh pr merge 91 --squash`.",
+      "shell": {
+        "gh": {
+          "stderr": "X Pull request getvalise/valise#91 is not mergeable: the merge commit cannot be cleanly created.\nTo have the pull request merged after all the requirements have been met, add the `--auto` flag.\nRun the following to resolve the merge conflict locally:\n  gh pr checkout 91 && git fetch origin main && git merge origin/main",
+          "exit": 1
+        }
+      },
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "requiredArgs": ["query"],
+      "why": "recall-on-error-live-hook-only with the hook line conditioned on the fix not being obvious: arm 3 of the wording comparison.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+        },
+        "recall-on-error": {
+          "enabled": true,
+          "text": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+        }
+      }
+    },
+    {
+      "id": "recall-on-error-live-hook-only-unclear-typo",
+      "prompt": "Run the tests before I push: `npm run tset`.",
+      "shell": {
+        "npm": {
+          "args": "run tset",
+          "stderr": "npm error Missing script: \"tset\"\nnpm error\nnpm error Did you mean this?\nnpm error   npm run test # run the \"test\" package script\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run",
+          "exit": 1
+        }
+      },
+      "tool": null,
+      "requiredArgs": [],
+      "why": "The typo over-fire control for recall-on-error-live-hook-only-unclear.",
+      "hookConfig": {
+        "recall-reminder": {
+          "text": "Valise is connected. Before re-deriving prior work, search it for decisions and skills."
+        },
+        "recall-on-error": {
+          "enabled": true,
+          "text": "This command failed. If the fix is not obvious from the output, search Valise for the error text before trying again; a stored memory may explain it."
+        }
+      }
+    },
+    {
+      "id": "startup-broad-blog",
+      "history": [
+        {
+          "role": "user",
+          "content": "Let's pick up the blog work."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_ready",
+              "type": "function",
+              "function": {
+                "name": "list_ready",
+                "arguments": "{\"limit\":100}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_ready",
+          "content": "{{fixture:list-ready-15.txt}}"
+        }
+      ],
+      "tool": "fetch",
+      "alsoAccept": ["claim_todo", "search"],
+      "requiredArgs": ["id"],
+      "why": "The startup before the brief: the reminder said check list_ready, so the session opens on all fifteen ready to-dos with their refs. Read firstPromptTokens against startup-brief-blog; a second list_ready is the unnecessary retrieval."
+    },
+    {
+      "id": "startup-brief-blog",
+      "context": "{{hook:SessionStart}}\n\n{{fixture:startup-brief.md}}",
+      "prompt": "Let's pick up the blog work.",
+      "tool": "search",
+      "alsoAccept": ["list_ready"],
+      "requiredArgs": ["query"],
+      "why": "The bounded brief instead: five to-do titles with tags and project, no ids or refs. Passing means the brief pointed at the blog to-do and the model went to get it by name."
+    },
+    {
+      "id": "startup-reminder-memory",
+      "context": "{{hook:SessionStart}}",
+      "prompt": "Why doesn't the console's list search just use the FTS index?",
+      "tool": "search",
+      "alsoAccept": ["fetch"],
+      "requiredArgs": ["query"],
+      "why": "The shipped SessionStart reminder and a question a stored decision answers. Pairs with startup-brief-memory."
+    },
+    {
+      "id": "startup-brief-memory",
+      "context": "{{hook:SessionStart}}\n\n{{fixture:startup-brief.md}}",
+      "prompt": "Why doesn't the console's list search just use the FTS index?",
+      "tool": "fetch",
+      "alsoAccept": ["search"],
+      "requiredArgs": ["id"],
+      "why": "The brief lists the deciding memory by id among the most fetched. fetch on that id is recall through recency and use; search still finds it, for more tokens."
+    },
+    {
+      "id": "startup-brief-unrelated",
+      "context": "{{hook:SessionStart}}\n\n{{fixture:startup-brief.md}}",
+      "prompt": "Rename foo to bar in this line: const foo = parseInt(x, 10);",
+      "tool": null,
+      "requiredArgs": [],
+      "why": "A turn the brief has nothing to do with. Any retrieval here is the brief costing a call as well as its tokens."
+    },
+    {
+      "id": "startup-brief-miss-todo",
+      "context": "{{hook:SessionStart}}\n\n{{fixture:startup-brief.md}}",
+      "prompt": "Let's pick up the console to-do about showing which client wrote a memory.",
+      "tool": "search",
+      "alsoAccept": ["list_ready"],
+      "requiredArgs": ["query"],
+      "why": "The miss to startup-brief-blog: the to-do is open in the store but not among the brief's five, two of which are console to-dos. search or list_ready(project) finds it; answering from the brief as if it were the whole queue, or claiming, is the miss."
+    },
+    {
+      "id": "startup-brief-miss-memory",
+      "context": "{{hook:SessionStart}}\n\n{{fixture:startup-brief.md}}",
+      "prompt": "Why did we make the search projection rebuildable instead of the source of truth?",
+      "tool": "search",
+      "stopOn": ["fetch"],
+      "requiredArgs": ["query"],
+      "why": "The miss to startup-brief-memory: the deciding memory is not among the brief's three, and a listed one is about search. fetch on that listed id is the nearest-looking item and ends the route as a miss; the eval store would answer it not-found, which a real store does not."
+    },
+    {
+      "id": "startup-brief-rollup",
+      "context": "{{hook:SessionStart}}\n\n{{fixture:startup-brief-rollup.md}}",
+      "prompt": "Where did the valise project come from, and how did it get to where it is now?",
+      "tool": "fetch",
+      "requiredArgs": ["id"],
+      "why": "A broad history question with a project rollup named in the brief. fetch on the rollup id answers it in one call, where a search reads titles across every memory in the project. Pairs with startup-brief-no-rollup."
+    },
+    {
+      "id": "startup-brief-no-rollup",
+      "context": "{{hook:SessionStart}}\n\n{{fixture:startup-brief.md}}",
+      "prompt": "Where did the valise project come from, and how did it get to where it is now?",
+      "tool": "search",
+      "requiredArgs": ["query", "project"],
+      "why": "startup-brief-rollup without the rollup pointer. With nothing to fetch, the route is a search scoped to the project; a search without project, or a fetch of an unrelated listed memory, is the miss."
+    },
+    {
+      "id": "skills-search-both",
+      "context": "Skills are not preloaded in this session. Before a task that may have a skill, search for one: find_skill searches this harness's installed skills, and Valise's skills are listed by list_skills. Load only the skill you will use.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Every console list 500s when I paste a long search term."
+        },
+        {
+          "role": "assistant",
+          "content": "Found it. D1 rejects a LIKE pattern longer than 50 bytes with 'LIKE or GLOB pattern too complex'. I switched the list filters to instr(lower(col), lower(?)) > 0, which has no length cap, and kept the FTS index out of it because token matching would change what the box finds. Tests pass."
+        }
+      ],
+      "prompt": "Good. Make sure the next session doesn't have to rediscover that.",
+      "harnessTools": [
+        {
+          "name": "find_skill",
+          "description": "Search this harness's own installed skills by what they do. Returns names and one-line descriptions; call load_skill for the one you use.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": ["query"]
+          },
+          "result": "[{\"name\":\"commit-message\",\"description\":\"Write a commit message in this repo's style.\"},{\"name\":\"pdf\",\"description\":\"Read and fill PDF forms.\"}]"
+        },
+        {
+          "name": "load_skill",
+          "description": "Load the full instructions of one installed skill by name.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["name"]
+          },
+          "result": "{\"error\":\"no installed skill by that name\"}"
+        }
+      ],
+      "hideTools": ["skill_*"],
+      "live": ["list_skills", "get_skill"],
+      "maxRounds": 5,
+      "tool": "save_memory",
+      "turnBudget": 3,
+      "via": "get_skill",
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "No skill preloaded: Valise's skills are not tools here, only list_skills and get_skill. Both registries are reachable and only Valise holds the relevant one. The route says which registries the model searched before it saved."
+    },
+    {
+      "id": "skills-search-native-only",
+      "context": "Skills are not preloaded in this session. Before a task that may have a skill, search for one: find_skill searches this harness's installed skills. Load only the skill you will use.",
+      "history": [
+        {
+          "role": "user",
+          "content": "Every console list 500s when I paste a long search term."
+        },
+        {
+          "role": "assistant",
+          "content": "Found it. D1 rejects a LIKE pattern longer than 50 bytes with 'LIKE or GLOB pattern too complex'. I switched the list filters to instr(lower(col), lower(?)) > 0, which has no length cap, and kept the FTS index out of it because token matching would change what the box finds. Tests pass."
+        }
+      ],
+      "prompt": "Good. Make sure the next session doesn't have to rediscover that.",
+      "harnessTools": [
+        {
+          "name": "find_skill",
+          "description": "Search this harness's own installed skills by what they do. Returns names and one-line descriptions; call load_skill for the one you use.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": ["query"]
+          },
+          "result": "[{\"name\":\"remember-this\",\"description\":\"Save a decision, insight, or dead end to long-term memory so another session can find it.\"},{\"name\":\"commit-message\",\"description\":\"Write a commit message in this repo's style.\"}]"
+        },
+        {
+          "name": "load_skill",
+          "description": "Load the full instructions of one installed skill by name.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["name"]
+          },
+          "result": "# remember-this\n\nSave one claim per memory with save_memory: a one-sentence title that states the claim, a body that leads with the conclusion and then the evidence and what was rejected, a type (decision, insight, fact), and two to four topic tags."
+        }
+      ],
+      "hideTools": ["list_skills", "get_skill", "skill_*", "publish_skill"],
+      "maxRounds": 5,
+      "tool": "save_memory",
+      "turnBudget": 3,
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "The same turn when the connector exposes no skills over MCP. The native registry carries an equivalent; the failure mode to watch is saving with no skill read, or not saving at all."
+    },
+    {
+      "id": "skills-preloaded-control",
+      "history": [
+        {
+          "role": "user",
+          "content": "Every console list 500s when I paste a long search term."
+        },
+        {
+          "role": "assistant",
+          "content": "Found it. D1 rejects a LIKE pattern longer than 50 bytes with 'LIKE or GLOB pattern too complex'. I switched the list filters to instr(lower(col), lower(?)) > 0, which has no length cap, and kept the FTS index out of it because token matching would change what the box finds. Tests pass."
+        }
+      ],
+      "prompt": "Good. Make sure the next session doesn't have to rediscover that.",
+      "harnessTools": [
+        {
+          "name": "find_skill",
+          "description": "Search this harness's own installed skills by what they do. Returns names and one-line descriptions; call load_skill for the one you use.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": ["query"]
+          },
+          "result": "[{\"name\":\"commit-message\",\"description\":\"Write a commit message in this repo's style.\"},{\"name\":\"pdf\",\"description\":\"Read and fill PDF forms.\"}]"
+        },
+        {
+          "name": "load_skill",
+          "description": "Load the full instructions of one installed skill by name.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["name"]
+          },
+          "result": "{\"error\":\"no installed skill by that name\"}"
+        }
+      ],
+      "live": ["list_skills", "get_skill"],
+      "maxRounds": 5,
+      "tool": "save_memory",
+      "turnBudget": 2,
+      "via": "skill_capture-this",
+      "requiredArgs": ["type", "title", "body", "tags"],
+      "why": "Today's surface, as a control for skills-search-both: every Valise skill is its own skill_* tool, so its description is preloaded, and nothing says to search. Whether a model reads the skill before saving."
+    },
+    {
+      "id": "retrieval-contradiction-newest",
+      "prompt": "Which embedding model are we using for the docs search prototype?",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75"
+      },
+      "why": "Search returns three memories that name a different model, and BM25 ranks the newest one last of the three. Passing means the model fetched the newest by updated_at rather than the first hit. An answer from the snippets alone scores as a miss; the row's answer says which model it named. Needs --memories."
+    },
+    {
+      "id": "retrieval-contradiction-brief",
+      "context": "{{hook:SessionStart}}\n\n{{fixture:retrieval-brief.md}}",
+      "prompt": "Which embedding model are we using for the docs search prototype?",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75"
+      },
+      "why": "The same turn with a startup brief that lists the newest of the three by id. Passing means the model fetched the id the brief pointed at, whether or not it searched first. Pairs with retrieval-contradiction-newest. Needs --memories."
+    },
+    {
+      "id": "retrieval-paraphrase-logs",
+      "prompt": "We saved a memory about where I can see what the nightly job printed yesterday. Find it and open the whole thing.",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "maxRounds": 4,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5"
+      },
+      "why": "The user's words are the fixture paraphrase of \"Past Worker logs are readable in the Cloudflare dashboard, not with the wrangler OAuth token\", which FTS alone misses at 5000 memories. Passing means the model's own search query bridged the vocabulary gap and it fetched the target. Pairs with retrieval-title-logs. Needs --memories."
+    },
+    {
+      "id": "retrieval-paraphrase-dump",
+      "prompt": "Open the memory about why a plain dump of the whole database fails.",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "maxRounds": 4,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_edc9d6df-c6ba-46d7-ac24-8a6757ea4175"
+      },
+      "why": "The fixture paraphrase of \"D1 cannot export an FTS5 virtual table, so backups name the authoritative tables\", which FTS alone misses at 5000. Passing means the model's query reached the target and it fetched it. The distractor pool holds the same fact from the docs (\"Lane 3: the unfiltered export failed...\"), and a fetch of it scores as wrong id though it answers the question; read the fetched id before counting a miss. Needs --memories."
+    },
+    {
+      "id": "retrieval-paraphrase-homelab",
+      "prompt": "Open the memory that says what services are on the storage box at home.",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "maxRounds": 4,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940"
+      },
+      "why": "The fixture paraphrase of \"Prefect, Portainer, SeaweedFS and Postgres run on the home NAS\". No content word is shared, so only a model that guesses NAS or a service name can reach it through FTS. Needs --memories."
+    },
+    {
+      "id": "retrieval-paraphrase-cost",
+      "prompt": "Find the memory on how expensive it is to run every tool-choice case against all the models, and open it.",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "maxRounds": 4,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1"
+      },
+      "why": "The fixture paraphrase of \"A full seven-model eval run costs about $1.12, and Sonnet is 58% of it\", which FTS alone misses at 5000. Needs --memories."
+    },
+    {
+      "id": "retrieval-title-logs",
+      "prompt": "Open the memory about reading past Worker logs in the Cloudflare dashboard.",
+      "corpus": true,
+      "tool": "fetch",
+      "turnBudget": 2,
+      "maxRounds": 4,
+      "requiredArgs": ["id"],
+      "expectArgs": {
+        "id": "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5"
+      },
+      "why": "Control for retrieval-paraphrase-logs: the same target asked in the memory's own words, the regime the FTS half says holds at 5000. A miss here is the runner or the model, not the vocabulary gap. Needs --memories."
+    },
+    {
+      "id": "library-save-discussed-missing",
+      "context": "Earlier in this conversation we spent the last hour working through https://www.lukew.com/ff/entry.asp?2047 (Luke Wroblewski on designing for agents): its argument that agents should show their work, the three interaction patterns it names, and how they apply to the Valise console's to-do pane. You quoted it six times.\n\nYour last tool call was search {\"query\": \"Luke Wroblewski designing for agents\", \"type\": \"source\"} and it returned {\"results\": []}.",
+      "prompt": "Good, that settles how the pane should explain itself. Let's write the plan up next.",
+      "tool": "save_source",
+      "requiredArgs": ["kind", "title", "url"],
+      "expectArgs": {
+        "url": "https://www.lukew.com/ff/entry.asp?2047"
+      },
+      "why": "Owner, 2026-10-25: an agent saves on its own only when an article was discussed at length and search shows it is missing. Both hold here, so the page belongs in the library before moving on."
+    },
+    {
+      "id": "library-no-save-passing-mention",
+      "context": "Earlier the user mentioned in passing that https://www.lukew.com/ff/entry.asp?2047 was an interesting read; nothing more was said about it.",
+      "prompt": "Rename the variable foo to paneState in this line: const foo = useState(null);",
+      "tool": null,
+      "requiredArgs": [],
+      "why": "One passing mention is not extended discussion and nobody asked to save it. Saving here is the contrived capture the owner rejected."
+    },
+    {
+      "id": "brief-related-unrelated-turn",
+      "context": "get_brief returned, among other sections: claimed: todo:tdo_hedge \"Plant a hedge for the orchard's pollinators\". related_library: {\"id\": \"source:src_hedgerows\", \"title\": \"Why hedgerows matter\", \"reason\": \"Related to \\\"Plant a hedge for the orchard's pollinators\\\"; not opened or fetched since it was saved.\", \"quote\": \"hawthorn hedgerows give bumblebees shelter and nectar early in spring\"}",
+      "prompt": "What's the shell command to count the lines in every .ts file under app/?",
+      "tool": null,
+      "requiredArgs": [],
+      "why": "A related item offered by the brief only matters if it changes the answer. Fetching or citing it on an unrelated question is a forced mention, which fails."
+    },
+    {
+      "id": "files-group-into-folder",
+      "prompt": "In Valise, put asset:ast_logo-dark into the same folder as asset:ast_logo-light, and call that folder \"Brand icons\". Don't change anything else about either file.",
+      "tool": "update_asset",
+      "requiredArgs": ["id", "folder", "folder_name"],
+      "expectArgs": {
+        "id": "asset:ast_logo-dark",
+        "folder": "asset:ast_logo-light",
+        "folder_name": "Brand icons"
+      },
+      "absentArgs": ["title", "tags", "project", "expires_in_seconds"],
+      "why": "Grouping is a field of update_asset (ADR-0003): a folder is addressed by a file in it, so no folder id or second tool is needed. Re-uploading or editing metadata would change what the person asked to keep."
+    },
+    {
+      "id": "subject-create",
+      "prompt": "Start a subject for my garden-site workshop site so the memories about it are grouped in one place.",
+      "tool": "save_subject",
+      "requiredArgs": ["name", "kind"],
+      "why": "Creating a subject is its own intent; save_memory or create_todo would not group anything."
+    },
+    {
+      "id": "subject-find",
+      "prompt": "Which memory subjects do I have about Acme?",
+      "tool": "list_subjects",
+      "requiredArgs": ["name"],
+      "why": "Subjects are not search hits, so finding one by name is list_subjects with name."
+    },
+    {
+      "id": "subject-add-members",
+      "prompt": "Add memory:mem_47c25cec-0920-4b00-be9a-7ce7ca7b69e9 and memory:mem_b34a743d-cfff-48e5-b20e-7e7a9c1488ce to the subject subject:sub_5c0c2d9c-7737-402c-b1cd-11d751103cf9.",
+      "tool": "edit_subject",
+      "requiredArgs": ["id", "add_members"],
+      "why": "Membership is part of editing a subject, not a memory link through edit_memory."
+    },
+    {
+      "id": "subject-delete-duplicate",
+      "prompt": "There are two garden-site subjects now. Delete the duplicate, subject:sub_5c0c2d9c-7737-402c-b1cd-11d751103cf9.",
+      "tool": "edit_subject",
+      "requiredArgs": ["id", "deleted"],
+      "expectArgs": { "deleted": true },
+      "why": "The 2026-11-03 duplicate: deletion is edit_subject with deleted: true; there is no separate delete tool."
+    },
+    {
+      "id": "subject-save-attach",
+      "prompt": "Remember that garden-site deploys from its main branch through Cloudflare Workers Builds. File it under my garden-site subject, subject:sub_5c0c2d9c-7737-402c-b1cd-11d751103cf9.",
+      "tool": "save_memory",
+      "requiredArgs": ["title", "body", "type", "tags", "subjects"],
+      "why": "Attaching a new memory to a subject is the subjects argument of save_memory, not a save followed by edit_subject."
+    }
+  ]
+}

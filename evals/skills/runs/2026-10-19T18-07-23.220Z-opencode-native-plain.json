@@ -1,0 +1,316 @@
+{
+  "client": "opencode",
+  "version": "opencode v2.0.32",
+  "mode": "native",
+  "test": "plain",
+  "protocol": "modern",
+  "fixtureHash": "c56276e59737ff0f9e4ebf53a4ea62d6b04a80cc1730faa8df6b9eaa8381273c",
+  "dir": "/var/folders/75/p5ymw8gs2nl_ww1fkqkvytlc0000gn/T/valise-skill-probe-KJf1L5",
+  "status": 0,
+  "methods": [
+    "server/discover",
+    "resources/list",
+    "resources/templates/list",
+    "resources/list",
+    "resources/templates/list",
+    "resources/list",
+    "resources/templates/list",
+    "resources/list",
+    "resources/templates/list",
+    "resources/list",
+    "resources/templates/list",
+    "resources/list",
+    "resources/templates/list"
+  ],
+  "calls": [
+    {
+      "at": "2026-10-19T18:07:22.450Z",
+      "jsonrpc": "2.0",
+      "id": "server-discover-probe-1",
+      "method": "server/discover",
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:22.477Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 0,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:22.478Z",
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 1,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:22.478Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 2,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:22.478Z",
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 3,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:22.478Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 4,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:22.479Z",
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 5,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:23.033Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 6,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:23.034Z",
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 7,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:23.034Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 8,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:23.034Z",
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 9,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:23.034Z",
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 10,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:23.034Z",
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 11,
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "opencode",
+            "version": "2.0.32"
+          },
+          "io.modelcontextprotocol/clientCapabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {}
+          }
+        }
+      }
+    }
+  ],
+  "nativeDiscovery": false,
+  "markerReturned": false,
+  "registry": []
+}

@@ -1,0 +1,41 @@
+{
+  "observedSearches": 194,
+  "routeSearches": 181,
+  "reranked": 87,
+  "empty": 105,
+  "errors": 0,
+  "fallbacks": [
+    {
+      "at": 1792571512042,
+      "meta": {
+        "backend": "jev",
+        "reranked": false,
+        "ms": 2512,
+        "fallback": "vector timeout 2500 ms"
+      },
+      "args": {
+        "query": "expensive run every tool-choice case against all models cost",
+        "type": "memory"
+      }
+    },
+    {
+      "at": 1792571640674,
+      "meta": {
+        "backend": "jev",
+        "reranked": false,
+        "ms": 2,
+        "fallback": "Error"
+      },
+      "args": {
+        "query": "storage box services",
+        "type": "memory",
+        "limit": 10
+      }
+    }
+  ],
+  "latency": {
+    "median": 722,
+    "p95": 1155,
+    "max": 2003
+  }
+}

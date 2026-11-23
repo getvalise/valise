@@ -1,0 +1,87 @@
+{
+  "journey": "j6",
+  "run": "2026-10-29-6592c5",
+  "origin": "http://localhost:58064",
+  "label": "local",
+  "runner_commit": "180ca3b3ae103a24539495bdcb35c9126d61fc57",
+  "started_at": "2026-10-29T10:05:51.062Z",
+  "steps": [
+    {
+      "step": "2. both tenants write same-named items in every concept",
+      "ok": true
+    },
+    {
+      "step": "guessed ids refused through MCP; search and skill:// stay per tenant",
+      "ok": true,
+      "detail": {
+        "fetch todo": "No active item exists for todo:tdo_5a9d58f8-c765-4c3c-a436-87088b237cfc.",
+        "fetch memory": "No active item exists for memory:mem_7f2e742a-4082-479a-8bcb-5a1db88fb861.",
+        "fetch source": "No active item exists for source:src_d7b610e7-07a8-4367-b569-a8215fc20082.",
+        "fetch asset": "No active item exists for asset:ast_47b84152-f7da-40bd-a897-e4ef29dddc09.",
+        "asset download": "No ready asset exists for asset:ast_47b84152-f7da-40bd-a897-e4ef29dddc09.",
+        "claim todo": "todo:tdo_5a9d58f8-c765-4c3c-a436-87088b237cfc: todo does not exist.",
+        "comment todo": "todo:tdo_5a9d58f8-c765-4c3c-a436-87088b237cfc: todo not found.",
+        "edit memory": "No active item exists for memory:mem_7f2e742a-4082-479a-8bcb-5a1db88fb861.",
+        "tag todo": "To-do not found."
+      }
+    },
+    {
+      "step": "console routes show nothing of tenant A",
+      "ok": true,
+      "detail": {
+        "signedUrlFromBrowserB": 200
+      }
+    },
+    {
+      "step": "revoking B's token stops B and not A",
+      "ok": true,
+      "detail": {
+        "afterRevoke": "thrown: SdkHttpError: Error POSTing to endpoint: {\"error\":\"invalid_token\",\"error_description\":\"Invalid access token\"}"
+      }
+    },
+    {
+      "step": "mixed load: quiet tenant's work lands and stays private",
+      "ok": true,
+      "detail": {
+        "seconds": 1.148,
+        "noisyConcurrency": 8,
+        "quietConcurrency": 1,
+        "noisy": {
+          "calls": 160,
+          "errors": 110,
+          "errorSamples": [
+            "save_memory: thrown: SdkHttpError: Error POSTing to endpoint: {\"jsonrpc\":\"2.0\",\"id\":n,\"error\":{\"code\":-32000,\"message\":\"Too many requests. Retry in one minute.\",\"data\":{\"code\":\"rate_limited\",\"retryAfterSeconds\":60}}}",
+            "list_todos: thrown: SdkHttpError: Error POSTing to endpoint: {\"jsonrpc\":\"2.0\",\"id\":n,\"error\":{\"code\":-32000,\"message\":\"Too many requests. Retry in one minute.\",\"data\":{\"code\":\"rate_limited\",\"retryAfterSeconds\":60}}}",
+            "search: thrown: SdkHttpError: Error POSTing to endpoint: {\"jsonrpc\":\"2.0\",\"id\":n,\"error\":{\"code\":-32000,\"message\":\"Too many requests. Retry in one minute.\",\"data\":{\"code\":\"rate_limited\",\"retryAfterSeconds\":60}}}"
+          ],
+          "p50": 41,
+          "p95": 123,
+          "p99": 167
+        },
+        "quiet": {
+          "calls": 20,
+          "errors": 0,
+          "errorSamples": [],
+          "p50": 49,
+          "p95": 110,
+          "p99": 136
+        },
+        "quietLanded": 20
+      }
+    }
+  ],
+  "fixtures": [
+    "todo:tdo_5a9d58f8-c765-4c3c-a436-87088b237cfc",
+    "memory:mem_7f2e742a-4082-479a-8bcb-5a1db88fb861",
+    "source:src_d7b610e7-07a8-4367-b569-a8215fc20082",
+    "asset:ast_47b84152-f7da-40bd-a897-e4ef29dddc09",
+    "todo:tdo_216802be-5617-420f-bb97-8992b3f1c840",
+    "memory:mem_0c36dc2a-be48-4bbe-90d5-5464cb226484",
+    "source:src_1e813384-7205-4448-9688-2fd56f0dbcd4",
+    "asset:ast_3f843e58-ca89-4519-a4cb-7f531966ba3e"
+  ],
+  "cleanup": [
+    "bearer tokens labelled \"journey j6 2026-10-29-6592c5\" revoked in both tenants",
+    "synthetic rows remain in project journey-j6-2026-10-29-6592c5 in both tenants"
+  ]
+}

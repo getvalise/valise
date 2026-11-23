@@ -1,0 +1,1 @@
+ALTER TABLE `todos` ADD `mirror_generation` integer DEFAULT 0 NOT NULL;

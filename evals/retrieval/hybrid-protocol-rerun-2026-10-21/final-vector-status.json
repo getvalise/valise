@@ -1,0 +1,9 @@
+{
+  "namespace": "rollout-eval-protocol-v1",
+  "total": 51,
+  "pending": 0,
+  "failed": 0,
+  "due": 0,
+  "oldestPendingSeconds": 0,
+  "lastAcceptedAt": 1792575604
+}

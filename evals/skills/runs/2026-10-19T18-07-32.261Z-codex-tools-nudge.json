@@ -1,0 +1,89 @@
+{
+  "client": "codex",
+  "version": "codex-cli 0.163.0",
+  "mode": "tools",
+  "test": "nudge",
+  "protocol": "legacy",
+  "fixtureHash": "c56276e59737ff0f9e4ebf53a4ea62d6b04a80cc1730faa8df6b9eaa8381273c",
+  "dir": "/var/folders/75/p5ymw8gs2nl_ww1fkqkvytlc0000gn/T/valise-skill-probe-Nz3dAi",
+  "status": 0,
+  "methods": [
+    "initialize",
+    "notifications/initialized",
+    "tools/list",
+    "tools/call"
+  ],
+  "calls": [
+    {
+      "at": "2026-10-19T18:07:22.440Z",
+      "jsonrpc": "2.0",
+      "id": 0,
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-06-18",
+        "capabilities": {
+          "experimental": {
+            "codex/auth-change": {}
+          },
+          "elicitation": {
+            "form": {},
+            "url": {}
+          }
+        },
+        "clientInfo": {
+          "name": "codex-mcp-client",
+          "title": "Codex",
+          "version": "0.163.0"
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:22.444Z",
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "tools/list",
+      "params": {
+        "_meta": {
+          "progressToken": 0
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:07:30.000Z",
+      "jsonrpc": "2.0",
+      "id": 2,
+      "method": "tools/call",
+      "params": {
+        "_meta": {
+          "callId": "exec-b6d9a07e-6ed0-4e65-817b-ed8b5b9e8c7c",
+          "x-codex-turn-metadata": {
+            "session_id": "01a15558-c08f-74d3-af3b-9ea1caf3350c",
+            "thread_id": "01a15558-c08f-74d3-af3b-9ea1caf3350c",
+            "reasoning_effort": "medium",
+            "turn_id": "01a15558-c4a1-76d1-9eff-95a795176526",
+            "model": "gpt-6.1-sol",
+            "thread_source": "user",
+            "turn_trigger": "exec",
+            "sandbox": "seatbelt",
+            "sandbox_mode": "read-only",
+            "auto_review_enabled": false,
+            "node_repl_auto_review_required": true,
+            "node_repl_disabled": false,
+            "turn_started_at_unix_ms": 1792433243313,
+            "codex_version": "0.163.0"
+          },
+          "threadId": "01a15558-c08f-74d3-af3b-9ea1caf3350c",
+          "sessionId": "01a15558-c08f-74d3-af3b-9ea1caf3350c",
+          "windowId": "01a15558-c08f-74d3-af3b-9ea1caf3350c:0",
+          "itemId": "ctc_0b990cea7e6042c0016ad65c6187c881919a0dd1268bd69cf0",
+          "progressToken": 1
+        },
+        "name": "skill_valise-probe-cerulean",
+        "arguments": {}
+      }
+    }
+  ],
+  "nativeDiscovery": false,
+  "markerReturned": true,
+  "finalText": "CERULEAN-one-7391"
+}

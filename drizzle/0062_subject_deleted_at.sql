@@ -1,0 +1,1 @@
+ALTER TABLE `memory_subjects` ADD `deleted_at` integer;

@@ -1,0 +1,8 @@
+# Install on the independent backup host, not in the Worker. Replace all paths.
+# Load CLOUDFLARE_API_TOKEN privately for this OS user; never put it in this file.
+# The release checkout must match the live D1 migrations and include npm ci's dev tools.
+# Configure working cron mail delivery and an external monitor of status exit codes.
+MAILTO=operator@example.invalid
+PATH=/usr/local/bin:/usr/bin:/bin
+30 3 * * * cd /srv/valise-release && node scripts/backup.mjs capture /secure/valise-backups --config wrangler.jsonc --remote --keep 14
+15 * * * * cd /srv/valise-release && node scripts/backup.mjs status /secure/valise-backups --max-age-hours 26

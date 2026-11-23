@@ -1,0 +1,13 @@
+{
+  "disposableIndex": "valise-rollout-eval-protocol-20261021",
+  "deleted": true,
+  "remainingIndexes": ["valise-memories-v1"],
+  "productionTouched": false,
+  "devPort": 4546,
+  "listenerAbsent": true,
+  "devServerExited": true,
+  "ownChildProcessesAbsent": true,
+  "temporaryCredentialCopyRemoved": true,
+  "consoleIndexMatchesBase": true,
+  "noRuntimeSourceChanges": true
+}

@@ -1,0 +1,1637 @@
+{
+  "at": "2026-10-21T08:35:20.967Z",
+  "toolsHash": "d1451f8600f0",
+  "storeHash": "96f8afe18b7e",
+  "repeat": 3,
+  "models": [
+    "anthropic/claude-haiku-5.5",
+    "openai/gpt-6-luna",
+    "openai/gpt-5.4-mini",
+    "google/gemini-3.8-flash",
+    "x-ai/grok-4.3",
+    "moonshotai/kimi-k2.6"
+  ],
+  "cases": {
+    "retrieval-contradiction-newest": {
+      "total": 18,
+      "strictPass": 12,
+      "claimFetches": 12,
+      "capped": 2,
+      "errors": 0,
+      "models": {
+        "anthropic/claude-haiku-5.5": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "openai/gpt-6-luna": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 1,
+          "errors": 0
+        },
+        "openai/gpt-5.4-mini": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 1,
+          "errors": 0
+        },
+        "google/gemini-3.8-flash": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "x-ai/grok-4.3": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "moonshotai/kimi-k2.6": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        }
+      }
+    },
+    "retrieval-contradiction-brief": {
+      "total": 18,
+      "strictPass": 9,
+      "claimFetches": 9,
+      "capped": 0,
+      "errors": 0,
+      "models": {
+        "anthropic/claude-haiku-5.5": {
+          "total": 3,
+          "strictPass": 2,
+          "claimFetches": 2,
+          "capped": 0,
+          "errors": 0
+        },
+        "openai/gpt-6-luna": {
+          "total": 3,
+          "strictPass": 1,
+          "claimFetches": 1,
+          "capped": 0,
+          "errors": 0
+        },
+        "openai/gpt-5.4-mini": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 0
+        },
+        "google/gemini-3.8-flash": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "x-ai/grok-4.3": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 0
+        },
+        "moonshotai/kimi-k2.6": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        }
+      }
+    },
+    "retrieval-paraphrase-logs": {
+      "total": 18,
+      "strictPass": 3,
+      "claimFetches": 12,
+      "capped": 4,
+      "errors": 1,
+      "models": {
+        "anthropic/claude-haiku-5.5": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "openai/gpt-6-luna": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 3,
+          "errors": 0
+        },
+        "openai/gpt-5.4-mini": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 1,
+          "errors": 1
+        },
+        "google/gemini-3.8-flash": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "x-ai/grok-4.3": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "moonshotai/kimi-k2.6": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        }
+      }
+    },
+    "retrieval-paraphrase-dump": {
+      "total": 18,
+      "strictPass": 0,
+      "claimFetches": 0,
+      "capped": 0,
+      "errors": 3,
+      "models": {
+        "anthropic/claude-haiku-5.5": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 0
+        },
+        "openai/gpt-6-luna": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 2
+        },
+        "openai/gpt-5.4-mini": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 0
+        },
+        "google/gemini-3.8-flash": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 1
+        },
+        "x-ai/grok-4.3": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 0
+        },
+        "moonshotai/kimi-k2.6": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 0
+        }
+      }
+    },
+    "retrieval-paraphrase-homelab": {
+      "total": 18,
+      "strictPass": 11,
+      "claimFetches": 12,
+      "capped": 2,
+      "errors": 0,
+      "models": {
+        "anthropic/claude-haiku-5.5": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "openai/gpt-6-luna": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 1,
+          "capped": 2,
+          "errors": 0
+        },
+        "openai/gpt-5.4-mini": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 0
+        },
+        "google/gemini-3.8-flash": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "x-ai/grok-4.3": {
+          "total": 3,
+          "strictPass": 3,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "moonshotai/kimi-k2.6": {
+          "total": 3,
+          "strictPass": 2,
+          "claimFetches": 2,
+          "capped": 0,
+          "errors": 0
+        }
+      }
+    },
+    "retrieval-paraphrase-cost": {
+      "total": 18,
+      "strictPass": 1,
+      "claimFetches": 10,
+      "capped": 4,
+      "errors": 3,
+      "models": {
+        "anthropic/claude-haiku-5.5": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "openai/gpt-6-luna": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 2,
+          "errors": 1
+        },
+        "openai/gpt-5.4-mini": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 2,
+          "errors": 0
+        },
+        "google/gemini-3.8-flash": {
+          "total": 3,
+          "strictPass": 1,
+          "claimFetches": 1,
+          "capped": 0,
+          "errors": 2
+        },
+        "x-ai/grok-4.3": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "moonshotai/kimi-k2.6": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        }
+      }
+    },
+    "retrieval-title-logs": {
+      "total": 18,
+      "strictPass": 1,
+      "claimFetches": 10,
+      "capped": 2,
+      "errors": 2,
+      "models": {
+        "anthropic/claude-haiku-5.5": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "openai/gpt-6-luna": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 2,
+          "errors": 0
+        },
+        "openai/gpt-5.4-mini": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 0,
+          "capped": 0,
+          "errors": 0
+        },
+        "google/gemini-3.8-flash": {
+          "total": 3,
+          "strictPass": 1,
+          "claimFetches": 1,
+          "capped": 0,
+          "errors": 2
+        },
+        "x-ai/grok-4.3": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        },
+        "moonshotai/kimi-k2.6": {
+          "total": 3,
+          "strictPass": 0,
+          "claimFetches": 3,
+          "capped": 0,
+          "errors": 0
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4136edff-9659-3cda-2755-76e3bdf92427",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4136edff-9659-3cda-2755-76e3bdf92427",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_eda22d91-8f20-dd2f-9ae1-5e0430e963fa",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_eda22d91-8f20-dd2f-9ae1-5e0430e963fa",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_eda22d91-8f20-dd2f-9ae1-5e0430e963fa",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-title-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-title-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "case": "retrieval-title-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": "400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"No tool output found for function call call_O52OTA5jZGwqGWlqQ4arkvag.\\\",\\n    \\\"type\\\": \\\"invalid_request_error\\\",\\n    \\\"param\\\": \\\"input\\\",\\n    \\\"code\\\": null\\n  }\\n}\",\"provider_name\""
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": "400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"No tool output found for function call call_bsKn5s5TX7oqNfPcoIMWWl47.\\\",\\n    \\\"type\\\": \\\"invalid_request_error\\\",\\n    \\\"param\\\": \\\"input\\\",\\n    \\\"code\\\": null\\n  }\\n}\",\"provider_name\""
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_2088b3eb-99a9-5da3-a0f1-d3c000070e23",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": "400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"No tool output found for function call call_tTW0XNWPcxvGxX3neubEv2H2.\\\",\\n    \\\"type\\\": \\\"invalid_request_error\\\",\\n    \\\"param\\\": \\\"input\\\",\\n    \\\"code\\\": null\\n  }\\n}\",\"provider_name\""
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-title-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-title-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "retrieval-title-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": "400 {\"error\":{\"message\":\"Provider returned error\",\"code\":400,\"metadata\":{\"raw\":\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"No tool output found for function call call_WPx96UVv2D68EAG4iy4rtcht.\\\",\\n    \\\"type\\\": \\\"invalid_request_error\\\",\\n    \\\"param\\\": \\\"input\\\",\\n    \\\"code\\\": null\\n  }\\n}\",\"provider_name\""
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": true,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-title-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-title-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "case": "retrieval-title-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_0b2c74e9-53a8-3256-0e77-9fad897618b9",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": "504 {\"error\":{\"message\":\"The operation was aborted\",\"code\":504,\"metadata\":{\"provider_name\":\"Google\"}},\"user_id\":\"org_382UyEbrmEiTjyWpj2SGUQIGxa0\"}"
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": "504 {\"error\":{\"message\":\"The operation was aborted\",\"code\":504,\"metadata\":{\"provider_name\":\"Google\"}},\"user_id\":\"org_382UyEbrmEiTjyWpj2SGUQIGxa0\"}"
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": "504 {\"error\":{\"message\":\"The operation was aborted\",\"code\":504,\"metadata\":{\"provider_name\":\"Google\"}},\"user_id\":\"org_382UyEbrmEiTjyWpj2SGUQIGxa0\"}"
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_2708399c-986f-4ed6-9bb2-5cf1798d1ff1",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-title-logs",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_2ecc010c-6f40-4636-9e66-c18096d9a3e5",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-title-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": "504 {\"error\":{\"message\":\"The operation was aborted\",\"code\":504,\"metadata\":{\"provider_name\":\"Google\"}},\"user_id\":\"org_382UyEbrmEiTjyWpj2SGUQIGxa0\"}"
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "retrieval-title-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": "504 {\"error\":{\"message\":\"The operation was aborted\",\"code\":504,\"metadata\":{\"provider_name\":\"Google\"}},\"user_id\":\"org_382UyEbrmEiTjyWpj2SGUQIGxa0\"}"
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4136edff-9659-3cda-2755-76e3bdf92427",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4136edff-9659-3cda-2755-76e3bdf92427",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4136edff-9659-3cda-2755-76e3bdf92427",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_b22168ac-0b3c-f9b9-cff2-7275ecad8fcd",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_eda22d91-8f20-dd2f-9ae1-5e0430e963fa",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_eda22d91-8f20-dd2f-9ae1-5e0430e963fa",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_0d9644a3-1d1c-bd07-b5e6-bcbf6df4c3d6",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-title-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-title-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "x-ai/grok-4.3",
+      "case": "retrieval-title-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-contradiction-newest",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 0,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-contradiction-brief",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_ab3293c4-ff2d-4280-b594-1a617e98fc75",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a4ef212-fa5d-e89b-1d4d-b31e15bffa6e",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4136edff-9659-3cda-2755-76e3bdf92427",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-dump",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": "memory:mem_5ee326d2-e8fa-f650-085c-2e41c38d847a",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": false,
+      "requestedId": null,
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 1,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-homelab",
+      "repeat": 2,
+      "strictPass": true,
+      "claimFetch": true,
+      "requestedId": "memory:mem_8f82e437-ba10-4ee3-b277-344d2792a940",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-paraphrase-cost",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_4476ba35-be96-09a4-4235-7754e8c8a164",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-title-logs",
+      "repeat": 0,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_7a1cc702-b89a-204b-2b6c-da09cf4e8744",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-title-logs",
+      "repeat": 1,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b",
+      "capped": false,
+      "error": null
+    },
+    {
+      "model": "moonshotai/kimi-k2.6",
+      "case": "retrieval-title-logs",
+      "repeat": 2,
+      "strictPass": false,
+      "claimFetch": true,
+      "requestedId": "memory:mem_0d82a03a-ddb3-8224-5f3f-c398479d655b",
+      "capped": false,
+      "error": null
+    }
+  ],
+  "costUsd": 0.6491855850000002,
+  "scoring": "Strict scores unchanged. Claim counts terminal fetch requests for target/relativesOf; the existing runner stops before executing an accepted fetch. Dump's documented same-fact confound is not relabelled."
+}

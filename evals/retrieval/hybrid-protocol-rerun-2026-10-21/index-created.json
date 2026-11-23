@@ -1,0 +1,10 @@
+{
+  "created_on": "2026-10-21T09:38:55.076014Z",
+  "modified_on": "2026-10-21T09:38:55.076014Z",
+  "name": "valise-rollout-eval-protocol-20261021",
+  "description": "Disposable 50-store nine-episode hybrid protocol compatibility",
+  "config": {
+    "dimensions": 1024,
+    "metric": "cosine"
+  }
+}

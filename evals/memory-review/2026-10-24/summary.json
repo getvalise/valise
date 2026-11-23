@@ -1,0 +1,106 @@
+{
+  "calls": 60,
+  "reservation": 0.47260630000000003,
+  "unknownUsage": [
+    {
+      "model": "google/gemini-3.8-flash",
+      "case": "contradiction-no-winner",
+      "repeat": 1,
+      "error": "The operation was aborted due to timeout"
+    }
+  ],
+  "models": [
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "calls": 12,
+      "valid": 12,
+      "expectedKind": 12,
+      "reportedUsd": 0.0034963,
+      "estimatedUsd": 0.0034962999999999995,
+      "promptTokens": 10558,
+      "outputTokens": 4881,
+      "reasoningTokens": 0,
+      "medianMs": 2436,
+      "p95Ms": 2734,
+      "providers": ["Azure"],
+      "errors": []
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "calls": 12,
+      "valid": 12,
+      "expectedKind": 12,
+      "reportedUsd": 0.015203999999999999,
+      "estimatedUsd": 0.015203999999999999,
+      "promptTokens": 6250,
+      "outputTokens": 2337,
+      "reasoningTokens": 0,
+      "medianMs": 1754,
+      "p95Ms": 4792,
+      "providers": ["OpenAI"],
+      "errors": []
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "calls": 12,
+      "valid": 11,
+      "expectedKind": 11,
+      "reportedUsd": 0.012780749999999999,
+      "estimatedUsd": 0.014058825,
+      "promptTokens": 5786,
+      "outputTokens": 2251,
+      "reasoningTokens": 0,
+      "medianMs": 3716.5,
+      "p95Ms": 30003,
+      "providers": ["Google"],
+      "errors": [
+        {
+          "case": "contradiction-no-winner",
+          "repeat": 1,
+          "error": "The operation was aborted due to timeout"
+        }
+      ]
+    },
+    {
+      "model": "anthropic/claude-sonnet-5.5",
+      "calls": 12,
+      "valid": 12,
+      "expectedKind": 12,
+      "reportedUsd": 0.06676,
+      "estimatedUsd": 0.06676,
+      "promptTokens": 10570,
+      "outputTokens": 4562,
+      "reasoningTokens": 0,
+      "medianMs": 3805,
+      "p95Ms": 5553,
+      "providers": ["Azure"],
+      "errors": []
+    },
+    {
+      "model": "google/gemini-2.5-flash-lite",
+      "calls": 12,
+      "valid": 10,
+      "expectedKind": 10,
+      "reportedUsd": 0.0016826,
+      "estimatedUsd": 0.0016826,
+      "promptTokens": 6442,
+      "outputTokens": 2596,
+      "reasoningTokens": 0,
+      "medianMs": 1045.5,
+      "p95Ms": 1491,
+      "providers": ["Google AI Studio"],
+      "errors": [
+        {
+          "case": "prompt-injection",
+          "repeat": 1,
+          "error": "Evidence must not repeat a source."
+        },
+        {
+          "case": "prompt-injection",
+          "repeat": 2,
+          "error": "Evidence must not repeat a source."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2476 @@
+{
+  "ranAt": "2026-10-29T12:29:44.136Z",
+  "models": [
+    {
+      "id": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "input": 0.293,
+      "output": 2.253,
+      "context": 24000,
+      "options": {}
+    },
+    {
+      "id": "@cf/zai-org/glm-5.3-flash",
+      "input": 0.15,
+      "output": 0.5,
+      "context": 1048576,
+      "options": {
+        "reasoning_effort": "low"
+      }
+    },
+    {
+      "id": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "input": 0.3,
+      "output": 1.2,
+      "context": 1048576,
+      "options": {
+        "reasoning_effort": "none"
+      }
+    },
+    {
+      "id": "@cf/google/gemma-4-26b-a4b-it",
+      "input": 0.1,
+      "output": 0.3,
+      "context": 256000,
+      "options": {
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      }
+    }
+  ],
+  "cases": [
+    {
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "max_tokens": 500
+    },
+    {
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "max_tokens": 500
+    },
+    {
+      "kind": "file",
+      "prefixBytes": 0,
+      "max_tokens": 900
+    },
+    {
+      "kind": "file",
+      "prefixBytes": 1048576,
+      "max_tokens": 900,
+      "minContext": 100000
+    }
+  ],
+  "summary": {
+    "@cf/google/gemma-4-26b-a4b-it bookmark@8192": {
+      "n": 11,
+      "ok": 11,
+      "ms": [1895, 2008, 2251, 2402, 2431, 2444, 2480, 2685, 2834, 3002, 5946],
+      "usd": 0.0025651000000000003,
+      "over25s": 0
+    },
+    "@cf/deepseek-ai/deepseek-v4.1-flash-1017 bookmark@8192": {
+      "n": 11,
+      "ok": 11,
+      "ms": [1811, 1817, 1947, 2108, 2123, 2244, 2408, 2409, 2472, 2613, 2701],
+      "usd": 0.008092499999999999,
+      "over25s": 0
+    },
+    "@cf/zai-org/glm-5.3-flash bookmark@8192": {
+      "n": 11,
+      "ok": 11,
+      "ms": [
+        2947, 3165, 3445, 3617, 3708, 3760, 4664, 5248, 6099, 14249, 14636
+      ],
+      "usd": 0.00401875,
+      "over25s": 0
+    },
+    "@cf/meta/llama-3.3-70b-instruct-fp8-fast bookmark@8192": {
+      "n": 11,
+      "ok": 4,
+      "ms": [
+        3285, 4345, 4403, 4975, 13319, 14607, 14720, 14973, 17148, 17864, 20277
+      ],
+      "usd": 0.015120748000000002,
+      "over25s": 0
+    },
+    "@cf/deepseek-ai/deepseek-v4.1-flash-1017 bookmark@32768": {
+      "n": 11,
+      "ok": 11,
+      "ms": [1508, 2281, 2439, 2837, 2887, 2985, 3013, 3058, 3401, 4599, 4613],
+      "usd": 0.0249102,
+      "over25s": 0
+    },
+    "@cf/google/gemma-4-26b-a4b-it bookmark@32768": {
+      "n": 11,
+      "ok": 11,
+      "ms": [1157, 1658, 1967, 2494, 2587, 2639, 2716, 3037, 3178, 3222, 3372],
+      "usd": 0.008699,
+      "over25s": 0
+    },
+    "@cf/deepseek-ai/deepseek-v4.1-flash-1017 file@12000": {
+      "n": 1,
+      "ok": 1,
+      "ms": [1799],
+      "usd": 0.0008616,
+      "over25s": 0
+    },
+    "@cf/google/gemma-4-26b-a4b-it file@12000": {
+      "n": 1,
+      "ok": 1,
+      "ms": [2188],
+      "usd": 0.0002939,
+      "over25s": 0
+    },
+    "@cf/deepseek-ai/deepseek-v4.1-flash-1017 file@1048576": {
+      "n": 1,
+      "ok": 1,
+      "ms": [8035],
+      "usd": 0.019867199999999998,
+      "over25s": 0
+    },
+    "@cf/zai-org/glm-5.3-flash bookmark@32768": {
+      "n": 11,
+      "ok": 11,
+      "ms": [3158, 3312, 3534, 3614, 3876, 4233, 4287, 4405, 5791, 6160, 9626],
+      "usd": 0.0126649,
+      "over25s": 0
+    },
+    "@cf/google/gemma-4-26b-a4b-it file@1048576": {
+      "n": 1,
+      "ok": 1,
+      "ms": [12628],
+      "usd": 0.0068659,
+      "over25s": 0
+    },
+    "@cf/zai-org/glm-5.3-flash file@12000": {
+      "n": 1,
+      "ok": 1,
+      "ms": [2706],
+      "usd": 0.0004168,
+      "over25s": 0
+    },
+    "@cf/zai-org/glm-5.3-flash file@1048576": {
+      "n": 1,
+      "ok": 1,
+      "ms": [4803],
+      "usd": 0.0098954,
+      "over25s": 0
+    },
+    "@cf/meta/llama-3.3-70b-instruct-fp8-fast bookmark@32768": {
+      "n": 11,
+      "ok": 5,
+      "ms": [
+        3550, 5404, 5439, 5565, 5567, 7367, 7393, 9016, 15266, 17270, 17769
+      ],
+      "usd": 0.028777017000000002,
+      "over25s": 0
+    },
+    "@cf/meta/llama-3.3-70b-instruct-fp8-fast file@12000": {
+      "n": 1,
+      "ok": 1,
+      "ms": [7196],
+      "usd": 0.0010037479999999998,
+      "over25s": 0
+    }
+  },
+  "totalUsd": 0.14405276299999997,
+  "results": [
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Jevons_paradox",
+      "ok": true,
+      "ms": 2444,
+      "inputTokens": 1834,
+      "outputTokens": 113,
+      "usd": 0.00021730000000000002,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The Jevons paradox describes an economic phenomenon where technological improvements in resource efficiency lead to an overall increase in the consumption of that resource. This occurs because increased efficiency lowers the effective cost of use, which can trigger a significant rise in demand if the resource is price elastic.",
+        "concepts": [
+          "resource efficiency",
+          "price elasticity of demand",
+          "rebound effect",
+          "technological progress",
+          "economic growth",
+          "consumption patterns"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Jevons_paradox",
+      "ok": true,
+      "ms": 2472,
+      "inputTokens": 1751,
+      "outputTokens": 150,
+      "usd": 0.0007053,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The page explains the Jevons paradox, an economic phenomenon in which technological improvements that increase the efficiency of resource use can lead to higher total consumption of that resource rather than lower. It traces the idea to William Stanley Jevons's 1865 observation about coal efficiency and the Watt steam engine, and connects it to modern debates over energy-efficiency rebound effects. It also outlines the conditions required for the paradox, the role of price elasticity, and policy responses such as pairing efficiency gains with conservation measures.",
+        "concepts": [
+          "Jevons paradox",
+          "rebound effect",
+          "energy efficiency",
+          "price elasticity of demand",
+          "coal consumption",
+          "Khazzoom–Brookes postulate",
+          "conservation policy"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Jevons_paradox",
+      "ok": true,
+      "ms": 2947,
+      "inputTokens": 1774,
+      "outputTokens": 162,
+      "usd": 0.0003471,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains the Jevons paradox, the observation by William Stanley Jevons in 1865 that improvements in resource-use efficiency can increase rather than decrease total consumption, as with coal after Watt's steam engine. It describes the rebound effect and price elasticity of demand as the mechanism, notes debates over its relevance to energy conservation, and mentions policy responses like green taxes and cap-and-trade. It also covers the related Khazzoom–Brookes postulate and extensions to water and other resources.",
+        "concepts": [
+          "Jevons paradox",
+          "Rebound effect",
+          "Price elasticity of demand",
+          "William Stanley Jevons and The Coal Question",
+          "Khazzoom–Brookes postulate",
+          "Energy conservation policy (green taxes, cap-and-trade)",
+          "Reservoir effect in socio-hydrology"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Agroforestry",
+      "ok": true,
+      "ms": 1811,
+      "inputTokens": 1710,
+      "outputTokens": 149,
+      "usd": 0.0006917999999999999,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article defines agroforestry as a polyculture land-use system that intentionally integrates trees with crops or pasture, combining agricultural and forestry practices for economic, environmental, and social benefits. It traces the term's 1973 coinage while noting that such practices, especially tropical home gardens, have existed for millennia and derive from indigenous and local traditions. The article details benefits including biodiversity support, soil protection, carbon sequestration, and sustainability, while noting adoption varies globally and depends on good management.",
+        "concepts": [
+          "polyculture systems",
+          "tree-crop integration",
+          "tropical home gardens",
+          "biodiversity and habitat creation",
+          "soil erosion and nutrient cycling",
+          "carbon sequestration",
+          "sustainable agriculture"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Agroforestry",
+      "ok": true,
+      "ms": 3002,
+      "inputTokens": 1760,
+      "outputTokens": 130,
+      "usd": 0.000215,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Agroforestry is a land management system that integrates trees with crops or pasture to create productive polyculture environments. This practice offers diverse economic, environmental, and social benefits, including increased biodiversity, improved soil health, and carbon sequestration. While modern scientific study is relatively recent, the practice is rooted in ancient indigenous traditions and is widely used in tropical regions.",
+        "concepts": [
+          "land use management",
+          "polyculture systems",
+          "sustainable agriculture",
+          "biodiversity conservation",
+          "ecosystem services",
+          "agroecology"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Agroforestry",
+      "ok": true,
+      "ms": 3708,
+      "inputTokens": 1760,
+      "outputTokens": 165,
+      "usd": 0.0003465,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains agroforestry, a land use system that integrates trees with crops or pasture to produce diverse agricultural and forest products. It traces the concept's history from indigenous practices and tropical home gardens to modern scientific study, and reports that agroforestry is widespread in the tropics, especially Asia and sub-Saharan Africa. The article argues that agroforestry offers economic, environmental, and social benefits, including improved productivity, biodiversity, soil health, and carbon sequestration, provided systems are well managed.",
+        "concepts": [
+          "Integration of trees with crops or pasture",
+          "Polyculture and applied agroecology",
+          "Tropical home gardens and indigenous practices",
+          "Biodiversity and habitat corridors",
+          "Soil erosion reduction and water infiltration",
+          "Carbon sequestration and sustainability",
+          "Income and food security through diversification"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Pollination",
+      "ok": true,
+      "ms": 2701,
+      "inputTokens": 1831,
+      "outputTokens": 137,
+      "usd": 0.0007137,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains pollination as the transfer of pollen from a plant's anther to a stigma, enabling fertilization and seed production. It describes the mechanisms in angiosperms (including double fertilization) and gymnosperms, and surveys pollinating agents such as insects, birds, bats, wind, and water. It also covers pollen germination stages, the history of pollination research, and the importance of pollination to agriculture and horticulture.",
+        "concepts": [
+          "pollination",
+          "pollinators",
+          "double fertilization",
+          "angiosperms and gymnosperms",
+          "pollen germination and pollen tube",
+          "biotic and abiotic pollination",
+          "anthecology"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Tragedy_of_the_commons",
+      "ok": true,
+      "ms": 2613,
+      "inputTokens": 1889,
+      "outputTokens": 166,
+      "usd": 0.0007658999999999999,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains the tragedy of the commons: when a shared resource benefits individuals at a cost to the community, rational self-interest leads to overuse and depletion. It traces the idea from Aristotle and William Forster Lloyd to Garrett Hardin's 1968 essay, which framed it around overpopulation and argued for coercive limits on reproduction and aid. It also notes criticisms, including Elinor Ostrom's work suggesting communities can achieve mutual restraint, and arguments that the historical commons was legally regulated rather than open-access.",
+        "concepts": [
+          "tragedy of the commons",
+          "shared resource depletion",
+          "rational self-interest",
+          "Garrett Hardin's 1968 essay",
+          "overpopulation and welfare state",
+          "Elinor Ostrom's critique",
+          "historical common land regulation"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Pollination",
+      "ok": true,
+      "ms": 5946,
+      "inputTokens": 1882,
+      "outputTokens": 131,
+      "usd": 0.0002275,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Pollination is the biological process of transferring pollen from an anther to a stigma to enable fertilization and seed production. This process can be mediated by biotic agents like insects and birds or abiotic factors such as wind and water. The text details the specific reproductive mechanisms in both angiosperms and gymnosperms, including the development of pollen tubes.",
+        "concepts": [
+          "pollen transfer",
+          "biotic and abiotic pollination",
+          "angiosperm fertilization",
+          "gymnosperm reproduction",
+          "pollen germination",
+          "pollinating agents"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Mycorrhiza",
+      "ok": true,
+      "ms": 2409,
+      "inputTokens": 1901,
+      "outputTokens": 194,
+      "usd": 0.0008031,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains that a mycorrhiza is a symbiotic association between a fungus and a plant, in which fungal hyphae interconnect with plant roots and exchange nutrients, typically with the fungus supplying water and minerals while receiving sugars or lipids. It traces the history of mycorrhizal research from A.B. Frank's 1885 naming of the term through modern genomic work, and describes the evolutionary origins of these associations, which date back hundreds of millions of years and likely helped early plants colonize land. The article also surveys the different forms of mycorrhizae, noting that arbuscular mycorrhizae are the most common, found in about 70% of plant species.",
+        "concepts": [
+          "symbiotic fungus-plant association",
+          "arbuscular mycorrhiza",
+          "ectomycorrhiza",
+          "plant nutrient exchange",
+          "evolution of land plants",
+          "Rhynie chert fossils",
+          "mycorrhizal research history"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Pollination",
+      "ok": true,
+      "ms": 6099,
+      "inputTokens": 1935,
+      "outputTokens": 161,
+      "usd": 0.00037075,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains pollination as the transfer of pollen from anther to stigma, enabling fertilisation and seed production in plants. It describes the biological mechanisms in angiosperms and gymnosperms, including pollen germination, pollen tube growth, and double fertilisation, and distinguishes biotic pollination by animals from abiotic pollination by wind and water. The article also notes pollination's importance to agriculture and horticulture, since fruiting depends on successful fertilisation.",
+        "concepts": [
+          "Pollen transfer and fertilisation",
+          "Double fertilisation in angiosperms",
+          "Gymnosperm cone reproduction",
+          "Biotic vs abiotic pollination",
+          "Pollinators such as bees, birds, and bats",
+          "Pollen germination stages",
+          "Agricultural importance of pollination"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Tragedy_of_the_commons",
+      "ok": true,
+      "ms": 2480,
+      "inputTokens": 2082,
+      "outputTokens": 119,
+      "usd": 0.0002439,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The tragedy of the commons describes a situation where individuals acting in their own rational self-interest deplete a shared resource, ultimately harming the entire community. While Garrett Hardin popularized the concept as a warning against overpopulation and unregulated resource use, critics argue that collective management and legal frameworks can prevent such depletion.",
+        "concepts": [
+          "resource depletion",
+          "rational self-interest",
+          "common-pool resources",
+          "overpopulation",
+          "collective action problems",
+          "economic theory"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "ok": true,
+      "ms": 2244,
+      "inputTokens": 1854,
+      "outputTokens": 145,
+      "usd": 0.0007302,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains the Bloom filter, a space-efficient probabilistic data structure invented by Burton Howard Bloom in 1970 for testing set membership. It describes how elements are inserted and queried using a bit array and multiple hash functions, noting that false positives are possible but false negatives are not, and that elements cannot be removed in the basic variant. It also covers space and time advantages, including constant O(k) lookup time and roughly 9.6 bits per element for a 1% false positive rate.",
+        "concepts": [
+          "Bloom filter",
+          "probabilistic data structure",
+          "false positives",
+          "bit array",
+          "hash functions",
+          "set membership testing",
+          "counting Bloom filter"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Mycorrhiza",
+      "ok": true,
+      "ms": 2251,
+      "inputTokens": 1953,
+      "outputTokens": 105,
+      "usd": 0.0002268,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Mycorrhiza is a symbiotic relationship between fungi and plant roots where nutrients and water are exchanged for organic molecules. This association is essential for plant nutrition and played a critical role in the evolutionary terrestrialization of early land plants.",
+        "concepts": [
+          "symbiotic association",
+          "nutrient exchange",
+          "arbuscular mycorrhiza",
+          "ectomycorrhiza",
+          "plant evolution",
+          "rhizosphere"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Tragedy_of_the_commons",
+      "ok": true,
+      "ms": 3445,
+      "inputTokens": 1941,
+      "outputTokens": 168,
+      "usd": 0.00037515,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains the tragedy of the commons: the idea that individuals rationally overuse shared resources, collectively depleting them. It traces the concept from Aristotle and William Forster Lloyd's 1833 pamphlet to Garrett Hardin's influential 1968 essay, which focused on overpopulation and advocated 'mutual coercion' and controversial lifeboat ethics. The article also notes major criticisms, including Elinor Ostrom's work showing that communities can manage commons through consensus and objections that historical common land was legally regulated rather than unmanaged.",
+        "concepts": [
+          "Tragedy of the commons",
+          "Garrett Hardin's 1968 essay",
+          "William Forster Lloyd's grazing example",
+          "Overpopulation and mutual coercion",
+          "Lifeboat ethics",
+          "Elinor Ostrom's commons governance",
+          "Criticism of historical accuracy"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Dunbar%27s_number",
+      "ok": true,
+      "ms": 2123,
+      "inputTokens": 1756,
+      "outputTokens": 153,
+      "usd": 0.0007104,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains Dunbar's number, the proposed cognitive limit of roughly 150 stable social relationships, derived by Robin Dunbar from correlations between primate neocortex size and social group size. It describes the research background, including hunter-gatherer group sizes and the social brain hypothesis, and suggests language evolved as a cheap form of social grooming to maintain cohesion. It also covers applications in business, social software, and the military, along with alternative estimates and methodological criticism.",
+        "concepts": [
+          "Dunbar's number",
+          "neocortex size and group size",
+          "social grooming",
+          "social brain hypothesis",
+          "hunter-gatherer group sizes",
+          "Bernard-Killworth estimate",
+          "replication and criticism"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Jevons_paradox",
+      "ok": false,
+      "ms": 17864,
+      "inputTokens": 1799,
+      "outputTokens": 500,
+      "usd": 0.0016536069999999999,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 2302 (line 1 column 2303)",
+      "content": "{\"summary\": \"The Jevons paradox argues that technological improvements that increase the efficiency of a resource's use can lead to a rise in total consumption of that resource. This occurs when the increased efficiency reduces the cost of using the resource, inducing greater demand and potentially offsetting the original efficiency gains. The paradox has been observed in various contexts, including energy and water usage.\", \"concepts\": [\"Jevons paradox\", \"rebound effect\", \"energy efficiency\", \"resource consumption\", \"technological progress\", \"price elasticity of demand\", \"conservation policies\", \"sustainability\", \"economic growth\", \"resource depletion\", \"Khazzoom-Brookes postulate\", \"energy conservation\", \"water usage\", \"socio-hydrology\", \"reservoir effect\", \"elastic demand\", \"inelastic demand\", \"fuel consumption\", \"travel demand\", \"behavioural perspective\", \"exploration-exploitation strategies\", \"agricultural productivity\", \"food prices\", \"farming sector\", \"employment\", \"Third Agricultural Revolution\", \"input cost\", \"market price\", \"cap and trade\", \"green taxes\", \"coal consumption\", \"Industrial Revolution\", \"Watt steam engine\", \"Newcomen's steam engine\", \"coal-fired steam engine\", \"steam engine\", \"coal reserves\", \"Britain\", \"England\", \"Manchester\", \"James Watt\", \"William Stanley Jevons\", \"The Coal Question\", \"economists\", \"economic phenomenon\", \"resource use\", \"efficiency gains\", \"conservation\", \"sustainability\", \"environmental economists\", \"policy makers\", \"energy policy\", \"water policy\", \"resource management\", \"economic growth\", \"development\", \"water shortage\", \"reservoir construction\", \"water availability\", \"water consumption\", \"hydrology\", \"socio-hydrology\", \"reservoir effect\", \"safe development paradox\", \"water usage\", \"water conservation\", \"energy conservation\", \"energy efficiency\", \"rebound effect\", \"Jevons paradox\", \"Khazzoom-Brookes postulate\", \"energy consumption\", \"energy use\", \"resource depletion\", \"sustainability\", \"conservation policies\", \"economic growth\", \"resource management\", \"environmental economics\", \"economists\", \"policy makers\", \"energy policy\", \"water policy\", \"resource policy\", \"sustainable development\", \"environmental sustainability\", \"economic sustainability\", \"social sustainability\", \"resource efficiency\", \"energy efficiency\", \"water"
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Photosynthesis",
+      "ok": true,
+      "ms": 1947,
+      "inputTokens": 1720,
+      "outputTokens": 157,
+      "usd": 0.0007044,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains photosynthesis as the set of biological processes by which plants, algae, cyanobacteria, and some other organisms convert light energy into chemical energy stored in organic compounds. It distinguishes oxygenic photosynthesis, which splits water and releases oxygen, from anoxygenic forms used by certain bacteria and archaea, and describes the two stages: light-dependent reactions producing ATP and NADPH, and light-independent carbon fixation such as the Calvin cycle. It also notes the process's role in oxygenating Earth's atmosphere and supplying most biological energy for complex life.",
+        "concepts": [
+          "oxygenic photosynthesis",
+          "anoxygenic photosynthesis",
+          "light-dependent reactions",
+          "Calvin cycle",
+          "carbon fixation",
+          "chlorophyll and reaction centers",
+          "ATP and NADPH"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "ok": true,
+      "ms": 2431,
+      "inputTokens": 1927,
+      "outputTokens": 101,
+      "usd": 0.000223,
+      "finish": "stop",
+      "parsed": {
+        "summary": "A Bloom filter is a space-efficient probabilistic data structure used to test whether an element belongs to a set. It allows for false positive matches but guarantees no false negatives, making it ideal for reducing expensive disk accesses in memory-constrained environments.",
+        "concepts": [
+          "probabilistic data structures",
+          "false positive probability",
+          "hash functions",
+          "space efficiency",
+          "set membership testing"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/ebooks/84",
+      "ok": true,
+      "ms": 1817,
+      "inputTokens": 1035,
+      "outputTokens": 138,
+      "usd": 0.0004761,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Project Gutenberg page presents Mary Wollstonecraft Shelley's 1818 Gothic novel Frankenstein; or, The Modern Prometheus, offering a brief synopsis and free download options. The synopsis describes Victor Frankenstein creating a living creature from assembled body parts, then abandoning it in horror. The conscious being learns language and seeks connection but faces repeated rejection, eventually confronting his creator with a desperate request that leads both toward vengeance and tragedy.",
+        "concepts": [
+          "Gothic novel",
+          "artificial creation of life",
+          "creator's abandonment",
+          "creature's self-education",
+          "rejection and isolation",
+          "revenge and tragedy",
+          "Prometheus myth"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Dunbar%27s_number",
+      "ok": true,
+      "ms": 2685,
+      "inputTokens": 1851,
+      "outputTokens": 137,
+      "usd": 0.00022620000000000002,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Dunbar's number is a proposed cognitive limit of approximately 150 individuals with whom a human can maintain stable social relationships. The theory suggests this limit is determined by the size of the neocortex and was originally derived from correlations between primate brain size and social group size. While widely applied in sociology and business, the specific number remains a subject of scientific debate and criticism.",
+        "concepts": [
+          "cognitive limit",
+          "social group size",
+          "neocortex volume",
+          "social brain hypothesis",
+          "stable social relationships",
+          "evolutionary anthropology"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Mycorrhiza",
+      "ok": true,
+      "ms": 5248,
+      "inputTokens": 2087,
+      "outputTokens": 210,
+      "usd": 0.00041805,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains mycorrhizae, the symbiotic associations between fungi and plant roots in which fungi supply water and minerals while plants provide sugars from photosynthesis. It traces the history of research from A.B. Frank's 1885 naming of the term through genome sequencing, and describes the evolutionary origins of mycorrhizal symbiosis, which fossil and genetic evidence suggests arose alongside the first land plants roughly 450-500 million years ago. The article also notes that most plant species form mycorrhizae, with arbuscular mycorrhiza being the most common type, though some lineages like Brassicaceae have lost this ability.",
+        "concepts": [
+          "symbiotic fungus-plant association",
+          "arbuscular mycorrhiza",
+          "ectomycorrhiza",
+          "plant terrestrialization and early root systems",
+          "nutrient exchange (phosphorus, nitrogen, water)",
+          "Rhynie chert fossil evidence",
+          "evolutionary loss of mycorrhizal ability in some plant lineages"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/cache/epub/34901/pg34901-images.html",
+      "ok": true,
+      "ms": 2408,
+      "inputTokens": 2144,
+      "outputTokens": 135,
+      "usd": 0.0008052,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This is an edition of John Stuart Mill's On Liberty, prefaced by a biographical introduction by W. L. Courtney. The introduction traces Mill's life from his rigorous childhood education under his father through his career at the India House, his writings, and his brief term in Parliament. It emphasizes the profound intellectual and personal influence of his wife, Harriet Taylor, to whom the work is dedicated and under whose encouragement it was written.",
+        "concepts": [
+          "individual liberty",
+          "Mill's biography",
+          "paternal education",
+          "Harriet Taylor's influence",
+          "India House career",
+          "parliamentary service",
+          "dedication to his wife"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Photosynthesis",
+      "ok": true,
+      "ms": 2008,
+      "inputTokens": 1785,
+      "outputTokens": 148,
+      "usd": 0.0002229,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Photosynthesis is a biological process used by autotrophic organisms to convert light energy into chemical energy stored in organic compounds. The process typically involves light-dependent reactions to produce ATP and NADPH, followed by light-independent reactions like the Calvin cycle to fix carbon dioxide into carbohydrates. This mechanism is essential for maintaining Earth's atmospheric oxygen and providing the primary energy source for most complex life.",
+        "concepts": [
+          "oxygenic and anoxygenic photosynthesis",
+          "light-dependent and light-independent reactions",
+          "carbon fixation",
+          "chlorophyll and photopigments",
+          "cellular respiration",
+          "biological energy conversion"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/cache/epub/3300/pg3300-images.html",
+      "ok": true,
+      "ms": 2108,
+      "inputTokens": 2600,
+      "outputTokens": 172,
+      "usd": 0.0009864,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This is the table of contents and introduction to Adam Smith's Wealth of Nations, which frames national wealth as the product of the annual labour of a nation rather than its soil, climate, or territory. Smith argues that the abundance of a nation's supply depends chiefly on the skill and dexterity with which labour is applied and on the proportion of productive to unproductive workers. The work is organized into five books covering the division of labour and distribution of produce, capital accumulation, the uneven progress of opulence across nations, critiques of mercantile and agricultural systems, and the revenue and expenses of the sovereign.",
+        "concepts": [
+          "division of labour",
+          "productive powers of labour",
+          "capital accumulation",
+          "productive versus unproductive labour",
+          "mercantile system",
+          "natural and market price",
+          "public revenue and debt"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "ok": true,
+      "ms": 3617,
+      "inputTokens": 1864,
+      "outputTokens": 166,
+      "usd": 0.0003626,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains the Bloom filter, a space-efficient probabilistic data structure invented by Burton Howard Bloom in 1970 for testing set membership with possible false positives but no false negatives. It describes how the filter works using a bit array and multiple hash functions, why elements cannot be removed, and how its constant-time operations and low memory footprint (e.g., under 10 bits per element for a 1% error rate) make it useful for avoiding expensive lookups such as disk accesses.",
+        "concepts": [
+          "Probabilistic set membership testing",
+          "False positives vs. false negatives",
+          "Bit array with multiple hash functions",
+          "Impossibility of element removal",
+          "Space efficiency (~9.6 bits per element at 1% error)",
+          "Constant-time O(k) insert and lookup",
+          "Counting Bloom filter variant"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/ebooks/84",
+      "ok": true,
+      "ms": 1895,
+      "inputTokens": 1245,
+      "outputTokens": 94,
+      "usd": 0.0001527,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This page provides a digital edition of Mary Wollstonecraft Shelley's Gothic novel, Frankenstein. It outlines the plot involving Victor Frankenstein's creation of a living being and the subsequent tragic consequences of abandonment and vengeance.",
+        "concepts": [
+          "Gothic fiction",
+          "Science fiction",
+          "Scientific ethics",
+          "Social rejection",
+          "Creation and abandonment"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/cache/epub/34901/pg34901-images.html",
+      "ok": true,
+      "ms": 2834,
+      "inputTokens": 2389,
+      "outputTokens": 104,
+      "usd": 0.0002701,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This text provides a biographical introduction to John Stuart Mill, detailing his rigorous education, prolific literary career, and political life. It specifically highlights the profound intellectual influence of his wife, Harriet Taylor Mill, on his philosophical development and major works.",
+        "concepts": [
+          "biography of John Stuart Mill",
+          "intellectual partnership",
+          "political economy",
+          "philosophical influence",
+          "Victorian intellectual history"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Jevons_paradox",
+      "ok": true,
+      "ms": 3401,
+      "inputTokens": 8270,
+      "outputTokens": 164,
+      "usd": 0.0026778,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The article explains the Jevons paradox, the economic phenomenon in which technological improvements that increase the efficiency of a resource's use lead to a rise, rather than a fall, in total consumption of that resource. It traces the idea to William Stanley Jevons's 1865 observation that more efficient coal-fired steam engines increased England's coal consumption, and connects it to modern work on rebound effects and the Khazzoom–Brookes postulate. It also surveys the debate over whether efficiency gains undermine energy conservation policy and discusses proposed remedies such as carbon taxes and cap and trade.",
+        "concepts": [
+          "Jevons paradox",
+          "rebound effect",
+          "energy efficiency",
+          "price elasticity of demand",
+          "Khazzoom–Brookes postulate",
+          "energy conservation policy",
+          "induced demand"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Dunbar%27s_number",
+      "ok": true,
+      "ms": 3760,
+      "inputTokens": 1793,
+      "outputTokens": 186,
+      "usd": 0.00036195,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The page explains Dunbar's number, Robin Dunbar's proposed cognitive limit of roughly 150 stable social relationships, derived from correlations between primate neocortex size and group size and supported by observations of hunter-gatherer societies, villages, and military units. It also discusses applications in social software, business organization, and network analysis, as well as criticisms, including the Bernard–Killworth estimate of about 290 ties and replication studies with widely varying results that question whether any single cognitive limit can be derived. It also notes Dunbar's related hypothesis that language evolved as an efficient substitute for social grooming in maintaining group cohesion.",
+        "concepts": [
+          "Dunbar's number (150 stable relationships)",
+          "Social brain hypothesis",
+          "Neocortex size and group size correlation",
+          "Language as social grooming",
+          "Hunter-gatherer group size categories",
+          "Bernard–Killworth alternative estimate",
+          "Applications in social networks and business organization"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/cache/epub/3300/pg3300-images.html",
+      "ok": true,
+      "ms": 2402,
+      "inputTokens": 3052,
+      "outputTokens": 115,
+      "usd": 0.00033969999999999996,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This foundational text examines the factors that drive the economic prosperity of nations, focusing on the productivity of labor and the accumulation of capital. It explores how the division of labor, market extent, and various economic systems influence the distribution of wealth and the development of societies.",
+        "concepts": [
+          "division of labour",
+          "accumulation of capital",
+          "productive powers of labour",
+          "mercantile system",
+          "natural and market price",
+          "political economy"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Agroforestry",
+      "ok": false,
+      "ms": 14607,
+      "inputTokens": 1803,
+      "outputTokens": 500,
+      "usd": 0.001654779,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unexpected end of JSON input",
+      "content": "{\"summary\": \"Agroforestry is a land use management system that integrates trees with crops or pasture, providing economic, environmental, and social benefits. It can improve farm productivity, reduce soil erosion, and increase biodiversity. Agroforestry practices are prevalent in the tropics and have been adopted in other regions for their sustainable benefits.\", \"concepts\": [\"land use management\", \"sustainable agriculture\", \"polyculture systems\", \"agroecology\", \"biodiversity conservation\", \"soil erosion prevention\", \"carbon sequestration\", \"ecosystem services\", \"agroforestry practices\", \"tropical home gardens\", \"permaculture\", \"ecological niches\", \"agroecological succession\", \"sustainable agriculture\", \"land restoration\", \"soil fertility\", \"crop diversity\", \"weather shocks\", \"food security\", \"nutrition\", \"income security\", \"fuelwood\", \"medicinal plants\", \"multiple crops\", \"ecosystem services\", \"sustainable development\", \"environmental benefits\", \"social benefits\", \"economic benefits\", \"agricultural practices\", \"forest ecosystems\", \"indigenous communities\", \"traditional practices\", \"modern science\", \"agroforestry systems\", \"tree crops\", \"permanent agriculture\", \"honey locust tree\", \"legume\", \"livestock feed\", \"grain inputs\", \"diets of livestock\", \"non-arable land\", \"tree agriculture\", \"tree-produced crops\", \"agroforestry practices\", \"simple interaction\", \"two components\", \"hedges\", \"trees\", \"single crop\", \"complex multi-strata agroforests\", \"nitrogen-fixing plants\", \"legumes\", \"soil nitrogen fertility\", \"education\", \"awareness\", \"adoption\", \"sustainable practices\", \"agroforestry\", \"agroecological succession\", \"ecological goods\", \"services\", \"good farm management\", \"choosing the right trees\", \"pruning\", \"biodiversity\", \"ecological niches\", \"food chains\", \"agroecosystems\", \"sustainability\", \"tropical bat\", \"bird diversity\", \"natural forests\", \"floristic species\", \"canopy height\", \"germplasm\", \"sensitive species\", \"habitat corridors\", \"ecosystem services\", \"soil erosion\", \"groundcover plants\", \"grass\", \"soil cover\", \"water runoff\","
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Agroforestry",
+      "ok": true,
+      "ms": 4613,
+      "inputTokens": 6802,
+      "outputTokens": 172,
+      "usd": 0.002247,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article defines agroforestry as a land-use management system that intentionally integrates trees with crops or pasture, combining agricultural and forestry practices to produce diverse products and ecosystem services. It traces the term to 1973 while noting that such practices, especially tropical home gardens and indigenous land management, have existed for millennia. The article surveys benefits such as improved soil, biodiversity, carbon sequestration, and climate adaptation, and describes temperate and tropical applications including alley cropping, silvopasture, riparian buffers, windbreaks, urban agroforestry, and forest gardening.",
+        "concepts": [
+          "agroforestry as polyculture",
+          "tropical home gardens",
+          "alley cropping",
+          "silvopasture",
+          "riparian forest buffers",
+          "forest gardening and seven-layer systems",
+          "carbon sequestration and climate adaptation"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Jevons_paradox",
+      "ok": true,
+      "ms": 3037,
+      "inputTokens": 9947,
+      "outputTokens": 137,
+      "usd": 0.0010358,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The Jevons paradox describes an economic phenomenon where technological improvements in resource efficiency lead to an increase in total consumption rather than a decrease. This occurs because increased efficiency lowers the effective cost of a resource, which can trigger higher demand through price elasticity and economic growth. Consequently, efficiency gains alone may fail to reduce resource depletion unless paired with conservation policies like taxes or caps.",
+        "concepts": [
+          "resource efficiency",
+          "rebound effect",
+          "price elasticity of demand",
+          "economic growth",
+          "energy conservation policy",
+          "Khazzoom–Brookes postulate"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Pollination",
+      "ok": true,
+      "ms": 3013,
+      "inputTokens": 6893,
+      "outputTokens": 184,
+      "usd": 0.0022887000000000003,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains pollination as the transfer of pollen from a plant's anther to a stigma, enabling fertilization and seed production, and describes the differing processes in angiosperms (double fertilization) and gymnosperms. It surveys pollination methods, distinguishing biotic agents such as insects, birds, bats, and other vertebrates from abiotic ones like wind, water, and rain, and covers cross- versus self-pollination mechanisms. It also discusses coevolution between plants and pollinators, the importance of pollination in agriculture and horticulture, and the environmental threat of pollinator decline.",
+        "concepts": [
+          "pollen transfer and fertilization",
+          "biotic versus abiotic pollination",
+          "pollinators (insects, birds, bats, vertebrates)",
+          "cross-pollination and self-pollination",
+          "double fertilization in angiosperms",
+          "plant-pollinator coevolution",
+          "pollination in agriculture and pollinator decline"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Agroforestry",
+      "ok": true,
+      "ms": 2716,
+      "inputTokens": 7140,
+      "outputTokens": 133,
+      "usd": 0.0007539,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Agroforestry is a land management system that integrates trees with crops or livestock to create productive polyculture environments. It offers diverse economic, environmental, and social benefits, including improved soil fertility, carbon sequestration, and increased biodiversity. The practice ranges from traditional tropical home gardens to modern urban food forests and temperate silvopasture systems.",
+        "concepts": [
+          "polyculture systems",
+          "ecosystem services",
+          "carbon sequestration",
+          "sustainable agriculture",
+          "biodiversity conservation",
+          "agroecology",
+          "climate change adaptation"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Pollination",
+      "ok": true,
+      "ms": 4403,
+      "inputTokens": 1950,
+      "outputTokens": 106,
+      "usd": 0.000810168,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Pollination is the transfer of pollen from one plant to another, enabling fertilization and seed production. This process can occur within a species or between species, resulting in hybrid offspring. Pollination is crucial for the reproductive system of most flowering plants and is facilitated by various agents, including animals, wind, and water.",
+        "concepts": [
+          "pollen transfer",
+          "fertilization",
+          "seed production",
+          "pollinating agents",
+          "flowering plants",
+          "hybrid offspring",
+          "reproductive system"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Pollination",
+      "ok": true,
+      "ms": 1658,
+      "inputTokens": 7065,
+      "outputTokens": 141,
+      "usd": 0.0007488,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Pollination is the biological process of transferring pollen from anther to stigma to enable fertilization and seed production. This process can be mediated by biotic agents like insects and vertebrates or abiotic factors such as wind and water. The text highlights the critical role of pollination in agriculture and the growing environmental threats posed by pollinator decline.",
+        "concepts": [
+          "biotic and abiotic pollination",
+          "angiosperm and gymnosperm reproduction",
+          "cross-pollination and self-pollination",
+          "coevolutionary mutualism",
+          "agricultural pollination management",
+          "pollinator decline and environmental impact"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Tragedy_of_the_commons",
+      "ok": true,
+      "ms": 2439,
+      "inputTokens": 6774,
+      "outputTokens": 166,
+      "usd": 0.0022313999999999997,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains the tragedy of the commons as the idea that shared resources are overused because individuals gain privately while costs are borne collectively, leading to depletion. It traces the concept from Aristotle and William Forster Lloyd to Garrett Hardin's influential 1968 essay, which focused on overpopulation and argued for coercive limits on reproduction and aid. It also presents criticisms, notably Elinor Ostrom's work showing communities often manage commons successfully, and surveys applications from environmental resources to digital commons and public health.",
+        "concepts": [
+          "tragedy of the commons",
+          "common-pool resources",
+          "overexploitation and depletion",
+          "Garrett Hardin's 1968 essay",
+          "Elinor Ostrom's commons governance",
+          "negative externalities",
+          "commons dilemma and cooperation"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Tragedy_of_the_commons",
+      "ok": true,
+      "ms": 2639,
+      "inputTokens": 7216,
+      "outputTokens": 122,
+      "usd": 0.0007582,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The tragedy of the commons describes a situation where individuals acting in their own rational self-interest deplete a shared resource, ultimately harming the entire community. While Garrett Hardin popularized the concept as an inevitable result of unregulated access, scholars like Elinor Ostrom have demonstrated that communities can often manage resources through collective agreements and local governance.",
+        "concepts": [
+          "common-pool resources",
+          "rational self-interest",
+          "negative externalities",
+          "resource depletion",
+          "collective action",
+          "sustainable management"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Mycorrhiza",
+      "ok": true,
+      "ms": 3058,
+      "inputTokens": 7195,
+      "outputTokens": 161,
+      "usd": 0.0023517,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains that a mycorrhiza is a symbiotic association between a fungus and a plant, in which fungal hyphae interconnect with plant roots and exchange nutrients at the cellular level. It surveys the evolutionary history of these associations, the major types (arbuscular, ectomycorrhizal, ericoid, orchid, and others), and the mechanisms by which fungi improve plant nutrient and water uptake. It also notes that the relationship is usually mutualistic but can be parasitic in some species or circumstances.",
+        "concepts": [
+          "symbiotic fungus-plant association",
+          "arbuscular mycorrhiza",
+          "ectomycorrhiza",
+          "nutrient exchange and plant nutrition",
+          "evolution and fossil evidence",
+          "mycorrhizal types and classification",
+          "common symbiosis signaling pathway"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Photosynthesis",
+      "ok": true,
+      "ms": 14636,
+      "inputTokens": 1825,
+      "outputTokens": 169,
+      "usd": 0.00035825,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains photosynthesis, the process by which plants, algae, and cyanobacteria convert light energy into chemical energy stored in carbohydrates, releasing oxygen as a byproduct. It describes the two-stage mechanism—light-dependent reactions producing ATP and NADPH, followed by the Calvin cycle fixing carbon dioxide into sugars—and contrasts oxygenic with anoxygenic forms found in some bacteria and archaea. The article also covers photosynthesis's evolutionary history, its role in oxygenating Earth's atmosphere, and its global scale of energy capture and carbon fixation.",
+        "concepts": [
+          "Oxygenic photosynthesis",
+          "Light-dependent reactions",
+          "Calvin cycle (carbon fixation)",
+          "Chlorophyll and chloroplasts",
+          "Anoxygenic photosynthesis",
+          "ATP and NADPH",
+          "Evolution of cyanobacteria and atmospheric oxygenation"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Mycorrhiza",
+      "ok": true,
+      "ms": 3222,
+      "inputTokens": 7313,
+      "outputTokens": 150,
+      "usd": 0.0007763000000000001,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Mycorrhiza is a symbiotic relationship between fungi and plant roots that facilitates the exchange of plant-produced sugars for fungal-sourced water and minerals. The association is primarily mutualistic and essential for plant nutrition, though it can occasionally become parasitic. Various types exist, including arbuscular, ectomycorrhizal, orchid, and ericoid, each differing in how the fungi interact with plant cells.",
+        "concepts": [
+          "symbiotic association",
+          "nutrient exchange",
+          "arbuscular mycorrhiza",
+          "ectomycorrhiza",
+          "evolutionary terrestrialization",
+          "mutualism",
+          "fungal hyphae"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "ok": true,
+      "ms": 2985,
+      "inputTokens": 9026,
+      "outputTokens": 157,
+      "usd": 0.0028962,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains the Bloom filter, a space-efficient probabilistic data structure invented by Burton Howard Bloom in 1970 for testing set membership. It describes the bit-array and multiple-hash-function algorithm, noting that queries return either \"possibly in set\" or \"definitely not in set,\" with false positives possible but false negatives impossible. The article also covers false-positive probability analysis, optimal hash function counts, variants like counting Bloom filters, and applications such as database lookups, web caching, and malicious URL detection.",
+        "concepts": [
+          "probabilistic data structure",
+          "false positive rate",
+          "bit array and hash functions",
+          "space efficiency",
+          "counting Bloom filter",
+          "set union and intersection",
+          "cache filtering and database lookups"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "ok": true,
+      "ms": 2587,
+      "inputTokens": 9822,
+      "outputTokens": 117,
+      "usd": 0.0010173,
+      "finish": "stop",
+      "parsed": {
+        "summary": "A Bloom filter is a space-efficient probabilistic data structure used to test set membership with the possibility of false positives but no false negatives. It utilizes a bit array and multiple hash functions to provide constant-time operations, making it ideal for reducing expensive disk lookups in databases and caches.",
+        "concepts": [
+          "probabilistic data structures",
+          "false positive probability",
+          "hash functions",
+          "space efficiency",
+          "set membership testing",
+          "counting Bloom filters"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Dunbar%27s_number",
+      "ok": true,
+      "ms": 2887,
+      "inputTokens": 5757,
+      "outputTokens": 171,
+      "usd": 0.0019322999999999999,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The article explains Dunbar's number, a proposed cognitive limit of roughly 150 people with whom a human can maintain stable social relationships, derived by Robin Dunbar from correlations between primate neocortex size and social group size. It describes the research background, including hunter-gatherer group sizes and the social brain hypothesis, and notes applications in business, social software, and online networks. It also covers alternative estimates, such as the Bernard-Killworth figure of about 290, and criticisms questioning whether a cognitive limit can be derived this way.",
+        "concepts": [
+          "Dunbar's number",
+          "neocortex size and group size",
+          "social brain hypothesis",
+          "social grooming and language evolution",
+          "hunter-gatherer group sizes",
+          "Bernard-Killworth estimate",
+          "criticism of cognitive limit"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/ebooks/84",
+      "ok": true,
+      "ms": 4664,
+      "inputTokens": 1043,
+      "outputTokens": 132,
+      "usd": 0.00022244999999999999,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This is a Project Gutenberg catalog page for Mary Shelley's 1818 Gothic novel Frankenstein; or, The Modern Prometheus, offering free downloads in multiple formats. It briefly describes the plot: Victor Frankenstein creates a living being, abandons it in horror, and the rejected creature's demand for connection leads both toward vengeance and tragedy. The page also lists metadata, subjects, and related literary categories.",
+        "concepts": [
+          "Gothic fiction",
+          "Victor Frankenstein and his abandoned creature",
+          "Creation and rejection",
+          "Vengeance and tragedy",
+          "Science fiction precursors",
+          "Public domain eBook distribution",
+          "Download formats (EPUB, Kindle, HTML)"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Dunbar%27s_number",
+      "ok": true,
+      "ms": 1967,
+      "inputTokens": 6643,
+      "outputTokens": 141,
+      "usd": 0.0007066,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Dunbar's number is a proposed cognitive limit of approximately 150 individuals with whom a human can maintain stable social relationships. The theory suggests this limit is determined by neocortex size and was originally derived from correlations between primate brain volume and social group size. While widely applied in sociology and business, the concept faces academic criticism regarding its methodology and the influence of dietary factors on brain evolution.",
+        "concepts": [
+          "cognitive social limit",
+          "neocortex size",
+          "social brain hypothesis",
+          "primate sociality",
+          "evolutionary psychology",
+          "group cohesion"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Tragedy_of_the_commons",
+      "ok": false,
+      "ms": 13319,
+      "inputTokens": 1961,
+      "outputTokens": 500,
+      "usd": 0.0017010729999999998,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 2157 (line 1 column 2158)",
+      "content": "{\"summary\": \"The tragedy of the commons is a concept that describes how shared resources can be depleted when individuals prioritize their own interests over the collective good. This idea has been discussed in economics, ecology, and other sciences, with some arguing that mutual restraint can prevent over-exploitation. The concept has been criticized and refined by various scholars, including Elinor Ostrom, who argued that collective management can prevent the tragedy of the commons. \", \"concepts\": [\"tragedy of the commons\", \"shared resources\", \"over-exploitation\", \"mutual restraint\", \"collective management\", \"economics\", \"ecology\", \"game theory\", \"rational choice theory\", \"common-pool resources\", \"sustainability\", \"environmental degradation\", \"population growth\", \"welfare state\", \"human rights\", \"freedom\", \"necessity\", \"self-interest\", \"altruism\", \"cooperation\", \"collective action\", \"social dilemma\", \"institutional analysis\", \"governance\", \"policy\", \"regulation\", \"conservation\", \"preservation\", \"resource management\", \"sustainable development\", \"environmental economics\", \"ecological economics\", \"political economy\", \"public choice theory\", \"social choice theory\", \"behavioral economics\", \"experimental economics\", \"econometrics\", \"mathematical modeling\", \"systems thinking\", \"complexity science\", \"resilience\", \"adaptation\", \"transformative change\", \"global governance\", \"international cooperation\", \"multilateralism\", \"diplomacy\", \"negotiation\", \"conflict resolution\", \"peace studies\", \"security studies\", \"human security\", \"sustainable peace\", \"environmental security\", \"ecological security\", \"climate change\", \"biodiversity loss\", \"deforestation\", \"soil degradation\", \"water pollution\", \"air pollution\", \"waste management\", \"recycling\", \"renewable energy\", \"energy efficiency\", \"sustainable agriculture\", \"agroecology\", \"permaculture\", \"regenerative agriculture\", \"organic farming\", \"local food systems\", \"food security\", \"nutrition\", \"public health\", \"health equity\", \"social justice\", \"human rights\", \"equity\", \"fairness\", \"justice\", \"morality\", \"ethics\", \"values\", \"principles\", \"norms\", \"standards\", \"laws\", \"policies\", \"regulations"
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Photosynthesis",
+      "ok": true,
+      "ms": 3178,
+      "inputTokens": 7492,
+      "outputTokens": 151,
+      "usd": 0.0007945,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Photosynthesis is a biological process used by autotrophic organisms to convert light energy into chemical energy stored in organic compounds. The process typically involves light-dependent reactions that produce ATP and NADPH, followed by light-independent reactions like the Calvin cycle to fix carbon dioxide into sugars. This mechanism is fundamental to Earth's biosphere, providing the primary energy source for complex life and maintaining atmospheric oxygen levels.",
+        "concepts": [
+          "oxygenic and anoxygenic photosynthesis",
+          "light-dependent and light-independent reactions",
+          "carbon fixation pathways",
+          "chloroplast ultrastructure",
+          "photosynthetic efficiency",
+          "evolutionary history of photosynthesis"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Photosynthesis",
+      "ok": true,
+      "ms": 4599,
+      "inputTokens": 7144,
+      "outputTokens": 197,
+      "usd": 0.0023796,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains photosynthesis as the set of biological processes by which plants, algae, cyanobacteria, and some other organisms convert light energy into chemical energy, storing it in organic compounds such as sugars. It describes the two main stages—light-dependent reactions that produce ATP and NADPH and split water to release oxygen, and light-independent reactions such as the Calvin cycle that fix carbon dioxide into carbohydrates—along with variations including anoxygenic photosynthesis, C4 and CAM carbon-concentrating mechanisms, and the evolutionary history of the process. It also covers chloroplast and thylakoid structure, photosynthetic efficiency, measurement methods, and the global importance of photosynthesis for atmospheric oxygen and the biosphere's energy supply.",
+        "concepts": [
+          "oxygenic photosynthesis",
+          "light-dependent reactions",
+          "Calvin cycle and carbon fixation",
+          "chloroplasts and thylakoids",
+          "anoxygenic photosynthesis",
+          "C4 and CAM carbon concentration",
+          "photosynthetic efficiency"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/ebooks/84",
+      "ok": true,
+      "ms": 1157,
+      "inputTokens": 1246,
+      "outputTokens": 94,
+      "usd": 0.0001528,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This page provides a digital edition of Mary Wollstonecraft Shelley's Gothic novel, Frankenstein. It outlines the plot regarding Victor Frankenstein's creation of a living being and the subsequent tragic consequences of his abandonment.",
+        "concepts": [
+          "Gothic fiction",
+          "Science fiction",
+          "Scientific responsibility",
+          "Social rejection",
+          "Tragedy and vengeance"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/ebooks/84",
+      "ok": true,
+      "ms": 1508,
+      "inputTokens": 1035,
+      "outputTokens": 132,
+      "usd": 0.00046889999999999996,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Project Gutenberg page presents Mary Wollstonecraft Shelley's 1818 Gothic novel Frankenstein; or, The Modern Prometheus, offering a brief synopsis and free download options. The synopsis describes Victor Frankenstein creating a living creature from assembled body parts, then abandoning it in horror. The conscious being learns language and seeks connection but faces repeated rejection, leading to a confrontation and a path of vengeance and tragedy.",
+        "concepts": [
+          "Gothic novel",
+          "artificial creation of life",
+          "creator's abandonment",
+          "creature's rejection and isolation",
+          "language acquisition",
+          "vengeance and tragedy",
+          "public domain ebook"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Mycorrhiza",
+      "ok": true,
+      "ms": 4345,
+      "inputTokens": 2099,
+      "outputTokens": 134,
+      "usd": 0.000916909,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Mycorrhiza is a symbiotic association between a fungus and a plant, where the fungus colonizes the plant's root tissues and provides essential nutrients. This association is crucial for plant nutrition, soil biology, and soil chemistry. Mycorrhizae have been present in plants for over 450 million years, with fossil evidence showing early mycorrhizal-like associations in ancient plants.",
+        "concepts": [
+          "mycorrhizal association",
+          "symbiotic relationship",
+          "fungal colonization",
+          "plant nutrition",
+          "soil biology",
+          "arbuscular mycorrhizae",
+          "ectomycorrhizae"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/cache/epub/34901/pg34901-images.html",
+      "ok": true,
+      "ms": 3372,
+      "inputTokens": 9246,
+      "outputTokens": 157,
+      "usd": 0.0009717,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This text provides an introduction to John Stuart Mill's 'On Liberty' and an overview of his life and intellectual influences. It argues that the primary threat to individual freedom has shifted from the tyranny of political rulers to the social tyranny of the collective community. The author also highlights the significant intellectual partnership between Mill and his wife, Harriet Taylor, noting her influence on his views regarding social advancement and women's rights.",
+        "concepts": [
+          "civil and social liberty",
+          "tyranny of the majority",
+          "individualism versus social authority",
+          "intellectual influence of Harriet Taylor Mill",
+          "the evolution of political liberty",
+          "human development and diversity"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/cache/epub/34901/pg34901-images.html",
+      "ok": true,
+      "ms": 2837,
+      "inputTokens": 8281,
+      "outputTokens": 181,
+      "usd": 0.0027014999999999995,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This is the front matter and opening chapter of John Stuart Mill's On Liberty, framed by W. L. Courtney's 1901 introduction, which recounts Mill's biography and the intellectual influence of his wife Harriet Taylor on his work. Mill opens the essay by defining its subject as civil or social liberty—the limits of society's legitimate power over the individual—and traces the historical struggle of subjects against tyrannical rulers. He argues that with the rise of popular government, the danger of tyranny shifts from rulers to society itself, making the question of individual liberty newly urgent.",
+        "concepts": [
+          "civil or social liberty",
+          "limits of society's authority over the individual",
+          "tyranny of the majority",
+          "struggle between liberty and authority",
+          "individuality and human development",
+          "influence of Harriet Taylor on Mill",
+          "popular government and self-rule"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/cache/epub/3300/pg3300-images.html",
+      "ok": true,
+      "ms": 2281,
+      "inputTokens": 8521,
+      "outputTokens": 149,
+      "usd": 0.0027351,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This is the opening of Adam Smith's Wealth of Nations, which argues that national wealth arises from the productivity of labour, driven chiefly by the division of labour. Smith illustrates this with the pin factory, showing how splitting work into specialized tasks multiplies output, and traces the gains to greater dexterity, time saved, and machinery invention. He also explains that the division of labour stems from the human propensity to trade and is limited by the extent of the market.",
+        "concepts": [
+          "division of labour",
+          "productive powers of labour",
+          "pin factory example",
+          "propensity to truck and barter",
+          "extent of the market",
+          "dexterity and time-saving",
+          "machinery invention"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/cache/epub/3300/pg3300-images.html",
+      "ok": true,
+      "ms": 2494,
+      "inputTokens": 9513,
+      "outputTokens": 106,
+      "usd": 0.0009831,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This foundational economic text explores the origins of national wealth, focusing on how the division of labour increases productivity. It argues that human propensity to exchange goods drives specialization, which in turn fosters technological innovation and widespread social opulence.",
+        "concepts": [
+          "division of labour",
+          "productive powers of labour",
+          "accumulation of capital",
+          "propensity to exchange",
+          "market extent",
+          "economic opulence"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "file",
+      "prefixBytes": 12000,
+      "item": "on-liberty.md",
+      "ok": true,
+      "ms": 1799,
+      "inputTokens": 2360,
+      "outputTokens": 128,
+      "usd": 0.0008616,
+      "finish": "stop",
+      "parsed": {
+        "title": "On Liberty",
+        "summary": "John Stuart Mill's essay on civil and social liberty, examining the legitimate limits of society's power over the individual and warning against the tyranny of the majority.",
+        "tags": [
+          "political philosophy",
+          "liberalism",
+          "individual freedom",
+          "tyranny of the majority",
+          "social liberty",
+          "classic essay"
+        ],
+        "project": null,
+        "concepts": [
+          "civil and social liberty",
+          "limits of society's authority over the individual",
+          "tyranny of the majority",
+          "liberty of thought and discussion",
+          "individuality",
+          "self-government vs. government of each by all",
+          "protection against rulers vs. protection against social opinion"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "file",
+      "prefixBytes": 12000,
+      "item": "on-liberty.md",
+      "ok": true,
+      "ms": 2188,
+      "inputTokens": 2495,
+      "outputTokens": 148,
+      "usd": 0.0002939,
+      "finish": "stop",
+      "parsed": {
+        "title": "On Liberty",
+        "summary": "A foundational political treatise examining the nature and limits of social and civil liberty. It explores the tension between individual autonomy and the authority of both the state and the collective society.",
+        "tags": [
+          "political philosophy",
+          "liberalism",
+          "individual rights",
+          "social tyranny",
+          "democracy",
+          "civil liberty"
+        ],
+        "project": null,
+        "concepts": [
+          "tyranny of the majority",
+          "social tyranny",
+          "civil liberty",
+          "individual autonomy",
+          "limits of authority"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/cache/epub/34901/pg34901-images.html",
+      "ok": true,
+      "ms": 14249,
+      "inputTokens": 2149,
+      "outputTokens": 152,
+      "usd": 0.00039834999999999995,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This page is the front matter and introduction to an edition of John Stuart Mill's 'On Liberty,' including Mill's dedication to his wife Harriet Taylor and a biographical introduction by W. L. Courtney. It recounts Mill's life—his rigorous upbringing, career at the India House, literary output, parliamentary service, and death in 1873—and emphasizes the profound intellectual influence Harriet Taylor had on his work, particularly 'On Liberty' and 'The Subjection of Women.'",
+        "concepts": [
+          "John Stuart Mill's biography",
+          "Harriet Taylor's intellectual influence",
+          "Mill's education by his father James Mill",
+          "Mill's career at the India House",
+          "Mill's parliamentary career",
+          "On Liberty's dedication",
+          "The Subjection of Women"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/cache/epub/3300/pg3300-images.html",
+      "ok": true,
+      "ms": 3165,
+      "inputTokens": 2564,
+      "outputTokens": 146,
+      "usd": 0.00045759999999999996,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This page contains the table of contents and introduction to Adam Smith's 'The Wealth of Nations,' outlining its five-book structure covering labour, capital, national economic development, systems of political economy, and public revenue. The introduction argues that a nation's annual supply of necessities depends chiefly on the skill and productivity of its labour, with capital stock determining the number of productive workers employed. It previews the work's analysis of how economic policies favouring towns over agriculture gave rise to competing theories of political economy.",
+        "concepts": [
+          "Division of labour",
+          "Productive powers of labour",
+          "Capital stock and accumulation",
+          "Natural and market price",
+          "Mercantile system critique",
+          "Public revenue and debt",
+          "Wages, profits, and rent"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+      "kind": "file",
+      "prefixBytes": 1048576,
+      "item": "on-liberty.md",
+      "ok": true,
+      "ms": 8035,
+      "inputTokens": 65648,
+      "outputTokens": 144,
+      "usd": 0.019867199999999998,
+      "finish": "stop",
+      "parsed": {
+        "title": "On Liberty",
+        "summary": "John Stuart Mill's essay defends civil and social liberty, arguing that society may interfere with an individual's freedom only to prevent harm to others, and that liberty of thought, discussion, and individuality is essential to human progress.",
+        "tags": [
+          "political philosophy",
+          "liberalism",
+          "individual liberty",
+          "freedom of speech",
+          "tyranny of the majority",
+          "individuality",
+          "harm principle",
+          "utilitarianism"
+        ],
+        "project": null,
+        "concepts": [
+          "harm principle",
+          "tyranny of the majority",
+          "liberty of thought and discussion",
+          "individuality and self-development",
+          "fallibility of opinion",
+          "limits of social authority over the individual",
+          "diversity of opinion as a path to truth"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Jevons_paradox",
+      "ok": true,
+      "ms": 3876,
+      "inputTokens": 8470,
+      "outputTokens": 158,
+      "usd": 0.0013495,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The page explains the Jevons paradox: improvements in resource-use efficiency can lower effective costs and, when demand is sufficiently price elastic, increase rather than decrease total consumption. It traces the concept from William Stanley Jevons's 1865 observation about coal and the Watt steam engine through the modern Khazzoom–Brookes postulate on energy efficiency, and discusses debate over the size of rebound effects. It concludes that efficiency gains alone may not conserve resources, so conservation policies such as green taxes or cap-and-trade are needed to keep the cost of use high.",
+        "concepts": [
+          "Jevons paradox",
+          "Rebound effect",
+          "Price elasticity of demand",
+          "Khazzoom–Brookes postulate",
+          "Energy conservation policy",
+          "Induced demand",
+          "Applications to AI and agriculture"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "ok": false,
+      "ms": 17148,
+      "inputTokens": 1885,
+      "outputTokens": 500,
+      "usd": 0.0016788049999999998,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 2263 (line 1 column 2264)",
+      "content": "{\"summary\": \"A Bloom filter is a space-efficient probabilistic data structure used to test whether an element is a member of a set, allowing for false positives but not false negatives. It is designed for applications where the amount of source data would require an impractically large amount of memory if conventional error-free hashing techniques were applied. The filter has a substantial space advantage over other data structures for representing sets, but may require additional solutions for actual storage. \", \"concepts\": [\"Bloom filter\", \"probabilistic data structure\", \"set membership\", \"hash functions\", \"false positives\", \"space efficiency\", \"data storage\", \"algorithm design\", \"error rate\", \"memory usage\", \"parallelization\", \"hardware implementation\", \"constant time complexity\", \"sparse hash tables\", \"deterministic bit array\", \"counting Bloom filter\", \"quotient filter\", \"skip list\", \"random trees\", \"treap\", \"rapidly exploring random tree\", \"randomized algorithm\", \"HyperLogLog\", \"count sketch\", \"count-min sketch\", \"probabilistic algorithms\", \"data structures for approximate set membership\", \"Bloom shader effect\", \"hyphenation algorithm\", \"dictionary\", \"words\", \"disk accesses\", \"hash area\", \"bit array\", \"array positions\", \"initial values\", \"double hashing\", \"triple hashing\", \"random number generators\", \"seeding\", \"one-time removal\", \"composite filter\", \"key-value storage system\", \"answer speed\", \"self-balancing binary search trees\", \"tries\", \"hash tables\", \"linked lists\", \"pointers\", \"linear space overhead\", \"compactness\", \"probabilistic nature\", \"error rate reduction\", \"potential values\", \"deterministic bit array\", \"collisions\", \"bucket\", \"entry\", \"constant-space set data structure\", \"average access time\", \"sparse hash tables\", \"hardware implementation\", \"parallelization\", \"independence\", \"lookups\", \"special case\", \"k = 1\", \"false positive rate\", \"bit fraction\", \"array size\", \"space efficiency\", \"trade-offs\", \"applications\", \"source data\", \"memory requirements\", \"conventional hashing\", \"error-free hashing\", \"impractical memory\", \"limited memory\", \"smaller hash area\", \"unnecessary disk accesses\", \"disk accesses elimination\", \"bits per element\", \"false positive probability\", \"independence of size\", \"independence of number"
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Agroforestry",
+      "ok": true,
+      "ms": 3534,
+      "inputTokens": 6991,
+      "outputTokens": 160,
+      "usd": 0.00112865,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains agroforestry, the practice of integrating trees with crops or livestock, describing its history, global prevalence (especially in the tropics), and benefits such as biodiversity, soil protection, carbon sequestration, and climate resilience. It surveys major practices including alley cropping, silvopasture, shade crops, forest farming, syntropic systems, and forest gardening, and discusses urban agroforestry's potential and implementation barriers.",
+        "concepts": [
+          "Agroforestry and polyculture land use",
+          "Ecosystem services and carbon sequestration",
+          "Tropical home gardens and indigenous practices",
+          "Alley cropping and silvopasture",
+          "Forest gardening and the seven-layer system",
+          "Syntropic farming",
+          "Urban agroforestry benefits and barriers"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "kind": "file",
+      "prefixBytes": 1048576,
+      "item": "on-liberty.md",
+      "ok": true,
+      "ms": 12628,
+      "inputTokens": 68167,
+      "outputTokens": 164,
+      "usd": 0.0068659,
+      "finish": "stop",
+      "parsed": {
+        "title": "On Liberty",
+        "summary": "A foundational political treatise exploring the relationship between authority and individual freedom, arguing for the protection of individual spontaneity against the tyranny of the majority and social custom.",
+        "tags": [
+          "political philosophy",
+          "liberalism",
+          "individual rights",
+          "social tyranny",
+          "freedom of speech",
+          "civil liberty",
+          "ethics",
+          "democracy"
+        ],
+        "project": null,
+        "concepts": [
+          "harm principle",
+          "tyranny of the majority",
+          "liberty of thought and discussion",
+          "individuality",
+          "social tyranny",
+          "utility"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Pollination",
+      "ok": true,
+      "ms": 9626,
+      "inputTokens": 7270,
+      "outputTokens": 191,
+      "usd": 0.001186,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains pollination as the transfer of pollen enabling fertilisation and seed production in plants, covering biotic (insect, bird, bat, mammal, even reptile) and abiotic (wind, water, rain) mechanisms across angiosperms and gymnosperms. It describes cross-pollination versus self-pollination strategies, the coevolution of flowers and their pollinators, and the critical role of pollination in agriculture and crop yields. It also reports on pollinator decline driven by habitat destruction, pesticides, disease, and climate change, and the resulting ecological and economic threats.",
+        "concepts": [
+          "Pollination and fertilisation process",
+          "Biotic vs abiotic pollination methods",
+          "Cross-pollination and self-pollination",
+          "Flower-pollinator coevolution and mutualism",
+          "Pollination management in agriculture",
+          "Pollinator decline and colony collapse",
+          "Economic value of pollination services"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Dunbar%27s_number",
+      "ok": false,
+      "ms": 14973,
+      "inputTokens": 1814,
+      "outputTokens": 500,
+      "usd": 0.001658002,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 2584 (line 1 column 2585)",
+      "content": "{\"summary\": \"Dunbar's number is a proposed cognitive limit to the number of people with whom one can maintain stable social relationships, estimated to be around 150. This concept is based on the correlation between primate brain size and average social group size. The idea has been applied in various fields, including anthropology, psychology, and business management. \", \"concepts\": [\"Dunbar's number\", \"social relationships\", \"primate brain size\", \"neocortex\", \"social grooming\", \"group size\", \"human evolution\", \"language development\", \"social networks\", \"cognitive limit\", \"anthropology\", \"evolutionary psychology\", \"business management\", \"social software\", \"online social networks\", \"communication networks\", \"unit cohesion\", \"morale\", \"terrorist networks\", \"cybercrime networks\", \"criminal ideology\", \"distributed networks\", \"dynamic networks\", \"social brain hypothesis\", \"complex communication\", \"cooperative effort\", \"productive effort\", \"social intimacy\", \"physical intimacy\", \"mathematical formulation\", \"statistical analysis\", \"comparative phylogenetic methods\", \"Bayesian methods\", \"generalized least-squares methods\", \"phylogenetic methods\", \"confidence intervals\", \"cognitive limit derivation\", \"theory criticism\", \"replication study\", \"updated datasets\", \"complementary datasets\", \"different methods\", \"various populations\", \"field studies\", \"median\", \"mean\", \"maximum likelihood\", \"size of social network\", \"number of ties\", \"social network analysis\", \"network size\", \"network structure\", \"network dynamics\", \"social network theory\", \"social network models\", \"social network simulation\", \"social network analysis software\", \"social network data\", \"social network metrics\", \"social network visualization\", \"social network mining\", \"social network optimization\", \"social network recommendation\", \"social network ranking\", \"social network clustering\", \"social network community detection\", \"social network link prediction\", \"social network classification\", \"social network regression\", \"social network clustering algorithms\", \"social network community detection algorithms\", \"social network link prediction algorithms\", \"social network classification algorithms\", \"social network regression algorithms\", \"social network optimization algorithms\", \"social network recommendation algorithms\", \"social network ranking algorithms\", \"social network visualization tools\", \"social network analysis tools\", \"social network simulation tools\", \"social network data mining tools\", \"social network optimization tools\", \"social network recommendation tools\", \"social network ranking"
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Tragedy_of_the_commons",
+      "ok": true,
+      "ms": 4287,
+      "inputTokens": 6905,
+      "outputTokens": 188,
+      "usd": 0.00112975,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains the tragedy of the commons, the idea that individuals rationally overuse shared resources, leading to collective depletion, tracing the concept from Aristotle and William Forster Lloyd to Garrett Hardin's influential 1968 essay. It surveys applications ranging from overfishing and climate change to antibiotics, finance, and digital commons, and notes major criticisms—especially Elinor Ostrom's work showing that communities often manage commons successfully through cooperation and self-governance. The article also covers Hardin's controversial views on population and lifeboat ethics, which have been criticized as simplistic and eugenicist.",
+        "concepts": [
+          "Tragedy of the commons",
+          "Garrett Hardin's 1968 essay",
+          "Common-pool resources and overexploitation",
+          "Elinor Ostrom's critique and self-governance",
+          "Externalities and internalization",
+          "Commons dilemma in game theory",
+          "Digital and knowledge commons"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Mycorrhiza",
+      "ok": true,
+      "ms": 5791,
+      "inputTokens": 7843,
+      "outputTokens": 178,
+      "usd": 0.00126545,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains mycorrhizae, the symbiotic associations between fungi and plant roots in which plants supply carbon while fungi provide water and mineral nutrients. It describes the major types (arbuscular, ectomycorrhizal, ericoid, orchid, and others), their independent evolutionary origins dating back hundreds of millions of years, and the mechanisms of nutrient exchange and chemical signaling that establish the symbiosis. The article also notes that these relationships are usually mutualistic but can be parasitic, and highlights their ecological importance in plant nutrition and soil chemistry.",
+        "concepts": [
+          "Mycorrhizal symbiosis",
+          "Arbuscular mycorrhiza",
+          "Ectomycorrhiza",
+          "Nutrient exchange (sugars for minerals)",
+          "Evolutionary origins with land plants",
+          "Common symbiosis signaling pathway",
+          "Dual mycorrhizal plants"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "ok": true,
+      "ms": 3614,
+      "inputTokens": 9222,
+      "outputTokens": 175,
+      "usd": 0.0014708,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains the Bloom filter, a space-efficient probabilistic data structure invented by Burton Howard Bloom in 1970 for approximate set membership testing that allows false positives but never false negatives. It covers the algorithm's mechanics (a bit array with k hash functions), the mathematics of false positive probability and optimal parameter selection, and practical trade-offs such as the inability to delete elements. The article also surveys real-world applications (databases, web caches, browsers, blockchains) and alternatives like counting, cuckoo, quotient, and xor filters.",
+        "concepts": [
+          "Probabilistic set membership testing",
+          "False positives vs. false negatives",
+          "Bit array with multiple hash functions",
+          "Optimal hash function count and filter size",
+          "Counting Bloom filter for deletions",
+          "Cache filtering and database lookup optimization",
+          "Alternative filters (cuckoo, quotient, xor)"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Dunbar%27s_number",
+      "ok": true,
+      "ms": 6160,
+      "inputTokens": 5938,
+      "outputTokens": 176,
+      "usd": 0.0009786999999999999,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The page explains Dunbar's number, Robin Dunbar's proposed cognitive limit of roughly 150 stable social relationships, derived from correlations between primate neocortex size and group size and supported by evidence from hunter-gatherer societies, villages, and military units. It covers applications in business, social software, and online networks, as well as criticisms, including alternative estimates like the Bernard–Killworth figure and phylogenetic replications yielding widely different numbers. It also notes the theory's popularization by Malcolm Gladwell and Dunbar's related claims about language evolving as efficient social grooming.",
+        "concepts": [
+          "Dunbar's number (~150 stable relationships)",
+          "Social brain hypothesis",
+          "Neocortex size and group size correlation",
+          "Language as social grooming",
+          "Bernard–Killworth alternative estimate",
+          "Phylogenetic replication criticism",
+          "Applications in organizations and online networks"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Photosynthesis",
+      "ok": true,
+      "ms": 4233,
+      "inputTokens": 7586,
+      "outputTokens": 180,
+      "usd": 0.0012278999999999999,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Wikipedia article explains photosynthesis, the process by which plants, algae, and bacteria convert light energy into chemical energy stored in carbohydrates, releasing oxygen in the oxygenic form. It details the light-dependent reactions (ATP and NADPH production via photosystems and water splitting) and light-independent Calvin cycle (carbon fixation), along with variants like C4, CAM, and anoxygenic photosynthesis. It also covers photosynthetic structures, efficiency, measurement methods, and the evolutionary history of the process.",
+        "concepts": [
+          "Oxygenic vs. anoxygenic photosynthesis",
+          "Light-dependent reactions and the Z-scheme",
+          "Calvin cycle and carbon fixation",
+          "Chloroplasts and thylakoid membranes",
+          "C4 and CAM carbon-concentrating mechanisms",
+          "Photosynthetic efficiency and chlorophyll fluorescence",
+          "Evolution of photosynthesis and the Great Oxygenation Event"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://en.wikipedia.org/wiki/Photosynthesis",
+      "ok": false,
+      "ms": 20277,
+      "inputTokens": 1847,
+      "outputTokens": 500,
+      "usd": 0.001667671,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 2085 (line 1 column 2086)",
+      "content": "{\"summary\": \"Photosynthesis is a biological process that converts light energy into chemical energy, producing oxygen and organic compounds. This process is essential for life on Earth, providing energy and organic compounds for plants and other organisms. Photosynthesis occurs in various forms, including oxygenic and anoxygenic photosynthesis, and is performed by different organisms such as plants, algae, and bacteria.\", \"concepts\": [\"photosynthesis\", \"light energy\", \"chemical energy\", \"oxygen production\", \"carbon fixation\", \"cellular respiration\", \"autotrophic organisms\", \"photopigments\", \"chlorophyll\", \"calvin cycle\", \"ATP production\", \"NADPH production\", \"biological carbon fixation\", \"oxygenic photosynthesis\", \"anoxygenic photosynthesis\", \"photoautotrophs\", \"photoheterotrophs\", \"cellular compartments\", \"mitochondria\", \"electron donors\", \"electron acceptors\", \"redox reactions\", \"endothermic reactions\", \"exothermic reactions\", \"biological energy\", \"ecosystem\", \"biosphere\", \"atmosphere\", \"oxygenation\", \"evolutionary history\", \"life on Earth\", \"complex life\", \"biomass production\", \"carbon cycle\", \"energy capture\", \"power consumption\", \"human civilization\", \"biological processes\", \"biological systems\", \"ecological systems\", \"environmental systems\", \"sustainability\", \"conservation\", \"biodiversity\", \"ecosystem services\", \"photosynthetic organisms\", \"phytoplankton\", \"terrestrial vegetation\", \"global distribution\", \"regional distribution\", \"local distribution\", \"spatial distribution\", \"temporal distribution\", \"diel cycles\", \"seasonal cycles\", \"annual cycles\", \"decadal cycles\", \"centennial cycles\", \"millennial cycles\", \"biological rhythms\", \"circadian rhythms\", \"ultradian rhythms\", \"infradian rhythms\", \"photoperiodism\", \"thermoperiodism\", \"chemoperiodism\", \"biological clocks\", \"molecular biology\", \"cell biology\", \"genetics\", \"genomics\", \"proteomics\", \"metabolomics\", \"biochemistry\", \"biophysics\", \"ecophysiology\", \"plant physiology\", \"microbial physiology\", \"animal physiology\", \"human physiology\", \"neurophysiology\", \"cardiovascular physiology\", \"respiratory"
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/ebooks/84",
+      "ok": true,
+      "ms": 3158,
+      "inputTokens": 1043,
+      "outputTokens": 125,
+      "usd": 0.00021894999999999998,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This Project Gutenberg page hosts the eBook edition of Mary Shelley's 1818 Gothic novel Frankenstein; or, The Modern Prometheus. It describes the plot of Victor Frankenstein, a scientist who abandons the living creature he creates, leading to rejection, a desperate plea, and a path of vengeance and tragedy. The page also provides download options, metadata, and subject classifications for the public-domain text.",
+        "concepts": [
+          "Gothic fiction",
+          "Victor Frankenstein and his creation",
+          "Abandonment and rejection",
+          "Vengeance and tragedy",
+          "Science fiction precursor",
+          "Public domain eBook distribution",
+          "Project Gutenberg metadata"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/ebooks/84",
+      "ok": true,
+      "ms": 3285,
+      "inputTokens": 1053,
+      "outputTokens": 117,
+      "usd": 0.00057213,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Frankenstein; or, The modern Prometheus by Mary Wollstonecraft Shelley is a Gothic novel that tells the story of Victor Frankenstein and his creation. The creature, after being abandoned by its creator, seeks connection and faces rejection, leading to a path of vengeance and tragedy. The novel explores themes of science, horror, and the human condition.",
+        "concepts": [
+          "Gothic novel",
+          "Victor Frankenstein",
+          "Frankenstein's monster",
+          "Science fiction",
+          "Horror tales",
+          "Gothic fiction",
+          "Scientists in fiction"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/cache/epub/34901/pg34901-images.html",
+      "ok": true,
+      "ms": 4405,
+      "inputTokens": 8303,
+      "outputTokens": 215,
+      "usd": 0.0013529500000000001,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This page contains the opening of John Stuart Mill's On Liberty (1859), prefaced by W. L. Courtney's biographical introduction discussing Mill's life and the profound influence of his wife, Harriet Taylor. Mill's essay argues that the central question of the future is the nature and limits of society's legitimate power over the individual, tracing the historical struggle between liberty and authority from protection against tyrannical rulers to the problem of democratic majorities potentially tyrannising over themselves. Courtney notes that Mill's defence of individual rights against society reflects an eighteenth-century individualist outlook, yet remains vital as a counterweight to conformist social pressure.",
+        "concepts": [
+          "Civil and social liberty versus tyranny of the majority",
+          "Limits of society's authority over the individual",
+          "Liberty of thought and discussion",
+          "Individuality as an element of well-being",
+          "Influence of Harriet Taylor on Mill's work",
+          "Historical struggle between liberty and authority",
+          "Individual rights versus the social organism"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/cache/epub/3300/pg3300-images.html",
+      "ok": true,
+      "ms": 3312,
+      "inputTokens": 8485,
+      "outputTokens": 167,
+      "usd": 0.00135625,
+      "finish": "stop",
+      "parsed": {
+        "summary": "This page contains the opening of Adam Smith's 'The Wealth of Nations,' including its table of contents, introduction, and the first chapters of Book I. It argues that a nation's wealth stems from the productivity of its labour, which is chiefly advanced by the division of labour, illustrated through the famous pin-manufacturing example. It further explains that the division of labour arises naturally from the human propensity to truck, barter, and exchange, and outlines the work's five-book plan covering labour, capital, national economic progress, systems of political economy, and sovereign revenue.",
+        "concepts": [
+          "Division of labour",
+          "Productive powers of labour",
+          "Pin factory example",
+          "Propensity to truck, barter, and exchange",
+          "Capital stock and accumulation",
+          "Mercantile system critique",
+          "Revenue of the sovereign and public debts"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "file",
+      "prefixBytes": 12000,
+      "item": "on-liberty.md",
+      "ok": true,
+      "ms": 2706,
+      "inputTokens": 2362,
+      "outputTokens": 125,
+      "usd": 0.0004168,
+      "finish": "stop",
+      "parsed": {
+        "title": "On Liberty by John Stuart Mill",
+        "summary": "John Stuart Mill's classic essay on civil and social liberty, examining the nature and limits of society's legitimate authority over the individual, including the danger of tyranny of the majority.",
+        "tags": [
+          "philosophy",
+          "political theory",
+          "liberty",
+          "liberalism",
+          "classic literature",
+          "ethics",
+          "government",
+          "individual rights"
+        ],
+        "project": null,
+        "concepts": [
+          "civil and social liberty",
+          "tyranny of the majority",
+          "limits of societal authority over the individual",
+          "liberty of thought and discussion",
+          "individuality",
+          "political liberties and constitutional checks",
+          "social tyranny versus political oppression"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/cache/epub/34901/pg34901-images.html",
+      "ok": false,
+      "ms": 14720,
+      "inputTokens": 2175,
+      "outputTokens": 500,
+      "usd": 0.0017637750000000002,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 1905 (line 1 column 1906)",
+      "content": "{\"summary\": \"The text discusses the life and work of John Stuart Mill, a philosopher and economist, and his most famous work, On Liberty. It highlights his intellectual energy and literary output, despite physical delicacy. The book was written under the influence of his wife, who had a significant impact on his thoughts and writings. \", \"concepts\": [\"John Stuart Mill\", \"On Liberty\", \"philosophy\", \"economics\", \"intellectual influence\", \"personal relationships\", \"literary output\", \"political economy\", \"social advancement\", \"women's rights\", \"autobiography\", \"biography\", \"Victorian era thought\", \"liberalism\", \"individual freedom\", \"social reform\", \"feminism\", \"sociology\", \"ethics\", \"politics\", \"history of ideas\", \"British intellectual history\", \"19th century philosophy\", \"utilitarianism\", \"classical liberalism\", \"human rights\", \"democracy\", \"parliamentary reform\", \"electoral reform\", \"representative government\", \"free speech\", \"censorship\", \"morality\", \"ethics\", \"human nature\", \"society\", \"culture\", \"civilization\", \"progress\", \"enlightenment\", \"rationalism\", \"empiricism\", \"positivism\", \"social contract\", \"state of nature\", \"general will\", \"social justice\", \"equality\", \"liberty\", \"fraternity\", \"human dignity\", \"individuality\", \"conformity\", \"nonconformity\", \"dissent\", \"rebellion\", \"revolution\", \"evolution\", \"reform\", \"conservatism\", \"liberalism\", \"radicalism\", \"socialism\", \"communism\", \"anarchism\", \"utopianism\", \"dystopianism\", \"futurism\", \"historicism\", \"philosophy of history\", \"philosophy of science\", \"philosophy of religion\", \"philosophy of mind\", \"philosophy of language\", \"philosophy of culture\", \"cultural criticism\", \"social criticism\", \"political criticism\", \"economic criticism\", \"moral criticism\", \"aesthetics\", \"art\", \"literature\", \"music\", \"philosophy of art\", \"philosophy of literature\", \"philosophy of music\", \"philosophy of beauty\", \"philosophy of taste\", \"philosophy"
+    },
+    {
+      "model": "@cf/zai-org/glm-5.3-flash",
+      "kind": "file",
+      "prefixBytes": 1048576,
+      "item": "on-liberty.md",
+      "ok": true,
+      "ms": 4803,
+      "inputTokens": 65496,
+      "outputTokens": 142,
+      "usd": 0.0098954,
+      "finish": "stop",
+      "parsed": {
+        "title": "On Liberty by John Stuart Mill",
+        "summary": "John Stuart Mill's classic essay defending civil and social liberty, arguing that society may only coerce individuals to prevent harm to others, and exploring freedom of thought, individuality, and the limits of state authority.",
+        "tags": [
+          "philosophy",
+          "political theory",
+          "liberty",
+          "utilitarianism",
+          "freedom of speech",
+          "individualism",
+          "classic literature",
+          "19th century"
+        ],
+        "project": null,
+        "concepts": [
+          "harm principle",
+          "tyranny of the majority",
+          "freedom of thought and discussion",
+          "individuality as an element of well-being",
+          "dead dogma versus living truth",
+          "limits of state authority over the individual",
+          "dangers of bureaucratic centralization"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 8192,
+      "item": "https://www.gutenberg.org/cache/epub/3300/pg3300-images.html",
+      "ok": true,
+      "ms": 4975,
+      "inputTokens": 2586,
+      "outputTokens": 127,
+      "usd": 0.001043829,
+      "finish": "stop",
+      "parsed": {
+        "summary": "The Wealth of Nations by Adam Smith discusses the factors that contribute to a nation's wealth and the distribution of goods among its population. The book explores the division of labor, the role of capital stock, and the impact of different economic systems on a nation's prosperity. It argues that the abundance or scantiness of a nation's annual supply depends on the skill and judgment with which labor is applied and the proportion of people employed in useful labor.",
+        "concepts": [
+          "division of labor",
+          "capital stock",
+          "economic systems",
+          "national wealth",
+          "labor productivity",
+          "market forces",
+          "political economy"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Jevons_paradox",
+      "ok": false,
+      "ms": 17270,
+      "inputTokens": 8425,
+      "outputTokens": 500,
+      "usd": 0.0035950249999999995,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 2753 (line 1 column 2754)",
+      "content": "{\"summary\": \"The Jevons paradox states that technological improvements that increase the efficiency of a resource's use can lead to a rise in total consumption of that resource. This occurs when the efficiency gains lower the effective cost of using the resource, inducing increased demand. The paradox suggests that increased efficiency may not necessarily lead to reduced consumption. \", \"concepts\": \"energy efficiency\", \"resource consumption”, “technological progress”, \": {\"summary\": \"The Jevons paradox states that technological improvements that increase the efficiency of a resource's use can lead to a rise in total consumption of that resource. This occurs when the efficiency gains lower the effective cost of using the resource, inducing increased demand. The paradox suggests that increased efficiency may not necessarily lead to reduced consumption. \", \"concepts\": \"energy efficiency\", \"resource consumption”, “technological progress”, \": {\"summary\": \"The Jevons paradox states that technological improvements that increase the efficiency of a resource's use can lead to a rise in total consumption of that resource. This occurs when the efficiency gains lower the effective cost of using the resource, inducing increased demand. The paradox suggests that increased efficiency may not necessarily lead to reduced consumption. \", \"concepts\": \"energy efficiency\", \"resource consumption”, “technological progress”, \": {\"summary\": \"The Jevons paradox states that technological improvements that increase the efficiency of a resource's use can lead to a rise in total consumption of that resource. This occurs when the efficiency gains lower the effective cost of using the resource, inducing increased demand. The paradox suggests that increased efficiency may not necessarily lead to reduced consumption. \", \"concepts\": \"energy efficiency\", \"resource consumption”, “technological progress”, \": {\"summary\": \"The Jevons paradox states that technological improvements that increase the efficiency of a resource's use can lead to a rise in total consumption of that resource. This occurs when the efficiency gains lower the effective cost of using the resource, inducing increased demand. The paradox suggests that increased efficiency may not necessarily lead to reduced consumption. \", \"concepts\": \"energy efficiency\", \"resource consumption”, “technological progress”, \": {\"summary\": \"The Jevons paradox states that technological improvements that increase the efficiency of a resource's use can lead to a rise in total consumption of that resource. This occurs when the efficiency gains lower the effective cost of using the resource, inducing increased demand. The paradox suggests that increased efficiency may not necessarily lead to reduced"
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Agroforestry",
+      "ok": false,
+      "ms": 17769,
+      "inputTokens": 7060,
+      "outputTokens": 500,
+      "usd": 0.00319508,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 2210 (line 1 column 2211)",
+      "content": "{\"summary\": \"Agroforestry is a land use management system that integrates trees with crops or pasture, providing economic, environmental, and social benefits. It can increase farm productivity, reduce soil erosion, and promote biodiversity. Agroforestry practices are prevalent in the tropics and are being adopted in other regions, including the US and Europe. \", \"concepts\": [\"land use management\", \"agroforestry systems\", \"sustainable agriculture\", \"biodiversity conservation\", \"soil erosion prevention\", \"climate change mitigation\", \"forest farming\", \"silvopasture\", \"urban agroforestry\", \"permaculture\", \"ecosystem services\", \"agroecology\", \"polyculture\", \"tree crops\", \"non-timber forest products\", \"forest gardening\", \"silvopasture\", \"agroforestry practices\", \"environmental benefits\", \"social benefits\", \"economic benefits\", \"agricultural productivity\", \"ecological goods and services\", \"carbon sequestration\", \"soil health\", \"water management\", \"wildlife habitat\", \"food security\", \"nutrition\", \"land restoration\", \"sustainable land use\", \"agroecological succession\", \"forest ecosystems\", \"agroforestry principles\", \"urban planning\", \"green infrastructure\", \"community development\", \"environmental resilience\", \"social and cultural wellbeing\", \"food production\", \"local self-sufficiency\", \"mental health\", \"stress reduction\", \"community well-being\", \"implementation barriers\", \"trade-offs\", \"financial costs\", \"biophysical challenges\", \"opportunity costs\", \"urban agriculture\", \"food systems\", \"ecological restoration\", \"biodiversity enhancement\", \"soil conservation\", \"water quality improvement\", \"air quality improvement\", \"climate regulation\", \"carbon cycling\", \"nutrient cycling\", \"pollination\", \"pest control\", \"soil erosion control\", \"water cycling\", \"ecosystem functioning\", \"ecosystem services\", \"human wellbeing\", \"quality of life\", \"sustainable development\", \"environmental sustainability\", \"social sustainability\", \"economic sustainability\", \"agroforestry research\", \"agroforestry development\", \"agroforestry policy\", \"agroforestry practice\", \"agroforestry education\", \"agroforestry training\", \"agroforestry extension\", \"agroforestry advisory services\", \"agroforestry support services\", \"ag"
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Pollination",
+      "ok": true,
+      "ms": 5565,
+      "inputTokens": 7280,
+      "outputTokens": 131,
+      "usd": 0.002428183,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Pollination is the transfer of pollen from one plant to another, allowing for fertilization and seed production. It can occur through various means, including biotic pollination by animals such as insects, birds, and bats, or abiotic pollination by wind or water. The process of pollination is crucial for the reproduction of most flowering plants and is a key component of many ecosystems.",
+        "concepts": [
+          "pollination",
+          "biotic pollination",
+          "abiotic pollination",
+          "flowering plants",
+          "pollinators",
+          "seed production",
+          "fertilization"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Tragedy_of_the_commons",
+      "ok": false,
+      "ms": 15266,
+      "inputTokens": 6919,
+      "outputTokens": 500,
+      "usd": 0.003153767,
+      "finish": "length",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unexpected end of JSON input",
+      "content": "{\"summary\": \"The tragedy of the commons is a concept that describes how shared resources can be depleted when individuals prioritize their own self-interest over the collective good. This idea has been discussed in various fields, including economics, ecology, and sociology. The concept is often illustrated with examples of overfishing, deforestation, and pollution, where individual actions lead to the degradation of a shared resource. \", \"concepts\": [\"shared resources\", \"self-interest\", \"collective good\", \"overexploitation\", \"sustainability\", \"environmental degradation\", \"economics of commons\", \"social dilemma\", \"cooperation and conflict\", \"resource management\", \"tragedy of the commons theory\", \"common pool resources\", \"environmental economics\", \"ecological systems\", \"human behavior and environment\", \"institutional analysis and development\", \"governance and policy\", \"sustainable development\", \"natural resource management\", \"ecological conservation\", \"social and environmental justice\", \"global commons\", \"digital commons\", \"knowledge commons\", \"cultural commons\", \"evolutionary biology and ecology\", \"microbial ecology\", \"ecological studies\", \"evolutionary suicide\", \"therapeutic methods\", \"cooperative behavior\", \"competitive behavior\", \"biodiversity and ecosystem services\", \"ecosystem health and resilience\", \"human well-being and environmental sustainability\", \"solutions to tragedy of the commons\", \"non-governmental solutions\", \"governmental solutions\", \"regulation and policy\", \"privatization and internalization of externalities\", \"cooperative governance and management\", \"social and institutional innovation\", \"deliberative democracy and participation\", \"ecological citizenship and environmental stewardship\", \"transdisciplinary research and collaboration\", \"interdisciplinary approaches to sustainability\", \"global environmental governance and international cooperation\", \"United Nations and sustainable development goals\", \"climate change mitigation and adaptation\", \"biodiversity conservation and ecosystem restoration\", \"sustainable agriculture and food systems\", \"water resources management and conservation\", \"energy transition and renewable energy\", \"waste reduction and management\", \"pollution prevention and control\", \"human rights and environmental justice\", \"indigenous knowledge and traditional practices\", \"community-based natural resource management\", \"participatory governance and co-management\", \"adaptive management and resilience\", \"transformative change and social-ecological transitions\", \"sustainability science and policy\", \"environmental education and awareness\", \"public engagement and participation\", \"science-policy interface and knowledge transfer\","
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Mycorrhiza",
+      "ok": true,
+      "ms": 7367,
+      "inputTokens": 7839,
+      "outputTokens": 151,
+      "usd": 0.00263703,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Mycorrhizal associations are symbiotic relationships between fungi and plants, where the fungus colonizes the plant's root tissues and provides essential nutrients in exchange for carbohydrates. These relationships are crucial for plant nutrition, soil biology, and soil chemistry. Mycorrhizal fungi can increase the plant's absorption of water and minerals, and some species can even provide protection against pathogens and pests.",
+        "concepts": [
+          "mycorrhizal associations",
+          "symbiotic relationships",
+          "fungal colonization",
+          "plant nutrition",
+          "soil biology",
+          "arbuscular mycorrhizae",
+          "ectomycorrhizae"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "ok": false,
+      "ms": 9016,
+      "inputTokens": 9263,
+      "outputTokens": 198,
+      "usd": 0.0031601529999999997,
+      "finish": "stop",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 965 (line 1 column 966)",
+      "content": "{\"summary\": \"A Bloom filter is a space-efficient probabilistic data structure used to test whether an element is a member of a set, with false positive matches possible but false negatives not, and elements can be added but not removed. The filter uses a bit array and hash functions to map elements to array positions. The probability of false positives decreases as the size of the bit array increases, and increases as the number of inserted elements increases. Bloom filters have applications in various fields, including web caching, database query optimization, and cryptocurrency. They offer advantages in terms of space efficiency and speed, but may have limitations such as false positives and scalability issues.\", \"concepts\": \"Bloom filter\", \"probabilistic data structure”, \": false, \"hash functions”, \": false, \"bit array”, \": false, \"set membership testing”, \": false, \"web caching”, \": false, \"database query optimization”, \": false, \"cryptocurrency”}"
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Dunbar%27s_number",
+      "ok": true,
+      "ms": 5404,
+      "inputTokens": 5861,
+      "outputTokens": 129,
+      "usd": 0.00200791,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Dunbar's number is a suggested cognitive limit to the number of people with whom one can maintain stable social relationships, proposed by Robin Dunbar in the 1990s. The number is estimated to be around 150, based on the average human brain size and its ability to process social information. This limit has been observed in various human societies and has implications for the structure and function of social networks.",
+        "concepts": [
+          "Dunbar's number",
+          "social relationships",
+          "cognitive limit",
+          "brain size",
+          "social networks",
+          "human evolution",
+          "primatology"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://en.wikipedia.org/wiki/Photosynthesis",
+      "ok": true,
+      "ms": 7393,
+      "inputTokens": 7605,
+      "outputTokens": 125,
+      "usd": 0.00250989,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Photosynthesis is a biological process that converts light energy into chemical energy, producing oxygen and organic compounds. It occurs in plants, algae, and cyanobacteria, and is essential for life on Earth. The process involves light-dependent reactions, which capture energy from light, and light-independent reactions, which use that energy to convert carbon dioxide into organic compounds.",
+        "concepts": [
+          "photosynthesis",
+          "light-dependent reactions",
+          "light-independent reactions",
+          "oxygenic photosynthesis",
+          "carbon fixation",
+          "chloroplasts",
+          "thylakoids"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/ebooks/84",
+      "ok": true,
+      "ms": 3550,
+      "inputTokens": 1053,
+      "outputTokens": 124,
+      "usd": 0.000587901,
+      "finish": "stop",
+      "parsed": {
+        "summary": "Frankenstein; or, The modern Prometheus by Mary Wollstonecraft Shelley is a Gothic novel that tells the story of Victor Frankenstein, a young scientist who creates a living creature from assembled body parts. The creature must navigate a world that fears him, leading to a dark path of vengeance and tragedy. The novel explores themes of rejection, loneliness, and the consequences of playing God.",
+        "concepts": [
+          "Gothic novel",
+          "Frankenstein's monster",
+          "Victor Frankenstein",
+          "Science fiction",
+          "Horror tales",
+          "Gothic fiction",
+          "Scientists in fiction"
+        ]
+      },
+      "error": null
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/cache/epub/34901/pg34901-images.html",
+      "ok": false,
+      "ms": 5439,
+      "inputTokens": 8326,
+      "outputTokens": 126,
+      "usd": 0.0027233960000000003,
+      "finish": "stop",
+      "parsed": null,
+      "error": "parse: SyntaxError: Unterminated string in JSON at position 623 (line 1 column 624)",
+      "content": "{\"summary\": \"The text discusses John Stuart Mill's book On Liberty, its background and significance, and the influence of his wife Harriet Taylor on his work. It also explores the concept of individual liberty and its relationship to societal authority. The author argues that Mill's ideas on liberty are still relevant today, despite being written in a different time and context. The book is considered a classic in the field of political philosophy and continues to be widely read and studied. \", \"concepts\": \"individual liberty\", \"societal authority”, “political philosophy”, “John Stuart Mill”, “Harriet Taylor”, \": \"}"
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "bookmark",
+      "prefixBytes": 32768,
+      "item": "https://www.gutenberg.org/cache/epub/3300/pg3300-images.html",
+      "ok": false,
+      "ms": 5567,
+      "inputTokens": 8507,
+      "outputTokens": 127,
+      "usd": 0.0027786819999999998,
+      "finish": "stop",
+      "parsed": null,
+      "error": "parse: [\n  {\n    \"expected\": \"array\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"concepts\"\n    ],\n    \"message\": \"Invalid input: expected array, received string\"\n  }\n]",
+      "content": "{\"summary\": \"The Wealth of Nations by Adam Smith argues that the division of labor is the key to economic growth and improvement in the productive powers of labor. The book explains how the division of labor leads to increased productivity, innovation, and trade, ultimately resulting in universal opulence. Smith discusses the principles of political economy, including the nature of capital stock, the accumulation of wealth, and the different systems of political economy.\", \"concepts\": \"division of labor\", \"productive powers of labor”, \": \"political economy\", \"capital stock”, \": \"trade\", \"innovation”, \": \"universal opulence\"}"
+    },
+    {
+      "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "kind": "file",
+      "prefixBytes": 12000,
+      "item": "on-liberty.md",
+      "ok": true,
+      "ms": 7196,
+      "inputTokens": 2380,
+      "outputTokens": 136,
+      "usd": 0.0010037479999999998,
+      "finish": "stop",
+      "parsed": {
+        "title": "On Liberty",
+        "summary": "On Liberty is a philosophical essay by John Stuart Mill that discusses the nature and limits of the power that can be exercised by society over the individual. The essay explores the concept of liberty and its relationship to authority, and argues that individual freedom is essential for human progress and happiness.",
+        "tags": [
+          "liberty",
+          "authority",
+          "individuality",
+          "society",
+          "government",
+          "philosophy",
+          "politics"
+        ],
+        "project": null,
+        "concepts": [
+          "civil liberty",
+          "social tyranny",
+          "tyranny of the majority",
+          "individual freedom",
+          "limits of authority",
+          "power of government"
+        ]
+      },
+      "error": null
+    }
+  ]
+}

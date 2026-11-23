@@ -1,0 +1,197 @@
+/**
+ * Valise. One Worker serving skills, memories, and to-dos to any MCP client.
+ * Bindings land as the PRs that use them land: V1-1 brings DB, V1-4 brings
+ * BUNDLES, V1-5 brings OAUTH_KV, V1-3 brings TODO_COORDINATOR.
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "valise",
+  "compatibility_date": "2026-07-14",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "main": "./workers/app.ts",
+  // Preserve operator-managed vars such as the Google owner allowlist. Values
+  // declared below still win; a deploy must not erase dashboard-only settings.
+  "keep_vars": true,
+  "vars": {
+    "APP_ORIGIN": "https://app.valise.run",
+    "MCP_RESOURCE_URL": "https://app.valise.run/mcp",
+    // A var rather than a constant: skills.sh's search and download endpoints
+    // are undocumented, and the CLI they belong to honours the same override.
+    // A change upstream is then an edit here. V1-16.
+    "SKILLS_REGISTRY_URL": "https://skills.sh",
+    "VALISE_VECTOR_NAMESPACE": "valise-prod-v1",
+    "VALISE_RERANK": "hybrid",
+    // The daily backup: which cron starts it, and how many complete snapshots
+    // retention keeps. ADR-0019.
+    "VALISE_BACKUP_CRON": "23 3 * * *",
+    "VALISE_BACKUP_KEEP": "30"
+  },
+  "workers_dev": true,
+  // Wrangler loads only the secrets named here from `.dev.vars`, so Google
+  // sign-in's three settings are listed even though the console works
+  // without them. A GOOGLE_CLIENT_ID of `none` turns Google off, and an empty
+  // TYPESAFE_API_KEY turns off the Jev rerank in `search`. A deploy fails
+  // while a listed secret is unset, so each is set before the merge that
+  // names it.
+  "secrets": {
+    "required": [
+      "VALISE_ADMIN_PASSWORD",
+      "SESSION_SECRET",
+      "TOKEN_PEPPER",
+      "GOOGLE_CLIENT_ID",
+      "GOOGLE_CLIENT_SECRET",
+      "VALISE_ADMIN_EMAILS",
+      "TYPESAFE_API_KEY",
+      "EMAIL_API_KEY"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "valise",
+      "database_id": "de471b00-3d61-4b3e-a91a-6ba60273e430",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUNDLES",
+      "bucket_name": "valise-bundles"
+    },
+    // Snapshots and originals, under Bucket Lock rules on `snapshots/` and
+    // `originals/`. The bucket must exist before a deploy binds it. ADR-0019.
+    {
+      "binding": "BACKUPS",
+      "bucket_name": "valise-backups"
+    }
+  ],
+  "workflows": [
+    {
+      "name": "valise-backup",
+      "binding": "BACKUP_WORKFLOW",
+      "class_name": "BackupWorkflow"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "OAUTH_KV",
+      "id": "c446dd83bceb458a9274eef202a82e6f"
+    }
+  ],
+  // Search embeds its query and reranks the lexical/current-vector union with
+  // Jev. The minute outbox embeds bounded revision batches independently.
+  "ai": {
+    "binding": "AI"
+  },
+  "vectorize": [
+    { "binding": "VECTOR_INDEX", "index_name": "valise-memories-v1" }
+  ],
+  "ratelimits": [
+    {
+      "name": "MCP_LIMITER",
+      "namespace_id": "26101501",
+      "simple": {
+        "limit": 60,
+        "period": 60
+      }
+    },
+    // POST /capture, keyed by token: an iPhone Shortcut saving by hand never
+    // reaches it, a leaked capture URL in a loop does. ADR-0015, 2026-11-02.
+    {
+      "name": "CAPTURE_LIMITER",
+      "namespace_id": "26110201",
+      "simple": {
+        "limit": 20,
+        "period": 60
+      }
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "TODO_COORDINATOR",
+        "class_name": "TodoCoordinator"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1-todo-coordinator",
+      "new_sqlite_classes": ["TodoCoordinator"]
+    }
+  ],
+  "triggers": {
+    // Nightly log trim (ADR-0006), the minute drains, and the daily backup
+    // named by VALISE_BACKUP_CRON (ADR-0019).
+    "crons": ["0 4 * * *", "* * * * *", "23 3 * * *"]
+  },
+  "observability": {
+    "enabled": true
+  },
+  "previews": {
+    // Deploys at staging.app.valise.run via Workers Builds previews.
+    // Preview Base secrets carry runtime config; bindings defined here, not in the dashboard.
+    "vars": {
+      "APP_ORIGIN": "https://staging.app.valise.run",
+      "MCP_RESOURCE_URL": "https://staging.app.valise.run/mcp",
+      "SKILLS_REGISTRY_URL": "https://skills.sh",
+      "VALISE_VECTOR_NAMESPACE": "valise-preview-v1",
+      "VALISE_RERANK": "hybrid"
+    },
+    "d1_databases": [
+      {
+        "binding": "DB",
+        "database_name": "valise-preview",
+        "database_id": "ae1422d5-176f-402b-bbe5-e80c7808931e",
+        "migrations_dir": "drizzle"
+      }
+    ],
+    "r2_buckets": [
+      {
+        "binding": "BUNDLES",
+        "bucket_name": "valise-preview-bundles"
+      }
+    ],
+    "kv_namespaces": [
+      {
+        "binding": "OAUTH_KV",
+        "id": "16d85f21cb32407b953c5fa385dcc1bf"
+      }
+    ],
+    "ai": {
+      "binding": "AI"
+    },
+    "vectorize": [
+      {
+        "binding": "VECTOR_INDEX",
+        "index_name": "valise-preview-memories-v1"
+      }
+    ],
+    "ratelimits": [
+      {
+        "name": "MCP_LIMITER",
+        "namespace_id": "26101502",
+        "simple": {
+          "limit": 60,
+          "period": 60
+        }
+      },
+      {
+        "name": "CAPTURE_LIMITER",
+        "namespace_id": "26110202",
+        "simple": {
+          "limit": 20,
+          "period": 60
+        }
+      }
+    ],
+    "durable_objects": {
+      "bindings": [
+        {
+          "name": "TODO_COORDINATOR",
+          "class_name": "TodoCoordinator"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "valise": {
+      "type": "http",
+      "url": "${VALISE_MCP_URL:-https://app.valise.run/mcp}",
+      "headersHelper": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/valise-headers.mjs\""
+    }
+  }
+}

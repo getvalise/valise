@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-21T09:24:56.255Z",
+  "purpose": "Synthetic protocol smoke using real provider and local fixture search; not a model-quality or hybrid-acceptance score",
+  "model": "openai/gpt-5.4-mini",
+  "endpoint": "http://localhost:4516/mcp",
+  "toolsHash": "d1451f8600f0",
+  "storeHash": "96f8afe18b7e",
+  "testCase": {
+    "tool": "fetch",
+    "maxRounds": 4,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Use search for these TWO independent queries in a single parallel tool-call batch: 'nightly audit MCP call retention' and 'D1 full backup export virtual tables'. Do not set project or type filters. After you receive both results, request fetch on the most relevant memory for log retention. Do not save or edit anything."
+      }
+    ]
+  },
+  "route": [
+    {
+      "id": "call_i1aBw6bU2PmKG8DU9MLQm0ST",
+      "name": "search",
+      "args": {
+        "query": "nightly audit MCP call retention",
+        "type": "memory",
+        "project": "*",
+        "tags": [],
+        "limit": 10
+      },
+      "argumentsJson": "{\"query\":\"nightly audit MCP call retention\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+      "round": 0,
+      "status": "executed"
+    },
+    {
+      "id": "call_EdtMABHQJI80xjJmN8IGwlVo",
+      "name": "search",
+      "args": {
+        "query": "D1 full backup export virtual tables",
+        "type": "memory",
+        "project": "*",
+        "tags": [],
+        "limit": 10
+      },
+      "argumentsJson": "{\"query\":\"D1 full backup export virtual tables\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+      "round": 0,
+      "status": "executed"
+    },
+    {
+      "id": "call_hQFcUxqcpENhGaX1HKzzsskV",
+      "name": "search",
+      "args": {
+        "query": "nightly audit MCP call retention",
+        "type": "memory",
+        "project": "*",
+        "tags": [],
+        "limit": 10
+      },
+      "argumentsJson": "{\"query\":\"nightly audit MCP call retention\",\"type\":\"memory\",\"project\":\"*\",\"tags\":[],\"limit\":10}",
+      "round": 1,
+      "status": "executed"
+    }
+  ],
+  "spend": {
+    "turns": 3,
+    "firstPromptTokens": 3476,
+    "promptTokens": 10795,
+    "completionTokens": 175,
+    "reasoningTokens": 0,
+    "costUsd": 0.00205815
+  },
+  "error": null,
+  "answer": "I ran the two searches in parallel; both returned no memory results.\n\nI then issued a follow-up search for the log-retention query alone, but it also returned no results, so there is no memory to fetch for that topic."
+}

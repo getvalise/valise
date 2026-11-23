@@ -1,0 +1,50 @@
+{
+  "client": "codex",
+  "version": "codex-cli 0.163.0",
+  "mode": "tools",
+  "test": "plain",
+  "protocol": "legacy",
+  "fixtureHash": "c56276e59737ff0f9e4ebf53a4ea62d6b04a80cc1730faa8df6b9eaa8381273c",
+  "dir": "/var/folders/75/p5ymw8gs2nl_ww1fkqkvytlc0000gn/T/opencode/valise-skill-probe-dQqT6s",
+  "status": 0,
+  "methods": ["initialize", "notifications/initialized", "tools/list"],
+  "calls": [
+    {
+      "at": "2026-10-19T18:08:25.766Z",
+      "jsonrpc": "2.0",
+      "id": 0,
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-06-18",
+        "capabilities": {
+          "experimental": {
+            "codex/auth-change": {}
+          },
+          "elicitation": {
+            "form": {},
+            "url": {}
+          }
+        },
+        "clientInfo": {
+          "name": "codex-mcp-client",
+          "title": "Codex",
+          "version": "0.163.0"
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T18:08:25.767Z",
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "tools/list",
+      "params": {
+        "_meta": {
+          "progressToken": 0
+        }
+      }
+    }
+  ],
+  "nativeDiscovery": false,
+  "markerReturned": false,
+  "finalText": "UNAVAILABLE"
+}

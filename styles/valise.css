@@ -1,0 +1,6640 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@import "tw-animate-css";
+@source "../app";
+@source "../workers";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Two themes over one set of shadcn/ui roles. Light is warm
+ * paper; dark keeps Tokyo Night's contrast on dark brown. Royal purple is a fill (primary actions,
+ * switches, the mark), never a tint. Surfaces that were lilac are sand,
+ * the canvas of trunk trim and luggage tags: hover, selection, tags.
+ * Every component, shadcn or legacy, reads these roles and nothing else.
+ * `.theme-light` lets /workbench show the light roles inside a dark page.
+ */
+:root,
+.theme-light {
+  --background: oklch(0.962 0.018 84);
+  --foreground: oklch(0.27 0.03 55);
+  --card: oklch(0.978 0.017 84);
+  --card-foreground: oklch(0.27 0.03 55);
+  --popover: oklch(0.978 0.017 84);
+  --popover-foreground: oklch(0.27 0.03 55);
+  --primary: oklch(0.36 0.12 300);
+  --primary-foreground: oklch(0.97 0.015 85);
+  --secondary: oklch(0.93 0.018 85);
+  --secondary-foreground: oklch(0.38 0.03 70);
+  --muted: oklch(0.935 0.02 84);
+  --muted-foreground: oklch(0.47 0.035 62);
+  --accent: oklch(0.915 0.022 85);
+  --accent-foreground: oklch(0.33 0.03 70);
+  --destructive: oklch(0.52 0.16 30);
+  --border: oklch(0.875 0.02 82);
+  /* Field outlines: 3:1 against cream and sand (SC 1.4.11, V6). */
+  --input: oklch(0.6 0.04 70);
+  --ring: oklch(0.36 0.12 300);
+  --chart-1: oklch(0.36 0.12 300);
+  --chart-2: oklch(0.65 0.12 270);
+  --chart-3: oklch(0.65 0.12 40);
+  --chart-4: oklch(0.6 0.09 220);
+  --chart-5: oklch(0.75 0.12 85);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.945 0.022 82);
+  --sidebar-foreground: oklch(0.27 0.03 55);
+  --sidebar-primary: oklch(0.36 0.12 300);
+  --sidebar-primary-foreground: oklch(0.97 0.015 85);
+  --sidebar-accent: oklch(0.905 0.025 85);
+  --sidebar-accent-foreground: oklch(0.3 0.03 70);
+  --sidebar-border: oklch(0.875 0.02 82);
+  --sidebar-ring: oklch(0.36 0.12 300);
+
+  /* Signals and the darker control rule, which have no shadcn role. */
+  --ok: oklch(0.47 0.08 140);
+  --warn: oklch(0.5 0.1 70);
+  --strong-rule: oklch(0.6 0.045 68);
+  --scrim: rgb(46 28 14 / 0.45);
+  /* A primary button under the pointer: near-black brown, not a paler purple. */
+  --primary-hover: oklch(0.2 0.02 50);
+  /* Trial: a faint pebbled leather grain on the content's ground, drawn by
+     SVG noise in saddle brown. No image file, no licence, no seam. */
+  --leather-grain: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27240%27%20height%3D%27240%27%3E%3Cfilter%20id%3D%27g%27%20x%3D%270%27%20y%3D%270%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.55%27%20numOctaves%3D%272%27%20seed%3D%277%27%20stitchTiles%3D%27stitch%27%20result%3D%27pebble%27%2F%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%271.6%27%20numOctaves%3D%271%27%20seed%3D%273%27%20stitchTiles%3D%27stitch%27%20result%3D%27pore%27%2F%3E%3CfeComposite%20in%3D%27pebble%27%20in2%3D%27pore%27%20operator%3D%27arithmetic%27%20k1%3D%270%27%20k2%3D%270.8%27%20k3%3D%270.35%27%20k4%3D%270%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%200.42%20%200%200%200%200%200.26%20%200%200%200%200%200.13%20%200%200%200%200.32%20-0.144%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23g%29%27%2F%3E%3C%2Fsvg%3E");
+  /* Purple as ink: the masthead, section labels, claimed and done marks.
+     On the dark ground it is tan, because dark purple text would not read. */
+  --brand-ink: var(--primary);
+  /* Sand: the canvas of the trim and the pane's edge. */
+  --sand: oklch(0.8 0.035 82);
+  /* Saddle: dark brown leather for tags and the add row's stitch, the
+     second accent beside purple. */
+  --saddle: oklch(0.36 0.035 55);
+  --saddle-foreground: oklch(0.94 0.02 85);
+  /* One stitch of a saddle stitch per edge: a short slanted thread with a
+     slight arc, mirrored top to bottom and side to side like a sewn edge. */
+  --stitch-top: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%276%27%3E%3Cpath%20d%3D%27M4.2%204.1Q5.3%202.6%207.6%202%27%20fill%3D%27none%27%20stroke%3D%27%233a2717%27%20stroke-opacity%3D%270.75%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
+  --stitch-bottom: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%276%27%3E%3Cpath%20d%3D%27M7.8%204.1Q6.7%202.6%204.4%202%27%20fill%3D%27none%27%20stroke%3D%27%233a2717%27%20stroke-opacity%3D%270.75%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
+  --stitch-left: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%276%27%20height%3D%2712%27%3E%3Cpath%20d%3D%27M4%204.2Q2.6%205.3%202%207.6%27%20fill%3D%27none%27%20stroke%3D%27%233a2717%27%20stroke-opacity%3D%270.75%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
+  --stitch-right: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%276%27%20height%3D%2712%27%3E%3Cpath%20d%3D%27M2%204.2Q3.4%205.3%204%207.6%27%20fill%3D%27none%27%20stroke%3D%27%233a2717%27%20stroke-opacity%3D%270.75%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
+  /* The detail pane: a deeper sand than the list it sits beside. */
+  --pane-ground: oklch(0.955 0.018 82);
+  /* A faint Valise V and case in saddle brown, drawn as lines from the mark,
+     repeated on the sidebar only. */
+  --valise-pattern: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2772%27%20height%3D%2772%27%3E%3Cg%20transform%3D%27translate%281%200%29%20scale%281.2%29%27%3E%3Cpath%20fill%3D%27none%27%20stroke%3D%27%236b3f1f%27%20stroke-opacity%3D%270.16%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M8.1%209.6H10.35L12%2014.55L13.65%209.6H15.9L12%2018.4Z%27%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%27translate%2835%2034%29%20scale%280.9%29%27%3E%3Cpath%20fill%3D%27none%27%20stroke%3D%27%236b3f1f%27%20stroke-opacity%3D%270.16%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M3%207H21A1%201%200%200%201%2022%208V20A1%201%200%200%201%2021%2021H3A1%201%200%200%201%202%2020V8A1%201%200%200%201%203%207ZM6.15%207V21M17.85%207V21M8.5%207V4.1A0.6%200.6%200%200%201%209.1%203.5H14.9A0.6%200.6%200%200%201%2015.5%204.1V7%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  color-scheme: light;
+}
+
+.dark {
+  /* Tokyo Night's steps of contrast, on a dark brown ground, not navy. */
+  --background: oklch(0.205 0.016 58);
+  --foreground: oklch(0.9 0.025 80);
+  --card: oklch(0.235 0.018 58);
+  --card-foreground: oklch(0.9 0.025 80);
+  --popover: oklch(0.235 0.018 58);
+  --popover-foreground: oklch(0.9 0.025 80);
+  --primary: oklch(0.44 0.15 300);
+  --primary-foreground: oklch(0.96 0.015 85);
+  --secondary: oklch(0.31 0.016 75);
+  --secondary-foreground: oklch(0.88 0.03 85);
+  --muted: oklch(0.265 0.02 58);
+  --muted-foreground: oklch(0.74 0.035 72);
+  --accent: oklch(0.3 0.016 75);
+  --accent-foreground: oklch(0.9 0.028 85);
+  --destructive: #f7768e;
+  --border: oklch(0.31 0.02 58);
+  --input: oklch(0.56 0.035 66);
+  --ring: oklch(0.8 0.035 82);
+  --chart-1: oklch(0.6 0.15 300);
+  --chart-2: #7aa2f7;
+  --chart-3: #ff9e64;
+  --chart-4: #7dcfff;
+  --chart-5: #e0af68;
+  --sidebar: oklch(0.18 0.016 58);
+  --sidebar-foreground: oklch(0.8 0.03 78);
+  --sidebar-primary: oklch(0.44 0.15 300);
+  --sidebar-primary-foreground: oklch(0.96 0.015 85);
+  --sidebar-accent: oklch(0.29 0.016 75);
+  --sidebar-accent-foreground: oklch(0.9 0.028 85);
+  --sidebar-border: oklch(0.25 0.018 58);
+  --sidebar-ring: oklch(0.8 0.035 82);
+
+  --ok: #9ece6a;
+  --warn: #e0af68;
+  --strong-rule: oklch(0.58 0.04 66);
+  --scrim: rgb(18 11 6 / 0.6);
+  --primary-hover: oklch(0.14 0.012 50);
+  --leather-grain: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27240%27%20height%3D%27240%27%3E%3Cfilter%20id%3D%27g%27%20x%3D%270%27%20y%3D%270%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.55%27%20numOctaves%3D%272%27%20seed%3D%277%27%20stitchTiles%3D%27stitch%27%20result%3D%27pebble%27%2F%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%271.6%27%20numOctaves%3D%271%27%20seed%3D%273%27%20stitchTiles%3D%27stitch%27%20result%3D%27pore%27%2F%3E%3CfeComposite%20in%3D%27pebble%27%20in2%3D%27pore%27%20operator%3D%27arithmetic%27%20k1%3D%270%27%20k2%3D%270.8%27%20k3%3D%270.35%27%20k4%3D%270%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%200.72%20%200%200%200%200%200.55%20%200%200%200%200%200.38%20%200%200%200%200.22%20-0.099%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23g%29%27%2F%3E%3C%2Fsvg%3E");
+  --brand-ink: oklch(0.84 0.035 85);
+  --sand: oklch(0.55 0.028 80);
+  --saddle: oklch(0.42 0.04 55);
+  --saddle-foreground: oklch(0.93 0.025 85);
+  --stitch-top: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%276%27%3E%3Cpath%20d%3D%27M4.2%204.1Q5.3%202.6%207.6%202%27%20fill%3D%27none%27%20stroke%3D%27%23b39a78%27%20stroke-opacity%3D%270.7%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
+  --stitch-bottom: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%276%27%3E%3Cpath%20d%3D%27M7.8%204.1Q6.7%202.6%204.4%202%27%20fill%3D%27none%27%20stroke%3D%27%23b39a78%27%20stroke-opacity%3D%270.7%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
+  --stitch-left: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%276%27%20height%3D%2712%27%3E%3Cpath%20d%3D%27M4%204.2Q2.6%205.3%202%207.6%27%20fill%3D%27none%27%20stroke%3D%27%23b39a78%27%20stroke-opacity%3D%270.7%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
+  --stitch-right: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%276%27%20height%3D%2712%27%3E%3Cpath%20d%3D%27M2%204.2Q3.4%205.3%204%207.6%27%20fill%3D%27none%27%20stroke%3D%27%23b39a78%27%20stroke-opacity%3D%270.7%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E");
+  --pane-ground: oklch(0.225 0.019 58);
+  --valise-pattern: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2772%27%20height%3D%2772%27%3E%3Cg%20transform%3D%27translate%281%200%29%20scale%281.2%29%27%3E%3Cpath%20fill%3D%27none%27%20stroke%3D%27%23b07a48%27%20stroke-opacity%3D%270.2%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M8.1%209.6H10.35L12%2014.55L13.65%209.6H15.9L12%2018.4Z%27%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%27translate%2835%2034%29%20scale%280.9%29%27%3E%3Cpath%20fill%3D%27none%27%20stroke%3D%27%23b07a48%27%20stroke-opacity%3D%270.2%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20vector-effect%3D%27non-scaling-stroke%27%20d%3D%27M3%207H21A1%201%200%200%201%2022%208V20A1%201%200%200%201%2021%2021H3A1%201%200%200%201%202%2020V8A1%201%200%200%201%203%207ZM6.15%207V21M17.85%207V21M8.5%207V4.1A0.6%200.6%200%200%201%209.1%203.5H14.9A0.6%200.6%200%200%201%2015.5%204.1V7%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-black: #000;
+  --color-white: #fff;
+  --color-transparent: transparent;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--sans);
+  --font-display: var(--display);
+  --font-mono: var(--mono);
+  --spacing: var(--space-unit);
+  --spacing-group: calc(var(--space-unit) * 4);
+  --spacing-section: calc(var(--space-unit) * 6);
+  /* Tailwind's shadows are black; these are saddle leather (V2). */
+  --shadow-2xs: 0 1px color-mix(in oklab, var(--saddle) 8%, transparent);
+  --shadow-xs: 0 1px 2px 0 color-mix(in oklab, var(--saddle) 8%, transparent);
+  --shadow-sm:
+    0 1px 3px 0 color-mix(in oklab, var(--saddle) 14%, transparent),
+    0 1px 2px -1px color-mix(in oklab, var(--saddle) 14%, transparent);
+  --shadow-md:
+    0 4px 6px -1px color-mix(in oklab, var(--saddle) 14%, transparent),
+    0 2px 4px -2px color-mix(in oklab, var(--saddle) 14%, transparent);
+  --shadow-lg:
+    0 10px 15px -3px color-mix(in oklab, var(--saddle) 14%, transparent),
+    0 4px 6px -4px color-mix(in oklab, var(--saddle) 14%, transparent);
+  --shadow-xl:
+    0 20px 25px -5px color-mix(in oklab, var(--saddle) 14%, transparent),
+    0 8px 10px -6px color-mix(in oklab, var(--saddle) 14%, transparent);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+}
+
+@layer components {
+  /*
+   * Valise. One stylesheet, served at a stable path so both the React console
+   * and the standalone OAuth consent page can link it. Colours come only from
+   * the theme roles above; the shadcn/ui components in app/components/ui use
+   * the same roles as utilities.
+   */
+
+  :root {
+    --space-unit: 0.25rem;
+    /*
+     * The names the component rules below were written against, kept as
+     * aliases of the theme roles so both themes reach every route.
+     */
+    --bone: var(--background);
+    --paper: var(--card);
+    --paper-2: var(--muted);
+    --ink: var(--foreground);
+    --ink-2: var(--muted-foreground);
+    --ink-3: var(--muted-foreground);
+    --trunk: var(--brand-ink);
+    --leather: var(--foreground);
+    --brass: var(--strong-rule);
+    --hardware: var(--card);
+    --stitch: var(--border);
+    --heading-ink: var(--foreground);
+    --tag-ink: var(--saddle-foreground);
+    --tag-rule: var(--saddle);
+    --tag-fill: var(--saddle);
+    --field-focus: var(--ring);
+    --claimed-ink: var(--brand-ink);
+    --completion-ink: var(--brand-ink);
+    --accent-surface: var(--accent);
+    --danger: var(--destructive);
+    --rule: var(--border);
+    --rule-2: var(--strong-rule);
+
+    --strap: 3px;
+
+    --sans:
+      "Helvetica Neue", Inter, Helvetica, Arial, system-ui, -apple-system,
+      sans-serif;
+    /* Geometric display type only on the masthead. */
+    --display: Futura, "Futura PT", "Century Gothic", "Avenir Next", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+    /* Swiss measure: a label column, then everything else. */
+    --label-column: 11rem;
+    /*
+   * A detail pane docked on the window's right edge. Wide enough for about
+   * 70 columns of payload, and never more than 45% of the window, so the list
+   * keeps the larger share.
+   */
+    --pane-width: min(36rem, 45vw);
+
+    color: var(--ink);
+    background: var(--bone);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.5;
+    accent-color: var(--trunk);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background-color: var(--bone);
+    color: var(--ink);
+    font-family: var(--sans);
+  }
+
+  /* ---------------------------------------------------------------- type --- */
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    color: var(--heading-ink);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 1.0625rem;
+  }
+
+  h3 {
+    font-size: 0.9375rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    max-width: 68ch;
+  }
+
+  /* shadcn parts carry data-slot and style themselves. */
+  a:where(:not([data-slot])) {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--rule-2);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:where(:not([data-slot])):hover {
+    text-decoration-color: var(--trunk);
+  }
+
+  /*
+   * In a list a link is a row's title, a tag or a project, and the pointer
+   * already says it opens: an underline on every one of them is noise. Links
+   * in running text and in a pane opened from a row keep theirs. Keyboard focus still draws the ring. The
+   * project filter in force is named in the toolbar, so its row marks go too.
+   */
+  :is(.item-list, .todo-list, .activity-trail, .card-list)
+  a:where(:not([data-slot], dialog *)),
+  :is(.item-list, .todo-list, .activity-trail, .card-list)
+    a.project-chip[aria-current]:where(:not(dialog *)) {
+    text-decoration: none;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    font-variant-ligatures: none;
+  }
+
+  /* The luggage label: tracked-out capitals, the only ornament in the system. */
+  .eyebrow,
+  .facts dt,
+  legend,
+  .stack label,
+  .field,
+  .filters label,
+  form:where(:not([class])) > label,
+  th,
+  .block > h4 {
+    color: var(--ink-3);
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.75rem;
+    color: var(--trunk);
+  }
+
+  /* A section label on the page: a label, not a rule. A paragraph's 68ch
+     measure cut a full-width rule short, so the line read as a mistake. */
+  section > .eyebrow:first-child {
+    max-width: none;
+    margin-bottom: calc(var(--space-unit) * 2);
+  }
+
+  .page-header > .eyebrow:first-child,
+  .auth-card > .eyebrow:first-child,
+  .token-reveal > .eyebrow:first-child {
+    padding-bottom: 0;
+    margin-bottom: 0.75rem;
+    border-bottom: 0;
+  }
+
+  .muted,
+  .lead {
+    color: var(--ink-2);
+    font-size: 0.875rem;
+  }
+
+  .warn {
+    color: var(--danger);
+    font-size: 0.875rem;
+  }
+
+  [role="alert"] {
+    margin: 0;
+    padding: 0.5rem 0 0.5rem 0.75rem;
+    border-left: var(--strap) solid var(--danger);
+    color: var(--danger);
+    font-size: 0.875rem;
+  }
+
+  /* -------------------------------------------------------------- layout --- */
+
+  .shell {
+    width: min(100% - 2.5rem, 72rem);
+    margin: 0 auto;
+    padding: calc(var(--space-unit) * 10) 0 8rem;
+  }
+
+  /* A console page fills the window; the sidebar and pane are its edges. */
+  .shell:has(> [data-slot="sidebar-wrapper"]) {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /*
+   * The sidebar's in-flow spacer stretches to the page's height and never
+   * moves, so the browser would pick it as the scroll anchor and stop holding
+   * a row in place when content is inserted above it (P4).
+   */
+  [data-slot="sidebar"] {
+    overflow-anchor: none;
+  }
+
+  .workspace-inset {
+    min-width: 0;
+    background-image: var(--leather-grain);
+    padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 8) 8rem;
+  }
+
+  /* A phone gives the page its width: 32px a side left a 390px screen a
+     326px column. The safe-area insets matter once the console is installed
+     on the home screen, where the page runs under the status bar. */
+  @media (max-width: 47.99rem) {
+    .workspace-inset {
+      padding: max(calc(var(--space-unit) * 4), env(safe-area-inset-top))
+        max(calc(var(--space-unit) * 3), env(safe-area-inset-right))
+        calc(6rem + env(safe-area-inset-bottom))
+        max(calc(var(--space-unit) * 3), env(safe-area-inset-left));
+    }
+  }
+
+  .workspace-inset > .workspace {
+    width: 100%;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  [data-slot="sidebar-inner"] {
+    background-image: var(--valise-pattern);
+  }
+
+  /*
+   * A list's create control is its first row: an empty item with a stitched
+   * dark-leather edge, inset from the row like a seam. The stitch is the one
+   * place the console draws one. P8.
+   */
+  .add-row {
+    padding: calc(var(--space-unit) * 2);
+    list-style: none;
+  }
+
+  .add-row + :is(.item-row, .todo-card, .library-item) {
+    border-top: 1px solid var(--border);
+  }
+
+  .add-row-link {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--space-unit) * 2);
+    min-height: 4rem;
+    padding: 0 calc(var(--space-unit) * 4);
+    border-radius: 0;
+    position: relative;
+    /* Whole stitches only: space spreads them evenly and never cuts one at
+       the end of an edge. Top and bottom run inside the side padding. */
+    background-image: var(--stitch-top), var(--stitch-bottom);
+    background-repeat: space no-repeat;
+    background-position:
+      0 3px,
+      0 calc(100% - 3px);
+    background-size: 12px 6px;
+    background-origin: content-box;
+    color: var(--saddle);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 100ms;
+  }
+
+  /* The sides, on their own layer so they stop short of the corners. */
+  .add-row-link::before {
+    content: "";
+    position: absolute;
+    inset: 9px 3px;
+    background-image: var(--stitch-left), var(--stitch-right);
+    background-repeat: no-repeat space;
+    background-position:
+      0 0,
+      100% 0;
+    background-size: 6px 12px;
+    pointer-events: none;
+  }
+
+  .dark .add-row-link {
+    color: var(--brand-ink);
+  }
+
+  .add-row-link:hover,
+  .add-row-link:focus-visible {
+    background-color: var(--accent);
+  }
+
+  .add-row-link:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /*
+   * Close and add as stitches on a saddle square: the modal and pane close,
+   * and the + that leads an add row. The glyph is the icon set's (close,
+   * add); the square is this.
+   */
+  .modal > header .stitch-button,
+  .stitch-chip {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--saddle);
+    color: var(--saddle-foreground);
+  }
+
+  /*
+   * The tag row's + is the empty state's "+ Add tags" link folded to its
+   * plus: the same dashed outline and ink (`.tagset .add-value`), at the
+   * tag size of the place it sits in. Under the pointer or keyboard focus the
+   * words unfold in line, after the plus: the + is the last chip, so the
+   * tags before it never move, and nothing is drawn over them. The owner's
+   * call of 2026-11-08, replacing the overlay that covered the last tags.
+   */
+  .tag-input .chip-add.chip-add,
+  .tag-input .chip-add.chip-add:hover {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    min-width: var(--tag-control);
+    height: var(--tag-control);
+    padding: 0;
+    border: 1px dashed var(--strong-rule);
+    border-radius: var(--tag-radius);
+    background: transparent;
+    color: var(--ink-3);
+    font-family: var(--sans);
+    font-size: var(--tag-add-font-size);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .tag-input .chip-add:is(:hover, :focus-visible) {
+    padding-inline: calc(var(--space-unit) * 1.5);
+    color: var(--trunk);
+  }
+
+  .chip-add-label {
+    display: none;
+  }
+
+  .tag-input .chip-add:is(:hover, :focus-visible) > .chip-add-label {
+    display: inline;
+  }
+
+  /* A compact + is shorter than 24px; its hit area is not. SC 2.5.8. */
+  .tag-input .chip-add::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: max(100%, 24px);
+    height: 24px;
+    transform: translate(-50%, -50%);
+  }
+
+  .modal > header .stitch-button:hover {
+    border: 0;
+    background: var(--primary-hover);
+    color: var(--saddle-foreground);
+  }
+
+  .stitch-chip {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  /*
+   * A centred modal is sewn onto the page: no border, square corners, and
+   * the saddle stitch on its edge, half on the modal and half on the scrim,
+   * the way the pane's seam joins the pane to the list. The body scrolls on
+   * its own, so the modal need not clip.
+   */
+  .modal:not(.modal-pane) {
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  /* An open picker's list hangs below its field; the body would clip it at
+     the modal's edge, so while one is open the body does not clip. The list
+     only exists while open, so scrolling returns when it closes. */
+  .modal:not(.modal-pane) .modal-body:has(.combobox-list) {
+    overflow: visible;
+  }
+
+  .modal:not(.modal-pane)::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: -3px;
+    background-image:
+      var(--stitch-top), var(--stitch-bottom), var(--stitch-left),
+      var(--stitch-right);
+    background-repeat:
+      space no-repeat,
+      space no-repeat,
+      no-repeat space,
+      no-repeat space;
+    background-position:
+      0 0,
+      0 100%,
+      0 0,
+      100% 0;
+    background-size:
+      12px 6px,
+      12px 6px,
+      6px 12px,
+      6px 12px;
+    background-origin: padding-box;
+    pointer-events: none;
+  }
+
+  /* The toolbar's controls get a solid ground. */
+  .list-toolbar :is([data-slot="input-group"], [data-slot="button"]) {
+    background-color: var(--card);
+  }
+
+  .workspace-bar {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--space-unit) * 2);
+    margin: calc(var(--space-unit) * -4) 0 calc(var(--space-unit) * 4);
+  }
+
+  /* The mark: the case and the word in the geometric display face. */
+  .masthead-mark {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* A page's title carries its sidebar icon, in the brand ink (V1). */
+  .page-title {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .page-title-icon {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    color: var(--brand-ink);
+  }
+
+  /* Beside a display title the set's 1.5px line reads thin. */
+  .page-title-icon svg {
+    stroke-width: 2.25px;
+  }
+
+  .masthead-word {
+    color: var(--brand-ink);
+    font-family: var(--display);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .workspace {
+    display: grid;
+    /*
+   * A grid item's default `min-width: auto` lets a wide child — a dense table,
+   * a log row — push the item past the shell and scroll the whole page
+   * sideways. Capping the track at `minmax(0, 1fr)` keeps the overflow inside
+   * whichever child owns it.
+   */
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(var(--space-unit) * 6);
+  }
+
+  /* When a row wraps, a button lands under a field: three units, like
+     every other pair of controls (FieldRow). */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--space-unit) * 3) calc(var(--space-unit) * 2);
+    align-items: center;
+  }
+
+  /*
+   * A form with no layout of its own stacks its fields three units apart,
+   * and its buttons keep their own width. Without this a submit button sat
+   * flush against the field above it.
+   */
+  form:where(:not([class])) {
+    display: grid;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  form:where(:not([class])) > :is(button, a.button) {
+    justify-self: start;
+  }
+
+  .stack {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .stack label,
+  .field,
+  form:where(:not([class])) > label {
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  /* The label column's capitals belong to the label, not to its control. */
+  .stack label > input,
+  .stack label > textarea,
+  .stack label > select,
+  .field > input,
+  .field > textarea,
+  form:where(:not([class])) > label > :is(input, textarea, select) {
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .stack label > input,
+  .stack label > select,
+  .field > input {
+    font-family: var(--sans);
+    font-size: 0.9375rem;
+  }
+
+  .compact {
+    margin-top: 1rem;
+  }
+
+  /* ---------------------------------------------------------- the header --- */
+
+  .page-header {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .page-header h1 {
+    margin: 0;
+  }
+
+  .page-header > .eyebrow:first-child {
+    margin: 0 0 calc(var(--space-unit) * 2);
+  }
+
+  .page-header > .eyebrow:first-child,
+  .auth-card > .eyebrow:first-child {
+    color: var(--trunk);
+  }
+
+  .page-header p:not(.eyebrow) {
+    max-width: 72ch;
+    margin: calc(var(--space-unit) * 2) 0 0;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+  }
+
+  /* A Swiss tab row: a hairline baseline, the active item marked by a rule. */
+  .strap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-top: calc(var(--space-unit) * 4);
+    border-bottom: 1px solid var(--rule-2);
+  }
+
+  .strap a {
+    padding: 0.5rem 0.9rem;
+    border-bottom: var(--strap) solid transparent;
+    margin-bottom: -1px;
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .strap a:first-child {
+    padding-left: 0;
+  }
+
+  .strap a:hover {
+    color: var(--ink);
+  }
+
+  .strap a[aria-current="page"] {
+    border-bottom-color: var(--trunk);
+    color: var(--ink);
+  }
+
+  .strap form {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 0 auto;
+    align-self: center;
+  }
+
+  /* Who is signed in, beside the way out, and the way to their account. ADR-0016. */
+  .strap form a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    padding: 0;
+    border-bottom: 0;
+    margin: 0;
+    text-decoration: underline;
+    text-decoration-color: var(--rule-2);
+    text-underline-offset: 0.2em;
+  }
+
+  .strap form a[aria-current="page"] {
+    text-decoration-color: var(--trunk);
+  }
+
+  /*
+ * The second level: a page's own sections, set tight under the strap. No
+ * baseline and no purple rule; smaller, lighter type, the current section in ink
+ * with an ink hairline under the word. It reads as belonging to the strap
+ * item above it rather than as a second strap.
+ */
+  .subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .subnav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    color: var(--ink-3);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .subnav a:hover {
+    color: var(--ink);
+  }
+
+  .subnav a[aria-current="page"] {
+    color: var(--ink);
+  }
+
+  /* The underline sits on the name alone, so a count after it stays clear. */
+  .subnav a[aria-current="page"] > .subnav-label {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.4em;
+  }
+
+  /* What waits in a section, after its name: the figure only, in the mono
+     the console counts in, the label's ink so it is noticed without a badge
+     shouting over the strap above it. */
+  .subnav-count {
+    display: inline-block;
+    margin-left: 0.375rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* --------------------------------------------------------------- cards --- */
+
+  .card {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+
+  /*
+ * A list shares hairlines rather than giving every item its own box. The
+ * rules are outlines because an outline takes no space: adjacent cards
+ * collapse to a single hairline, and an unfilled track at the end of the
+ * grid stays blank. A background behind a 1px gap paints that empty track.
+ */
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    gap: 1px;
+    margin: 0;
+    padding: 1px;
+    list-style: none;
+  }
+
+  .card-list > .card {
+    border: 0;
+    border-radius: 0;
+    outline: 1px solid var(--rule);
+  }
+
+  .todo-card,
+  .editor {
+    padding: 1.25rem 1.375rem 1.5rem;
+  }
+
+  .todo-card {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+  }
+
+  .todo-card > h2,
+  .todo-card > h3 {
+    margin-top: 0.125rem;
+    font-size: 1.0625rem;
+  }
+
+  /* A hairline under an editor's heading. */
+  .editor > h2 {
+    padding-bottom: 0.875rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .auth-card {
+    width: min(100%, 30rem);
+    margin: 10vh auto 0;
+    padding: 2.25rem 2.25rem 2rem;
+  }
+
+  .auth-card h1 {
+    margin-bottom: 0.75rem;
+    font-size: 2rem;
+  }
+
+  /* The stud line again: it separates the claim from the thing you do. */
+  .auth-card .stack {
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .auth-card .muted:last-child {
+    margin-top: 1.25rem;
+  }
+
+  .auth-card .wide {
+    width: 100%;
+  }
+
+  /* Chrome caps an action popup at 600px tall: the card drops its page
+     margins there so the primary action stays in view. */
+  .auth-card.capture-popup {
+    display: grid;
+    gap: calc(var(--space-unit) * 4);
+    width: 30rem;
+    margin: 0 auto;
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .capture-popup p,
+  .capture-popup h2,
+  .capture-popup blockquote,
+  .capture-popup fieldset {
+    margin: 0;
+  }
+
+  .capture-popup fieldset {
+    padding: 0;
+    border: 0;
+  }
+
+  .capture-view,
+  .capture-page,
+  .capture-article,
+  .capture-controls,
+  .capture-selection {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .capture-popup [hidden] {
+    display: none;
+  }
+
+  .capture-page h2 {
+    font-size: 1.0625rem;
+    overflow-wrap: anywhere;
+  }
+
+  .capture-state {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--space-unit) * 2) calc(var(--space-unit) * 3);
+    font-weight: 500;
+    color: var(--muted-foreground);
+  }
+
+  .capture-state svg {
+    flex: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-right: calc(var(--space-unit) * -1);
+  }
+
+  .capture-saved {
+    color: var(--foreground);
+  }
+
+  .capture-saved svg {
+    color: var(--ok);
+  }
+
+  .capture-check-failed svg {
+    color: var(--warn);
+  }
+
+  .capture-header,
+  .capture-tools,
+  .capture-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--space-unit) * 2);
+  }
+
+  .capture-header {
+    justify-content: space-between;
+  }
+
+  .capture-popup .capture-header .eyebrow {
+    margin: 0;
+  }
+
+  .capture-actions {
+    justify-content: flex-end;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  /* Note opens the note field; it sits apart from the two saves. */
+  .capture-actions #add-note {
+    margin-right: auto;
+  }
+
+  .capture-popup :is(button, a.button) {
+    gap: calc(var(--space-unit) * 2);
+  }
+
+  .capture-popup :is(button, a.button) > svg {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* A page saved from this popup keeps its save buttons off; they read so. */
+  .capture-popup button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .capture-popup .capture-icon {
+    width: 2.25rem;
+    padding: 0;
+  }
+
+  /* Save as: two radios drawn as the console's segmented Tabs list, so the
+     arrow keys move between them with no script. */
+  /* In the header row, where the eyebrow stands until there is a page. */
+  .capture-popup .capture-mode:not([hidden]) {
+    display: flex;
+    flex: 0 1 16rem;
+    gap: 0;
+    padding: 3px;
+    border-radius: var(--radius-lg);
+    background: var(--muted);
+  }
+
+  .capture-mode label {
+    position: relative;
+    display: inline-flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--space-unit) * 2);
+    min-height: 2rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    color: var(--muted-foreground);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .capture-mode label:has(:checked) {
+    border-color: var(--border);
+    background: var(--card);
+    color: var(--foreground);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .capture-mode label:has(:focus-visible) {
+    outline: 2px solid var(--trunk);
+    outline-offset: 2px;
+  }
+
+  .capture-mode label:has(:disabled) {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  .capture-mode input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .capture-mode svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .capture-todo,
+  .capture-note {
+    display: grid;
+    gap: var(--space-unit);
+  }
+
+  .capture-todo label:not(:first-child) {
+    margin-top: calc(var(--space-unit) * 2);
+  }
+
+  /* A to-do's description and a page note are prose, not the console's
+     code-shaped textarea. */
+  .capture-todo textarea,
+  .capture-note textarea {
+    min-height: 3.75rem;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.5;
+  }
+
+  /* The note starts one line tall and grows with its text, so the Bookmark
+     side keeps Save article inside Chrome's 600px popup. */
+  .capture-note textarea {
+    field-sizing: content;
+    min-height: 0;
+    max-height: 8.5rem;
+  }
+
+  /* The added to-do on one line: its title is in the console, a click away. */
+  .capture-popup .capture-todo-added {
+    flex-wrap: nowrap;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .capture-todo-added a {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .capture-reconnect {
+    display: grid;
+    gap: calc(var(--space-unit) * 3);
+    justify-items: start;
+  }
+
+  /* The list opens over what follows, as the console's Combobox does. */
+  .capture-combobox {
+    position: relative;
+    display: grid;
+    gap: var(--space-unit);
+  }
+
+  /* Extension settings: body type at the console's size, at a width that
+     holds the endpoint URL on one line. */
+  .auth-card.settings-card {
+    width: min(100%, 36rem);
+  }
+
+  .settings-card :is(.muted, details > summary) {
+    font-size: 1rem;
+  }
+
+  .settings-connection {
+    display: grid;
+    gap: var(--space-unit);
+    margin: 1rem 0 1.25rem;
+  }
+
+  .settings-connection p {
+    margin: 0;
+  }
+
+  .settings-connection .capture-state {
+    color: var(--foreground);
+    font-size: 1.0625rem;
+  }
+
+  .settings-connected svg {
+    color: var(--ok);
+  }
+
+  /* Under the state's text, past its icon. */
+  .settings-endpoint,
+  .settings-how {
+    padding-left: 1.625rem;
+  }
+
+  .settings-endpoint {
+    font-family: var(--mono);
+    font-size: 0.9375rem;
+    overflow-wrap: anywhere;
+  }
+
+  .settings-how {
+    color: var(--muted-foreground);
+  }
+
+  /* Quoted from the page, never rendered from its markup. */
+  .capture-article blockquote,
+  .capture-selection blockquote {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    border-left: 2px solid var(--trunk);
+    padding-left: calc(var(--space-unit) * 3);
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  /* "or" between the password and Google, set on the stud line. */
+  .auth-or {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+    color: var(--ink-2);
+    font-size: 0.75rem;
+  }
+
+  .auth-or::before,
+  .auth-or::after {
+    flex: 1;
+    border-top: 1px solid var(--border);
+    content: "";
+  }
+
+  /* Google's mark keeps its own colours, so it is an image, not a token. */
+  a.button.google {
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* --------------------------------------------------------------- forms --- */
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button:where(:not([data-slot])),
+  a.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.25rem;
+    padding: 0 1rem;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  button:where(:not([data-slot])):hover,
+  a.button:hover {
+    border-color: var(--primary-hover);
+    background: var(--primary-hover);
+  }
+
+  button.ghost,
+  a.button.ghost {
+    border: 1px solid var(--input);
+    background: transparent;
+    color: var(--ink);
+  }
+
+  button.ghost:hover,
+  a.button.ghost:hover {
+    border-color: var(--strong-rule);
+    background: var(--accent);
+    color: var(--ink);
+  }
+
+  /* The accent action is the primary fill, never a second accent. */
+  button.accent {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  button.accent:hover {
+    border-color: var(--primary-hover);
+    background: var(--primary-hover);
+  }
+
+  button.danger {
+    border-color: var(--rule-2);
+    background: transparent;
+    color: var(--danger);
+  }
+
+  button.danger:hover {
+    border-color: var(--danger);
+    background: var(--danger);
+    color: var(--paper);
+  }
+
+  button.small,
+  a.button.small {
+    height: 1.875rem;
+    padding: 0 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--trunk);
+    outline-offset: 2px;
+  }
+
+  /* Text fields only: a checkbox or radio is not a box to fill. */
+  input:where(:not([data-slot], [type="checkbox"], [type="radio"])),
+  textarea:where(:not([data-slot])),
+  select:where(:not([data-slot])) {
+    width: 100%;
+    min-height: 2.25rem;
+    padding: 0.4375rem 0.625rem;
+    border: 1px solid var(--rule-2);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  input:where(:not([data-slot]))::placeholder,
+  textarea:where(:not([data-slot]))::placeholder {
+    color: var(--ink-3);
+  }
+
+  input:where(:not([data-slot])):focus,
+  textarea:where(:not([data-slot])):focus {
+    border-color: var(--field-focus);
+    outline: none;
+    box-shadow: inset 0 0 0 1px var(--field-focus);
+  }
+
+  textarea {
+    min-height: 6rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    resize: vertical;
+  }
+
+  fieldset {
+    display: grid;
+    gap: 0.375rem;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  legend {
+    padding: 0 0 0.25rem;
+  }
+
+  /*
+   * A field and the button that commits it are two controls, not a label and
+   * its field, so they take the group gap of three units rather than the
+   * label's 0.375rem. `FieldRow` puts them on one row, the button on the
+   * field's baseline, and stacks them when the row runs out.
+   */
+  .field-row,
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .field-row > :not(button) {
+    flex: 1 1 12rem;
+    min-width: 0;
+  }
+
+  .field-row > .field-narrow {
+    flex: 0 1 9rem;
+  }
+
+  /*
+ * The label column rule above catches every label in a form. A checkbox row
+ * is a label too, and needs the inline layout instead.
+ */
+  .check,
+  .stack label.check,
+  .stack .check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 24px;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .check input {
+    width: 0.875rem;
+    min-height: 0;
+    height: 0.875rem;
+    padding: 0;
+  }
+
+  /* The filter bar is a rule, not a panel. */
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    gap: calc(var(--space-unit) * 3);
+    align-items: end;
+    padding: 0 0 1rem;
+    border-bottom: 1px solid var(--rule-2);
+  }
+
+  .filters label {
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  /*
+ * A checkbox is a label too, and `.filters label` stacks it over its text and
+ * sets it in tracked-out capitals. `.check` cannot win that on its own.
+ */
+  .filters label.check {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .filter-actions a {
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+  }
+
+  /* ------------------------------------------------------- tags and pills --- */
+
+  /*
+ * Tag sizes. A tag takes its size from where it sits, not from the feature
+ * that draws it: every tag, read-only or removable, reads the --tag-* tokens,
+ * and a context sets them. Two sizes:
+ *
+ *   standard  detail panes, modals, editors, the workbench. The default.
+ *   compact   list rows (`.item-list`, `.todo-list`, `.activity-trail`,
+ *             `.card-list`) and anything marked `data-tag-size="compact"`.
+ *             The same saddle chip, set tighter: a shorter line, smaller
+ *             gaps and a 20px add slot instead of 24px, so a row's tags sit
+ *             close under its title. /library's tags are the reference.
+ *
+ * A new place that shows tags picks one of these; it never styles its own.
+ */
+  :root {
+    --tag-font-size: 0.75rem;
+    --tag-pad-block: 0.0625rem;
+    --tag-pad-inline: 0.4375rem;
+    --tag-gap: 0.375rem;
+    --tag-control: 24px;
+    --tag-add-font-size: 0.8125rem;
+    --tag-radius: var(--radius);
+    --tag-line: 1.4;
+    --tag-box-fill: var(--tag-fill);
+    --tag-box-rule: var(--tag-rule);
+    --tag-box-ink: var(--tag-ink);
+  }
+
+  :is(
+    .item-list,
+    .todo-list,
+    .activity-trail,
+    .card-list,
+    [data-tag-size="compact"]
+  ) {
+    --tag-gap: 0.25rem;
+    --tag-control: 1.25rem;
+    --tag-add-font-size: 0.75rem;
+    --tag-line: 1.3;
+  }
+
+  /* A pane or modal inside a list row is not a list row. */
+  :is(.item-list, .todo-list, .activity-trail, .card-list)
+  :is(dialog, [data-tag-size="standard"]) {
+    --tag-gap: 0.375rem;
+    --tag-control: 24px;
+    --tag-add-font-size: 0.8125rem;
+    --tag-line: 1.4;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tag-gap);
+    margin: 0.25rem 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: var(--tag-pad-block) var(--tag-pad-inline);
+    border: 1px solid var(--tag-box-rule);
+    border-radius: var(--tag-radius);
+    background: var(--tag-box-fill);
+    color: var(--tag-box-ink);
+    font-family: var(--mono);
+    font-size: var(--tag-font-size);
+    line-height: var(--tag-line);
+    white-space: nowrap;
+  }
+
+  /*
+ * A project is one per item and its own column, so it does not borrow the
+ * tag's box: a folder and a name in the grotesque, leather on no border. The
+ * shape tells it from a tag before the text does.
+ */
+  /*
+   * Baseline, not centre: an inline-flex box takes its baseline from its
+   * first item that aligns on one, so with every item centred it took the
+   * folder icon's bottom edge and sat the name off the line of the text
+   * around it. The name carries the baseline; the icon alone is centred.
+   */
+  .project-chip {
+    display: inline-flex;
+    align-items: baseline;
+    min-width: 0;
+    max-width: 100%;
+    gap: 0.25rem;
+    color: var(--leather);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+  }
+
+  .project-chip > .icon {
+    align-self: center;
+  }
+
+  /* Shorter than 24px; the hit area is not, and takes no space. P10. */
+  a.project-chip {
+    position: relative;
+  }
+
+  a.project-chip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 24px;
+    transform: translateY(-50%);
+  }
+
+  a.project-chip:hover {
+    color: var(--trunk);
+  }
+
+  /* The filter in force. An underline rather than a box, which would make it
+   a tag, or purple, which has a different job. */
+  a.project-chip[aria-current] {
+    text-decoration: underline 2px;
+    text-underline-offset: 0.25em;
+  }
+
+  .project-count {
+    color: var(--ink-2);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The /todos project row: every project, one click from the list. */
+
+  /*
+ * A tag that can be removed: the same hairline box as `.tag`, with its remove
+ * inside. The mark is 12px; its hit area is 24px per SC 2.5.8, on ::after so
+ * the chip keeps the height of a plain tag.
+ */
+  .tag-input .tags {
+    align-items: center;
+    margin: 0;
+  }
+
+  .tag-input .chip,
+  .active-filters .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: var(--tag-pad-block) 0.1875rem var(--tag-pad-block)
+      var(--tag-pad-inline);
+    border: 1px solid var(--tag-box-rule);
+    border-radius: var(--tag-radius);
+    background: var(--tag-box-fill);
+    color: var(--tag-box-ink);
+    font-family: var(--mono);
+    font-size: var(--tag-font-size);
+    line-height: var(--tag-line);
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+  }
+
+  .tag-input .chip-remove,
+  .tag-input .chip-add,
+  .active-filters .chip-remove {
+    position: relative;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink-3);
+  }
+
+  /* The same remove on a pointer row in the view (P7). */
+  .refs .chip-remove {
+    align-self: center;
+    position: relative;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink-3);
+  }
+
+  .refs .chip-remove::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 24px;
+    height: 24px;
+    transform: translate(-50%, -50%);
+  }
+
+  .refs .chip-remove:hover {
+    color: var(--trunk);
+  }
+
+  .tag-input .chip-remove::after,
+  .active-filters .chip-remove::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 24px;
+    height: 24px;
+    transform: translate(-50%, -50%);
+  }
+
+  .tag-input .chip-remove:hover,
+  .active-filters .chip-remove:hover {
+    background: transparent;
+    color: var(--trunk);
+  }
+
+  .tag-input .chip-remove,
+  .active-filters .chip-remove {
+    color: var(--tag-box-ink);
+  }
+
+  .tag-input .chip-add:hover {
+    border-color: var(--ink);
+  }
+
+  /*
+ * On the filter bar a combobox sits beside plain inputs that take their size
+ * from a `.filters label`. It is not inside one, so it says so itself.
+ */
+  .filters .combobox > label {
+    letter-spacing: 0.14em;
+  }
+
+  .filters .combobox-control input[type="text"] {
+    font-size: 0.9375rem;
+  }
+
+  .filters select {
+    color: var(--ink);
+    font-size: 0.9375rem;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  /*
+ * Several tags in one box: the chips, then the field that adds the next.
+ * The box draws the input's border, and the field inside it draws none, so
+ * the pair reads as one input. P7.
+ */
+  .tag-filter {
+    display: grid;
+    gap: 0.375rem;
+    min-width: 0;
+  }
+
+  .tag-filter-label {
+    color: var(--ink-3);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .tag-filter-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.375rem;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0 0 0 0.375rem;
+    border: 1px solid var(--rule-2);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+
+  /* An input's own focus, drawn on the box the field sits in. */
+  .tag-filter-box:has(input:focus) {
+    border-color: var(--field-focus);
+    box-shadow: inset 0 0 0 1px var(--field-focus);
+  }
+
+  .tag-filter-box .combobox {
+    flex: 1 1 5rem;
+    min-width: 5rem;
+  }
+
+  .tag-filter-box .combobox-control input[type="text"] {
+    min-height: calc(2.25rem - 2px);
+    border: 0;
+    background: transparent;
+  }
+
+  .tag-filter-box .combobox-control input[type="text"]:focus {
+    box-shadow: none;
+  }
+
+  .tag-filter .chip-remove {
+    display: inline-flex;
+    text-decoration: none;
+  }
+
+  /* Backspace's first press: the chip the second press removes. */
+  .tag-filter .chip.is-armed {
+    outline: 2px solid var(--trunk);
+    outline-offset: 2px;
+    text-decoration: underline;
+  }
+
+  /* Up to 14rem, never wider than the column it is in. */
+  .tag-input .chip-new:has(.combobox) {
+    flex: 1 1 8rem;
+    min-width: 0;
+    max-width: 14rem;
+  }
+
+  .tag-input .chip-new .combobox {
+    width: 100%;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  /*
+ * The `+` or the pen named the box already; the label stays for the screen
+ * reader, as Editable's own field carries an aria-label and no visible one.
+ */
+  .tag-input .combobox > label,
+  .editable.editing > .combobox > label,
+  .todo-card .editable-form > .combobox > label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /*
+ * The set in the view, not behind a pen (P7). The chips are the editor's,
+ * with the value inside each one a link to its filter: the link keeps the
+ * chip's ink and takes its hover, so the box does not say link twice. The ×
+ * posts its own remove.
+ */
+  .tagset .chip > form,
+  .refs li > form {
+    display: inline-flex;
+  }
+
+  .tagset .chip-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* A chip is shorter than 24px; its hit area is not, and takes no space. */
+  .tagset a.chip-link {
+    position: relative;
+  }
+
+  .tagset a.chip-link::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 24px;
+    transform: translateY(-50%);
+  }
+
+  .tagset .chip-link:hover {
+    color: var(--tag-ink);
+    text-decoration: underline 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  /*
+   * A suggested tag is the tag chip as a ghost: the same box, type and
+   * remove, drawn as the dashed outline small create controls use (V4)
+   * with no saddle fill, because it is not a tag yet. Its words add it.
+   */
+  .tag-suggestions .chip.chip-ghost {
+    border: 1px dashed var(--strong-rule);
+    background: transparent;
+    color: var(--ink-2);
+  }
+
+  .tag-suggestions .chip > form {
+    display: inline-flex;
+  }
+
+  .tag-suggestions .chip-ghost-add,
+  .tag-suggestions .chip-ghost-add:hover {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    cursor: pointer;
+  }
+
+  /* Shorter than 24px, as a chip is; its hit area is not. */
+  .tag-suggestions .chip-ghost-add::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 24px;
+    transform: translateY(-50%);
+  }
+
+  .tag-suggestions .chip-ghost-add:hover {
+    color: var(--trunk);
+    text-decoration: underline 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .tag-suggestions .chip-ghost .chip-remove,
+  .tag-suggestions .chip-ghost .chip-remove:hover {
+    color: var(--ink-3);
+  }
+
+  .tag-suggestions .chip-ghost .chip-remove:hover {
+    color: var(--trunk);
+  }
+
+  /* Status reads as a tracked label with a square chip, never as a badge. */
+  .pill {
+    display: inline-flex;
+    justify-self: start;
+    align-items: center;
+    gap: 0.4375rem;
+    width: fit-content;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .pill::before {
+    content: "";
+    width: 0.4375rem;
+    height: 0.4375rem;
+    background: currentcolor;
+  }
+
+  .pill.pending {
+    color: var(--ink-3);
+  }
+
+  .pill.claimed {
+    color: var(--claimed-ink);
+  }
+
+  .pill.blocked {
+    color: var(--danger);
+  }
+
+  .pill.done {
+    color: var(--completion-ink);
+  }
+
+  /* Text, so muted ink rather than the control rule: AA at this size (V6). */
+  .pill.label {
+    color: var(--muted-foreground);
+  }
+
+  .pill.accent {
+    color: var(--trunk);
+  }
+
+  /* ------------------------------------------------------------- details --- */
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: 1rem;
+    margin: 0.75rem 0 0.25rem;
+  }
+
+  /*
+   * A subject's name and kind share a row; its description is prose and
+   * takes the whole row under them. Two even columns, not the 7rem tracks,
+   * so a name does not wrap a word to a line.
+   */
+  .subject-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .subject-facts > div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* The cell, not everything inside it: a fact's value may hold a div now. */
+  .facts > div {
+    border-top: 1px solid var(--rule);
+    padding-top: 0.5rem;
+  }
+
+  .facts dd {
+    margin: 0.3125rem 0 0;
+    font-size: 0.875rem;
+  }
+
+  /*
+ * A to-do's pointers: kind, then the path or link it points at. `anywhere`
+ * rather than `break-word` because it is the form that shrinks min-content,
+ * which is what keeps a long path from widening the page on a phone.
+ */
+  .refs {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0.25rem 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.8125rem;
+  }
+
+  .refs li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.375rem;
+  }
+
+  .refs code,
+  .refs a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /*
+ * A pointer's kind is a category, not a status, so it drops the pill's square
+ * chip and is told apart by colour from the existing palette. A fixed column
+ * lines the values up. `--trunk` stays structural, and `--brass` stays the
+ * label colour; an unknown kind falls back to `--ink-3`.
+ */
+  .ref-kind {
+    flex: 0 0 3.25rem;
+    color: var(--ink-3);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .ref-kind[data-kind="repo"] {
+    color: var(--leather);
+  }
+
+  .ref-kind[data-kind="file"] {
+    color: var(--ink-2);
+  }
+
+  .ref-kind[data-kind="doc"] {
+    color: var(--ok);
+  }
+
+  .ref-kind[data-kind="issue"] {
+    color: var(--warn);
+  }
+
+  .ref-kind[data-kind="url"] {
+    color: var(--danger);
+  }
+
+  /* A to-do's files: the same list as its pointers, with the size in mono. */
+  .attachments {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0.25rem 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.8125rem;
+  }
+
+  .attachments li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 24px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* An unlink button names its document, and a page title can be long. */
+  .attachments li button {
+    max-width: 100%;
+    white-space: normal;
+    text-align: start;
+  }
+
+  .attachments a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .attachment-size {
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  /* Ephemeral card decoration reserves its box before bytes arrive. P4, P6. */
+  .asset-thumbnail {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--space-unit) * 26);
+    height: calc(var(--space-unit) * 34);
+    max-width: 100%;
+    overflow: hidden;
+    background: var(--paper);
+    color: var(--ink-2);
+    border: 1px solid var(--rule);
+    font-size: 0.8rem;
+  }
+
+  .asset-thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /*
+ * A file in the preview modal. The image keeps its own proportions inside
+ * the body; the PDF viewer has no intrinsic height, so it gets most of the
+ * dialog's.
+ */
+  .file-preview {
+    display: block;
+    max-width: 100%;
+  }
+
+  img.file-preview {
+    max-height: 65vh;
+    margin: 0 auto;
+  }
+
+  iframe.file-preview {
+    width: 100%;
+    height: 65vh;
+    border: 1px solid var(--rule-2);
+  }
+
+  .attach-file {
+    margin: 0;
+    padding-top: 0.25rem;
+  }
+
+  .attach-file input[type="file"] {
+    flex: 1 1 12rem;
+    min-width: 0;
+    min-height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-size: 0.8125rem;
+  }
+
+  /* P10, P11: the enhanced picker is a real button; no-script keeps the input. */
+  .file-dropzone {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: calc(var(--space-unit) * 3);
+    min-width: 0;
+    min-height: calc(var(--space-unit) * 36);
+    padding: calc(var(--space-unit) * 6);
+    /* A sand well, not a dotted frame. */
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--muted);
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .file-dropzone > p {
+    margin: 0;
+  }
+
+  .file-dropzone > input {
+    max-width: 100%;
+  }
+
+  .file-dropzone.is-enhanced input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    clip-path: inset(50%);
+    overflow: hidden;
+  }
+
+  .file-dropzone.is-dropping {
+    background: var(--accent);
+  }
+
+  .file-dropzone.is-dropping,
+  .file-dropzone:focus-within {
+    outline: 2px solid var(--field-focus);
+    outline-offset: 2px;
+  }
+
+  /*
+   * The library is an item list like the others: one bordered group, one
+   * row per item, its details in the right-hand pane. The Details control
+   * sits on the row's right, where the other lists put an item's facts.
+   */
+  .card-list.library-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+
+  .library-grid > .library-item {
+    position: relative;
+    gap: calc(var(--space-unit) * 1);
+    padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 4);
+    cursor: pointer;
+    border-radius: 0;
+    outline: 0;
+    background: transparent;
+    transition: background-color 100ms;
+  }
+
+  .library-grid > .library-item + .library-item {
+    border-top: 1px solid var(--border);
+  }
+
+  .library-grid > .library-item:hover {
+    background: color-mix(in oklch, var(--accent) 40%, transparent);
+  }
+
+  .library-grid > .library-item:has(.modal-pane[open]),
+  .library-grid > .library-item.is-selected {
+    background: color-mix(in oklch, var(--accent) 70%, transparent);
+  }
+
+  .library-grid > .library-item > * {
+    margin-block: 0;
+  }
+
+  /* One row: the kind and host, the title with its labels on the right,
+     then one line of the notes. The labels wrap inside two fifths of the
+     row, so nine long tags cannot squeeze the title to a letter a line. */
+  .library-grid > .library-item:has(> .library-organization) {
+    grid-template-columns: minmax(0, 1fr) fit-content(40%);
+    column-gap: calc(var(--space-unit) * 4);
+  }
+
+  .library-grid > .library-item > :not(.library-organization) {
+    grid-column: 1;
+  }
+
+  .library-grid > .library-item > .library-organization {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: start;
+    justify-self: end;
+  }
+
+  /* On a phone the labels go under the title, not beside it, so the title
+     keeps the row's width. */
+  @media (max-width: 48rem) {
+    .library-grid > .library-item:has(> .library-organization) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .library-grid > .library-item > .library-organization {
+      grid-column: 1;
+      grid-row: auto;
+      justify-self: start;
+    }
+  }
+
+  .library-grid > .library-item > p.row {
+    font-size: 0.75rem;
+  }
+
+  .library-grid .library-excerpt {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  /*
+   * Show, don't tell: the whole row opens the item's details. The details
+   * link is the row's hit area, named for readers; the row's own links and
+   * controls sit above it.
+   */
+  .library-grid .library-item-details {
+    position: static;
+    padding: 0;
+    border: 0;
+  }
+
+  .library-grid .library-item-details > .library-details-link {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+  }
+
+  /* Controls sit above the row's link; the title and its editor wrapper do
+     not, so a click on the title opens the item like the rest of the row. */
+  .library-grid
+    > .library-item
+    :is(a, button, input, select, textarea, label, summary):not(
+      .library-details-link
+    ) {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* A document row: a small thumbnail beside the title, and its processing
+     state as one line under it, not a block of its own. */
+  .library-grid .library-file-heading {
+    align-items: center;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .library-grid .library-file-caption {
+    gap: 0;
+  }
+
+  .library-grid .library-thumbnail-link .asset-thumbnail {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.625rem;
+  }
+
+  .library-grid > .library-item > .asset-processing {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--space-unit) * 1) calc(var(--space-unit) * 3);
+    padding-left: calc(2.5rem + var(--space-unit) * 3);
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+  }
+
+  .library-grid > .library-item > .asset-processing > *,
+  .library-grid > .library-item > .asset-processing .row {
+    display: contents;
+    margin: 0;
+  }
+
+  .library-host-link {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--space-unit) * 1);
+    text-decoration: none;
+  }
+
+  /* The thumbnail occupies the whole document row, not a 40px title icon.
+     Pane content is deliberately outside these compact-row selectors. */
+  .library-grid > .library-document {
+    min-height: 7rem;
+    padding-left: calc(5rem + var(--space-unit) * 4);
+  }
+
+  .library-grid > .library-document a.library-thumbnail-link {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5rem;
+    height: 100%;
+  }
+
+  .library-grid .library-document .library-thumbnail-link .asset-thumbnail {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .library-grid .library-document .asset-thumbnail img {
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .library-grid > .library-document > .asset-processing {
+    padding-left: 0;
+  }
+
+  /* Full processing content must shrink inside the pane, not establish an
+     intrinsic grid track that scrolls past its right edge. */
+  .modal-pane > .modal-body > .stack,
+  .modal-pane .asset-processing,
+  .modal-pane .asset-processing .stack {
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .library-item {
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+    overflow-wrap: anywhere;
+  }
+
+  .library-item > *,
+  .library-item .row > *,
+  .library-item .editable {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .library-item h3:not(.eyebrow) {
+    font-size: 1rem;
+  }
+
+  .library-file-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--space-unit) * 4);
+  }
+
+  .library-file-caption {
+    display: grid;
+    gap: calc(var(--space-unit) * 2);
+    min-width: 0;
+  }
+
+  .library-item .library-file-meta {
+    font-size: 0.8125rem;
+    margin: 0;
+  }
+
+  .library-item .library-retention {
+    gap: calc(var(--space-unit) * 3);
+    margin-block: calc(var(--space-unit) * 2);
+  }
+
+  .library-item .library-retention label {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: calc(var(--space-unit) * 3);
+    font-size: 0.8125rem;
+    letter-spacing: normal;
+    text-transform: none;
+    flex: 1 1 15rem;
+  }
+
+  .library-item .library-retention select {
+    max-width: 100%;
+    font-size: 0.8125rem;
+    min-height: 24px;
+    width: auto;
+    flex: 1 1 10rem;
+  }
+
+  .library-item select,
+  .library-source select {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .library-source,
+  .library-source fieldset,
+  .library-source label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .library-item .library-actions {
+    padding-top: calc(var(--space-unit) * 3);
+  }
+
+  .library-upload .library-upload-results {
+    padding-left: calc(var(--space-unit) * 5);
+    overflow-wrap: anywhere;
+  }
+
+  .library-upload > summary,
+  .library-source > summary {
+    cursor: pointer;
+    min-height: 24px;
+    font-weight: 600;
+  }
+
+  .library-upload[open] > summary,
+  .library-source[open] > summary,
+  .library-item-details[data-expanded="true"] > .library-details-link {
+    margin-bottom: calc(var(--space-unit) * 4);
+  }
+
+  .library-thumbnail-link {
+    display: block;
+    flex: none;
+    min-width: 24px;
+    min-height: 24px;
+  }
+
+  .library-organization {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .library-organization .tag {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .library-excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: pre-line;
+    margin: 0;
+  }
+
+  .library-byline {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* The article reads as the pane's body: no indent, no inner scroll; the
+     pane scrolls. */
+  .library-article {
+    max-width: 68ch;
+    overflow-wrap: anywhere;
+  }
+
+  /* The page's own words start under one hairline and their own heading,
+     so they never run on from Valise's summary above. */
+  .library-saved-text {
+    display: grid;
+    gap: calc(var(--space-unit) * 3);
+    padding-top: calc(var(--space-unit) * 4);
+    border-top: 1px solid var(--rule);
+  }
+
+  .library-saved-text > .eyebrow {
+    margin: 0;
+  }
+
+  /* Read more sits under the opening; open, the rest follows it and the
+     control moves to the end as Show less, where the reading stops. */
+  .library-article-more {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--space-unit) * 3);
+    margin-top: calc(var(--space-unit) * 3);
+  }
+
+  .library-article-more[open] > summary {
+    order: 1;
+  }
+
+  .library-article-more > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3125rem;
+    width: fit-content;
+    min-height: 24px;
+    color: var(--ink-2);
+    font-size: 0.875rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .library-article-more > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .library-article-more > summary {
+    padding: 0;
+    font-weight: 400;
+    text-decoration: underline 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .library-article-more[open] .library-more-closed,
+  .library-article-more:not([open]) .library-more-open {
+    display: none;
+  }
+
+  /* Provenance is detail: muted, opened on request, like the toolbar's
+     "What can I search?". */
+  .library-provenance > summary {
+    width: fit-content;
+    padding: 0;
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+
+  .library-provenance > p {
+    margin: calc(var(--space-unit) * 1) 0 0;
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+  }
+
+  .library-article img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .library-group-bar {
+    display: grid;
+    gap: calc(var(--space-unit) * 3);
+    margin-bottom: calc(var(--space-unit) * 4);
+    padding: calc(var(--space-unit) * 4);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    background: var(--card);
+  }
+
+  /* The grouping box sits in the row's top-right corner, above the title
+     link's row cover so it stays its own target (P13). */
+  .library-select {
+    display: grid;
+    place-items: center;
+    min-width: 24px;
+    min-height: 24px;
+  }
+
+  .library-grid > .library-document:has(> .library-select) {
+    padding-right: calc(var(--space-unit) * 4 + 24px + var(--space-unit) * 2);
+  }
+
+  /* Specific enough to win over the row-control rule's position: relative. */
+  .library-grid > .library-item.library-document > label.library-select {
+    position: absolute;
+    top: calc(var(--space-unit) * 3);
+    right: calc(var(--space-unit) * 4);
+    z-index: 2;
+  }
+
+  .library-item-details {
+    border-top: 1px solid var(--rule);
+    padding-top: calc(var(--space-unit) * 3);
+  }
+
+  .library-item-details > .library-details-link,
+  .library-import-backups > summary,
+  .library-help > summary {
+    cursor: pointer;
+    min-height: 24px;
+    color: var(--ink-2);
+  }
+
+  .library-details-link {
+    display: block;
+    min-height: 24px;
+  }
+
+  .log {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0.625rem 0 0;
+    padding-left: 1.125rem;
+    color: var(--ink-2);
+    font-size: 0.875rem;
+  }
+
+  /* An entry's body is Markdown under its kind and author. */
+  .log .prose p {
+    margin: 0.125rem 0;
+  }
+
+  details > summary {
+    cursor: pointer;
+    padding: 0.375rem 0;
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  details > summary:hover {
+    color: var(--trunk);
+  }
+
+  pre,
+  .connect > code,
+  .token-reveal code {
+    display: block;
+    overflow-x: auto;
+    overflow-wrap: anywhere;
+    margin: 0.5rem 0;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--accent-surface);
+    color: var(--ink);
+    font-size: 0.78125rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .token-reveal {
+    margin-top: 1.25rem;
+  }
+
+  .empty {
+    max-width: none;
+    padding: 3rem 1.25rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    color: var(--ink-3);
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  /* The consent screen's scope table: label column, then plain language. */
+  .scope-list {
+    margin: 1rem 0 1.75rem;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .scope-list li {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.875rem;
+  }
+
+  .scope-list code {
+    color: var(--trunk);
+  }
+
+  .scope-list span {
+    color: var(--ink-2);
+  }
+
+  /* ------------------------------------------------------------ workbench --- */
+
+  /* Switches are shadcn's, drawn in app/components/belt-switch.tsx. */
+
+  /* A saddle stitch inside a hairline, for the one panel holding the object. */
+  .stitched,
+  .token-reveal {
+    padding: calc(var(--space-unit) * 4) calc(var(--space-unit) * 5);
+    border: 1px solid var(--rule-2);
+    border-radius: var(--radius);
+    outline: 1px solid var(--border);
+    outline-offset: calc(var(--space-unit) * -2);
+    background: var(--paper);
+  }
+
+  /* ------------------------------------------------------------- tables --- */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  th {
+    padding: 0 1rem 0.5rem 0;
+    border-bottom: 1px solid var(--rule-2);
+    text-align: left;
+  }
+
+  td {
+    padding: 0.625rem 1rem 0.625rem 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  /* ----------------------------------------------------- logs and evals --- */
+
+  /* Large counts use the working face and tabular figures, not another logo. */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: 1px;
+    margin: 1.5rem 0 1.75rem;
+    padding: 1px;
+    list-style: none;
+  }
+
+  .kpi {
+    display: grid;
+    gap: 0.125rem;
+    padding: 0.875rem 1rem;
+    outline: 1px solid var(--rule);
+    background: var(--paper);
+  }
+
+  .kpi .n {
+    font-family: var(--sans);
+    font-variant-numeric: tabular-nums;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .kpi .muted {
+    font-size: 0.75rem;
+  }
+
+  /*
+ * A dense table cannot stack on a phone and stay readable, so it scrolls
+ * inside its own band rather than pushing the page sideways.
+ */
+  .scroll-x {
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  /* A log is read by scanning, so it is tighter and monospaced where it counts. */
+  table.dense {
+    margin: 0.5rem 0 2rem;
+    font-size: 0.8125rem;
+  }
+
+  table.dense td,
+  table.dense th {
+    padding: 0.4375rem 1rem 0.4375rem 0;
+  }
+
+  table.dense code {
+    font-size: 0.78125rem;
+  }
+
+  /* The eval matrix: one narrow column per model, read across a case. */
+  .matrix td:not(:first-child):not(:nth-child(2)) {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .matrix td.pass {
+    color: var(--ok);
+  }
+
+  .matrix td.fail {
+    color: var(--danger);
+  }
+
+  /*
+ * A table cell that opens something is a real control for the keyboard: a
+ * link where the thing it opens has a URL, a button where it does not. Either
+ * way it must not read as one: no fill, no border, no height of its own, and
+ * the underline only on hover.
+ */
+  table button.cell,
+  table a.cell {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    text-align: inherit;
+    text-decoration: none;
+    /* A button is nowrap in the UA sheet, and the column's max-width caps the
+     box, not the text: an unwrapped title paints over the next cells. */
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  table button.cell:hover,
+  table a.cell:hover {
+    background: transparent;
+    text-decoration: underline;
+    text-decoration-color: var(--trunk);
+    text-underline-offset: 3px;
+  }
+
+  /* The case open in the pane, marked where the eye left it. */
+  .matrix tr[aria-current="true"] > td {
+    background: var(--paper-2);
+  }
+
+  /*
+ * A case's runs, newest first: when, one mark per model in a fixed order so a
+ * column reads down the list, the verdict, then what the run tested and what
+ * changed since the one before.
+ */
+  .case-history {
+    margin: 0.5rem 0 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .case-history > li {
+    display: grid;
+    grid-template-columns: 6.5rem auto 1fr;
+    gap: 0.25rem 0.75rem;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8125rem;
+  }
+
+  .case-history .when {
+    color: var(--ink-2);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  .case-history .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .case-history .note,
+  .case-history .changes {
+    grid-column: 2 / -1;
+    margin: 0;
+  }
+
+  .case-history .changes {
+    color: var(--ink-3);
+    font-size: 0.75rem;
+  }
+
+  /* A dropped run stays in the record, quieter than the runs that count. */
+  .case-history > li.dropped .note,
+  .case-history > li.dropped .marks i,
+  table.run-log tr.dropped td {
+    color: var(--ink-3);
+  }
+
+  .marks {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.125em;
+    white-space: nowrap;
+  }
+
+  .marks i {
+    font-style: normal;
+  }
+
+  .marks .pass {
+    color: var(--ok);
+  }
+
+  .marks .fail {
+    color: var(--danger);
+  }
+
+  .marks .part {
+    color: var(--warn);
+  }
+
+  .marks .none {
+    color: var(--ink-3);
+  }
+
+  .call-pane table.dense {
+    margin: 0.5rem 0 0;
+  }
+
+  table.run-log td:last-child {
+    min-width: 24rem;
+  }
+
+  /* A route that read a skill before acting. The title holds the whole route. */
+  .matrix .via {
+    text-decoration: underline dashed var(--brass);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    cursor: help;
+  }
+
+  /* The outcome counts are a band under the numbers, not a stray row. */
+  .outcomes {
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .delta {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+  }
+
+  .delta.up {
+    color: var(--ok);
+  }
+
+  .delta.down {
+    color: var(--danger);
+  }
+
+  /*
+ * One call per row, the summary on one line, the arguments underneath. The
+ * grid is the Swiss move: time, tool, caller, outcome, duration, always in the
+ * same columns so a scan down the list lands on the same thing every time.
+ */
+  .calls {
+    margin: 0.5rem 0 2rem;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .calls > li {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .calls .call-row {
+    display: grid;
+    grid-template-columns: 11rem minmax(8rem, 1fr) minmax(0, 14rem) auto 4.5rem;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.5rem 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .calls .call-row:hover .what {
+    color: var(--trunk);
+  }
+
+  .calls .when,
+  .calls .took {
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  .calls .took {
+    text-align: right;
+  }
+
+  .calls .what {
+    font-family: var(--mono);
+    font-size: 0.78125rem;
+  }
+
+  /*
+ * Which item the call acted on, so ten complete_todo rows read as ten, and
+ * which reranker ordered a search, so a fallback to FTS order shows per row.
+ */
+  .calls .what .target,
+  .calls .what .rerank {
+    margin-left: 0.75ch;
+    color: var(--ink-2);
+  }
+
+  .calls .who {
+    overflow: hidden;
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /*
+ * What the agent said it was doing, on the summary line rather than under
+ * the disclosure. A row that says why is the row worth reading first, and
+ * opening every payload to find it defeats the point. ADR-0007.
+ */
+  .calls .why {
+    grid-column: 1 / -1;
+    padding-left: 0.875rem;
+    border-left: 2px solid var(--brass);
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+  }
+
+  /*
+ * Why a failed call failed, on the row for the same reason as the intent: the
+ * row that failed is the one opened first, and the reason is what it is
+ * opened for. One line; the full text is in the pane.
+ */
+  .calls .error {
+    grid-column: 1 / -1;
+    overflow: hidden;
+    padding-left: 0.875rem;
+    border-left: 2px solid var(--danger);
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ---------------------------------------------------------------- icons --- */
+
+  /*
+ * Lucide at 16 on a 1.5 stroke, set in `app/components/icon.tsx`. An icon is
+ * the weight of a hairline and the colour of the text it sits in, never its
+ * own colour; a glyph that needs to signal does it from the element around it.
+ */
+  /* Preflight makes every svg a block; an icon sits in a line of text. */
+  .icon {
+    display: inline-block;
+    flex: none;
+    color: currentColor;
+    vertical-align: -0.1875em;
+  }
+
+  /*
+ * Hairlines on the cells rather than a gap over a tinted ground. The gap
+ * trick paints the leftover cells of a ragged last row, and a grid that is
+ * 21 long is always ragged somewhere.
+ */
+  .icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+
+  .icons li {
+    display: grid;
+    gap: 0.375rem;
+    justify-items: center;
+    padding: 0.875rem 0.25rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+  }
+
+  .icons .icon {
+    color: var(--ink);
+  }
+
+  /* ---------------------------------------------------------------- modal --- */
+
+  /*
+ * A column, not a box with two independent height caps. The header and the
+ * footer keep their size and the body takes the rest, so the dialog is as
+ * tall as the viewport allows rather than as tall as a second guess. 52rem
+ * because what goes in one here is a table of facts and a file tree, not a
+ * sentence and two buttons.
+ */
+  .modal {
+    width: min(100% - 2rem, 52rem);
+    max-height: 85vh;
+    /* Preflight zeroes every margin; a modal dialog centres on auto. */
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    /* No shadow and no blur. The backdrop is a flat tint of the same ink. */
+    overflow: hidden;
+  }
+
+  .modal-wide {
+    width: min(100% - 2rem, 68rem);
+    max-height: 90vh;
+  }
+
+  /*
+   * A pane: the dialog docked on the window's right edge at full height,
+   * under the strap, opened with show() so the page beside it stays live.
+   * Its left edge is leather with the purple strap inside it, the page's two
+   * bands turned on end. The width is the person's, within 22rem and 70% of
+   * the window; --pane-chosen is set by the grip.
+   *
+   * It sits beside the list, not over it: the page gives up the pane's
+   * width, so no row runs under it and the grip is the line between the
+   * two (Fluent's inline drawer, Material's coplanar side sheet). The
+   * narrower rows rewrap; `holdRow` in modal.tsx scrolls by what that moved
+   * the opened row, so it stays where it was clicked (P4).
+   */
+  :root {
+    --pane: clamp(22rem, var(--pane-chosen, min(36rem, 45vw)), 70vw);
+  }
+
+  @media (min-width: 48rem) {
+    body:has(dialog.modal-pane[open]) {
+      padding-right: var(--pane);
+    }
+  }
+
+  .modal-pane {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: var(--pane);
+    max-width: none;
+    height: auto;
+    max-height: none;
+    margin: 0;
+    /* No rule between list and pane: the seam is a column of stitches,
+       drawn by ::before across the edge. */
+    border: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+    overflow: visible;
+    background-color: var(--pane-ground);
+    color: var(--card-foreground);
+  }
+
+  /* The seam: a 6px strip centred on the pane's edge, half over the list
+     and half over the pane, so each stitch crosses from one to the other. */
+  .modal-pane::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -3px;
+    width: 6px;
+    background-image: var(--stitch-left);
+    background-repeat: no-repeat space;
+    background-size: 6px 12px;
+    pointer-events: none;
+  }
+
+  @media (max-width: 47.99rem) {
+    .modal-pane {
+      width: 100%;
+      border-left: 0;
+    }
+
+    .modal-pane::before {
+      display: none;
+    }
+
+    /* Outranks the grip's own rule further down the file. */
+    .modal-pane > .pane-grip {
+      display: none;
+    }
+  }
+
+  /* `.modal.modal-pane`: the plain modal's header rules come later in the
+     file at the same weight. */
+  /* The title sits on the pane's sand with no rule under it. */
+  .modal.modal-pane > header {
+    align-items: flex-start;
+    padding: 1.25rem 1.25rem 0.5rem 1.5rem;
+    border-bottom: 0;
+  }
+
+  .modal.modal-pane > header h2 {
+    font-size: 1.3125rem;
+    font-weight: 600;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  /* show() focuses the dialog itself; its leather edge already says where
+     it is. Controls inside keep their own focus ring. */
+  .modal-pane:focus {
+    outline: none;
+  }
+
+  .sheet-grip {
+    display: none;
+  }
+
+  .todo-pane-navigation {
+    display: flex;
+    flex: none;
+    flex-wrap: wrap;
+    gap: calc(var(--space-unit) * 4);
+    padding: 0 calc(var(--space-unit) * 6);
+    font-size: 0.8125rem;
+  }
+
+  .todo-pane-navigation :is(a, span) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-unit);
+    min-height: 24px;
+  }
+
+  .todo-pane-navigation > span {
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 47.99rem) {
+    /* Let even the last list row scroll above the non-modal half sheet. */
+    body:has(dialog.modal-sheet[open]) {
+      padding-bottom: 50dvh;
+    }
+
+    .modal.modal-sheet {
+      inset: auto 0 0;
+      height: 50dvh;
+      max-height: calc(100dvh - 2rem);
+      /* A drawer: rounded top corners and a shadow, no band. */
+      border: 0;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      box-shadow: 0 -8px 24px rgb(40 24 12 / 0.18);
+    }
+
+    .modal.modal-sheet[data-sheet-height="full"] {
+      height: calc(100dvh - 2rem);
+    }
+
+    /* shadcn's drawer handle: a short rounded bar on the sheet's top edge,
+       inside a full-width target that still drags and toggles height. */
+    .modal-sheet > .sheet-grip {
+      display: flex;
+      flex: none;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 24px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      touch-action: none;
+      cursor: ns-resize;
+    }
+
+    .modal-sheet > .sheet-grip::before {
+      content: "";
+      width: 3rem;
+      height: 0.375rem;
+      border-radius: 999px;
+      background: var(--input);
+    }
+
+    .modal-sheet > .sheet-grip > * {
+      display: none;
+    }
+
+    .sheet-grip:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: -4px;
+    }
+
+    .modal.modal-sheet > header {
+      padding: calc(var(--space-unit) * 3);
+    }
+  }
+
+  /* The pane is narrower than a modal, so the five facts wrap to three
+     rows; tighter rows keep them one band. */
+  .modal-pane .modal-body {
+    padding: 1.25rem 1.25rem 1.5rem 1.5rem;
+  }
+
+  /*
+   * Files are one line in the pane, not a 9rem drop target with a bar under
+   * it: the whole pane already takes a dropped file, so the zone only needs
+   * to say so and hold the picker. Attach stays a button beside it.
+   */
+  .modal-pane .attach-file {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .modal-pane .file-dropzone.is-enhanced {
+    display: flex;
+    flex: 1 1 16rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-items: start;
+    gap: calc(var(--space-unit) * 3);
+    min-height: 0;
+    padding: calc(var(--space-unit) * 2.5) calc(var(--space-unit) * 3);
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--muted);
+    text-align: left;
+  }
+
+  .modal-pane .file-dropzone.is-enhanced > p:first-of-type {
+    flex: 1 1 auto;
+    font-size: 0.8125rem;
+  }
+
+  .modal-pane .file-dropzone.is-enhanced > p:first-of-type strong {
+    font-weight: 400;
+  }
+
+  .modal-pane .file-dropzone.is-enhanced > .muted {
+    display: none;
+  }
+
+  .modal-pane .file-dropzone.is-enhanced > .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /*
+   * A centred modal opened from a pane is not the pane: its drop target is
+   * the full sand well, hint included, as in the Upload dialog (V4).
+   */
+  .modal-pane .modal:not(.modal-pane) .file-dropzone.is-enhanced {
+    display: grid;
+    justify-items: center;
+    min-height: calc(var(--space-unit) * 36);
+    padding: calc(var(--space-unit) * 6);
+    text-align: center;
+  }
+
+  .modal-pane .modal:not(.modal-pane) .file-dropzone.is-enhanced > p {
+    font-size: inherit;
+  }
+
+  .modal-pane .modal:not(.modal-pane) .file-dropzone.is-enhanced > .muted {
+    display: block;
+  }
+
+  .modal-pane .modal:not(.modal-pane) .file-dropzone.is-enhanced > .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* The library attach modal: two ways in, split by a hairline. */
+  .attach-choices > .detail-section + .detail-section {
+    padding-top: calc(var(--space-unit) * 4);
+    border-top: 1px solid var(--rule);
+  }
+
+  /*
+   * The grip sits on the leather edge: a 14px hit area over the 6px band,
+   * the clasp drawn across it in brass. It takes no layout space. P5.
+   */
+  /*
+   * The pane's left edge is the resize handle: a 12px hit area with the
+   * resize cursor and nothing drawn. Keyboard focus shows a faint line,
+   * because focus has to be visible; pointer hover shows only the cursor.
+   */
+  .pane-grip {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: -6px;
+    display: flex;
+    justify-content: center;
+    width: 12px;
+    cursor: col-resize;
+    touch-action: none;
+  }
+
+  .pane-grip-line {
+    width: 1px;
+    height: 100%;
+    background: transparent;
+  }
+
+  .pane-grip:focus-visible > .pane-grip-line {
+    background: var(--muted-foreground);
+  }
+
+  .pane-grip:focus-visible {
+    outline: none;
+  }
+
+  /* An icon that says a fact's state sits before its words. */
+  .facts dd.with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--space-unit) * 1.5);
+  }
+
+  .modal::backdrop {
+    background: var(--scrim);
+  }
+
+  /* A file is over the dialog: a dashed hairline inside the frame says the
+   whole dialog takes it. Ink, not purple; it is not focus. */
+  .modal.is-dropping {
+    outline: 1px dashed var(--ink-3);
+    outline-offset: -0.5rem;
+  }
+
+  .modal > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.875rem 1.25rem;
+  }
+
+  .modal > header h2 {
+    font-size: 0.9375rem;
+  }
+
+  /* An editable title is the heading, so it takes the heading's share of the row. */
+  .modal > header > .editable {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  /* The close button, not every button a heading may now contain. */
+  .modal > header > button {
+    width: 1.875rem;
+    padding: 0;
+  }
+
+  /*
+ * `[open]`, not `.modal`. An author `display` on a `<dialog>` beats the user
+ * agent's `dialog:not([open]) { display: none }` whatever its specificity, so
+ * a plain `display: flex` leaves every closed dialog laid out over the page,
+ * invisible and eating clicks.
+ */
+  .modal[open] {
+    display: flex;
+    flex-direction: column;
+    /* No-script dialogs are not in the top layer; sewn rows are positioned. */
+    z-index: 20;
+  }
+
+  /* A no-script dialog opened inside another's body (a pane's Add link or
+     History) is in its flow, so the body scrolls to it. The UA's absolute
+     position would hang it off the fixed pane, out of reach. P11. */
+  .modal-body .modal[open]:not(:modal) {
+    position: static;
+    width: auto;
+    max-height: none;
+    margin: 0;
+  }
+
+  .modal > header,
+  .modal > footer {
+    flex: none;
+  }
+
+  .modal-body {
+    flex: 1;
+    min-height: 0;
+    padding: 1.25rem;
+    overflow: auto;
+    overflow-anchor: none;
+  }
+
+  /*
+ * The page's `.facts` tracks are 7rem, which is right in a card and wrong
+ * here: a `skill://` uri in a 7rem column wraps onto three lines. Wider
+ * tracks, and a long monospaced value breaks wherever it has to.
+ */
+  .modal-body .facts {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+
+  .modal-body .facts dd {
+    overflow-wrap: anywhere;
+  }
+
+  .modal-body > :first-child {
+    margin-top: 0;
+  }
+
+  .modal-body pre {
+    margin: 0.75rem 0 0;
+    padding: 0.75rem;
+    background: var(--accent-surface);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .modal > footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    border-top: 1px solid var(--rule-2);
+    background: var(--bone);
+  }
+
+  /* ------------------------------------------------------------ combobox --- */
+
+  .combobox {
+    position: relative;
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  .combobox > label {
+    color: var(--ink-3);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .combobox-control {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .combobox-control input[type="text"] {
+    padding-right: 2.25rem;
+  }
+
+  .combobox-toggle {
+    position: absolute;
+    right: 1px;
+    height: calc(2.25rem - 2px);
+    width: 2rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink-2);
+  }
+
+  .combobox-toggle:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .combobox-list {
+    position: absolute;
+    z-index: 5;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 15rem;
+    margin: 2px 0 0;
+    padding: 0;
+    border: 1px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--paper);
+    list-style: none;
+    overflow-y: auto;
+  }
+
+  .combobox-list li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0 0.5rem;
+    padding: 0.4375rem 0.625rem 0.4375rem 0.5rem;
+    border-left: 2px solid transparent;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+  }
+
+  .combobox-list li:last-child {
+    border-bottom: 0;
+  }
+
+  .combobox-list li.active {
+    border-left-color: var(--trunk);
+    background: var(--accent-surface);
+  }
+
+  /* Two lines before the cut: a to-do title is a sentence, not a tag. */
+  .combobox-list li > span {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .combobox-list li > small {
+    grid-column: 1 / -1;
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+  }
+
+  /* Said, not shown: the list itself is the visible answer. */
+  .combobox-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .combobox-empty {
+    color: var(--ink-3);
+    cursor: default;
+  }
+
+  /* ------------------------------------------------------------- skills --- */
+
+  /*
+ * Not `display: grid`. A table cell that stops being a table cell leaves the
+ * row's hairline to stop with it, and the rule under the first column then
+ * ends short of every other.
+ */
+
+  table.skills small {
+    display: block;
+    margin-top: 0.125rem;
+    color: var(--ink-3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* The bundle, nested. Indentation is the only thing carrying the hierarchy. */
+  .file-tree,
+  .file-tree ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .file-tree ul {
+    margin-left: 0.4375rem;
+    padding-left: 0.875rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  .file-tree li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.1875rem 0;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+  }
+
+  .file-tree li > ul {
+    grid-column: 1 / -1;
+  }
+
+  .file-tree small {
+    color: var(--ink-3);
+    font-size: 0.6875rem;
+  }
+
+  .file-tree .folder > span {
+    color: var(--ink-2);
+  }
+
+  .version-line {
+    margin: 1rem 0 0;
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  .skill-frontmatter {
+    width: min(100%, 36rem);
+    margin: 0 0 1rem;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+  }
+
+  .skill-frontmatter th,
+  .skill-frontmatter td {
+    padding: 0.25rem 0.625rem 0.25rem 0;
+    border-bottom: 1px solid var(--rule-2);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .skill-frontmatter th {
+    color: var(--muted-foreground);
+    font-family: var(--mono);
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .skill-frontmatter td {
+    overflow-wrap: anywhere;
+  }
+
+  .tag-input-fallback {
+    display: grid;
+    gap: 0.375rem;
+    color: var(--ink-2);
+    font-size: 0.75rem;
+  }
+
+  .tag-input-fallback input {
+    min-width: 0;
+  }
+
+  .versions {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .versions li {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .versions .muted {
+    font-size: 0.75rem;
+  }
+
+  .versions button[aria-pressed="true"] {
+    border-color: var(--trunk);
+    background: transparent;
+    color: var(--trunk);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  /* A SKILL.md edit against its head. Colour only on the changed lines. */
+  .modal-body pre.diff {
+    white-space: pre-wrap;
+  }
+
+  .diff span {
+    display: block;
+  }
+
+  .diff .add {
+    color: var(--ok);
+  }
+
+  .diff .del {
+    color: var(--danger);
+  }
+
+  .diff .fold {
+    color: var(--ink-3);
+  }
+
+  .skill-actions,
+  .skill-publish {
+    margin: 1rem 0 1.5rem;
+  }
+
+  .skill-actions button:not(.belt-switch),
+  .skill-actions a.button {
+    gap: 0.375rem;
+    text-decoration: none;
+  }
+
+  /* The ticked rows' verbs share the Add skill row, flush right. */
+  .skill-changes {
+    margin-left: auto;
+  }
+
+  .skill-change-report {
+    margin: 0 0 0.75rem;
+  }
+
+  /* P7, P10–P12: the reversible boolean lives beside the skill it controls. */
+
+  .skill-list .skill-enabled {
+    flex: none;
+    margin: 0;
+  }
+
+  .skill-list .belt-switch {
+    font-size: 0.75rem;
+  }
+
+  /* P2, P3: organization stays editable; secondary facts have their own place.
+     Version-specific facts never borrow the current head's frontmatter. */
+  .skill-detail {
+    min-width: 0;
+  }
+
+  .skill-detail .skill-summary {
+    margin: 0 0 calc(var(--space-unit) * 4);
+    max-width: 72ch;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  .skill-detail .facts {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap: calc(var(--space-unit) * 3) calc(var(--space-unit) * 6);
+  }
+
+  .skill-detail .skill-organization > div {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .skill-detail .skill-metadata {
+    margin-top: calc(var(--space-unit) * 4);
+    font-size: 0.8125rem;
+  }
+
+  .skill-detail .skill-metadata .facts dd {
+    font-size: 0.8125rem;
+  }
+
+  .skill-detail .versions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .skill-detail .version-line {
+    overflow-wrap: anywhere;
+  }
+
+  .skill-detail .skill-version-metadata {
+    margin-top: calc(var(--space-unit) * 3);
+  }
+
+  .skill-detail .skill-frontmatter {
+    margin-top: calc(var(--space-unit) * 2);
+    width: 100%;
+  }
+
+  .skill-detail .skill-frontmatter th {
+    color: var(--ink-2);
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  table.skills .pick {
+    width: 1.5rem;
+    padding-right: 0;
+  }
+
+  /* The label is the 24px hit area around a 16px box. P10. */
+  table.skills .pick label {
+    display: inline-grid;
+    min-width: 24px;
+    min-height: 24px;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  table.skills .pick input {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+  }
+
+  table.skills tr.deleted td:not(.pick) {
+    color: var(--ink-3);
+  }
+
+  /* No skills at all: what one is, then the way to add one. */
+  div.empty p {
+    max-width: 36rem;
+    margin: 0 auto 1.25rem;
+  }
+
+  div.empty a.button {
+    gap: 0.375rem;
+    text-decoration: none;
+  }
+
+  .detail-section > .eyebrow:first-child {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .detail-section {
+    @apply grid min-w-0 grid-cols-1 gap-3;
+  }
+
+  .search-field {
+    @apply grid min-w-0 gap-1.5;
+  }
+
+  .search-bar .search-field {
+    flex: 1 1 12rem;
+  }
+
+  .list-controls {
+    @apply grid min-w-0 grid-cols-1 gap-3;
+  }
+
+  .list-controls .filters {
+    padding: 0;
+    border: 0;
+  }
+
+  @media (width > 48rem) {
+    .filters:has(select[name="type"]) {
+      grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)) auto;
+    }
+  }
+
+  .list-controls .todo-done-toggle {
+    margin: 0;
+  }
+
+  .list-controls .todo-add {
+    padding: 0;
+  }
+
+  .list-controls .sorts {
+    padding: 0;
+  }
+
+  .list-controls .ghost-link,
+  .list-controls .sorts a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+  }
+
+  /*
+   * A to-do named in prose (`todo:tdo_…`), drawn as a card in the line: the
+   * to-do icon, its title, its state. A hairline box on the card ground, so it
+   * reads as a thing rather than a link out, and one line tall so the
+   * paragraph keeps its rhythm; a long title truncates (title tooltip has it).
+   * Done reads struck through, as a done row does. P7.
+   */
+  .prose a.todo-mention,
+  a.todo-mention {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3125rem;
+    max-width: min(100%, 32rem);
+    padding: 0 0.375rem;
+    border: 1px solid var(--rule-2);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+    color: var(--ink);
+    font-size: 0.875em;
+    line-height: 1.5;
+    vertical-align: bottom;
+    text-decoration: none;
+    /* A sub-task's hanging indent is the line's, not the card's. */
+    text-indent: 0;
+  }
+
+  a.todo-mention:hover {
+    border-color: var(--strong-rule);
+    background: var(--accent);
+  }
+
+  a.todo-mention > .icon {
+    flex: none;
+    color: var(--ink-3);
+  }
+
+  .todo-mention-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .todo-mention-state {
+    flex: none;
+    color: var(--ink-3);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  a.todo-mention[data-state="done"] .todo-mention-title {
+    color: var(--ink-2);
+    text-decoration: line-through;
+  }
+
+  /* ------------------------------------------------------------ activity --- */
+
+  /* One list of sessions; a day heading opens the first session of its day. */
+  .activity-filters {
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .activity-trail,
+  .activity-run ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .activity-trail > li + li {
+    margin-top: 1rem;
+  }
+
+  .activity-day {
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  /* A session is its who-line over an item list of one-line changes. */
+  .activity-who {
+    margin: 0 0 0.375rem;
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+  }
+
+  .activity-event .project-chip {
+    display: inline-flex;
+    font-size: 0.75rem;
+  }
+
+  /*
+   * Transcripts. docs/design/transcripts.md. A prompt is the landmark: a
+   * card on the cream surface with a heading. A reply is plain prose on the
+   * pane's ground, labelled, with no rule, so neither reads as a quotation.
+   * An error is a destructive hairline box. A run of tool calls is one quiet
+   * disclosure that opens by itself when a call in it failed, so an error
+   * never folds away.
+   */
+  .transcript-text {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .transcript-day {
+    margin-block-end: calc(var(--space-unit) * 4);
+  }
+
+  .transcript-day-heading {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    margin: 0 0 calc(var(--space-unit) * 2);
+  }
+
+  .transcript-toggle {
+    display: inline-flex;
+    align-items: center;
+    height: 2rem;
+    padding: 0 0.625rem;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    font-size: 0.8125rem;
+    color: var(--foreground);
+    text-decoration: none;
+  }
+
+  .transcript-toggle[aria-current="true"] {
+    border-style: solid;
+    border-color: var(--destructive);
+  }
+
+  .transcript-filter-note {
+    font-size: 0.875rem;
+  }
+
+  .item-row.transcript-row.has-errors {
+    box-shadow: inset 3px 0 0 var(--destructive);
+  }
+
+  .transcript-error-count {
+    color: var(--destructive);
+    font-weight: 600;
+  }
+
+  .transcript-sub {
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+  }
+
+  .transcript-pane {
+    display: grid;
+    gap: calc(var(--space-unit) * 4);
+    min-width: 0;
+  }
+
+  .transcript-pane > * {
+    margin: 0;
+  }
+
+  .transcript-facts {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+  }
+
+  .transcript-facts .project-chip {
+    display: inline-flex;
+  }
+
+  .transcript-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: calc(var(--space-unit) * 3);
+    margin: 0;
+  }
+
+  .transcript-stats > div {
+    border-top: 1px solid var(--border);
+    padding-top: 0.5rem;
+  }
+
+  .transcript-stats dt {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+  }
+
+  .transcript-stats dd {
+    margin: 0.125rem 0 0;
+    font-size: 1.25rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .transcript-stats .has-errors {
+    border-top-color: var(--destructive);
+  }
+
+  .transcript-stats .has-errors dd {
+    color: var(--destructive);
+  }
+
+  .transcript-links {
+    display: grid;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .transcript-links > * {
+    margin: 0;
+  }
+
+  .transcript-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    align-items: center;
+  }
+
+  .transcript-chips .tags {
+    margin: 0;
+  }
+
+  /* A subject is a named grouping, not a tag: a hairline box, no fill (V3). */
+  .transcript-subjects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .subject-chip {
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+    min-height: 1.5rem;
+    padding: 0 0.5rem;
+    border: 1px solid var(--strong-rule);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    color: var(--foreground);
+    text-decoration: none;
+  }
+
+  .subject-chip:hover {
+    background: var(--accent);
+  }
+
+  .subject-via {
+    color: var(--muted-foreground);
+  }
+
+  .transcript-linked {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+  }
+
+  .transcript-files code {
+    font-size: 0.8125rem;
+    overflow-wrap: anywhere;
+  }
+
+  .transcript-jump {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+  }
+
+  .transcript-histogram li {
+    display: grid;
+    grid-template-columns: minmax(6rem, 12rem) 1fr 3ch;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .transcript-histogram-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .transcript-histogram-bar {
+    block-size: 0.5rem;
+    background: var(--saddle);
+    border-radius: 2px;
+  }
+
+  .transcript-outline ol {
+    margin: 0;
+    padding-left: 1.75rem;
+    display: grid;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  .transcript-outline a {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+  }
+
+  .transcript-conversation-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+
+  .transcript-conversation-head h3 {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .transcript-toggle[aria-pressed="true"] {
+    border-style: solid;
+  }
+
+  .transcript-conversation {
+    display: grid;
+    gap: calc(var(--space-unit) * 6);
+  }
+
+  .transcript-exchange {
+    display: grid;
+    gap: calc(var(--space-unit) * 3);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 20rem;
+    /*
+     * content-visibility paints only inside the box; reaching into the
+     * pane's margin keeps the copy button beside each time inside it.
+     */
+    margin-left: -22px;
+    padding-left: 22px;
+  }
+
+  /*
+   * A line of the conversation: the time in a narrow column, the turn beside
+   * it, aligned on their first baselines so a time sits on its turn's first
+   * line whether that is a prompt card, a reply or a folded run.
+   */
+  .transcript-line {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    column-gap: 0.75rem;
+    align-items: baseline;
+    scroll-margin-top: 1rem;
+    min-width: 0;
+  }
+
+  .transcript-time {
+    position: relative;
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .transcript-time a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .transcript-time a:hover {
+    color: var(--foreground);
+    text-decoration: underline;
+  }
+
+  /*
+   * Copies a message's link. Always in the markup and the tab order, hidden
+   * only by opacity behind a fine pointer, like the pen (SC 1.4.13); a touch
+   * screen has no hover, so there it is simply on.
+   */
+  /*
+   * Out of the layout, in the pane's 22.5px left margin beside the time, so
+   * no row grows and the time column keeps its width.
+   */
+  button.transcript-copy {
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--muted-foreground);
+    cursor: pointer;
+  }
+
+  /* Not the base button's fill: this is a bare icon. */
+  button.transcript-copy:hover,
+  button.transcript-copy:focus-visible {
+    border: 0;
+    background: transparent;
+    color: var(--foreground);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .transcript-copy {
+      opacity: 0;
+    }
+
+    .transcript-line:hover .transcript-copy,
+    .transcript-copy:focus-visible {
+      opacity: 1;
+    }
+  }
+
+  /* The speaker floats ahead of the first line, so the text follows it. */
+  .transcript-body {
+    display: flow-root;
+    min-width: 0;
+  }
+
+  .transcript-turn p,
+  .transcript-turn h3 {
+    margin: 0;
+  }
+
+  .turn-human .transcript-body {
+    padding: 0.625rem 0.875rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+
+  .turn-error .transcript-body {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--destructive);
+    border-radius: var(--radius);
+  }
+
+  .transcript-speaker {
+    float: left;
+    margin: 0 0.375em 0 0 !important;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  .transcript-speaker::after {
+    content: ":";
+  }
+
+  /* Jumps to the next prompt; floats to the card's corner, out of the text. */
+  .transcript-next {
+    float: right;
+    margin-left: 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.6rem;
+    color: var(--muted-foreground);
+    text-decoration: none;
+  }
+
+  .transcript-next:hover {
+    color: var(--foreground);
+    text-decoration: underline;
+  }
+
+  /*
+   * Only a paragraph runs on after the speaker. A message that opens with a
+   * list, heading, fence, table or quote starts on the next line, or the
+   * list's markers, which hang outside its text, sit under the speaker.
+   */
+  .transcript-body .prose > :first-child:not(p) {
+    clear: left;
+  }
+
+  .turn-human .transcript-speaker {
+    color: var(--brand-ink);
+  }
+
+  .turn-error .transcript-speaker {
+    color: var(--destructive);
+  }
+
+  .turn-error .transcript-text {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .transcript-speaker a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /*
+   * Prompts and replies share one Markdown setting, so a reply reads in the
+   * same type whether or not the tool calls around it are shown. Headings
+   * stay at the body's scale: a reply's "# Plan" is a label, not a page title.
+   */
+  /* The body's own size, 15px: prompts and replies are what the page is for. */
+  .transcript-turn .prose {
+    max-width: none;
+    color: var(--foreground);
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  /*
+   * A reply before the last in its exchange narrates the work ("Let me read
+   * the route"); the last one is the answer. The notes step back in size and
+   * ink so the answer reads first.
+   */
+  .turn-progress .prose,
+  .turn-progress .transcript-speaker {
+    font-size: 0.9375rem;
+    color: var(--muted-foreground);
+  }
+
+  .transcript-turn .prose > :last-child {
+    margin-bottom: 0;
+  }
+
+  /* Preflight strips list markers; a reply's list needs them to read as one. */
+  .transcript-turn .prose ul {
+    list-style: disc;
+  }
+
+  .transcript-turn .prose ol {
+    list-style: decimal;
+  }
+
+  .transcript-turn .prose h1,
+  .transcript-turn .prose h2 {
+    font-size: 1.0625rem;
+  }
+
+  .transcript-turn .prose h3,
+  .transcript-turn .prose h4 {
+    font-size: 1rem;
+  }
+
+  .transcript-turn .prose pre {
+    white-space: pre;
+    overflow-wrap: normal;
+  }
+
+  .transcript-turn .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    font-size: 0.8125rem;
+  }
+
+  .transcript-turn .prose th,
+  .transcript-turn .prose td {
+    padding: 0.375rem 0.75rem 0.375rem 0;
+  }
+
+  .transcript-tools {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+  }
+
+  .transcript-tools > summary {
+    cursor: pointer;
+    min-height: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .transcript-tools > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .transcript-tools > summary::before {
+    content: "▸";
+    font-size: 0.6875rem;
+    inline-size: 0.75rem;
+  }
+
+  .transcript-tools[open] > summary::before {
+    content: "▾";
+  }
+
+  .transcript-tools.has-errors > summary {
+    color: var(--foreground);
+  }
+
+  /*
+   * Thinking: the agent's working before or between replies. Folded to one
+   * italic line with its opening words, so it reads as neither a reply nor
+   * an event; open, it is the reply's prose in muted ink on a hairline.
+   */
+  .transcript-thinking {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    min-width: 0;
+  }
+
+  .transcript-thinking > summary {
+    cursor: pointer;
+    min-height: 1.5rem;
+    list-style: none;
+    font-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .transcript-thinking > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .transcript-thinking > summary::before {
+    content: "▸ ";
+    font-size: 0.6875rem;
+    font-style: normal;
+  }
+
+  .transcript-thinking[open] > summary::before {
+    content: "▾ ";
+  }
+
+  .transcript-thinking-body {
+    margin: 0.375rem 0 0 0.375rem;
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--border);
+  }
+
+  .transcript-thinking-body .prose {
+    max-width: none;
+    font-size: 0.9375rem;
+    color: var(--muted-foreground);
+  }
+
+  /*
+   * System: what the client put in front of the model. Folded to one muted
+   * line naming its sources, set like a tool run; each source opens to its
+   * text verbatim, wrapped, on the thinking block's hairline.
+   */
+  .transcript-system {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    min-width: 0;
+  }
+
+  .transcript-system summary {
+    cursor: pointer;
+    min-height: 1.5rem;
+    list-style: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .transcript-system summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .transcript-system summary::before {
+    content: "▸ ";
+    font-size: 0.6875rem;
+  }
+
+  .transcript-system details[open] > summary::before,
+  .transcript-system[open] > summary::before {
+    content: "▾ ";
+  }
+
+  .transcript-system-list {
+    margin: 0.375rem 0 0 0.375rem;
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--border);
+    list-style: none;
+  }
+
+  .transcript-system-size {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .transcript-system-text {
+    margin: 0.25rem 0 0.5rem;
+    max-height: 32rem;
+    overflow: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 0.8125rem;
+    color: var(--foreground);
+  }
+
+  /*
+   * An event the client wrote as a user message (a background task, a slash
+   * command, a compaction summary): one muted line in the reply's flow, set
+   * like a tool run so it never reads as the person's prompt.
+   */
+  .transcript-event {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    overflow-wrap: anywhere;
+  }
+
+  .transcript-event code {
+    font-size: 0.75rem;
+    color: var(--foreground);
+  }
+
+  .transcript-event.has-errors {
+    color: var(--destructive);
+  }
+
+  .transcript-event > summary {
+    cursor: pointer;
+    min-height: 1.5rem;
+    list-style: none;
+  }
+
+  .transcript-event > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .transcript-event > summary::before {
+    content: "▸ ";
+    font-size: 0.6875rem;
+  }
+
+  .transcript-event[open] > summary::before {
+    content: "▾ ";
+  }
+
+  .transcript-event-detail {
+    margin: 0.375rem 0 0 0.375rem;
+    max-height: 24rem;
+    overflow: auto;
+  }
+
+  div.transcript-event-detail {
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--border);
+  }
+
+  .transcript-tool-list {
+    list-style: none;
+    margin: 0.375rem 0 0 0.375rem;
+    padding: 0 0 0 0.75rem;
+    border-left: 1px solid var(--border);
+    display: grid;
+    gap: 0.25rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+  }
+
+  .transcript-tool-list li {
+    scroll-margin-top: 1rem;
+    overflow-wrap: anywhere;
+  }
+
+  .transcript-tool-list .tool-error {
+    color: var(--destructive);
+  }
+
+  .transcript-tool-name {
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  .tool-error .transcript-tool-name {
+    color: var(--destructive);
+  }
+
+  .transcript-gap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+  }
+
+  .transcript-gap::before,
+  .transcript-gap::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 30rem) {
+    .transcript-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /*
+   * Section tabs: a pane's own sections, the third level under the strap and
+   * the SubNav. Smaller type on a hairline; the open section in ink with an
+   * ink underline, like the SubNav, never a purple tint (V1).
+   */
+  .section-tabs {
+    display: grid;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+
+  .section-tabs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-tabs-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3125rem;
+    min-height: 24px;
+    padding-bottom: 0.375rem;
+    margin-bottom: -1px;
+    border-bottom: 2px solid transparent;
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .section-tabs-list a:hover {
+    color: var(--foreground);
+  }
+
+  .section-tabs-list a[aria-current="true"] {
+    color: var(--foreground);
+    border-bottom-color: var(--foreground);
+  }
+
+  .section-tabs-count {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    color: var(--muted-foreground);
+  }
+
+  .section-tabs-panel {
+    min-width: 0;
+  }
+
+  /* The date filter's popover: presets, then two fields and Apply. */
+  .date-range-presets {
+    display: grid;
+    padding: 0.25rem;
+  }
+
+  .date-range-presets a {
+    padding: 0.375rem 0.5rem;
+    border-radius: calc(var(--radius) - 2px);
+    color: var(--foreground);
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+
+  .date-range-presets a:hover,
+  .date-range-presets a[aria-current="true"] {
+    background: var(--accent);
+  }
+
+  .date-range {
+    display: grid;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .date-range.scriptless {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    padding: 0;
+  }
+
+  .date-range-field {
+    display: grid;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+  }
+
+  .date-range-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  /*
+   * Syntax colours for highlighted fences (app/components/code-highlight.js),
+   * from the roles only, so the dark theme follows and nothing is grey (V2).
+   */
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-doctag {
+    color: var(--brand-ink);
+  }
+
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-addition,
+  .hljs-symbol {
+    color: var(--ok);
+  }
+
+  .hljs-number,
+  .hljs-literal,
+  .hljs-built_in,
+  .hljs-type,
+  .hljs-attr,
+  .hljs-attribute,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-params {
+    color: var(--warn);
+  }
+
+  .hljs-comment,
+  .hljs-quote,
+  .hljs-meta {
+    color: var(--muted-foreground);
+    font-style: italic;
+  }
+
+  .hljs-title,
+  .hljs-section,
+  .hljs-name,
+  .hljs-selector-id,
+  .hljs-selector-class {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  .hljs-deletion {
+    color: var(--destructive);
+  }
+
+  /* ----------------------------------------------------------------- runs --- */
+
+  /*
+ * Three grounds, one per level of nesting. A run sits on the page's bone, the
+ * calls it holds sit on paper, and one call's payload sits on paper-2. Depth
+ * is the only thing telling you which of the three disclosures you opened, so
+ * it has to be visible rather than implied by indentation alone.
+ */
+
+  /* Sort, not filter: the same rows in a different order. */
+  .sorts {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.25rem 0 0.75rem;
+  }
+
+  .sorts a {
+    color: var(--ink-3);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .sorts a:hover {
+    color: var(--ink);
+  }
+
+  .sorts a[aria-current="true"] {
+    color: var(--ink);
+    box-shadow: inset 0 -2px 0 var(--trunk);
+  }
+
+  .runs {
+    display: grid;
+    gap: 1px;
+    margin: 0 0 2.5rem;
+    padding: 0;
+    list-style: none;
+    background: var(--rule);
+    border-block: 1px solid var(--rule);
+  }
+
+  .runs > li {
+    background: var(--bone);
+  }
+
+  /* Level one. The caller leads, because it is the thing being looked for. */
+  .runs > li > details > summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    gap: 0.125rem 1.25rem;
+    align-items: baseline;
+    padding: 0.75rem 1rem;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .runs > li > details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .runs > li > details[open] > summary {
+    background: var(--accent-surface);
+  }
+
+  .runs > li > details > summary:hover {
+    background: var(--accent-surface);
+  }
+
+  .runs .caller {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Everything under the name is context, and reads like it. */
+  .runs .via {
+    grid-column: 1;
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+  }
+
+  .runs .counts,
+  .runs > li > details > summary > .took {
+    color: var(--ink-2);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  .runs .badges {
+    display: flex;
+    gap: 0.375rem;
+  }
+
+  .runs > li > details > summary .why {
+    grid-column: 1 / -1;
+    max-width: 68ch;
+    margin: 0.375rem 0 0;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--brass);
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+  }
+
+  /* Level two. The calls of a run, on paper, clearly inside something. */
+  .run-detail {
+    padding: 0.75rem 1rem 1rem;
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+  }
+
+  .run-detail .calls {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+
+  .run-detail .calls > li + li {
+    border-top: 1px solid var(--rule);
+  }
+
+  .run-detail .calls .call-row {
+    grid-template-columns: 4.5rem minmax(0, 1fr) auto 4.5rem;
+    gap: 0.75rem;
+    padding: 0.4375rem 0.75rem;
+  }
+
+  .run-detail .calls .call-row:hover {
+    background: var(--bone);
+  }
+
+  /* The open call uses the same purple selection surface and inset rule. */
+  .run-detail .calls .call-row[aria-current="true"] {
+    background: var(--accent-surface);
+    box-shadow: inset 2px 0 0 var(--trunk);
+  }
+
+  .run-detail .calls .when {
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    text-align: right;
+  }
+
+  /* Every call in a run shares its caller, so repeating it per row is noise. */
+  .run-detail .calls .who {
+    display: none;
+  }
+
+  .run-detail .calls .why {
+    grid-column: 2 / -1;
+    padding-left: 0.625rem;
+    border-left: 2px solid var(--brass);
+    color: var(--ink-2);
+    font-size: 0.75rem;
+  }
+
+  .run-detail .calls .error {
+    grid-column: 2 / -1;
+    padding-left: 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  /*
+ * Level three is beside the list, not inside it. The open call docks on the
+ * window's right edge at full height, and the page steps left to make room, so
+ * reading a payload never pushes the next row off the screen and never covers
+ * it. The pane scrolls on its own; the list scrolls under the page.
+ */
+  body:has(:is(.logs-split, .evals-split) > .call-pane) {
+    padding-right: var(--pane-width);
+  }
+
+  :is(.logs-split, .evals-split) > .call-pane {
+    position: fixed;
+    top: calc(var(--strap) * 2);
+    right: 0;
+    bottom: 0;
+    width: var(--pane-width);
+    max-width: none;
+    overflow-y: auto;
+    border-width: 0 0 0 1px;
+  }
+
+  .call-pane {
+    max-width: var(--pane-width);
+    padding: 0 1rem 1rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+
+  .call-pane-head {
+    position: sticky;
+    top: 0;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin: 0 -1rem 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .call-pane-head .what {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .call-pane-head a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    color: var(--ink-2);
+    font-size: 0.75rem;
+  }
+
+  .call-pane-head a:hover {
+    color: var(--ink);
+  }
+
+  .call-pane h3 {
+    margin: 1.25rem 0 0;
+  }
+
+  .call-pane .facts {
+    gap: 0.5rem;
+    margin: 0.5rem 0 0;
+  }
+
+  .call-pane .facts > div {
+    padding-top: 0.375rem;
+  }
+
+  /* A pane under half the window cannot spare the page's 11rem label column. */
+  .call-pane .call-facts > .wide {
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+
+  .call-pane .facts dd {
+    margin: 0;
+    font-size: 0.8125rem;
+  }
+
+  .call-pane pre {
+    margin: 0.75rem 0 0;
+    padding: 0.75rem;
+    background: var(--accent-surface);
+    font-size: 0.75rem;
+    overflow-x: auto;
+  }
+
+  .call-pane p.muted {
+    margin: 0.5rem 0 0;
+    font-size: 0.75rem;
+  }
+
+  /*
+ * A value that can run long, a URL, a user agent, a session, takes a whole
+ * row with its label in the label column. In a 7rem track beside empty
+ * neighbours it wrapped four lines deep.
+ */
+  .call-facts > .wide {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(6rem, var(--label-column)) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .call-facts > .wide dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* The logs list narrowed by values clicked in the pane, each removable. */
+  .active-filters {
+    align-items: center;
+    margin: 0 0 1rem;
+  }
+
+  .active-filters .chip-remove {
+    display: inline-flex;
+  }
+
+  .call-facts .open-item {
+    margin-left: 0.75ch;
+    color: var(--ink-2);
+    font-size: 0.75rem;
+  }
+
+  /* A fact whose value is a block: label on top, value across the row. */
+  .call-facts > .stacked {
+    grid-column: 1 / -1;
+  }
+
+  /*
+ * JSON in ink weights, not a theme. Keys stay ink, strings take the green,
+ * numbers and literals the brass, and the punctuation recedes. No colour here
+ * that is not already a token.
+ */
+  pre.json {
+    color: var(--ink-3);
+  }
+
+  pre.json .j-key {
+    color: var(--ink);
+  }
+
+  pre.json .j-str {
+    color: var(--ok);
+  }
+
+  pre.json .j-num,
+  pre.json .j-lit {
+    color: var(--muted-foreground);
+  }
+
+  /* The auth trail is mostly repeated sign-ins, so it opens on request. */
+  .auth-trail > summary {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--rule-2);
+    color: var(--muted-foreground);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .auth-trail > summary .count {
+    color: var(--ink-3);
+    font-family: var(--mono);
+    letter-spacing: normal;
+  }
+
+  /* ----------------------------------------------------------- memories --- */
+
+  /*
+   * A memory row's left rule names its type before the word does. Each
+   * recommended type that is asked about most takes a signal colour; the
+   * rest, and a coined type, take the strong rule. Inset, so it takes no
+   * width and the row's text does not move.
+   */
+  .item-row.memory-row {
+    --memory-rule: var(--strong-rule);
+    box-shadow: inset 3px 0 0 var(--memory-rule);
+  }
+
+  .item-row.memory-type-decision {
+    --memory-rule: var(--primary);
+  }
+
+  .item-row.memory-type-insight {
+    --memory-rule: var(--ok);
+  }
+
+  .item-row.memory-type-reference {
+    --memory-rule: var(--warn);
+  }
+
+  .item-row.memory-type-fact {
+    --memory-rule: var(--saddle);
+  }
+
+  table.memories td:first-child {
+    max-width: 28rem;
+  }
+
+  table.memories td:first-child .cell {
+    color: var(--heading-ink);
+  }
+
+  /* How often agents opened it: a count, and the day of the last one. */
+  table.memories td.fetched {
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+
+  table.memories small {
+    display: block;
+    margin-top: 0.125rem;
+    color: var(--ink-3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* A tag or a type that is also a filter keeps the label look, not the link's. */
+  a.tag,
+  a.facet {
+    text-decoration: none;
+  }
+
+  a.facet {
+    color: var(--ink-2);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  /* A chip is shorter than 24px; its hit area is not, and takes no space. P10. */
+  a.tag {
+    position: relative;
+  }
+
+  a.tag::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 24px;
+    transform: translateY(-50%);
+  }
+
+  a.facet:hover {
+    border-color: var(--trunk);
+    color: var(--trunk);
+  }
+
+  a.tag:hover {
+    color: var(--tag-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--tag-ink);
+  }
+
+  .tag:focus-visible,
+  .chip :is(.chip-link, .chip-remove):focus-visible {
+    outline-color: var(--tag-ink);
+    outline-offset: -2px;
+  }
+
+  /*
+ * Rendered Markdown, agent-written. Type scale and hairlines only; headings
+ * stay in the grotesque; the geometric display face belongs to the masthead.
+ */
+  /* No minimum width of its own: a grid or flex parent may narrow it below
+     its widest unbreakable run (a to-do card, a long URL) instead of
+     widening the pane past its edge. */
+  .prose {
+    min-width: 0;
+    max-width: 44rem;
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    margin: 1.25rem 0 0.375rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: var(--sans);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .prose p {
+    margin: 0.625rem 0;
+    max-width: none;
+  }
+
+  /* The leading margin would drop the pen beside it into empty space. */
+  .prose > :first-child {
+    margin-top: 0;
+  }
+
+  .prose ul,
+  .prose ol {
+    margin: 0.625rem 0;
+    padding-left: 1.25rem;
+  }
+
+  .prose li {
+    margin: 0.25rem 0;
+  }
+
+  .prose blockquote {
+    margin: 0.75rem 0;
+    padding: 0 0 0 1rem;
+    border-left: 2px solid var(--brass);
+    color: var(--ink-2);
+  }
+
+  .prose :not(pre) > code {
+    padding: 0.0625rem 0.25rem;
+    background: var(--paper-2);
+  }
+
+  .prose table {
+    margin: 0.75rem 0;
+    width: auto;
+  }
+
+  /* Images dropped into a description or comment, held to the column. */
+  .prose img {
+    display: block;
+    max-width: 100%;
+    max-height: 24rem;
+    height: auto;
+    border: 1px solid var(--rule);
+  }
+
+  .prose hr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ------------------------------------------------- editing in place --- */
+
+  /*
+ * A value and the pen that opens it. The pen is always in the markup and in
+ * the tab order, hidden only by opacity, so SC 1.4.13 holds and a keyboard
+ * reaches it without a pointer. The hiding is gated behind a fine pointer:
+ * a touch screen has no hover to reveal anything with, so there it is simply
+ * on. Hit area is 24px square per SC 2.5.8, around a 14px mark.
+ */
+  .editable {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .editable > :first-child {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .pen {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    /* Fixed pixels, not rems: this is the SC 2.5.8 floor, not a type measure. */
+    width: 24px;
+    height: 24px;
+    margin: -0.25rem 0 0 0;
+    border-radius: var(--radius);
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+
+  .pen:hover {
+    color: var(--trunk);
+  }
+
+  /*
+ * An empty value is the control that fills it (P8): always visible, never
+ * behind hover, and 24px tall per SC 2.5.8.
+ */
+  .add-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3125rem;
+    min-height: 24px;
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+    text-decoration: none;
+  }
+
+  .add-value:hover {
+    color: var(--trunk);
+  }
+
+  .editable > .add-value {
+    flex: 0 0 auto;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .pen {
+      opacity: 0;
+      transition: opacity 80ms linear;
+    }
+
+    .editable:hover > .pen,
+    .editable:focus-within > .pen,
+    .pen:focus-visible {
+      opacity: 1;
+    }
+  }
+
+  /*
+ * The editor stands where the value stood (P6). The value stays in the flow,
+ * hidden, so the box keeps its height; the form is laid over that box, and
+ * where it needs more room it covers what is below rather than pushing it.
+ * The strap hangs in the gutter, so the field starts where the text did.
+ */
+  .editable.editing {
+    position: relative;
+  }
+
+  .editable-held {
+    visibility: hidden;
+  }
+
+  .pen-space {
+    flex: 0 0 24px;
+  }
+
+  .editable-form {
+    position: absolute;
+    z-index: 2;
+    inset: 0 0 auto calc(-0.75rem - var(--strap));
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 100%;
+    padding-left: 0.75rem;
+    border-left: var(--strap) solid var(--trunk);
+    background: var(--paper);
+  }
+
+  .editable-form > input {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    padding: 0.1875rem 0.5rem;
+  }
+
+  .editable-form > .row {
+    flex: 0 0 auto;
+  }
+
+  /* Prose fills the value's box, with a floor so a one-line value still edits. */
+  .editable-form.multiline {
+    inset: 0 0 0 calc(-0.75rem - var(--strap));
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-items: stretch;
+    min-height: 10rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .editable-form > textarea {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .cancel {
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+  }
+
+  /* ----------------------------------------------------------- to-dos --- */
+
+  /*
+ * One column, so a row is as tall as its text and no taller. A grid of equal
+ * tracks gave a two-line to-do the height of the ten-line one beside it.
+ */
+  /*
+   * The to-do list is an item list (app/components/item-list.tsx) with a
+   * checkbox: one bordered group, a hairline between rows. Each row is one
+   * column of lines on the title's edge: the title with its sub-task count,
+   * then the project, tags and state, then the preview and where it stands.
+   */
+  .card-list.todo-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+
+  .todo-list > .todo-card {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: calc(var(--space-unit) * 0.5);
+    padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 4);
+    outline: 0;
+    background: transparent;
+    transition: background-color 100ms;
+  }
+
+  /* Blocked rows lead the list as one admonition: the alert's strap down
+     their left edge and a faint wash of the same colour, under a header
+     that says why they are first. The section is fixed while the list is
+     open (useSections), but the strap and wash follow the row's state, so
+     an unblocked row clears where it stands and one blocked from its pane
+     turns red where it stands. */
+  .todo-blocked-head {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--space-unit) * 2);
+    padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 4);
+    border-top: 1px solid var(--border);
+    box-shadow: inset var(--strap) 0 0 var(--danger);
+    background: color-mix(in oklch, var(--danger) 8%, transparent);
+    color: var(--danger);
+    font-size: 0.875rem;
+    list-style: none;
+  }
+
+  .todo-blocked-head.is-clear {
+    box-shadow: none;
+    background: transparent;
+    color: var(--ink-2);
+  }
+
+  .todo-blocked-head > svg {
+    flex: 0 0 auto;
+    margin-top: 0.125rem;
+  }
+
+  .todo-blocked-head > p {
+    margin: 0;
+  }
+
+  .todo-blocked-head span {
+    color: var(--foreground);
+  }
+
+  .todo-list > .todo-card.is-blocked {
+    box-shadow: inset var(--strap) 0 0 var(--danger);
+    background: color-mix(in oklch, var(--danger) 4%, transparent);
+  }
+
+  .todo-blocked-head + .todo-card {
+    border-top: 1px solid var(--border);
+  }
+
+  .todo-list > .todo-card.in-blocked.is-blocked + .todo-card:not(.in-blocked) {
+    border-top-color: var(--danger);
+  }
+
+  .todo-list > .todo-card:hover {
+    background: color-mix(in oklch, var(--accent) 40%, transparent);
+  }
+
+  .todo-list > .todo-card.is-open {
+    background: color-mix(in oklch, var(--accent) 70%, transparent);
+  }
+
+  .todo-list > .todo-card + .todo-card {
+    border-top: 1px solid var(--border);
+  }
+
+  /* The project, the tags and the state flow as one line of tag-sized slots on
+     the title's edge: the tag set's wrappers step aside, so the folder, each
+     chip, the add and the pill are items of the same wrapping line, and a
+     tag that does not fit starts the next line under the folder. An open
+     tag editor keeps its box (P6). Direct children only: the pane is a
+     dialog inside the row and has a .todo-tags of its own. */
+  .todo-list > .todo-card > .todo-tags {
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  .todo-list > .todo-card > .todo-tags > .editable:not(.editing),
+  .todo-list > .todo-card > .todo-tags > .editable:not(.editing) > .tagset,
+  .todo-list > .todo-card > .todo-tags > .editable:not(.editing) .tags {
+    display: contents;
+  }
+
+  .todo-list > .todo-card > .todo-tags > .editable.editing {
+    flex: 1 1 0;
+    min-width: min(100%, 12rem);
+  }
+
+  .todo-list > .todo-card > .todo-tags > :is(.project-chip, .pill),
+  .todo-list > .todo-card > .todo-tags .tags > li {
+    min-height: var(--tag-control);
+  }
+
+  .todo-list > .todo-card > .todo-tags > .pill {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  .todo-list > .todo-card > .todo-summary {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+  }
+
+  /* Show, don't tell: the title's link covers the row, and the summary is
+     the same door. Every other control in the row sits above that cover:
+     the checkbox, tags, sub-task toggle, Unblock. Forms are left alone,
+     because an editor positions itself over its value (P6). */
+  .todo-list > .todo-card .todo-open::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  .todo-list
+    > .todo-card
+    :is(
+      button,
+      input,
+      select,
+      textarea,
+      label,
+      summary,
+      .task-count,
+      a:not(.todo-open, .todo-summary)
+    ) {
+    position: relative;
+    z-index: 1;
+  }
+
+  table.memories tbody td,
+  table.skills tbody td {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /*
+ * The row under the last to-do that files the next one, inset like a row's
+ * title. Closed it is one 24px link (P8, P10); open it is the title line, the
+ * description, and the Add and Cancel pair, stacked.
+ */
+  .todo-add {
+    display: grid;
+    gap: calc(var(--space-unit) * 3);
+    padding: 0.75rem 1.375rem 1.25rem;
+  }
+
+  .add-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    min-height: calc(var(--space-unit) * 24);
+    width: 100%;
+    padding: calc(var(--space-unit) * 4);
+    border: 1px dashed var(--strong-rule);
+    border-radius: var(--radius);
+    color: var(--ink-2);
+    background: transparent;
+    text-decoration: none;
+  }
+
+  .add-item:hover,
+  .add-item:focus-visible {
+    border-color: var(--trunk);
+    background: var(--accent-surface);
+    color: var(--trunk);
+  }
+
+  .add-item-mark {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    gap: calc(var(--space-unit) * 2);
+  }
+
+  .add-item-label {
+    overflow: hidden;
+    font-size: 0.8125rem;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .add-item-label {
+      /* P6/P8: revealing the label never moves the centred plus. */
+      position: absolute;
+      left: calc(100% + var(--space-unit) * 2);
+      top: 50%;
+      opacity: 0;
+      white-space: nowrap;
+      transform: translate(4px, -50%);
+    }
+
+    .add-item:is(:hover, :focus-visible, :focus-within) .add-item-label {
+      opacity: 1;
+      transform: translate(0, -50%);
+    }
+
+    /* A card has room below the plus, not beyond its right-hand edge. */
+    .add-item-card .add-item-label {
+      left: 50%;
+      top: calc(100% + var(--space-unit) * 2);
+      transform: translate(-50%, 4px);
+    }
+
+    .add-item-card
+      .add-item:is(:hover, :focus-visible, :focus-within)
+      .add-item-label {
+      transform: translate(-50%, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .add-item-label {
+      transition:
+        transform 160ms ease-out,
+        opacity 160ms ease-out;
+    }
+  }
+
+  .add-item-card {
+    display: grid;
+    min-height: calc(var(--space-unit) * 40);
+    padding: calc(var(--space-unit) * 2);
+  }
+
+  .add-item-card > .editable {
+    display: grid;
+  }
+
+  .add-item-card .add-item {
+    height: 100%;
+  }
+
+  .infinite-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--space-unit) * 3);
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+  }
+
+  .infinite-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: calc(var(--space-unit) * 2);
+  }
+
+  .chip-add {
+    border-style: dashed;
+    border-color: var(--ink-3);
+  }
+
+  /* The empty set's phrase keeps the 24px target in every size: it stands
+     alone, so there is no row of tags whose height it has to match. */
+  .tagset .add-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border: 1px dashed var(--strong-rule);
+    border-radius: var(--tag-radius);
+    padding-inline: calc(var(--space-unit) * 2);
+    font-size: var(--tag-add-font-size);
+  }
+
+  .composer textarea {
+    resize: vertical;
+  }
+
+  .composer > .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .todo-add-landed {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+  }
+
+  /* Hover shows the row under the pointer without making it Enter's pick. */
+  .composer .combobox-list li:hover {
+    background: var(--accent-surface);
+  }
+
+  .composer > [role="alert"] {
+    grid-column: 1 / -1;
+  }
+
+  /* Done rows stay where they were; this is how they leave, and come back. */
+  .todo-done-toggle {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: none;
+    gap: 1rem;
+    justify-content: center;
+    margin: 0 0 0.5rem;
+  }
+
+  /* Everything under the title hangs from the title, not from the circle. */
+  .todo-list .todo-tags,
+  .todo-list .todo-blocked,
+  .todo-summary,
+  .todo-last-update,
+  .todo-subtasks {
+    margin-left: 1.75rem;
+  }
+
+  /* The rest of the row opens the to-do too: its first line and what it holds. */
+  .todo-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-width: 0;
+    min-height: 24px;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  .todo-preview {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .todo-meta {
+    flex: 0 0 auto;
+    font-size: 0.75rem;
+  }
+
+  /* Where the work stands, from the thread: one line, under the preview. */
+  .todo-last-update {
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    color: var(--ink-3);
+    font-size: 0.75rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Under a list row's title, two lines of one size and one height: the
+     preview with its counts, then where the work stands, or what a blocked
+     row waits on with Unblock beside it. Ink, not size, ranks them. */
+  .todo-list > .todo-card > .todo-summary,
+  .todo-list .todo-meta,
+  .todo-list .todo-last-update,
+  .todo-list .todo-blocked {
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+
+  /* One line is 1.5rem tall; a wrapped one keeps the tighter leading. */
+  .todo-list .todo-last-update,
+  .todo-list .todo-blocked {
+    padding-block: 0.125rem;
+  }
+
+  .todo-list .todo-meta {
+    color: var(--ink-3);
+  }
+
+  .todo-list .todo-blocked {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    padding-top: 0;
+  }
+
+  .todo-list .todo-blocked-on {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Unblock fits the line it sits on rather than setting its height. */
+  .todo-list .todo-blocked > button.small {
+    flex: 0 0 auto;
+    height: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  /*
+   * The pane is a dialog inside the row's <li>, so the row's one-line
+   * blocked rules reach it too. There the reason reads whole: a long one
+   * would otherwise set the pane's minimum width and push it off-screen.
+   */
+  .todo-detail .todo-blocked {
+    flex-wrap: wrap;
+    margin-left: 0;
+  }
+
+  .todo-detail .todo-blocked-on {
+    flex: 1 1 12rem;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .todo-last-update-when {
+    color: var(--muted-foreground);
+  }
+
+  /* At the top of the pane the status reads whole, flush with the body. */
+  .todo-detail .todo-last-update {
+    margin-left: 0;
+    white-space: normal;
+  }
+
+  /* The title in the list opens the to-do, so it reads as the title. */
+  .todo-open {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* No underline at rest, on hover or when open: the pointer says it opens,
+     and the open row's wash says which one is open. */
+
+  /* A track that can shrink, so a long line wraps inside the dialog. The
+     markup sets the gaps: six units between groups, three inside one. */
+  .todo-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
+  }
+
+  .todo-detail .subtask-add {
+    position: relative;
+  }
+
+  .todo-detail .subtask-add.editing > span {
+    visibility: hidden;
+  }
+
+  .todo-detail .subtask-add > form {
+    position: absolute;
+    z-index: 2;
+    inset: 0 0 auto;
+    padding: calc(var(--space-unit) * 2);
+    background: var(--paper);
+    outline: 1px solid var(--rule);
+  }
+
+  .todo-detail .subtask-add input[type="text"] {
+    flex: 1 1 8rem;
+    min-width: 0;
+  }
+
+  /* The pane's title line: the row's completion circle, then the title. */
+  .todo-pane-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--space-unit) * 2.5);
+    min-width: 0;
+  }
+
+  .todo-pane-heading > .todo-check {
+    flex: none;
+    padding-top: 0.2rem;
+  }
+
+  .todo-pane-heading > .editable {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* The description opens on a click anywhere in it, so it says so. */
+  .edit-on-click {
+    cursor: text;
+  }
+
+  /* A fact's column is narrow; its suggestions are not held to it. */
+  .facts .combobox-list {
+    right: auto;
+    min-width: 100%;
+    width: max-content;
+    max-width: 20rem;
+  }
+
+  .todo-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+  }
+
+  /* The title takes its own width, so the sub-task count it opens sits
+     right after it rather than out in the middle of the row. */
+  .todo-head > .todo-title {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .todo-head h2 {
+    margin: 0;
+  }
+
+  /* The title opens its own editor, so it reads as the title, not a link. */
+  .todo-title-edit {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    cursor: text;
+  }
+
+  /* The title editor is the composer's field, sized to the plain one's box. P6. */
+  .editable-form > .quick-add-input {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .editable-form > .quick-add-input > input {
+    min-height: 0;
+    padding: 0.1875rem 0.5rem;
+  }
+
+  .todo-check {
+    display: flex;
+    padding-top: 0.0625rem;
+  }
+
+  /* The project reads as the row's own label, left of the tags it is not one of. */
+  .todo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .todo-tags > .editable {
+    flex: 1 1 auto;
+    min-width: 0;
+    align-items: center;
+  }
+
+  .todo-tags .tags {
+    margin: 0;
+  }
+
+  /*
+ * The to-do's own completion is a circle; a checkbox inside a body is a
+ * square. The shapes say which one closes the ticket.
+ */
+  .check-circle,
+  .task-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: 0;
+    padding: 0;
+    border: 1px solid var(--rule-2);
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+  }
+
+  .check-circle {
+    position: relative;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 50%;
+  }
+
+  /* SC 2.5.8: a 24px hit area around a smaller mark, taking no layout space. */
+  .check-circle::after,
+  .task-box::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 24px;
+    height: 24px;
+    transform: translate(-50%, -50%);
+  }
+
+  .task-box {
+    position: relative;
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: var(--radius);
+    margin-right: 0.4375rem;
+    vertical-align: -0.0625rem;
+  }
+
+  .check-circle:hover,
+  .task-box:hover {
+    border-color: var(--trunk);
+    background: transparent;
+    color: var(--ink-3);
+  }
+
+  .check-circle[aria-checked="true"],
+  .task-box[aria-checked="true"] {
+    border-color: var(--completion-ink);
+    background: var(--completion-ink);
+    color: var(--paper);
+  }
+
+  /* Done stays in the list and reads as done, rather than vanishing. */
+  .todo-card.is-done .todo-head h2 {
+    color: var(--ink-3);
+    text-decoration: line-through;
+    text-decoration-color: var(--rule-2);
+  }
+
+  .prose .task-list-item:has(> .task-box[aria-checked="true"]) {
+    color: var(--ink-3);
+    text-decoration: line-through;
+    text-decoration-color: var(--rule-2);
+  }
+
+  /* A checklist is not a bulleted list; the box is the marker. */
+  .prose ul:has(> .task-list-item) {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  /*
+ * The row is padded rather than the box grown: two 24px hit areas on rows
+ * 22px apart would overlap, and the mis-tap would land on the next subtask.
+ *
+ * A hanging indent rather than flex. A flex container makes every contiguous
+ * text run and every inline element its own flex item, so `- [ ] a sentence
+ * with `code` in it` lays out as side-by-side columns that wrap separately.
+ * One-word subtasks hide it. The box is inline, so the item stays one flow.
+ * The indent is the box's 0.875rem plus its 0.4375rem margin.
+ */
+  .prose .task-list-item {
+    padding: 0.1875rem 0 0.1875rem 1.3125rem;
+    text-indent: -1.3125rem;
+  }
+
+  .prose .task-list-item > input[type="checkbox"] {
+    width: 0.875rem;
+    height: 0.875rem;
+    min-height: 0;
+    margin-right: 0.4375rem;
+    padding: 0;
+  }
+
+  /* The count is the row's sub-task disclosure: a quiet control, 24px tall. P10. */
+  .task-count {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.125rem;
+    height: auto;
+    min-height: 24px;
+    padding: 0 0.25rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .task-count:hover {
+    background: var(--paper-2);
+    color: var(--ink);
+  }
+
+  /* The checklist unfolded under the row: the dialog's rows, without the prose. */
+  .todo-subtasks ul {
+    margin: 0.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .todo-subtasks li {
+    padding: 0.1875rem 0 0.1875rem 1.3125rem;
+    text-indent: -1.3125rem;
+    color: var(--ink-2);
+  }
+
+  .todo-subtasks li.is-done {
+    color: var(--ink-3);
+    text-decoration: line-through;
+    text-decoration-color: var(--rule-2);
+  }
+
+  .subtask-add {
+    margin: 0;
+  }
+
+  .todo-state {
+    margin: 0;
+    padding-top: 0.25rem;
+  }
+
+  .todo-state input[type="text"] {
+    flex: 1 1 12rem;
+  }
+
+  /* One history: state changes are one quiet line, what someone wrote sits
+   under its line at full ink. */
+  .todo-history > .eyebrow:first-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .todo-history ol {
+    display: grid;
+    gap: 0.625rem;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .todo-history li {
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--rule-2);
+  }
+
+  .todo-history .entry-head {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+  }
+
+  .todo-history .entry-head strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .todo-history time {
+    color: var(--ink-3);
+    cursor: help;
+  }
+
+  /* An agent's entry can hold a URL or a hash with no break in it. It wraps
+     inside the pane; unbroken, it widened the pane's track past the window
+     and the pane scrolled sideways, cutting off the text's left edge. */
+  .todo-history .prose {
+    min-width: 0;
+    margin-top: 0.125rem;
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+  }
+
+  .todo-detail > * {
+    min-width: 0;
+  }
+
+  /* The box, and the button under it once the box is in use, as a field's
+     Save appears when its pen opens it. Focus inside the form or a draft in
+     the box shows it, so a click that takes focus off the box still lands.
+     Hidden, it keeps its line, so showing it moves nothing (P6) and the pane
+     already scrolls far enough to reach it. */
+  .todo-comment {
+    display: grid;
+    justify-items: start;
+    gap: calc(var(--space-unit) * 2);
+    margin: 0;
+  }
+
+  .todo-comment textarea {
+    width: 100%;
+    min-height: 2.5rem;
+  }
+
+  .todo-comment > button {
+    visibility: hidden;
+  }
+
+  .todo-comment:focus-within > button,
+  .todo-comment:has(textarea:not(:placeholder-shown)) > button,
+  .todo-comment:has([role="alert"]) > button {
+    visibility: visible;
+  }
+
+  /* Block's form covers the link and the lines under it (P6). */
+  .todo-state-slot {
+    position: relative;
+  }
+
+  .todo-state-slot.editing > p.todo-state {
+    visibility: hidden;
+  }
+
+  .todo-state-slot > form {
+    position: absolute;
+    z-index: 2;
+    inset: 0 0 auto;
+    padding: calc(var(--space-unit) * 2);
+    background: var(--paper);
+    outline: 1px solid var(--rule);
+  }
+
+  .ghost-link {
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+  }
+
+  /* A fact's value may now be an editable, which must not inherit the label. */
+  .facts dd .editable > span {
+    color: var(--ink);
+    font-size: 0.875rem;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .revisions .log {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .revisions .log > li {
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .revisions .eyebrow {
+    margin: 0;
+  }
+
+  /* -------------------------------------------------------------- narrow --- */
+
+  @media (max-width: 48rem) {
+    .todo-list > .todo-card {
+      padding-inline: calc(var(--space-unit) * 3);
+    }
+
+    .todo-summary {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .todo-preview,
+    .todo-list .todo-blocked-on {
+      overflow: visible;
+      white-space: normal;
+    }
+
+    .todo-list .todo-blocked {
+      align-items: flex-start;
+    }
+
+    .shell {
+      width: min(100% - 1.5rem, 72rem);
+      padding: 2rem 0 4rem;
+    }
+
+    .auth-card {
+      margin: 2rem auto 0;
+      padding: 1.5rem;
+    }
+
+    .card-list {
+      grid-template-columns: 1fr;
+    }
+
+    .facts,
+    .filters {
+      grid-template-columns: 1fr;
+    }
+
+    .scope-list li {
+      grid-template-columns: 1fr;
+      gap: 0.125rem;
+    }
+
+    .slice > summary {
+      grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+    }
+
+    .calls .call-row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.25rem 0.75rem;
+    }
+
+    /* No room to split, so the open call covers the list until it is closed. */
+    body:has(.logs-split > .call-pane) {
+      padding-right: 0;
+    }
+
+    .logs-split > .call-pane {
+      inset: 0;
+      z-index: 20;
+      width: auto;
+      border: 0;
+    }
+
+    .runs > li > details > summary {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.125rem 0.75rem;
+    }
+
+    .runs .badges {
+      grid-column: 1 / -1;
+      margin-top: 0.25rem;
+      flex-wrap: wrap;
+    }
+
+    .run-detail .calls .call-row {
+      grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+      gap: 0.5rem;
+    }
+
+    .run-detail .calls .took {
+      display: none;
+    }
+
+    .sorts {
+      gap: 0.875rem;
+    }
+
+    .calls .when {
+      grid-column: 1 / -1;
+    }
+
+    .calls .what {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .calls .who,
+    .calls .took {
+      display: none;
+    }
+
+    .slice > summary .count {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+    }
+  }
+}
+.asset-processing {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.asset-suggestion-ghost {
+  border: 1px dashed var(--rule-2);
+  padding: calc(var(--space-unit) * 1) calc(var(--space-unit) * 2);
+  color: var(--ink);
+}
+
+/* Chrome styles an extension page's body at `font-size: 75%` from a sheet of
+   its own. That sheet is unlayered, so it beats every layered rule above;
+   the extension's Settings and popup take the console's size back here. */
+body:has(> .settings-card, > .capture-popup) {
+  font-size: 1rem;
+}

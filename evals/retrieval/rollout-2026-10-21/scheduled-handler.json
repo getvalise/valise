@@ -1,0 +1,31 @@
+{
+  "localOnly": true,
+  "cron": "* * * * *",
+  "scheduledTime": 1792570500000,
+  "outcome": "ok",
+  "noRetry": false,
+  "report": {
+    "event": "vector_drain",
+    "configured": true,
+    "delivered": 0,
+    "attemptedFailed": 0,
+    "total": 5001,
+    "pending": 0,
+    "failed": 0,
+    "due": 0,
+    "oldestPendingSeconds": 0,
+    "lastAcceptedAt": 1792570151,
+    "statusSampled": true,
+    "backfill": {
+      "cursor": "[\"mem_0293acea-5d7c-5457-8a5b-f710ced32861\",1]",
+      "done": false,
+      "scanned": 50,
+      "total": 5001,
+      "pending": 0,
+      "failed": 0,
+      "due": 0,
+      "oldestPendingSeconds": 0,
+      "lastAcceptedAt": 1792570151
+    }
+  }
+}
