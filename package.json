@@ -29,6 +29,7 @@
     "shots": "node scripts/console-shots.mjs",
     "shots:extension": "node scripts/extension-shots.mjs",
     "shots:ui": "npm run css:build && node scripts/ui-consistency-shots.mjs",
+    "shots:readme": "npm run css:build && node scripts/readme-gif.mjs",
     "oauth:roundtrip": "node scripts/oauth-roundtrip.mjs",
     "test:d1": "vitest run --config vitest.d1.config.ts",
     "test:mcp": "vitest run --config vitest.mcp.config.ts",

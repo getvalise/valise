@@ -2,6 +2,8 @@
 
 One MCP endpoint that carries your skills, memories, and to-dos between models and agents.
 
+![The Valise console: to-dos, memories and skills](docs/images/valise-console.gif)
+
 People who work with several models at once (Claude on the phone, ChatGPT on the web, a handful of coding agents in parallel on the desktop) end up with each one keeping its own skills, its own memory and its own task list on its own machine. Valise is the case you carry between them: one authenticated endpoint on your own Cloudflare account that every client connects to over MCP.
 
 ## What it holds
