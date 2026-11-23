@@ -55,8 +55,8 @@ it, and never add one.
    sessions merge about as often as a full verify takes (six minutes), so
    requiring the branch to be current when the gate finishes never ended.
    GitHub's `CI` check runs `npm run verify:ci` only, never Playwright, so it
-   does not replace this gate. No `--auto`: no branch protection enforces the
-   gate.
+   does not replace this gate. No `--auto`: the ruleset waits for CI's
+   `verify`, not for the local gate.
 7. Observe production. Confirm the Workers Build for the merge commit
    succeeded, that the live version's `main@<sha>` contains your merge (a
    later merge's build may be the one that deploys it), and that
@@ -76,9 +76,14 @@ with `git revert` in a new PR rather than rewriting `main`.
 on `main`. It was off from 2026-10-20 until the move to the public
 `getvalise/valise` repository on 2026-11-23, while Actions billing on the
 earlier private repository was unavailable; a public repository runs Actions
-without it. A red check is a real failure: record it as a blocker. Branch
-protection is not configured, so the pre-merge gate is the recorded local
-`npm run verify`, including Playwright, which CI does not run.
+without it. A red check is a real failure: record it as a blocker.
+
+The `main` ruleset (repository settings, Rules, ruleset 27922134, set
+2026-11-23) refuses direct pushes, force pushes and deletion of `main`. A
+change lands as a squash-merged pull request whose `verify` check passed; no
+approval is required, so the maintainer merges their own pull requests, and
+the ruleset has no bypass. The recorded local `npm run verify`, including
+Playwright, which CI does not run, stays the pre-merge gate.
 
 Cloudflare Workers Builds deploys, and that is where the enforcement actually
 lives. It watches `main` and runs:
