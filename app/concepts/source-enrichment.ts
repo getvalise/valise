@@ -408,9 +408,9 @@ export async function enrichSource(
           } as never,
           { signal: AbortSignal.timeout(25000) },
         ),
-        // glm-5.3-flash took up to 16 s on a 32 KiB page in the 2026-10-29
-        // eval. The scheduler has no HTTP waitUntil limit, so wait longer
-        // than files do.
+        // In the 2026-10-29 eval a 32 KiB page took up to 16 s on GLM 5.3
+        // Flash and 4.6 s on DeepSeek V4.1 Flash. The scheduler has no HTTP
+        // waitUntil limit, so wait longer than files do.
         25000,
       );
       const usage = usageOf(result);

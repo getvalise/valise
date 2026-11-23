@@ -6,13 +6,25 @@ export const NEW_REVIEW_MODELS = [
   "anthropic/claude-haiku-5.5",
   "anthropic/claude-sonnet-5.5",
   "deepseek/deepseek-v4.1-flash-1017",
-  "@cf/zai-org/glm-5.3-flash",
+  "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
 ] as const;
 export const LEGACY_REVIEW_MODELS = [
   "@cf/meta/llama-3.1-8b-instruct-fp8",
   "@cf/meta/llama-3.2-3b-instruct",
   "google/gemini-2.5-flash-lite",
+  "@cf/zai-org/glm-5.3-flash",
 ] as const;
+/**
+ * Workers AI answers these with HTTP 410, error 5028, since 2026-11-20
+ * (https://developers.cloudflare.com/changelog/post/2026-11-05-planned-model-deprecations/).
+ * A saved setting naming one stays as it is, because consent names a model;
+ * a run stops before any call and the Review page asks for another model.
+ */
+const RETIRED_REVIEW_MODELS: Partial<Record<ReviewModel, string>> = {
+  "@cf/zai-org/glm-5.3-flash": "2026-11-20",
+  "@cf/meta/llama-3.1-8b-instruct-fp8": "2026-11-20",
+  "@cf/meta/llama-3.2-3b-instruct": "2026-11-20",
+};
 export const REVIEW_MODELS = [
   ...NEW_REVIEW_MODELS,
   ...LEGACY_REVIEW_MODELS,
@@ -49,23 +61,30 @@ const MODEL_CONFIG = {
     prompt: 0.3,
     completion: 1.2,
   },
-  // Selected from `npx wrangler ai models list --json`, 2026-10-29.
+  // Selected from `npx wrangler ai models list --json`, 2026-11-23, after
+  // GLM 5.3 Flash was retired. Reasoning runs at "none".
+  "@cf/deepseek-ai/deepseek-v4.1-flash-1017": {
+    provider: "workers-ai",
+    label: "Cloudflare Workers AI · DeepSeek V4.1 Flash 1017",
+    prompt: 0.3,
+    completion: 1.2,
+  },
   "@cf/zai-org/glm-5.3-flash": {
     provider: "workers-ai",
-    label: "Cloudflare Workers AI · GLM 5.3 Flash",
+    label: "Cloudflare Workers AI · GLM 5.3 Flash (retired by Cloudflare)",
     prompt: 0.15,
     completion: 0.5,
     outputTokens: GLM_REVIEW_OUTPUT_TOKENS,
   },
   "@cf/meta/llama-3.1-8b-instruct-fp8": {
     provider: "workers-ai",
-    label: "Cloudflare Workers AI · Llama 3.1 8B (saved legacy choice)",
+    label: "Cloudflare Workers AI · Llama 3.1 8B (retired by Cloudflare)",
     prompt: 0.2,
     completion: 0.5,
   },
   "@cf/meta/llama-3.2-3b-instruct": {
     provider: "workers-ai",
-    label: "Cloudflare Workers AI · Llama 3.2 3B (saved legacy choice)",
+    label: "Cloudflare Workers AI · Llama 3.2 3B (retired by Cloudflare)",
     prompt: 0.2,
     completion: 0.5,
   },
@@ -138,6 +157,7 @@ export class ReviewFailure extends Error {
       | "provider-http"
       | "provider-timeout"
       | "provider-unavailable"
+      | "model-retired"
       | "provider-response"
       | "response-too-large"
       | "response-truncated"
@@ -172,6 +192,8 @@ export function reviewFailureLabel(code: string): string {
     "provider-timeout": "The provider did not finish within 30 seconds.",
     "provider-unavailable":
       "The provider could not be reached or the request failed.",
+    "model-retired":
+      "The provider has retired this model. Choose another review model in the review settings.",
     "review-failed": "The review could not be completed.",
     "provider-response": "The provider returned no usable response.",
     "response-too-large": "The provider response exceeded the size limit.",
@@ -215,6 +237,9 @@ async function providerRequest<T>(call: () => Promise<T>): Promise<T> {
       ["TimeoutError", "AbortError"].includes(error.name)
     )
       throw new ReviewFailure("provider-timeout");
+    // Workers AI: "5028: <model> was deprecated on <date>. ..."
+    if (error instanceof Error && /^5028\b/.test(error.message))
+      throw new ReviewFailure("model-retired");
     throw new ReviewFailure("provider-unavailable");
   }
 }
@@ -233,12 +258,16 @@ export function reviewProviderAvailable(
   env: ReviewProviderEnv,
   model: ReviewModel,
 ): boolean {
+  if (RETIRED_REVIEW_MODELS[model]) return false;
   return modelConfig(model).provider === "openrouter"
     ? !!env.OPENROUTER_API_KEY?.trim()
     : !!env.AI;
 }
 
 export function reviewProviderUnavailable(model: ReviewModel): string {
+  const retired = RETIRED_REVIEW_MODELS[model];
+  if (retired)
+    return `Cloudflare retired ${model} on ${retired}. Choose another review model, then turn checks back on; no review text was sent.`;
   return modelConfig(model).provider === "openrouter"
     ? "OpenRouter is not configured for the selected review model. Ask the operator to configure OPENROUTER_API_KEY; no review text was sent."
     : "Cloudflare Workers AI is not configured for the selected review model; no review text was sent.";
@@ -332,12 +361,12 @@ export async function draftMemoryReview(
       throw new ReviewFailure("response-truncated");
     return parseReviewJson(choice.message.content);
   }
-  if (
-    model !== "@cf/zai-org/glm-5.3-flash" &&
-    model !== LEGACY_REVIEW_MODELS[0] &&
-    model !== LEGACY_REVIEW_MODELS[1]
-  )
-    throw new Error("Unsupported Workers AI review model.");
+  if (model !== "@cf/deepseek-ai/deepseek-v4.1-flash-1017")
+    throw new Error(
+      RETIRED_REVIEW_MODELS[model]
+        ? reviewProviderUnavailable(model)
+        : "Unsupported Workers AI review model.",
+    );
   if (!env.AI) throw new Error(reviewProviderUnavailable(model));
   const output = await providerRequest(() =>
     env.AI!.run(
@@ -348,9 +377,7 @@ export async function draftMemoryReview(
         temperature: 0.1,
         stream: false,
         response_format: { type: "json_object" },
-        ...(model === "@cf/zai-org/glm-5.3-flash"
-          ? { reasoning_effort: "low" }
-          : {}),
+        reasoning_effort: "none",
       },
       { signal: AbortSignal.timeout(30_000) },
     ),

@@ -64,9 +64,9 @@ passage is delivered through the existing ledger at four per minute, so a
 130-passage book is semantically searchable after about half an hour and
 lexically at once.
 
-Costs at Workers AI list prices (2026-10-29): text conversion free, metadata
-at most about $0.003 per file (64 KiB prefix, 900 output tokens with
-glm-5.3-flash, `app/concepts/summary-model.ts`),
+Costs at Workers AI list prices (2026-11-23): text conversion free, metadata
+about $0.006 per file (64 KiB prefix, 900 output tokens with
+deepseek-v4.1-flash-1017, `app/concepts/summary-model.ts`),
 bge-m3 embeddings $0.012 per million tokens, about $0.001 for a 280 KB book.
 Image description is billed by Workers AI and not estimated.
 Only selected text inflates; nothing executes macros, formulas or document
@@ -323,7 +323,7 @@ retain failed reports and the isolated local store for diagnosis.
 `maintainSourceEnrichment()` runs each minute beside file processing. It
 takes the two newest sources still owed an attempt, fetches a page only for a
 source with no captured article (robots.txt first, paywalls kept out), asks
-glm-5.3-flash for a summary and key concepts from a 32 KiB prefix, splits the
+deepseek-v4.1-flash-1017 for a summary and key concepts from a 32 KiB prefix, splits the
 article into passages and publishes all of it in one batch with a
 `source_enrichments` row. That row records tokens and cost at list price
 ($0.15 and $0.50 per million input and output tokens) and is the ledger

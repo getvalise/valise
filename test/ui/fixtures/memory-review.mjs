@@ -59,6 +59,7 @@ export async function installLegacyReviewSettings(baseURL, model) {
       "@cf/meta/llama-3.1-8b-instruct-fp8",
       "@cf/meta/llama-3.2-3b-instruct",
       "google/gemini-2.5-flash-lite",
+      "@cf/zai-org/glm-5.3-flash",
     ].includes(model)
   )
     throw new Error("Expected an exact historical model fixture");

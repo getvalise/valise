@@ -875,3 +875,21 @@ change". An archived evidence memory refuses the whole batch. Not a rule
 keeps the card and its optional reason, and the next cluster call receives
 the rule as known. Transcripts are not read; the card says so.
 
+## Amendment, 2026-11-23: Cloudflare retired GLM 5.3 Flash
+
+Cloudflare retired `@cf/zai-org/glm-5.3-flash`,
+`@cf/meta/llama-3.1-8b-instruct-fp8` and `@cf/meta/llama-3.2-3b-instruct`
+on 2026-11-20 (Workers AI changelog, 2026-11-05). Calls answer HTTP 410,
+error 5028. The binding throws it, and `providerRequest` recorded it as
+`provider-unavailable`, so the owner's nightly upkeep, saved on GLM, failed
+every group from 2026-11-20 02:10 UTC with "The provider could not be
+reached or the request failed."
+
+The owner chose `@cf/deepseek-ai/deepseek-v4.1-flash-1017` on 2026-11-23 as
+the offered Workers AI model, in GLM's place. The three retired ids stay
+in `REVIEW_MODELS` so history keeps its labels. A saved setting naming one
+is not moved, because consent names a model (2026-11-04). The provider
+counts as unavailable, so a check or nightly run stops before admission
+with "Cloudflare retired <model> on 2026-11-20" and sends nothing, and the
+Review page shows the same line. A 5028 from a model retired later is
+recorded as `model-retired`, not `provider-unavailable`.

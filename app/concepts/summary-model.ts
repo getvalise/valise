@@ -8,18 +8,19 @@
  * the catalog before changing it rather than copying a model id from code.
  */
 export const SUMMARY_MODEL = {
-  id: "@cf/zai-org/glm-5.3-flash",
-  catalogReadOn: "2026-11-01",
+  /** Replaced `@cf/zai-org/glm-5.3-flash`, which Cloudflare retired on
+   * 2026-11-20 (HTTP 410, error 5028). Owner's choice of 2026-11-23, from the
+   * 2026-10-29 comparison in `evals/summary-model/README.md`. */
+  id: "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+  catalogReadOn: "2026-11-23",
   /** List prices, USD per million tokens, which equals micro-dollars per token. */
-  inputUsdPerMillion: 0.15,
-  outputUsdPerMillion: 0.5,
+  inputUsdPerMillion: 0.3,
+  outputUsdPerMillion: 1.2,
   contextTokens: 1_048_576,
-  /** The catalog lists this model as vision-capable; `evals/summary-model`
-   * measured what an image costs. */
+  /** The catalog lists this model as vision-capable. */
   vision: true,
-  /** Reasoning cannot be turned off on this model, and its tokens count as
-   * output; low kept every eval reply under 220 output tokens. */
-  options: { reasoning_effort: "low" },
+  /** Reasoning is optional on this model; the eval ran it at "none". */
+  options: { reasoning_effort: "none" },
 } as const;
 
 /** How much of a bookmark's article the model reads. Latency did not grow
@@ -29,10 +30,11 @@ export const SOURCE_PROMPT_BYTES = 32 * 1024;
 export const SUMMARY_IMAGES = 2;
 /** Largest stored image sent, in bytes. Larger ones are left out. */
 export const SUMMARY_IMAGE_BYTES = 1024 * 1024;
-/** Tokens charged per image when none is reported. Measured on
- * 2026-11-01: a 256 px square took 121 prompt tokens, 1024 px 1,390 and
- * 2048 px 5,062, so about 1,200 per megapixel; this covers 13 megapixels,
- * more than a 1 MiB image reaches in practice. */
+/** Tokens charged per image when none is reported. Measured on GLM 5.3
+ * Flash on 2026-11-01: a 256 px square took 121 prompt tokens, 1024 px 1,390
+ * and 2048 px 5,062, so about 1,200 per megapixel; this covers 13
+ * megapixels, more than a 1 MiB image reaches in practice. Not re-measured
+ * on DeepSeek V4.1 Flash; it sizes the per-item ceiling, not the charge. */
 export const SUMMARY_IMAGE_TOKENS = 16_384;
 export const SUMMARY_IMAGE_TYPES = [
   "image/png",

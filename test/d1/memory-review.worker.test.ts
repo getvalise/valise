@@ -38,7 +38,6 @@ import {
 import {
   DEFAULT_REVIEW_MODEL,
   draftMemoryReview,
-  GLM_REVIEW_OUTPUT_TOKENS,
   LEGACY_REVIEW_MODELS,
   NEW_REVIEW_MODELS,
   REVIEW_INPUT_BYTES,
@@ -52,6 +51,7 @@ import {
   reviewFailureLabel,
   reviewMaxCallMicrousd,
   reviewModelChoices,
+  reviewProviderAvailable,
   reviewProviderUnavailable,
   reviewReservation,
 } from "~/concepts/memory-review-model";
@@ -66,6 +66,7 @@ import {
 import { search } from "~/search/query";
 
 const db = env.DB;
+const WORKERS_AI_REVIEW_MODEL = "@cf/deepseek-ai/deepseek-v4.1-flash-1017";
 const person = {
   userId: "local",
   agent: "console",
@@ -803,7 +804,7 @@ describe("Haiku selection and provider consent", () => {
       "anthropic/claude-haiku-5.5",
       "anthropic/claude-sonnet-5.5",
       "deepseek/deepseek-v4.1-flash-1017",
-      "@cf/zai-org/glm-5.3-flash",
+      "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
     ]);
   });
 
@@ -836,23 +837,34 @@ describe("Haiku selection and provider consent", () => {
         enabled: true,
         overnight: true,
       });
-      expect(
-        (
-          await runMemoryReview(
-            {
-              DB: db,
-              AI: env.AI,
-              OPENROUTER_API_KEY: "synthetic-not-a-real-key",
-            },
-            "local",
-          )
-        ).calls,
-      ).toBe(1);
+      const result = await runMemoryReview(
+        {
+          DB: db,
+          AI: env.AI,
+          OPENROUTER_API_KEY: "synthetic-not-a-real-key",
+        },
+        "local",
+      );
       if (selected.startsWith("@cf/")) {
-        expect(ai).toHaveBeenCalledTimes(1);
-        expect(ai.mock.calls[0][0]).toBe(selected);
+        // Every legacy Workers AI choice was retired on 2026-11-20: the run
+        // stops before admission and sends nothing, and the setting stays.
+        expect(result).toMatchObject({
+          calls: 0,
+          stopped: reviewProviderUnavailable(selected),
+        });
+        expect(result.stopped).toContain("Cloudflare retired");
+        expect(ai).not.toHaveBeenCalled();
         expect(http).not.toHaveBeenCalled();
-      } else {
+        expect(await listReviewGroups(db, "local")).toEqual([]);
+        expect(await readReviewSettings(db, "local")).toMatchObject({
+          model: selected,
+          enabled: true,
+          overnight: true,
+        });
+        return;
+      }
+      expect(result.calls).toBe(1);
+      {
         expect(ai).not.toHaveBeenCalled();
         expect(http).toHaveBeenCalledTimes(1);
         expect(JSON.parse(String(http.mock.calls[0][1]?.body))).toMatchObject({
@@ -1022,7 +1034,7 @@ describe("Haiku selection and provider consent", () => {
   it("a provider change after reservation fences dispatch without refunding the old attempt or sending to either provider", async () => {
     await save("claimmarker Legacy apples cool.");
     await save("claimmarker Legacy pears dry.");
-    await enable("local", { model: LEGACY_REVIEW_MODELS[0] });
+    await enable("local", { model: WORKERS_AI_REVIEW_MODEL });
     const delayed = delayFirstResponse(
       (sql) => sql.includes("INSERT INTO memory_review_budgets"),
       async () => {
@@ -1325,36 +1337,63 @@ describe("safe review failure categories", () => {
     expect(new ReviewFailure("invalid-json").message).toBe("invalid-json");
   });
 
-  it("sends GLM only to Workers AI with low reasoning and the same bounded JSON contract", async () => {
+  it("sends DeepSeek on Workers AI only to Workers AI with reasoning off and the same bounded JSON contract", async () => {
     const ai = vi.spyOn(env.AI, "run").mockResolvedValue({
       choices: [{ message: { content: JSON.stringify(noop) } }],
     } as never);
     const http = vi.spyOn(globalThis, "fetch");
-    expect(
-      await draftMemoryReview(env, "@cf/zai-org/glm-5.3-flash", "[]"),
-    ).toEqual(noop);
+    expect(await draftMemoryReview(env, WORKERS_AI_REVIEW_MODEL, "[]")).toEqual(
+      noop,
+    );
     expect(ai).toHaveBeenCalledWith(
-      "@cf/zai-org/glm-5.3-flash",
+      WORKERS_AI_REVIEW_MODEL,
       expect.objectContaining({
-        reasoning_effort: "low",
-        max_tokens: GLM_REVIEW_OUTPUT_TOKENS,
+        reasoning_effort: "none",
+        max_tokens: 1536,
         response_format: { type: "json_object" },
       }),
       expect.anything(),
     );
     expect(http).not.toHaveBeenCalled();
-    expect(reviewMaxCallMicrousd("@cf/zai-org/glm-5.3-flash")).toBe(5648);
+    expect(reviewMaxCallMicrousd(WORKERS_AI_REVIEW_MODEL)).toBe(9044);
+  });
+
+  it("refuses a retired Workers AI model before any call, and names a model the provider retires later", async () => {
+    const ai = vi.spyOn(env.AI, "run");
+    await expect(
+      draftMemoryReview(env, "@cf/zai-org/glm-5.3-flash", "[]"),
+    ).rejects.toThrow("Cloudflare retired @cf/zai-org/glm-5.3-flash");
+    expect(ai).not.toHaveBeenCalled();
+    expect(reviewProviderAvailable(env, "@cf/zai-org/glm-5.3-flash")).toBe(
+      false,
+    );
+    // The message Workers AI threw for glm-5.3-flash on 2026-11-23.
+    ai.mockRejectedValue(
+      new Error(
+        "5028: @cf/x was deprecated on 2026-11-20. See the model catalog for alternatives: https://developers.cloudflare.com/workers-ai/models/",
+      ),
+    );
+    await expect(
+      draftMemoryReview(env, WORKERS_AI_REVIEW_MODEL, "[]"),
+    ).rejects.toMatchObject({ code: "model-retired" });
+    expect(reviewFailureLabel("model-retired")).toContain("retired");
+    ai.mockRejectedValue(new Error("network down"));
+    await expect(
+      draftMemoryReview(env, WORKERS_AI_REVIEW_MODEL, "[]"),
+    ).rejects.toMatchObject({ code: "provider-unavailable" });
   });
 
   it("names a reply cut off at the output cap instead of calling it invalid JSON", async () => {
-    // GLM's reasoning counts against max_tokens; a cap hit returns half a JSON string.
+    // A cap hit returns half a JSON string.
     const cut = '{"why":"Both memories time the full verify';
     vi.spyOn(env.AI, "run").mockResolvedValue({
       choices: [{ message: { content: cut }, finish_reason: "length" }],
     } as never);
-    const glm = draftMemoryReview(env, "@cf/zai-org/glm-5.3-flash", "[]");
-    await expect(glm).rejects.toBeInstanceOf(ReviewFailure);
-    await expect(glm).rejects.toMatchObject({ code: "response-truncated" });
+    const workersAi = draftMemoryReview(env, WORKERS_AI_REVIEW_MODEL, "[]");
+    await expect(workersAi).rejects.toBeInstanceOf(ReviewFailure);
+    await expect(workersAi).rejects.toMatchObject({
+      code: "response-truncated",
+    });
     vi.spyOn(globalThis, "fetch").mockImplementation(async () =>
       Response.json({
         choices: [{ message: { content: cut }, finish_reason: "length" }],
@@ -1960,12 +1999,12 @@ describe("bounded cost and failure controls", () => {
     const run = vi
       .spyOn(env.AI, "run")
       .mockResolvedValue({ response: JSON.stringify(noop) });
-    expect(await draftMemoryReview(env, LEGACY_REVIEW_MODELS[0], "[]")).toEqual(
+    expect(await draftMemoryReview(env, WORKERS_AI_REVIEW_MODEL, "[]")).toEqual(
       noop,
     );
     // A provider can return a JSON-mode object despite older generated response types saying string.
     run.mockResolvedValue(JSON.parse(JSON.stringify({ response: noop })));
-    expect(await draftMemoryReview(env, LEGACY_REVIEW_MODELS[0], "[]")).toEqual(
+    expect(await draftMemoryReview(env, WORKERS_AI_REVIEW_MODEL, "[]")).toEqual(
       noop,
     );
     expect(run).toHaveBeenCalledTimes(2);
