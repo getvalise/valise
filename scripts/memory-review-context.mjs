@@ -147,7 +147,8 @@ if (priorPath) {
   report.continuedFrom = priorPath;
 }
 const models = [
-  "@cf/zai-org/glm-5.3-flash",
+  // Replaced @cf/zai-org/glm-5.3-flash, retired by Cloudflare on 2026-11-20.
+  "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
   "anthropic/claude-haiku-5.5",
   "anthropic/claude-sonnet-5.5",
 ];

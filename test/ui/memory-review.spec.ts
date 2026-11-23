@@ -30,11 +30,17 @@ async function openSettings(page: Page) {
 const haiku = "anthropic/claude-haiku-5.5";
 const sonnet = "anthropic/claude-sonnet-5.5";
 const deepseek = "deepseek/deepseek-v4.1-flash-1017";
-const offered = [haiku, sonnet, deepseek, "@cf/zai-org/glm-5.3-flash"];
+const offered = [
+  haiku,
+  sonnet,
+  deepseek,
+  "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+];
 const legacyModels = [
   "@cf/meta/llama-3.1-8b-instruct-fp8",
   "@cf/meta/llama-3.2-3b-instruct",
   "google/gemini-2.5-flash-lite",
+  "@cf/zai-org/glm-5.3-flash",
 ];
 
 test.beforeEach(async ({ request, baseURL }) => {
@@ -89,7 +95,7 @@ test("review settings: consent defaults, keyboard saving, section tabs, and a no
       "Claude Haiku 5.5 (default) — up to $0.0032 per call",
       "Claude Sonnet 5.5 — up to $0.0634 per call",
       "DeepSeek V4.1 Flash 1017 — up to $0.0090 per call",
-      "GLM 5.3 Flash — up to $0.0056 per call",
+      "Workers AI · DeepSeek V4.1 Flash 1017 — up to $0.0090 per call",
     ].entries()) {
       await expect(choices.nth(index)).toHaveAttribute("value", offered[index]);
       await expect(choices.nth(index)).toContainText(hint);
@@ -271,9 +277,15 @@ for (const selected of legacyModels) {
             ),
           ),
         ).toEqual([...offered, selected]);
+        // Cloudflare retired every legacy Workers AI choice on 2026-11-20.
+        const retired = selected.startsWith("@cf/");
         await expect(picker.locator("option:checked")).toContainText(
-          "saved legacy choice",
+          retired ? "retired by Cloudflare" : "saved legacy choice",
         );
+        if (retired)
+          await expect(
+            page.getByText(`Cloudflare retired ${selected}`).first(),
+          ).toBeVisible();
         await expect(
           page.getByRole("switch", { name: "Allow model reviews" }),
         ).toHaveAttribute("aria-checked", "true");

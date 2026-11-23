@@ -59,7 +59,7 @@ memory limit is due again the next minute, like one that stopped at two calls.
 
 ## Provider and budget
 
-Three OpenRouter models and Workers AI GLM 5.3 Flash are offered for new selections. OpenRouter ids and rates come
+Three OpenRouter models and Workers AI DeepSeek V4.1 Flash 1017 are offered for new selections. OpenRouter ids and rates come
 from <https://openrouter.ai/api/v1/models>, read on 2026-10-25.
 
 | Choice | OpenRouter id | Request shape |
@@ -67,7 +67,18 @@ from <https://openrouter.ai/api/v1/models>, read on 2026-10-25.
 | Claude Haiku 5.5 (default) | `anthropic/claude-haiku-5.5` | reasoning disabled, no temperature |
 | Claude Sonnet 5.5 | `anthropic/claude-sonnet-5.5` | reasoning effort `low` (the catalog marks reasoning mandatory), no temperature |
 | DeepSeek V4.1 Flash 1017 | `deepseek/deepseek-v4.1-flash-1017` | reasoning disabled, temperature 0.1 |
-| GLM 5.3 Flash | `@cf/zai-org/glm-5.3-flash` (Workers AI, not OpenRouter) | reasoning effort `low`, JSON-object mode |
+| DeepSeek V4.1 Flash 1017 on Workers AI | `@cf/deepseek-ai/deepseek-v4.1-flash-1017` (Workers AI, not OpenRouter) | reasoning effort `none`, temperature 0.1, JSON-object mode |
+
+Cloudflare retired `@cf/zai-org/glm-5.3-flash` and both Llama choices on
+2026-11-20; Workers AI answers them with HTTP 410, error 5028. A setting that
+still names one keeps it, because consent names a model, but a check stops
+before any call with "Cloudflare retired <model> on 2026-11-20", which the
+Review page also shows. Choosing another model clears the switches, as any
+destination change does. A later retirement of an offered model fails its
+review as `model-retired`. The DeepSeek Workers AI entry was read from
+`npx wrangler ai models list --json` on 2026-11-23: $0.30/$1.20.
+
+The GLM notes below describe the retired model and stay for history.
 
 GLM was read from `npx wrangler ai models list --json` on 2026-10-29:
 $0.15/$0.50 per million input/output tokens. Reasoning cannot be disabled;
@@ -138,8 +149,9 @@ micro-USD, with an explicit fail-closed model/rate table:
 | Claude Haiku 5.5 | $0.10 / $0.50 | $0.003168 |
 | Claude Sonnet 5.5 | $2.00 / $10.00 | $0.063360 |
 | DeepSeek V4.1 Flash 1017 | $0.30 / $1.20 (weekday peak override) | $0.009044 |
-| Workers AI GLM 5.3 Flash | $0.15 / $0.50 | $0.005648 |
-| Saved legacy Workers AI Llama 8B/3B | $0.20 / $0.50, rounded up | $0.005568 |
+| Workers AI DeepSeek V4.1 Flash 1017 | $0.30 / $1.20 | $0.009044 |
+| Saved Workers AI GLM 5.3 Flash (retired 2026-11-20, never called) | $0.15 / $0.50 | $0.005648 |
+| Saved legacy Workers AI Llama 8B/3B (retired 2026-11-20, never called) | $0.20 / $0.50, rounded up | $0.005568 |
 | Saved legacy Gemini 2.5 Flash Lite | $0.10 / $0.40 | $0.003015 |
 
 Haiku's >=100k-token pricing tier is unreachable within 24 KB. The default 75

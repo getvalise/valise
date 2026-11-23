@@ -808,6 +808,16 @@ Dogfood checks: save a bookmark with notes and find it from another client; uplo
   `asset_processing_outputs.suggestion_model` already names its model, so
   earlier Llama summaries are kept and labelled, not redone.
   `evals/summary-model/README.md` has the numbers.
+- 2026-11-23, summary model. Cloudflare retired `@cf/zai-org/glm-5.3-flash`
+  on 2026-11-20; every call since answers HTTP 410, error 5028, so no file
+  or bookmark got a summary from then until this change. The owner chose
+  DeepSeek V4.1 Flash 1017 (`@cf/deepseek-ai/deepseek-v4.1-flash-1017`),
+  which the 2026-10-29 eval rated 11/11 valid and faithful at 2.2 s p50 and
+  $0.00074 a bookmark, about twice GLM's cost. It runs with
+  `reasoning_effort: "none"`. List prices are $0.30/$1.20, so the per-item
+  bookmark ceiling doubles to 21183 micro-dollars and fewer items fit the
+  same daily budget; actual charges stay per-token. GLM rows keep their
+  model name and are not redone.
 - 2026-10-29, bookmarks are fetched once, summarised and split, within a
   daily budget. This reverses "Valise never fetches the URL" for one case:
   a source that never had an article, such as a Raindrop import or a save
