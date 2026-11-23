@@ -1,3 +1,5 @@
+<p align="center"><img src="public/favicon.svg" alt="Valise" width="96" height="96"></p>
+
 # Valise
 
 One MCP endpoint that carries your skills, memories, and to-dos between models and agents.
@@ -60,9 +62,25 @@ codex mcp add valise --url https://<your-host>/mcp --oauth-client-registration C
 
 In Claude web, add the URL as a custom connector; it then syncs to mobile. In ChatGPT web, open **Plugins**, choose **Add custom MCP server**, enter the same URL and complete the consent screen. ChatGPT cannot reach `localhost`.
 
-- [`clients/valise/`](clients/valise/README.md) is one plugin for Claude Code and Codex: the connector plus hooks that nudge memory capture and recall.
-- [`clients/valise-cli/`](clients/valise-cli/README.md) is the `valise` command: it signs in over a loopback OAuth client and sends local Claude Code, Codex and OpenCode sessions as transcripts ([ADR-0022](docs/adr/0022-transcripts-concept-and-cli-grant.md)).
-- [`clients/chrome-extension/`](docs/operations/chrome-capture.md) saves the active tab into the Library as an HTML snapshot and a linked source, with an OAuth grant limited to that.
+The [`clients/valise/`](clients/valise/README.md) plugin for Claude Code and Codex adds hooks that nudge memory capture and recall on top of the connector.
+
+## Capture from the browser and the phone
+
+- **Chrome extension.** [`clients/chrome-extension/`](clients/chrome-extension) saves the active tab into the Library: the article as a bookmark, the full page as an archived HTML snapshot with its images and fonts, or a selected highlight, each with tags and an optional project. It connects with its own OAuth grant, limited to those writes. Build it from the repository root with `npm ci`, `npm run css:build` and `npm run build --prefix clients/chrome-extension` and load `clients/chrome-extension/dist` unpacked in `chrome://extensions`. [Chrome capture](docs/operations/chrome-capture.md) covers installing, connecting, revoking and self-hosted endpoints.
+- **iPhone Shortcut.** The Valise Capture Shortcut saves the page you are reading from Safari's share sheet. Create a capture URL on the console's Connections page, add the Shortcut and paste the URL when it asks. Revoking the URL on Connections stops it. [iPhone share-sheet capture](docs/operations/ios-capture.md) has the Shortcut link and every step.
+
+## The `valise` CLI
+
+[`clients/valise-cli/`](clients/valise-cli/README.md) sends the conversations this machine holds from Claude Code, Codex and OpenCode to Valise as transcripts: every existing session once, then each new one as its client writes it. It is dependency-free Node 22 or later, signs in over a loopback OAuth client whose grant can only send and read transcripts, and keeps successful tool results and tool definitions on the machine ([ADR-0022](docs/adr/0022-transcripts-concept-and-cli-grant.md)).
+
+```sh
+npm run cli:install                    # from a checkout: puts `valise` on PATH
+valise install                         # sign in, send existing sessions, then watch at login (macOS)
+valise                                 # where setup stands, and the next command
+valise import --from ~/exports/chatgpt --client chatgpt   # a claude.ai or ChatGPT export, or archived sessions
+valise status                          # the same facts as `valise`, tab-separated for scripts
+valise uninstall                       # stop the watcher; what was sent stays in Valise
+```
 
 ## Develop locally
 
