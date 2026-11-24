@@ -2,6 +2,7 @@
 
 Date: 2026-10-20
 Status: accepted
+Amended: 2026-11-24 by ADR-0023, hook files as assets.
 
 ## Context
 
@@ -78,6 +79,14 @@ These are verification boundaries for the live to-do, not a second work queue (A
 Dogfood checks: save a bookmark with notes and find it from another client; upload a PDF, find it by metadata, and download the unchanged original with a clear "contents not indexed" indication. No parsing or semantic pipeline is required for acceptance.
 
 ## Amendments
+
+- 2026-11-24, hook files. ADR-0023 stores a runnable hook entry's files as
+  assets with a new nullable `purpose` column set to `hook`. Such an asset
+  has no search projection, is not listed in Library, is not reachable by an
+  agent through `fetch` or `get_asset_download`, and does not expire while a
+  hook version references it. The hook manifest hands out the same
+  short-lived download capability, valid for 10 minutes. Assets with
+  `purpose` null are unchanged.
 
 - 2026-11-03, the bookmark pane reads summary first, and rates. Owner
   walkthrough of 2026-11-03 (`todo:tdo_aea11fc7-8463-49a6-af77-6dc341489dc3`,

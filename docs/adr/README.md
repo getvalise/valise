@@ -48,6 +48,12 @@ The number is read off this directory, so two parallel sessions can take the sam
 | --- | --- |
 | [0021](0021-agpl-server-apache-clients.md) | AGPL-3.0-only server, Apache-2.0 clients, unlicensed name, no CLA. |
 
+## Client decisions
+
+| Record | Boundary |
+| --- | --- |
+| [0023](0023-runnable-hooks.md) | Runnable hooks: agents propose, the owner approves each version with a passkey, a `hooks:exec` manifest delivers them, and Stop stays silent. |
+
 ## Open questions
 
 Decisions we owe but have not had to make. Each names what forces it and what keeps it open in the meantime, so a slice shipped today cannot quietly answer it.

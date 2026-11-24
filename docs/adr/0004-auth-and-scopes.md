@@ -2,7 +2,7 @@
 
 Date: 2026-10-12
 Status: accepted
-Amended: 2026-10-20 by ADR-0015, planning asset/source scopes and linked-asset authorization requirements; implementation remains pending. Amended 2026-10-21 by ADR-0016, multi-user accounts and invites. Amended 2026-10-25, Chrome extension OAuth. Amended 2026-11-01, the extension's opt-in `todos:write`. Amended 2026-11-03, recall on a failed command under `search:read`, and the brief for a working directory.
+Amended: 2026-10-20 by ADR-0015, planning asset/source scopes and linked-asset authorization requirements; implementation remains pending. Amended 2026-10-21 by ADR-0016, multi-user accounts and invites. Amended 2026-10-25, Chrome extension OAuth. Amended 2026-11-01, the extension's opt-in `todos:write`. Amended 2026-11-03, recall on a failed command under `search:read`, and the brief for a working directory. Amended 2026-11-24 by ADR-0023, `hooks:exec` and passkey approval.
 
 ## Context
 
@@ -235,6 +235,19 @@ claude.ai and ChatGPT connectors expect OAuth with PKCE and dynamic client regis
   `app/auth/scopes.ts`), so a Valise CLI holding `transcripts:write` cannot
   read the case. ADR-0022 records the rule and why the request, not the
   client, carries it.
+
+- 2026-11-24, runnable hooks. ADR-0023 adds `hooks:exec`, stored in
+  `bearer_token_grants`, which reads the manifest of approved hook entries
+  at `GET /hooks/manifest` and posts run reports at `POST /hooks/runs`. It
+  is the first scope outside the whole-vocabulary grant: `consentGrant()`
+  never gives it to a client that names nothing, and a client gets it only
+  by naming it. `valise login` names it; a console-minted bearer holds it
+  when minted with it. Approving a hook entry is the first console action
+  that needs more than the session: a WebAuthn assertion with user
+  verification, whose challenge is bound to the version hash, and no bearer
+  or OAuth route reaches it. The 2026-11-04 line "`Stop` is unchanged and
+  local" still holds for the Stop hook itself, which reads only its cache;
+  the detached runs it starts post their reports.
 
 ## Consequences
 
