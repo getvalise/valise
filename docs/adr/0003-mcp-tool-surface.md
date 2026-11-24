@@ -2,7 +2,7 @@
 
 Date: 2026-10-12
 Status: accepted
-Amended: 2026-10-20 by ADR-0015, planning five asset/source tools; implementation remains pending.
+Amended: 2026-10-20 by ADR-0015, planning five asset/source tools; implementation remains pending. Amended 2026-11-24 by ADR-0023, `propose_hook`.
 
 ## Context
 
@@ -23,6 +23,8 @@ Rules the surface encodes rather than asks for:
 - Tool descriptions are written for the model and state when to call, since description text is the only discovery mechanism in fallback clients.
 
 ## Amendments
+
+- 2026-11-24, `propose_hook`. ADR-0023 adds one tool under `config:write`: an agent proposes a runnable hook entry, its scripts inline as UTF-8 text, and the result says nothing runs until the owner approves it in the console. The intent no existing tool serves is proposing code to run on the owner's machines; `edit_hook` edits injected text field by field and now refuses runnable entries, and `list_hooks` lists them with their state. Folding proposals into `edit_hook` was rejected: a model choosing between "change this text" and "propose a script that needs the owner's approval" picks better with two names, and `edit_hook` takes effect at once while a proposal never does. The file contents go inline rather than through `upload_asset` and a PUT, so a proposal is one call.
 
 - 2026-11-15, evals on request, and smaller results. Owner, 2026-11-15, in a Claude Code session: evals "are costing us too much (time & money)". The owner also asked for the token cuts measured in memory:mem_b260c968-42f3-44af-bb50-a93d4018cd14.
   - Evals no longer gate a change. A changed tool description, a new tool or a new argument needs an amendment here saying what changed and why, and neither an `npm run evals` run nor an eval case. The owner asks for a run when a measurement is wanted, and a run is how to investigate a tool-choice regression that `mcp_calls` shows. This replaces the eval case the 2026-10-17 amendment required of a new tool. AGENTS.md, CONTRIBUTING.md and `evals/README.md` say the same. This amendment's own description changes, to `list_skills` and to `list_ready`'s `limit`, ran no evals.

@@ -1,7 +1,7 @@
 # 0023. Runnable hooks: agents propose, the owner approves with a passkey
 
 Date: 2026-11-24
-Status: proposed
+Status: accepted
 Amends: ADR-0003 (`propose_hook`), ADR-0004 (`hooks:exec`, approval, the
 2026-11-04 line "`Stop` is unchanged and local"), ADR-0015 (hook files as
 assets).
@@ -36,8 +36,13 @@ takes seconds is noise in every turn, and `capture-nudge` is already the one
 blocking Stop text the owner accepts. And the Stop hook runs at the end of
 every turn, so anything it does on the network is paid per turn.
 
-Decided with the owner in the design session of 2026-11-24. The points this
-record adds beyond that session are listed under "Questions for the owner".
+Decided with the owner in the design session of 2026-11-24. The owner
+reviewed the draft the same day and settled what it added beyond that
+session: hook cost in `hook_runs` rather than `spend_daily`, a cloud handoff as
+the run report's result rather than a to-do comment, no waiting period for a
+new passkey, the transcript upload on `Stop` every 10 turns because
+`SessionEnd` is unreliable, and the git gates in the detached child because
+`git status` is a spawn and slow on a large repository.
 
 ## Decision
 
@@ -100,7 +105,9 @@ grant reaches the approve route. The decision row records the credential id.
 
 Passkeys are registered on the account page. The first needs a console sign-in
 younger than 5 minutes. Each later one needs a user-verified assertion from an
-existing passkey. Every passkey shows on the account page with its creation
+existing passkey. A new passkey can approve at once; holding it back for 24 hours
+was rejected by the owner, because it slows the owner's own second device as
+much as an agent's. Every passkey shows on the account page with its creation
 time and last use, and the startup brief names one added in the last 7 days.
 A virtual authenticator added over the Chrome DevTools Protocol can satisfy
 `uv` with no person present, so user verification proves a person only when
@@ -167,9 +174,12 @@ blocking Stop text. A failure goes to `~/.cache/valise/hooks/runs.log` and to
 `POST /hooks/runs`, and the next session's brief names it.
 
 Events in this release: `SessionStart`, `Stop` and `SessionEnd`. `SessionEnd`
-fires once when a session ends, which is the moment for a transcript upload;
-`Stop` fires every turn. `PostToolUseFailure` stays text only: a runnable entry
-there would spawn a process per failed command, and no entry needs it yet.
+fires only when a session exits cleanly; a closed terminal, a crash or a VM
+torn down skips it. So nothing depends on it alone: an entry that must run
+before the session is lost runs on `Stop` with `every_turns`, and may also run
+on `SessionEnd` as a last pass when that fires. `PostToolUseFailure` stays text
+only: a runnable entry there would spawn a process per failed command, and no
+entry needs it yet.
 
 ### Outputs and tracked files
 
@@ -226,8 +236,12 @@ seen loading the plugin and running its SessionStart hook.
 A cloud VM is discarded, so its handoff goes up as the run report's `result`
 and the brief shows it; locally the handoff stays `HANDOFF.md` for the Herdr
 `handoff-md` pane. The `valise watch` LaunchAgent is macOS and login-scoped,
-so a VM instead runs a `SessionEnd` entry that uploads the session once:
-`valise import --session <transcript_path>`.
+so a VM instead runs an entry that uploads the session,
+`valise import --session <transcript_path>`, on `Stop` with `every_turns: 10`
+and again on `SessionEnd`. Repeating it is safe: `/mcp/transcripts` checks the
+turns it already holds hash by hash and appends only the rest (ADR-0022), so
+each upload sends what is new since the last one. A VM discarded mid-session
+loses at most the last nine turns.
 
 ### Hook files as assets
 
@@ -246,24 +260,6 @@ server never holds, and the runner refuses any entry whose signature does not
 verify against a public key pinned on the machine (`VALISE_HOOKS_PUBKEY`, or a
 file beside `cli.json`). Not built in this release.
 `todo:tdo_8b2b151a-369f-49cc-9cd5-18bec4589437`.
-
-## Questions for the owner
-
-These go beyond the 2026-11-24 session. Each is decided above as written
-unless the owner says otherwise before this record is accepted.
-
-1. Cost stays out of `spend_daily`, in `hook_runs`, because Valise does not
-   pay for it. The session said "the spend tables".
-2. A cloud handoff goes up as the run report's result and shows in the brief.
-   The alternative is a comment on the to-do the worktree has claimed, which
-   needs `todos:write` on the VM's token.
-3. A passkey added after the first could also be held back from approving for
-   24 hours. Not decided above: it slows the owner's own second device as much
-   as an agent's.
-4. `SessionEnd` is added as an event for the transcript upload, and runnable
-   entries on `PostToolUseFailure` are left out.
-5. The git gates run in the detached child, not in the Stop process, because
-   `git status` is a spawn and slow on a large repository.
 
 ## Consequences
 
