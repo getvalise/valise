@@ -1,0 +1,1 @@
+ALTER TABLE `todos` ADD `holder_session` text;

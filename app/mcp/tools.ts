@@ -832,11 +832,12 @@ export async function createServer(
       const id = turnRef
         ? `${transcriptRef(turnRef.transcriptId)}${turnRef.position === null ? "" : `#t-${turnRef.position}`}`
         : given;
-      const document = await fetchDocument(store, id, {
-        full: full === true,
-        cursor,
-        limit,
-      });
+      const document = await fetchDocument(
+        store,
+        id,
+        { full: full === true, cursor, limit },
+        provenance,
+      );
       if (document === null)
         return toolError(`No active item exists for ${id}.`);
       if ("error" in document) return toolError(document.error);
@@ -1298,6 +1299,7 @@ async function fetchDocument(
   store: TenantStore,
   id: string,
   page: ThreadPage = { full: false },
+  viewer: Viewer | null = null,
 ): Promise<FetchedDocument | { error: string } | null> {
   const [concept, conceptId] = id.split(":");
   switch (concept) {
@@ -1306,7 +1308,7 @@ async function fetchDocument(
     case "skill":
       return fetchSkill(store, id, conceptId);
     case "todo":
-      return fetchTodo(store, id, conceptId, page);
+      return fetchTodo(store, id, conceptId, page, viewer);
     case "asset":
       return fetchAsset(store.library, id);
     case "source":
@@ -1565,11 +1567,30 @@ async function fetchSkill(
   };
 }
 
+/** Who is reading, for what only the lease holder may see. */
+type Viewer = Pick<Provenance, "agent" | "session">;
+
+/**
+ * The holder, as the coordinator's `isHolder` names it: the lease's agent,
+ * and its session when the claim recorded one. ADR-0002, 2026-11-24.
+ */
+function holdsLease(
+  todo: { leaseHolder: string | null; holderSession: string | null },
+  viewer: Viewer | null,
+): boolean {
+  return (
+    viewer !== null &&
+    todo.leaseHolder === viewer.agent &&
+    (todo.holderSession === null || todo.holderSession === viewer.session)
+  );
+}
+
 async function fetchTodo(
   store: TenantStore,
   id: string,
   todoId: string,
   page: ThreadPage,
+  viewer: Viewer | null,
 ): Promise<FetchedDocument | { error: string } | null> {
   const todo = await store.todos.get(todoId);
   if (todo === null) return null;
@@ -1613,9 +1634,13 @@ async function fetchTodo(
       state: todo.state,
       lease_holder: todo.leaseHolder,
       lease_expires_at: todo.leaseExpiresAt,
-      // 0 is never claimed. Not tied to lease_holder: the coordinator writes
-      // the token at once and the lease through its mirror queue, later.
-      fencing_token: todo.fencingToken === 0 ? null : todo.fencingToken,
+      // The holder's alone: another session with the token could write
+      // under this claim. The claim writes the holder with the fence, so the
+      // holder sees it at once. 0 is never claimed.
+      fencing_token:
+        todo.fencingToken !== 0 && holdsLease(todo, viewer)
+          ? todo.fencingToken
+          : null,
       blocked_on: todo.blockedOn,
       relations: relationsOnWire(await store.todos.relationsOf(todoId)),
       source_agent: todo.sourceAgent,
