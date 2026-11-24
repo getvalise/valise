@@ -82,6 +82,16 @@ A pending version never runs and is never in the manifest. It expires after 7
 days: reads treat `expires_at < now` as expired, and the existing scheduled
 maintenance deletes its unreferenced files.
 
+A version's state is derived, never stored: the latest decision made at or
+after its `proposed_at`, and with none, pending until `expires_at`, then
+expired. Proposing content whose hash already exists is answered from what is
+there when that version runs or waits. When it was rejected, revoked,
+suspended or expired, the proposal renews the version's `proposed_at` and
+`expires_at` (and its provenance and stored file ids) and leaves the content
+columns alone, so the same hash is pending again and the earlier decision no
+longer counts. `listRunnables` and `proposeRunnable` in
+`app/concepts/hook-runnables.ts`.
+
 `edit_hook` refuses runnable entries, and `list_hooks` lists them with their
 state (approved hash, pending hash, last run). Turning an entry off or revoking
 an approval happens in the console under the session alone: removing what can
@@ -252,6 +262,14 @@ subject to expiry while a version references it. It inherits what makes assets
 the right store: an immutable object, a verified SHA-256, owner scoping, and
 the download capability the manifest hands out. Assets with `purpose` null are
 unchanged.
+
+A hook asset has no `expires_at`. One file is stored per distinct content per
+user and shared by every version that names it. `cleanupLibrary` purges a hook
+asset once no version names it that was ever approved or is pending and
+unexpired, and nothing has touched it for 24 hours, so a proposal still landing
+keeps its files. Every asset read outside `app/concepts/hook-runnables.ts`
+carries `purpose IS NULL`, including the projection's own `SELECT`, so a hook
+file cannot reach search even through a write path that forgets.
 
 ### Later: signed manifests
 

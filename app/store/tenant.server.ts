@@ -267,7 +267,7 @@ function memoryStore(
     todos: todoStore(data, userId, provenance),
     skills: skillStore(data, userId, provenance),
     activity: activityStore(data, userId),
-    hooks: hookStore(data, userId),
+    hooks: hookStore(data, userId, provenance),
     files: fileStore(data, userId),
     review: reviewStore(data, userId, provenance),
     subjects: subjectStore(data, userId, provenance),

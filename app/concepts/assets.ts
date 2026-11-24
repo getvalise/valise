@@ -126,7 +126,9 @@ export async function readAssetRow(
   assetId: string,
 ): Promise<Asset | null> {
   const row = await db
-    .prepare(`${SELECT_ASSET} WHERE a.asset_id = ? AND a.user_id = ?`)
+    .prepare(
+      `${SELECT_ASSET} WHERE a.asset_id = ? AND a.user_id = ? AND a.purpose IS NULL`,
+    )
     .bind(assetId, userId)
     .first<AssetRow>();
   return row === null ? null : fromRow(row);
@@ -145,7 +147,7 @@ export async function readAssets(
   if (!ids.length) return [];
   const { results } = await db
     .prepare(`${SELECT_ASSET} WHERE a.user_id = ? AND a.asset_id IN (SELECT value FROM json_each(?))
-    AND a.state = 'ready' AND (a.expires_at IS NULL OR a.expires_at > unixepoch()) ORDER BY a.created_at, a.asset_id`)
+    AND a.state = 'ready' AND a.purpose IS NULL AND (a.expires_at IS NULL OR a.expires_at > unixepoch()) ORDER BY a.created_at, a.asset_id`)
     .bind(userId, JSON.stringify(ids))
     .all<AssetRow>();
   return results.map(fromRow);
@@ -159,7 +161,7 @@ export async function listAssets(
   const { results } = await db
     .prepare(
       `${SELECT_ASSET}
-        WHERE a.user_id = ? AND a.state = 'ready'
+        WHERE a.user_id = ? AND a.state = 'ready' AND a.purpose IS NULL
           AND (a.expires_at IS NULL OR a.expires_at > ?)
           AND (a.archived_at IS NOT NULL) = ?
         ORDER BY a.created_at DESC, a.asset_id DESC`,
@@ -179,7 +181,7 @@ export async function listAssetsPage(
   const where = libraryPageWhere("a", "asset_id", options);
   const { results } = await db
     .prepare(`${SELECT_ASSET}
-    WHERE a.user_id = ? AND a.state = 'ready'
+    WHERE a.user_id = ? AND a.state = 'ready' AND a.purpose IS NULL
       AND (a.expires_at IS NULL OR a.expires_at > ?)
       AND (a.archived_at IS NOT NULL) = ? ${where.sql}
       ${options.durableOnly ? "AND NOT (a.source_agent = 'raindrop-import' AND EXISTS (SELECT 1 FROM json_each(a.tags_json) WHERE value = 'import-snapshot'))" : ""}
@@ -285,7 +287,7 @@ export async function visibleAssetIds(
     .prepare(
       `SELECT asset_id FROM assets
         WHERE user_id = ? AND state = 'ready' AND archived_at IS NULL
-          AND (expires_at IS NULL OR expires_at > ?)
+          AND purpose IS NULL AND (expires_at IS NULL OR expires_at > ?)
           AND asset_id IN (SELECT value FROM json_each(?))`,
     )
     .bind(userId, nowSeconds(), JSON.stringify(assetIds))
@@ -948,7 +950,8 @@ export function assetProjection(
                                   WHERE type = 'text'), ''),
                        updated_at
                   FROM assets
-                 WHERE asset_id = ? AND user_id = ? AND state = 'ready' AND archived_at IS NULL`,
+                 WHERE asset_id = ? AND user_id = ? AND state = 'ready' AND archived_at IS NULL
+                   AND purpose IS NULL`,
     bindings: [assetId, userId],
   };
 }
@@ -1006,7 +1009,7 @@ export function assetSearchStatements(
            JOIN asset_processing_outputs o ON o.processing_id = h.processing_id AND o.user_id = a.user_id
            JOIN json_each(o.passages_json, '$.passages') p
           WHERE a.asset_id = ? AND a.user_id = ? AND a.state = 'ready' AND a.archived_at IS NULL
-            AND o.passages_json IS NOT NULL`,
+            AND a.purpose IS NULL AND o.passages_json IS NOT NULL`,
       )
       .bind(assetId, userId),
   ];

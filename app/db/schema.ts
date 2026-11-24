@@ -1058,6 +1058,13 @@ export const assets = sqliteTable(
     expiresAt: integer("expires_at"),
     /** Out of search and lists; bytes and id still resolve. */
     archivedAt: integer("archived_at"),
+    /**
+     * Null for a file someone chose to keep. `hook` is a runnable hook's
+     * file (ADR-0023): no projection, not in Library, not reachable by an
+     * agent's `fetch` or `get_asset_download`, and swept once no live
+     * version names it. No CHECK: adding one would rebuild the table.
+     */
+    purpose: text("purpose", { enum: ["hook"] }),
     failure: text("failure"),
     createdAt: integer("created_at").notNull(),
     updatedAt: integer("updated_at").notNull(),
@@ -1704,6 +1711,102 @@ export const hookConfigs = sqliteTable("hook_configs", {
   document: text("document").notNull(),
   updatedAt: integer("updated_at").notNull(),
 });
+
+// --- Runnable hooks ---------------------------------------------------------
+
+/**
+ * A named hook that runs a command on the owner's machines, ADR-0023. Its
+ * content lives in versions; what runs is decided by approval events. Kept
+ * out of `hook_configs`, which agents edit field by field under
+ * `config:write`.
+ */
+export const hookRunnables = sqliteTable(
+  "hook_runnables",
+  {
+    runnableId: text("runnable_id").primaryKey(),
+    userId: text("user_id").notNull(),
+    name: text("name").notNull(),
+    createdAt: integer("created_at").notNull(),
+    /** Set in the console; a disabled entry is never in the manifest. */
+    disabledAt: integer("disabled_at"),
+  },
+  (table) => [uniqueIndex("hook_runnables_name").on(table.userId, table.name)],
+);
+
+/**
+ * One proposed content of a runnable entry, keyed by the SHA-256 of its
+ * canonical JSON (`runnableVersionHash`). The content columns are never
+ * updated. `proposed_at` and `expires_at` are the latest proposal of that
+ * content: proposing identical content again after a rejection or expiry
+ * renews them, so the same hash is pending again.
+ */
+export const hookRunnableVersions = sqliteTable(
+  "hook_runnable_versions",
+  {
+    userId: text("user_id").notNull(),
+    versionHash: text("version_hash").notNull(),
+    runnableId: text("runnable_id")
+      .notNull()
+      .references(() => hookRunnables.runnableId),
+    event: text("event", {
+      enum: ["SessionStart", "Stop", "SessionEnd"],
+    }).notNull(),
+    argvJson: text("argv_json").notNull(),
+    gatesJson: text("gates_json").notNull(),
+    outputsJson: text("outputs_json").notNull(),
+    timeoutSeconds: integer("timeout_seconds").notNull(),
+    dailyCapMicrousd: integer("daily_cap_microusd").notNull(),
+    maxRunsPerDay: integer("max_runs_per_day").notNull(),
+    /** `[{ path, sha256, size, asset_id }]`, sorted by path. */
+    filesJson: text("files_json").notNull(),
+    sourceAgent: text("source_agent").notNull(),
+    sourceClient: text("source_client").notNull(),
+    sourceSession: text("source_session"),
+    proposedAt: integer("proposed_at").notNull(),
+    expiresAt: integer("expires_at").notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.userId, table.versionHash] }),
+    index("hook_runnable_versions_runnable").on(
+      table.runnableId,
+      table.proposedAt,
+    ),
+    check(
+      "hook_runnable_versions_event",
+      sql`${table.event} IN ('SessionStart', 'Stop', 'SessionEnd')`,
+    ),
+  ],
+);
+
+/**
+ * Append-only decisions on a version. Its state is the latest decision made
+ * at or after its `proposed_at`; with none it is pending until it expires.
+ * `credential_id` is the passkey that made an approval.
+ */
+export const hookRunnableDecisions = sqliteTable(
+  "hook_runnable_decisions",
+  {
+    decisionId: integer("decision_id").primaryKey({ autoIncrement: true }),
+    userId: text("user_id").notNull(),
+    versionHash: text("version_hash").notNull(),
+    decision: text("decision", {
+      enum: ["approved", "rejected", "revoked", "suspended"],
+    }).notNull(),
+    credentialId: text("credential_id"),
+    at: integer("at").notNull(),
+    reason: text("reason"),
+  },
+  (table) => [
+    index("hook_runnable_decisions_version").on(
+      table.userId,
+      table.versionHash,
+    ),
+    check(
+      "hook_runnable_decisions_decision",
+      sql`${table.decision} IN ('approved', 'rejected', 'revoked', 'suspended')`,
+    ),
+  ],
+);
 
 // --- Observability ----------------------------------------------------------
 

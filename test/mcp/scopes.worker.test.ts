@@ -125,6 +125,11 @@ describe("MCP scopes", () => {
     ],
     ["list_hooks", {}, "config:read"],
     ["edit_hook", { action: "remove", id: "custom-0" }, "config:write"],
+    [
+      "propose_hook",
+      { name: "scope-test", event: "Stop", argv: ["true"] },
+      "config:write",
+    ],
     ["upload_asset", { file_name: "scope.png", size: 1 }, "assets:write"],
     ["update_asset", { id: MISSING_ASSET, title: "Scope" }, "assets:write"],
     ["get_asset_download", { id: MISSING_ASSET }, "assets:read"],

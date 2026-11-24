@@ -370,3 +370,200 @@ function serialize(entries: HookEntry[]): string {
   }
   return JSON.stringify(document, null, 2);
 }
+
+// --- Runnable entries, ADR-0023 ---------------------------------------------
+//
+// A runnable entry runs a command instead of injecting text. Its content is
+// validated here, beside the text entries' rules, because the hook script
+// will hold the gates and outputs to the same answers
+// (todo:tdo_842081a9-1070-4d8c-9af7-ed7262609ff7 adds that half and its
+// parity test). Storage, hashing and approval state are
+// `app/concepts/hook-runnables.ts`.
+
+export const RUNNABLE_EVENTS = ["SessionStart", "Stop", "SessionEnd"] as const;
+export type RunnableEvent = (typeof RUNNABLE_EVENTS)[number];
+
+/** Lowercase words joined by hyphens; never a text entry's id. */
+export const RUNNABLE_NAME = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+export const MAX_RUNNABLE_NAME_LENGTH = 64;
+export const MAX_ARGV = 32;
+export const MAX_ARG_LENGTH = 1000;
+export const MAX_OUTPUTS = 20;
+export const MAX_PATH_LENGTH = 200;
+export const DEFAULT_TIMEOUT_SECONDS = 600;
+export const MAX_TIMEOUT_SECONDS = 1800;
+export const DEFAULT_DAILY_CAP_USD = 0.5;
+export const MAX_DAILY_CAP_USD = 20;
+export const DEFAULT_MAX_RUNS_PER_DAY = 20;
+export const MAX_RUNS_PER_DAY = 500;
+
+export type RunnableGates = {
+  /** The latest model call's input plus cache tokens, from the transcript. */
+  min_context_tokens?: number;
+  /** Stop only: run on every Nth stop of a session. */
+  every_turns?: number;
+  /** Per entry and repo. */
+  cooldown_minutes?: number;
+  git_repo_only?: boolean;
+  /** HEAD or the dirty files differ from the entry's last run in this repo. */
+  changed_since_last_run?: boolean;
+};
+
+const GATE_FIELDS = [
+  "min_context_tokens",
+  "every_turns",
+  "cooldown_minutes",
+  "git_repo_only",
+  "changed_since_last_run",
+] as const;
+
+/** Everything a version binds except its files. Defaults applied. */
+export type RunnableContent = {
+  name: string;
+  event: RunnableEvent;
+  argv: string[];
+  gates: RunnableGates;
+  outputs: string[];
+  timeout_seconds: number;
+  daily_cap_usd: number;
+  max_runs_per_day: number;
+};
+
+export type RunnableContentInput = {
+  name: string;
+  event: string;
+  argv: readonly string[];
+  gates?: Record<string, unknown>;
+  outputs?: readonly string[];
+  timeout_seconds?: number;
+  daily_cap_usd?: number;
+  max_runs_per_day?: number;
+};
+
+/**
+ * A repo-relative POSIX path with no `.` or `..` segment, no leading slash
+ * and no control characters. Used for declared outputs and hook file paths.
+ */
+export function relativePathError(path: string, label: string): string | null {
+  if (path.length === 0 || path.length > MAX_PATH_LENGTH) {
+    return `${label} must be 1 to ${MAX_PATH_LENGTH} characters`;
+  }
+  if (/[\u0000-\u001f\u007f\\]/.test(path)) {
+    return `${label} must not contain control characters or backslashes`;
+  }
+  if (path.startsWith("/") || /^[A-Za-z]:/.test(path)) {
+    return `${label} must be relative to the repo root`;
+  }
+  const segments = path.split("/");
+  if (
+    segments.some(
+      (segment) => segment === "" || segment === "." || segment === "..",
+    )
+  ) {
+    return `${label} must not contain empty, "." or ".." segments`;
+  }
+  return null;
+}
+
+/** The validated content with defaults filled in, or the first problem. */
+export function parseRunnableContent(
+  input: RunnableContentInput,
+): { content: RunnableContent } | { error: string } {
+  const name = input.name.trim();
+  if (name.length > MAX_RUNNABLE_NAME_LENGTH || !RUNNABLE_NAME.test(name)) {
+    return {
+      error: `name must be lowercase letters, digits and single hyphens, at most ${MAX_RUNNABLE_NAME_LENGTH} characters`,
+    };
+  }
+  if (name in SHIPPED_HOOKS || /^custom-\d+$/.test(name)) {
+    return { error: `name "${name}" is a text entry's id; choose another` };
+  }
+  if (!RUNNABLE_EVENTS.includes(input.event as RunnableEvent)) {
+    return { error: 'event must be "SessionStart", "Stop" or "SessionEnd"' };
+  }
+  const event = input.event as RunnableEvent;
+
+  if (input.argv.length === 0 || input.argv.length > MAX_ARGV) {
+    return { error: `argv must have 1 to ${MAX_ARGV} elements` };
+  }
+  for (const [index, arg] of input.argv.entries()) {
+    if (
+      typeof arg !== "string" ||
+      arg.length > MAX_ARG_LENGTH ||
+      arg.includes("\u0000")
+    ) {
+      return {
+        error: `argv[${index}] must be a string of at most ${MAX_ARG_LENGTH} characters with no NUL`,
+      };
+    }
+  }
+  if (input.argv[0].trim() === "")
+    return { error: "argv[0] must name a command" };
+
+  const gates: RunnableGates = {};
+  for (const [field, value] of Object.entries(input.gates ?? {})) {
+    if (value === undefined) continue;
+    if (!(GATE_FIELDS as readonly string[]).includes(field)) {
+      return { error: `unknown gate "${field}"` };
+    }
+    if (field === "git_repo_only" || field === "changed_since_last_run") {
+      if (typeof value !== "boolean")
+        return { error: `gates.${field} must be a boolean` };
+      // false is the absence of the gate, so it hashes the same as leaving it out.
+      if (value) gates[field] = true;
+      continue;
+    }
+    if (typeof value !== "number" || !Number.isInteger(value) || value < 1) {
+      return { error: `gates.${field} must be an integer >= 1` };
+    }
+    if (field === "every_turns" && event !== "Stop") {
+      return { error: 'gates.every_turns is only valid when event is "Stop"' };
+    }
+    gates[field as "min_context_tokens" | "every_turns" | "cooldown_minutes"] =
+      value;
+  }
+
+  const outputs = [...new Set(input.outputs ?? [])].sort();
+  if (outputs.length > MAX_OUTPUTS) {
+    return { error: `outputs must list at most ${MAX_OUTPUTS} paths` };
+  }
+  for (const output of outputs) {
+    const error = relativePathError(output, `output "${output}"`);
+    if (error) return { error };
+  }
+
+  const timeout = input.timeout_seconds ?? DEFAULT_TIMEOUT_SECONDS;
+  if (
+    !Number.isInteger(timeout) ||
+    timeout < 1 ||
+    timeout > MAX_TIMEOUT_SECONDS
+  ) {
+    return {
+      error: `timeout_seconds must be an integer from 1 to ${MAX_TIMEOUT_SECONDS}`,
+    };
+  }
+  const cap = input.daily_cap_usd ?? DEFAULT_DAILY_CAP_USD;
+  if (!Number.isFinite(cap) || cap < 0 || cap > MAX_DAILY_CAP_USD) {
+    return { error: `daily_cap_usd must be from 0 to ${MAX_DAILY_CAP_USD}` };
+  }
+  const runs = input.max_runs_per_day ?? DEFAULT_MAX_RUNS_PER_DAY;
+  if (!Number.isInteger(runs) || runs < 1 || runs > MAX_RUNS_PER_DAY) {
+    return {
+      error: `max_runs_per_day must be an integer from 1 to ${MAX_RUNS_PER_DAY}`,
+    };
+  }
+
+  return {
+    content: {
+      name,
+      event,
+      argv: [...input.argv],
+      gates,
+      outputs,
+      timeout_seconds: timeout,
+      // Whole micro-dollars, so a cap hashes and stores the same everywhere.
+      daily_cap_usd: Math.round(cap * 1_000_000) / 1_000_000,
+      max_runs_per_day: runs,
+    },
+  };
+}

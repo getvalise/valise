@@ -211,7 +211,7 @@ export async function queueAssetProcessing(
     SELECT ?, a.user_id, a.asset_id,
       1 + COALESCE((SELECT MAX(generation) FROM asset_processing WHERE asset_id = a.asset_id AND user_id = a.user_id), 0),
       ?, 'queued', ? FROM assets a
-    WHERE a.asset_id = ? AND a.user_id = ? AND a.state = 'ready'
+    WHERE a.asset_id = ? AND a.user_id = ? AND a.state = 'ready' AND a.purpose IS NULL
       AND a.archived_at IS NULL AND (a.expires_at IS NULL OR a.expires_at > unixepoch())
       AND NOT EXISTS (SELECT 1 FROM asset_processing p WHERE p.asset_id = a.asset_id AND p.user_id = a.user_id
         AND (p.state IN ('queued', 'running') OR p.lease_until > unixepoch()))

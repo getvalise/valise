@@ -51,6 +51,10 @@ export const TABLES = [
   "memory_attachments",
   "todo_attachments",
   "hook_configs",
+  // Runnable hooks, ADR-0023: entries before the versions that reference them.
+  "hook_runnables",
+  "hook_runnable_versions",
+  "hook_runnable_decisions",
   "vector_snapshots",
   "transcripts",
   "transcript_turns",

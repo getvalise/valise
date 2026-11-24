@@ -148,7 +148,7 @@ async function heldAsset(
     .prepare(
       `SELECT a.asset_id AS assetId FROM assets a
          JOIN objects o ON o.object_id = a.object_id AND o.user_id = a.user_id
-        WHERE a.user_id = ? AND o.sha256 = ? AND a.state = 'ready'
+        WHERE a.user_id = ? AND o.sha256 = ? AND a.state = 'ready' AND a.purpose IS NULL
           AND a.expires_at IS NULL AND a.archived_at IS NULL
         ORDER BY a.created_at LIMIT 1`,
     )

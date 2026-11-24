@@ -1,6 +1,16 @@
 import { z } from "zod";
 import { MAX_SOURCE_IMAGES } from "~/concepts/attachment-limits";
-import { HOOK_EVENTS, MAX_HOOK_TEXT_LENGTH } from "~/concepts/hook-config";
+import {
+  HOOK_EVENTS,
+  MAX_ARG_LENGTH,
+  MAX_ARGV,
+  MAX_HOOK_TEXT_LENGTH,
+  MAX_OUTPUTS,
+  MAX_PATH_LENGTH,
+  MAX_RUNNABLE_NAME_LENGTH,
+  RUNNABLE_EVENTS,
+} from "~/concepts/hook-config";
+import { MAX_HOOK_FILE_BYTES, MAX_HOOK_FILES } from "~/concepts/hook-runnables";
 import { MEMORY_LINK_KINDS } from "~/concepts/memory-links";
 import { SUBJECT_KINDS } from "~/concepts/memory-subjects";
 import { MEMORY_TYPES } from "~/concepts/memory-types";
@@ -1000,9 +1010,27 @@ const hookEntry = z.looseObject({
   default_text: z.string().nullable(),
 });
 
+const runnableVersion = z.looseObject({
+  version_hash: z.string(),
+  event: z.enum(RUNNABLE_EVENTS),
+  proposed_at: z.number(),
+  expires_at: z.number().optional(),
+});
+
+/** A runnable entry: what runs, if anything, and what awaits the owner. */
+const runnableEntry = z.looseObject({
+  name: z.string(),
+  enabled: z.boolean(),
+  approved: runnableVersion.nullable(),
+  pending: runnableVersion.nullable(),
+});
+
 export const listHooksOutput = z.looseObject({
   entries: z.array(hookEntry),
   updated_at: z.number().nullable(),
+  // Optional, so a client that cached the schema before ADR-0023 still
+  // validates results that carry it.
+  runnable: z.array(runnableEntry).optional(),
 });
 
 /**
@@ -1069,6 +1097,74 @@ export const editHookInput = z
 export const editHookOutput = listHooksOutput;
 
 export type EditHookInput = z.infer<typeof editHookInput>;
+
+/**
+ * A runnable hook proposal, ADR-0023. Content limits are checked again by
+ * `parseRunnableContent` and `parseHookFiles`, which count bytes, not
+ * characters; the schema bounds what a model may send at all.
+ */
+export const proposeHookInput = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1)
+    .max(MAX_RUNNABLE_NAME_LENGTH)
+    .describe(
+      "The entry, lowercase words joined by hyphens, such as handoff. Proposing to an existing name adds a version.",
+    ),
+  event: z.enum(RUNNABLE_EVENTS),
+  argv: z
+    .array(z.string().max(MAX_ARG_LENGTH))
+    .min(1)
+    .max(MAX_ARGV)
+    .describe(
+      "The command, run from the repo root. ./<path> naming one of files runs that file.",
+    ),
+  files: z
+    .array(
+      z.object({
+        path: z.string().max(MAX_PATH_LENGTH),
+        content: z.string().max(MAX_HOOK_FILE_BYTES),
+      }),
+    )
+    .max(MAX_HOOK_FILES)
+    .optional()
+    .describe("Scripts as UTF-8 text, 64 KiB each, 256 KiB in all."),
+  gates: z
+    .object({
+      min_context_tokens: z.number().int().min(1).optional(),
+      every_turns: z.number().int().min(1).optional().describe("Stop only."),
+      cooldown_minutes: z.number().int().min(1).optional(),
+      git_repo_only: z.boolean().optional(),
+      changed_since_last_run: z.boolean().optional(),
+    })
+    .optional(),
+  outputs: z
+    .array(z.string().max(MAX_PATH_LENGTH))
+    .max(MAX_OUTPUTS)
+    .optional()
+    .describe(
+      "Paths the hook writes, relative to the repo root, each under .git/ or ignored by git. Changing a tracked file suspends the hook.",
+    ),
+  timeout_seconds: z.number().int().min(1).optional(),
+  daily_cap_usd: z.number().min(0).optional(),
+  max_runs_per_day: z.number().int().min(1).optional(),
+});
+
+export type ProposeHookInput = z.infer<typeof proposeHookInput>;
+
+export const proposeHookOutput = z.looseObject({
+  name: z.string(),
+  version_hash: z.string(),
+  state: z.enum(["pending", "approved"]),
+  expires_at: z.number().nullable(),
+  files: z.array(
+    z.looseObject({ path: z.string(), sha256: z.string(), size: z.number() }),
+  ),
+  running_version_hash: z.string().nullable(),
+  approve_url: z.string().optional(),
+  message: z.string(),
+});
 
 // --- Assets, ADR-0015 ---------------------------------------------------------
 

@@ -113,7 +113,8 @@ const ARMS = [
           a.source_agent AS agent, NULL AS session, a.file_name AS detail,
           a.finalized_at AS at, 'new_' || a.asset_id AS id
      FROM assets a
-    WHERE a.user_id = ?1 AND a.finalized_at >= ?2 AND a.finalized_at < ?3`,
+    WHERE a.user_id = ?1 AND a.purpose IS NULL
+      AND a.finalized_at >= ?2 AND a.finalized_at < ?3`,
 ];
 
 /**
