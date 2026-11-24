@@ -12,6 +12,14 @@ import {
   readAttachedObject,
 } from "~/concepts/attachments";
 import { readHookConfig, writeHookConfig } from "~/concepts/hook-config";
+import {
+  isRunnableName,
+  listRunnables,
+  type ProposeRunnableInput,
+  proposeRunnable,
+  readRunnableVersion,
+} from "~/concepts/hook-runnables";
+import type { Provenance } from "~/concepts/memories";
 import { readTrail, type TrailWindow } from "~/concepts/trail";
 import { serveObject } from "~/r2/objects";
 
@@ -32,10 +40,19 @@ export function activityStore(data: Data, userId: string) {
 }
 
 /** The tenant's hook configuration, one document per tenant. */
-export function hookStore(data: Data, userId: string) {
+export function hookStore(data: Data, userId: string, provenance: Provenance) {
   return Object.freeze({
     read: () => readHookConfig(data, userId),
     write: (document: string) => writeHookConfig(data, userId, document),
+    /** Runnable entries, ADR-0023. Proposing never makes anything run. */
+    runnables: Object.freeze({
+      list: () => listRunnables(data.DB, userId),
+      isName: (name: string) => isRunnableName(data.DB, userId, name),
+      version: (versionHash: string) =>
+        readRunnableVersion(data.DB, userId, versionHash),
+      propose: (input: ProposeRunnableInput) =>
+        proposeRunnable(data, input, provenance),
+    }),
   });
 }
 

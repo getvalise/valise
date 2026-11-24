@@ -214,6 +214,7 @@ async function readAssets(db: D1Database) {
                 WHERE h.asset_id = assets.asset_id AND h.user_id = assets.user_id
                   AND o.user_id = assets.user_id) AS extractedText
          FROM assets
+        WHERE purpose IS NULL
         ORDER BY asset_id`,
     )
     .all<AssetSource>();

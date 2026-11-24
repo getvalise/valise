@@ -108,7 +108,7 @@ async function itemTitles(
         WHERE user_id = ?1 AND source_id IN (SELECT value FROM json_each(?2))
        UNION ALL
        SELECT asset_id AS id, title FROM assets
-        WHERE user_id = ?1 AND asset_id IN (SELECT value FROM json_each(?3))`,
+        WHERE user_id = ?1 AND purpose IS NULL AND asset_id IN (SELECT value FROM json_each(?3))`,
     )
     .bind(userId, ids("source"), ids("asset"))
     .all<{ id: string; title: string }>();

@@ -13,6 +13,7 @@ import {
   type HookEntry,
   hookEntries,
 } from "~/concepts/hook-config";
+import type { RunnableEntry, RunnableVersion } from "~/concepts/hook-runnables";
 import { itemPath } from "~/concepts/item-path";
 import {
   NEAR_TIE,
@@ -80,6 +81,8 @@ import {
   listTodosInput,
   listTodosOutput,
   MAX_SEARCH_QUERY,
+  proposeHookInput,
+  proposeHookOutput,
   publishSkillInput,
   publishSkillOutput,
   readSkillFileInput,
@@ -1083,18 +1086,24 @@ export async function createServer(
     {
       title: "List Valise hook text",
       description:
-        "List the text Valise injects into a session at SessionStart, at Stop, and after a failed shell command, with each entry's id. A client without Valise's hooks receives the enabled text as server instructions instead. Call this before edit_hook changes or removes an entry.",
+        "List the text Valise injects into a session at SessionStart, at Stop, and after a failed shell command, with each entry's id, and the runnable hooks with the version approved to run and any awaiting the owner. A client without Valise's hooks receives the enabled text as server instructions instead. Call this before edit_hook changes or removes an entry.",
       inputSchema: listHooksInput,
       outputSchema: listHooksOutput,
     },
     async () => {
-      const { document, updatedAt } = await store.hooks.read();
+      const [{ document, updatedAt }, runnable] = await Promise.all([
+        store.hooks.read(),
+        store.hooks.runnables.list(),
+      ]);
       const read = hookEntries(document);
       if ("error" in read)
         return toolError(
           `The stored hook config is invalid: ${read.error}. Fix it on the console's Hooks page.`,
         );
-      return textResult(hooksOutput(read.entries, updatedAt));
+      return textResult({
+        ...hooksOutput(read.entries, updatedAt),
+        runnable: runnable.map(runnableOutput),
+      });
     },
   );
 
@@ -1108,6 +1117,13 @@ export async function createServer(
       outputSchema: editHookOutput,
     },
     async (input) => {
+      if (
+        input.id !== undefined &&
+        (await store.hooks.runnables.isName(input.id))
+      )
+        return toolError(
+          `${input.id} is a runnable hook, and edit_hook changes injected text only. Send a new version with propose_hook; it runs once the owner approves it in the console.`,
+        );
       const { document } = await store.hooks.read();
       const edited = applyHookEdit(document, input);
       if ("error" in edited) return toolError(edited.error);
@@ -1120,7 +1136,65 @@ export async function createServer(
     },
   );
 
+  server.registerTool(
+    "propose_hook",
+    {
+      title: "Propose a runnable Valise hook",
+      description:
+        "Propose a hook that runs a command on the user's machines at SessionStart, Stop or SessionEnd, with its scripts inline, when the user asks for a hook that does something rather than says something. Nothing runs until the owner approves this exact version in the console; until then the previously approved version, if any, keeps running. The hook must print nothing, write only its declared outputs, and report its cost to $VALISE_HOOK_REPORT. For hook text, use edit_hook.",
+      inputSchema: proposeHookInput,
+      outputSchema: proposeHookOutput,
+    },
+    async (input) => {
+      const proposed = await store.hooks.runnables.propose(input);
+      if ("error" in proposed)
+        return toolError(`${proposed.error}. Nothing was proposed.`);
+      const { version, running, outcome } = proposed;
+      const name = version.content.name;
+      const approveUrl = caller.origin
+        ? `${caller.origin}/hooks?runnable=${encodeURIComponent(name)}`
+        : undefined;
+      const message =
+        outcome === "running"
+          ? `${name} already runs this exact version; nothing changed.`
+          : `${name} version ${version.versionHash.slice(0, 12)} is ${outcome === "pending" ? "already " : ""}awaiting the owner's approval in the console${approveUrl ? ` at ${approveUrl}` : ""}. Nothing runs until they approve it${running ? `; version ${running.versionHash.slice(0, 12)} keeps running until then` : ""}. Unapproved, it expires ${new Date(version.expiresAt * 1000).toISOString().slice(0, 10)}.`;
+      return textResult({
+        name,
+        version_hash: version.versionHash,
+        state: outcome === "running" ? "approved" : "pending",
+        expires_at: outcome === "running" ? null : version.expiresAt,
+        files: version.files.map(({ path, sha256, size }) => ({
+          path,
+          sha256,
+          size,
+        })),
+        running_version_hash: running?.versionHash ?? null,
+        ...(approveUrl ? { approve_url: approveUrl } : {}),
+        message,
+      });
+    },
+  );
+
   return server;
+}
+
+function runnableVersionOutput(version: RunnableVersion | null) {
+  if (version === null) return null;
+  return {
+    version_hash: version.versionHash,
+    event: version.content.event,
+    proposed_at: version.proposedAt,
+    ...(version.state === "pending" ? { expires_at: version.expiresAt } : {}),
+  };
+}
+
+function runnableOutput(entry: RunnableEntry) {
+  return {
+    name: entry.name,
+    enabled: !entry.disabled,
+    approved: runnableVersionOutput(entry.running),
+    pending: runnableVersionOutput(entry.pending),
+  };
 }
 
 /**

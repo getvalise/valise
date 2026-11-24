@@ -12,6 +12,7 @@ import {
   readAsset,
   readAssetRow,
 } from "~/concepts/assets";
+import { unreferencedHookFiles } from "~/concepts/hook-runnables";
 import { forgetUseStatements } from "~/concepts/library-use";
 import type { Provenance } from "~/concepts/memories";
 import { sourceSearchStatements } from "~/concepts/source-search";
@@ -102,7 +103,10 @@ export async function deleteAsset(
  * next run deletes the row; the reverse order would leave bytes no row
  * names. R2 deletes are idempotent, so a retry repeats them harmlessly.
  */
-async function purgeAsset(env: AssetEnv, asset: Asset): Promise<void> {
+async function purgeAsset(
+  env: AssetEnv,
+  asset: Pick<Asset, "assetId" | "userId" | "objectId">,
+): Promise<void> {
   const object =
     asset.objectId === null
       ? null
@@ -139,6 +143,8 @@ export type CleanupReport = {
   protected: number;
   strayUploads: number;
   orphanObjects: number;
+  /** Hook files no live version names any more. */
+  hookFiles: number;
   errors: string[];
 };
 
@@ -159,6 +165,9 @@ const ORPHAN_GRACE_SECONDS = 24 * 60 * 60;
  *    failed, are deleted.
  * 4. Object keys no `objects` row names, from a batch that failed after its
  *    R2 write, are deleted once a day old (ADR-0011's accepted orphans).
+ *
+ * Between 2 and 3, hook files no approved or pending version names lose
+ * their bytes and rows (ADR-0023).
  */
 export async function cleanupLibrary(
   env: AssetEnv,
@@ -170,6 +179,7 @@ export async function cleanupLibrary(
     protected: 0,
     strayUploads: 0,
     orphanObjects: 0,
+    hookFiles: 0,
     errors: [],
   };
   const attempt = async (what: string, step: () => Promise<void>) => {
@@ -221,6 +231,15 @@ export async function cleanupLibrary(
       }
       await purgeAsset(env, asset);
       report.expired++;
+    });
+  }
+
+  // Hook files are never given an expiry; they go once no live version
+  // names them. ADR-0023.
+  for (const file of await unreferencedHookFiles(env.DB, now)) {
+    await attempt(assetRef(file.assetId), async () => {
+      await purgeAsset(env, file);
+      report.hookFiles++;
     });
   }
 
