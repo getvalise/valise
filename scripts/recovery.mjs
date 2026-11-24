@@ -77,6 +77,7 @@ export function restoredRow(table, row) {
       throw new Error("Invalid fencing floor");
     result.fencing_token++;
     result.lease_holder = null;
+    if ("holder_session" in result) result.holder_session = null;
     // Keep the state snapshot, but never replay its live lease. The fresh
     // coordinator adopts an expired claim and performs the next transition.
     result.lease_expires_at = result.state === "claimed" ? 0 : null;

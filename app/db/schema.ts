@@ -821,6 +821,12 @@ export const todos = sqliteTable(
       .default("pending"),
     /** Mirror of coordinator truth, may lag by seconds. Display only. */
     leaseHolder: text("lease_holder"),
+    /**
+     * The holder's `x-valise-session`, null when its client sent none. Written
+     * with the fence on claim, so fetch can show the token to the holder only.
+     * ADR-0002, amendment of 2026-11-24.
+     */
+    holderSession: text("holder_session"),
     /** Mirror of coordinator truth, may lag by seconds. Display only. */
     leaseExpiresAt: integer("lease_expires_at"),
     /**

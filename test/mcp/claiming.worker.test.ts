@@ -486,13 +486,17 @@ describe("todo claiming", () => {
       "alice",
     );
     expect(answered.isError).not.toBe(true);
-    const fetched = await tool("fetch", { id });
+    const fetched = await tool("fetch", { id }, "alice");
     const metadata = fetched.structuredContent?.metadata as {
       lease_holder: string;
       fencing_token: number;
       updates: { kind: string; author: string; body: string }[];
     };
     expect(metadata.fencing_token).toBe(token(claimed));
+    // Only the holder sees the token. ADR-0002, amendment of 2026-11-24.
+    expect(
+      (await tool("fetch", { id }, "bob")).structuredContent?.metadata,
+    ).not.toHaveProperty("fencing_token");
     expect(
       metadata.updates.map((update) => [update.kind, update.author]),
     ).toEqual([

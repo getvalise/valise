@@ -22,12 +22,34 @@ type CoordinatorTodo = {
   todoId: string;
   state: TodoState;
   leaseHolder: string | null;
+  /**
+   * The holder's `x-valise-session`, when its client sent one. With the
+   * agent it names the holder for the paths that take no token: fetch
+   * showing the token, and a re-claim returning it (ADR-0002, 2026-11-24).
+   */
+  holderSession: string | null;
   leaseExpiresAt: number | null;
   fencingToken: number;
   mirrorGeneration: number;
   blockedOn: string | null;
   completedAt: number | null;
+  /**
+   * Who held the lease when the alarm expired it, kept here only: their
+   * still-current token revives it on their next write. Cleared by every
+   * other transition. Absent on a row read from D1.
+   */
+  lapsedHolder?: string | null;
+  lapsedSession?: string | null;
 };
+
+/** The lease a revival grants, the same default a claim gets. */
+const DEFAULT_LEASE_SECONDS = 30 * 60;
+
+const LOCAL_COLUMNS = `todo_id as todoId, state, lease_holder as leaseHolder,
+  holder_session as holderSession, lease_expires_at as leaseExpiresAt,
+  fencing_token as fencingToken, mirror_generation as mirrorGeneration,
+  blocked_on as blockedOn, completed_at as completedAt,
+  lapsed_holder as lapsedHolder, lapsed_session as lapsedSession`;
 
 type TodoFailure = {
   ok: false;
@@ -79,6 +101,7 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     agent: string,
     ttlSeconds: number,
     sessionName: string | null = null,
+    session: string | null = null,
   ): Promise<ClaimResult> {
     return this.serialize(todoId, async () => {
       const loaded = await this.load(todoId);
@@ -89,6 +112,12 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
       return this.graph.run(reopening, async () => {
         const todo = await this.load(todoId);
         if (todo === null) return missing();
+        const live = todo.state === "claimed" && !isExpired(todo, nowSeconds());
+        // The holder claiming again lost its token, to a compaction or a
+        // restart. It gets the same token back and a renewed lease, not a
+        // refusal naming itself and a wait for its own lease to run out.
+        if (live && isHolder(todo, agent, session) && !this.isUncertain(todoId))
+          return this.renewLease(todo, ttlSeconds);
         const readiness = await this.dependencyFailure(todo);
         if (readiness) return readiness;
         const now = nowSeconds();
@@ -119,19 +148,39 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
             "INSERT OR IGNORE INTO uncertain_reopens (todo_id) VALUES (?)",
             todoId,
           );
+        // The holder rides with the fence, so a fetch right after the claim
+        // already knows whom to show the token to; the state still mirrors.
         const fence = reopening
           ? this.env.DB.prepare(
               `UPDATE todos
                 SET fencing_token = ?, state = 'claimed', lease_holder = ?,
-                    lease_expires_at = ?, blocked_on = NULL, completed_at = NULL,
-                    updated_at = ?
+                    holder_session = ?, lease_expires_at = ?, blocked_on = NULL,
+                    completed_at = NULL, updated_at = ?
               WHERE todo_id = ? AND user_id = ? AND fencing_token < ?`,
-            ).bind(token, agent, expiresAt, now, todoId, this.userId, token)
+            ).bind(
+              token,
+              agent,
+              session,
+              expiresAt,
+              now,
+              todoId,
+              this.userId,
+              token,
+            )
           : this.env.DB.prepare(
               `UPDATE todos
-                SET fencing_token = ?
+                SET fencing_token = ?, lease_holder = ?, holder_session = ?,
+                    lease_expires_at = ?
               WHERE todo_id = ? AND user_id = ? AND fencing_token < ?`,
-            ).bind(token, todoId, this.userId, token);
+            ).bind(
+              token,
+              agent,
+              session,
+              expiresAt,
+              todoId,
+              this.userId,
+              token,
+            );
         const writes = await this.env.DB.batch([
           fence,
           this.env.DB.prepare(
@@ -161,11 +210,14 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
           todoId,
           state: "claimed",
           leaseHolder: agent,
+          holderSession: session,
           leaseExpiresAt: expiresAt,
           fencingToken: token,
           mirrorGeneration: todo.mirrorGeneration + 1,
           blockedOn: null,
           completedAt: null,
+          lapsedHolder: null,
+          lapsedSession: null,
         });
         if (reopening)
           this.ctx.storage.sql.exec(
@@ -183,10 +235,11 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     agent: string,
     token: number,
     ttlSeconds: number,
+    session: string | null = null,
   ): Promise<TransitionResult> {
     return this.serialize(todoId, () =>
       this.graph.run(false, async () => {
-        const todo = await this.requireCurrent(todoId, agent, token);
+        const todo = await this.requireCurrent(todoId, agent, token, session);
         if ("ok" in todo) return todo;
         return this.renewLease(todo, ttlSeconds);
       }),
@@ -196,7 +249,7 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
   private async renewLease(
     todo: CoordinatorTodo,
     ttlSeconds: number,
-  ): Promise<TransitionResult> {
+  ): Promise<{ ok: true; token: number; expiresAt: number }> {
     const expiresAt = nowSeconds() + ttlSeconds;
     this.queueMirror({
       ...todo,
@@ -215,10 +268,17 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     renewTtlSeconds: number | null,
     sessionName: string | null = null,
     summary: string | null = null,
+    session: string | null = null,
   ): Promise<TransitionResult> {
     return this.serialize(todoId, () =>
       this.graph.run(false, async () => {
-        const todo = await this.requireCurrent(todoId, agent, token);
+        const todo = await this.requireCurrent(
+          todoId,
+          agent,
+          token,
+          session,
+          sessionName,
+        );
         if ("ok" in todo) return todo;
         let renewed: TransitionResult = {
           ok: true,
@@ -267,35 +327,45 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     blocker: string,
     sessionName: string | null = null,
     summary: string | null = null,
+    session: string | null = null,
   ): Promise<TransitionResult> {
-    return this.serialize(todoId, async () => {
-      const todo = await this.requireCurrent(todoId, agent, token);
-      if ("ok" in todo) return todo;
-      const now = nowSeconds();
-      const mirrored = await this.recordTransition(
-        todoId,
-        "blocked",
-        agent,
-        token,
-        blocker,
-        now,
-        sessionName,
-        summary,
-      );
-      if (!mirrored) return this.d1Conflict(todoId);
+    return this.serialize(todoId, () =>
+      this.graph.run(false, async () => {
+        const todo = await this.requireCurrent(
+          todoId,
+          agent,
+          token,
+          session,
+          sessionName,
+        );
+        if ("ok" in todo) return todo;
+        const now = nowSeconds();
+        const mirrored = await this.recordTransition(
+          todoId,
+          "blocked",
+          agent,
+          token,
+          blocker,
+          now,
+          sessionName,
+          summary,
+        );
+        if (!mirrored) return this.d1Conflict(todoId);
 
-      this.queueMirror({
-        ...todo,
-        state: "blocked",
-        leaseHolder: null,
-        leaseExpiresAt: null,
-        mirrorGeneration: todo.mirrorGeneration + 1,
-        blockedOn: blocker,
-        completedAt: null,
-      });
-      await this.scheduleNextAlarm();
-      return { ok: true, token, expiresAt: null };
-    });
+        this.queueMirror({
+          ...todo,
+          state: "blocked",
+          leaseHolder: null,
+          holderSession: null,
+          leaseExpiresAt: null,
+          mirrorGeneration: todo.mirrorGeneration + 1,
+          blockedOn: blocker,
+          completedAt: null,
+        });
+        await this.scheduleNextAlarm();
+        return { ok: true, token, expiresAt: null };
+      }),
+    );
   }
 
   async complete(
@@ -304,10 +374,17 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     token: number,
     summary: string,
     sessionName: string | null = null,
+    session: string | null = null,
   ): Promise<TransitionResult> {
     return this.serialize(todoId, () =>
       this.graph.run(false, async () => {
-        const todo = await this.requireCurrent(todoId, agent, token);
+        const todo = await this.requireCurrent(
+          todoId,
+          agent,
+          token,
+          session,
+          sessionName,
+        );
         if ("ok" in todo) return todo;
         const now = nowSeconds();
         const mirrored = await this.recordTransition(
@@ -325,6 +402,7 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
           ...todo,
           state: "done",
           leaseHolder: null,
+          holderSession: null,
           leaseExpiresAt: null,
           mirrorGeneration: todo.mirrorGeneration + 1,
           blockedOn: null,
@@ -442,7 +520,8 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
           this.env.DB.prepare(
             `UPDATE todos
             SET fencing_token = ?, state = ?, lease_holder = NULL,
-                lease_expires_at = NULL, blocked_on = ?, completed_at = ?,
+                holder_session = NULL, lease_expires_at = NULL, blocked_on = ?,
+                completed_at = ?,
                 updated_at = ?
           WHERE todo_id = ? AND user_id = ? AND fencing_token < ?`,
           ).bind(
@@ -483,11 +562,14 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
           todoId,
           state: next === "done" ? "done" : next,
           leaseHolder: null,
+          holderSession: null,
           leaseExpiresAt: null,
           fencingToken: token,
           mirrorGeneration: todo.mirrorGeneration + 1,
           blockedOn: next === "blocked" ? note : null,
           completedAt: next === "done" ? now : null,
+          lapsedHolder: null,
+          lapsedSession: null,
         });
         this.ctx.storage.sql.exec(
           "DELETE FROM uncertain_reopens WHERE todo_id = ?",
@@ -875,12 +957,31 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     agent: string,
     token: number,
     sessionName: string | null = null,
+    session: string | null = null,
   ): Promise<TransitionResult> {
-    return this.serialize(todoId, async () => {
-      const todo = await this.requireCurrent(todoId, agent, token);
-      if ("ok" in todo) return todo;
-      return this.releaseClaim(todoId, agent, token, "released", sessionName);
-    });
+    return this.serialize(todoId, () =>
+      this.graph.run(false, async () => {
+        const todo = await this.requireCurrent(
+          todoId,
+          agent,
+          token,
+          session,
+          sessionName,
+        );
+        if ("ok" in todo) return todo;
+        const released = await this.releaseClaim(
+          todoId,
+          agent,
+          token,
+          "released",
+          sessionName,
+        );
+        // Without this the mirror waited for the alarm still set at the old
+        // expiry, and listings showed a released to-do claimed until then.
+        await this.scheduleNextAlarm();
+        return released;
+      }),
+    );
   }
 
   async alarm(): Promise<void> {
@@ -889,10 +990,7 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     const now = nowSeconds();
     const expired = this.ctx.storage.sql
       .exec<CoordinatorTodo>(
-        `SELECT todo_id as todoId, state, lease_holder as leaseHolder,
-                lease_expires_at as leaseExpiresAt, fencing_token as fencingToken,
-                mirror_generation as mirrorGeneration, blocked_on as blockedOn,
-                completed_at as completedAt
+        `SELECT ${LOCAL_COLUMNS}
            FROM coordinator_todos
           WHERE state = 'claimed' AND lease_expires_at <= ?`,
         now,
@@ -910,6 +1008,8 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
           current.leaseHolder ?? "system",
           current.fencingToken,
           "lease expired",
+          null,
+          true,
         );
       });
     }
@@ -982,6 +1082,11 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
         "ALTER TABLE coordinator_todos ADD COLUMN completed_at INTEGER",
       );
     }
+    for (const column of ["holder_session", "lapsed_holder", "lapsed_session"])
+      if (!columns.includes(column))
+        this.ctx.storage.sql.exec(
+          `ALTER TABLE coordinator_todos ADD COLUMN ${column} TEXT`,
+        );
     this.ctx.storage.sql.exec(`
       CREATE TABLE IF NOT EXISTS mirror_queue (
         todo_id TEXT PRIMARY KEY,
@@ -1009,6 +1114,7 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     // restore cannot leave this atom coordinating another user's to-do.
     const source = await this.env.DB.prepare(
       `SELECT todo_id as todoId, state, lease_holder as leaseHolder,
+                holder_session as holderSession,
                 lease_expires_at as leaseExpiresAt, fencing_token as fencingToken,
                 mirror_generation as mirrorGeneration, blocked_on as blockedOn,
                 completed_at as completedAt
@@ -1025,12 +1131,13 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     if (stored !== null) return stored;
     this.ctx.storage.sql.exec(
       `INSERT OR IGNORE INTO coordinator_todos
-        (todo_id, state, lease_holder, lease_expires_at, fencing_token,
-         mirror_generation, blocked_on, completed_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        (todo_id, state, lease_holder, holder_session, lease_expires_at,
+         fencing_token, mirror_generation, blocked_on, completed_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       source.todoId,
       source.state,
       source.leaseHolder,
+      source.holderSession,
       source.leaseExpiresAt,
       source.fencingToken,
       source.mirrorGeneration,
@@ -1044,11 +1151,7 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     return (
       this.ctx.storage.sql
         .exec<CoordinatorTodo>(
-          `SELECT todo_id as todoId, state, lease_holder as leaseHolder,
-                  lease_expires_at as leaseExpiresAt, fencing_token as fencingToken,
-                  mirror_generation as mirrorGeneration, blocked_on as blockedOn,
-                  completed_at as completedAt
-             FROM coordinator_todos WHERE todo_id = ?`,
+          `SELECT ${LOCAL_COLUMNS} FROM coordinator_todos WHERE todo_id = ?`,
           todoId,
         )
         .toArray()[0] ?? null
@@ -1073,24 +1176,36 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
   private write(todo: CoordinatorTodo): void {
     this.ctx.storage.sql.exec(
       `INSERT OR REPLACE INTO coordinator_todos
-        (todo_id, state, lease_holder, lease_expires_at, fencing_token,
-         mirror_generation, blocked_on, completed_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        (todo_id, state, lease_holder, holder_session, lease_expires_at,
+         fencing_token, mirror_generation, blocked_on, completed_at,
+         lapsed_holder, lapsed_session)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       todo.todoId,
       todo.state,
       todo.leaseHolder,
+      todo.holderSession,
       todo.leaseExpiresAt,
       todo.fencingToken,
       todo.mirrorGeneration,
       todo.blockedOn,
       todo.completedAt,
+      todo.lapsedHolder ?? null,
+      todo.lapsedSession ?? null,
     );
   }
 
+  /**
+   * The lease a guarded write may use: the caller's token must be current and
+   * the caller the agent it was issued to. A lease that expired while nobody
+   * claimed over it is still that holder's, because its token is: the write
+   * revives it rather than being refused for a token nothing superseded.
+   */
   private async requireCurrent(
     todoId: string,
     agent: string,
     token: number,
+    session: string | null = null,
+    sessionName: string | null = null,
   ): Promise<CoordinatorTodo | TransitionResult> {
     const todo = await this.load(todoId);
     if (todo === null) return missing();
@@ -1099,15 +1214,94 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
         todo,
         "readiness unavailable; retry the console state change",
       );
-    if (
-      todo.state !== "claimed" ||
-      todo.leaseHolder !== agent ||
-      todo.fencingToken !== token ||
-      isExpired(todo, nowSeconds())
-    ) {
+    if (todo.fencingToken !== token)
       return conflict(todo, "stale fencing token");
+    if (todo.state === "claimed" && todo.leaseHolder === agent) {
+      if (!isExpired(todo, nowSeconds())) return todo;
+      return this.revive(
+        todo,
+        agent,
+        session ?? todo.holderSession,
+        sessionName,
+      );
     }
-    return todo;
+    if (todo.state === "pending" && todo.lapsedHolder === agent)
+      return this.revive(
+        todo,
+        agent,
+        session ?? todo.lapsedSession ?? null,
+        sessionName,
+      );
+    return conflict(todo, "stale fencing token");
+  }
+
+  /**
+   * Re-grants an expired lease to the holder whose token is still current.
+   * Nobody claimed in between, or the token would have moved, so nothing is
+   * lost: the holder carries on and the log says the lease came back. It is
+   * a claim in all but the token, so structured prerequisites still apply.
+   */
+  private async revive(
+    todo: CoordinatorTodo,
+    agent: string,
+    session: string | null,
+    sessionName: string | null,
+  ): Promise<CoordinatorTodo | TransitionResult> {
+    const readiness = await this.dependencyFailure(todo);
+    if (readiness) return readiness;
+    const now = nowSeconds();
+    const expiresAt = now + DEFAULT_LEASE_SECONDS;
+    const note = "revived its expired lease";
+    const writes = await this.env.DB.batch([
+      this.env.DB.prepare(
+        `UPDATE todos
+            SET lease_holder = ?, holder_session = ?, lease_expires_at = ?
+          WHERE todo_id = ? AND user_id = ? AND fencing_token = ?`,
+      ).bind(
+        agent,
+        session,
+        expiresAt,
+        todo.todoId,
+        this.userId,
+        todo.fencingToken,
+      ),
+      this.env.DB.prepare(
+        `INSERT INTO todo_updates (update_id, todo_id, kind, author, session_name, token, body, summary, created_at)
+         SELECT ?, ?, 'claim', ?, ?, ?, ?, ?, ?
+          WHERE EXISTS (
+            SELECT 1 FROM todos
+             WHERE todo_id = ? AND user_id = ? AND fencing_token = ?
+          )`,
+      ).bind(
+        `tdu_${uuid7()}`,
+        todo.todoId,
+        agent,
+        sessionName,
+        todo.fencingToken,
+        note,
+        updateSummary(note),
+        now,
+        todo.todoId,
+        this.userId,
+        todo.fencingToken,
+      ),
+    ]);
+    if (writes[1].meta.changes !== 1) return this.d1Conflict(todo.todoId);
+    const revived: CoordinatorTodo = {
+      ...todo,
+      state: "claimed",
+      leaseHolder: agent,
+      holderSession: session,
+      leaseExpiresAt: expiresAt,
+      mirrorGeneration: todo.mirrorGeneration + 1,
+      blockedOn: null,
+      completedAt: null,
+      lapsedHolder: null,
+      lapsedSession: null,
+    };
+    this.queueMirror(revived);
+    await this.scheduleNextAlarm();
+    return revived;
   }
 
   private async releaseClaim(
@@ -1116,6 +1310,8 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
     token: number,
     reason: string,
     sessionName: string | null = null,
+    /** An expiry, not a hand-back: the holder's token may revive it. */
+    lapse = false,
   ): Promise<TransitionResult> {
     const todo = this.read(todoId);
     if (todo === null) return missing();
@@ -1135,10 +1331,13 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
       ...todo,
       state: "pending",
       leaseHolder: null,
+      holderSession: null,
       leaseExpiresAt: null,
       mirrorGeneration: todo.mirrorGeneration + 1,
       blockedOn: null,
       completedAt: null,
+      lapsedHolder: lapse ? todo.leaseHolder : null,
+      lapsedSession: lapse ? todo.holderSession : null,
     });
     return { ok: true, token, expiresAt: null };
   }
@@ -1208,13 +1407,15 @@ export class TodoCoordinator extends DurableObject<CoordinatorEnv> {
       const updatedAt = nowSeconds();
       const result = await this.env.DB.prepare(
         `UPDATE todos
-            SET state = ?, lease_holder = ?, lease_expires_at = ?, blocked_on = ?,
-                completed_at = ?, updated_at = ?, mirror_generation = ?
+            SET state = ?, lease_holder = ?, holder_session = ?,
+                lease_expires_at = ?, blocked_on = ?, completed_at = ?,
+                updated_at = ?, mirror_generation = ?
           WHERE todo_id = ? AND user_id = ? AND fencing_token = ? AND mirror_generation < ?`,
       )
         .bind(
           todo.state,
           todo.leaseHolder,
+          todo.holderSession,
           todo.leaseExpiresAt,
           todo.blockedOn,
           todo.completedAt,
@@ -1293,6 +1494,22 @@ function isCoordinatorName(name: string | undefined): name is string {
 
 function nowSeconds(): number {
   return Math.floor(Date.now() / 1000);
+}
+
+/**
+ * The holder, for the paths that take no token: its agent, and its session
+ * when the claim recorded one. A claim from a client that sends no session
+ * keys on the agent alone, as every lease did before 2026-11-24.
+ */
+function isHolder(
+  todo: CoordinatorTodo,
+  agent: string,
+  session: string | null,
+): boolean {
+  return (
+    todo.leaseHolder === agent &&
+    (todo.holderSession === null || todo.holderSession === session)
+  );
 }
 
 function isExpired(todo: CoordinatorTodo, now: number): boolean {

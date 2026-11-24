@@ -216,6 +216,73 @@ to-do whose reopen outcome is uncertain is refused until the console retries.
 `test/mcp/claiming.worker.test.ts` and `test/mcp/todo-relations.worker.test.ts`
 cover the reopen, the stale token, and the dependent refusal.
 
+## Amendment, 2026-11-24: the holder is an agent and a session
+
+The lease holder was `provenance.agent`, the OAuth client id. Every Claude
+Code session on a machine shares one grant, so two parallel sessions had the
+same holder and were separated by the token alone, and `fetch` returned the
+token to anyone who asked. Leases also lapsed under agents still working: 69
+expiries against about 478 claims, and 18 writes refused for a stale token,
+each after the caller's own lease expired with nobody claiming in between.
+`docs/research/2026-11-24-claim-holder-session.md` has the numbers.
+
+A claim records the caller's `x-valise-session` as `holder_session`, in the
+coordinator and in the D1 row. The holder is the lease's agent, plus its
+session when the claim recorded one. A claim from a client that sends no
+session (claude.ai, ChatGPT, Claude Code without the plugin) keys on the agent
+alone, as every lease did before. The claim writes `lease_holder`,
+`holder_session` and `lease_expires_at` with the fence, in the same statement,
+so a read straight after the claim already knows the holder; `state` still
+reaches D1 through the mirror.
+
+The holder governs the two paths that take no token:
+
+- `fetch` returns `fencing_token` only to the holder. Up to 115 of 498
+  same-session writes fetched the to-do between claim and write, possibly to
+  recover the token, so the holder keeps that path. Another session of the
+  same client, or another client, gets no token.
+- A claim from the holder on its own live lease returns the current token and
+  renews the lease to the requested TTL, instead of `already claimed`. A
+  session whose context lost the token gets it back without waiting out its
+  own lease. It writes no log entry and does not bump the token. Every other
+  caller is still refused with the holder named.
+
+Guarded writes still check the token and the agent, not the session. A
+session id is not guaranteed stable: 3 of 9 long-running sessions showed two
+ids under one name, from a resume or a fork, and an agent may hand its token to
+the next session in a handoff file. Refusing those writes would stall work
+the token proves is theirs. The token is unreachable to another session now
+that `fetch` hides it, which is what separated sessions needed.
+
+A lease that expired while nobody claimed over it stays its holder's. A write
+whose token is still current, from the agent the lease was issued to, revives
+it before applying: the coordinator re-grants a 30-minute lease, logs a
+`claim` entry reading `revived its expired lease`, and the write proceeds. The
+alarm keeps the expired holder and session in coordinator storage
+(`lapsed_holder`, `lapsed_session`) so this works after the alarm has made the
+to-do `pending`; before the alarm runs, the expired `claimed` row serves. Any
+claim, override or close moves the token and ends revival; an explicit release
+clears the lapsed holder, so a released lease never comes back. A revival is
+a claim in all but the token, so structured prerequisites are checked, and a
+dependency added while the lease lapsed refuses it. Fencing still refuses
+exactly what it exists to refuse, a holder whose token was superseded. Losing
+coordinator storage loses the lapsed holder, and the write is refused as
+before.
+
+The token stays a plain counter. A secret beside it, as Vercel Board issues,
+matters when something leaks the token to a party that should not write. Here
+every caller is the same user through their own grants; the risk was a
+sibling session reusing a token it read, and `fetch` no longer shows it.
+
+A release now reschedules the alarm. It used to leave the alarm at the old
+lease's expiry, so the D1 mirror showed a released to-do as claimed until
+then; todo:tdo_013c8301 read `claimed` for 30 minutes after its release.
+
+`test/mcp/claim-holder.worker.test.ts` covers fetch visibility per session,
+the holder's re-claim and the refusals around it, revival after and before
+the alarm, the refusals after a re-claim, another agent or a release, a
+prerequisite added while the lease lapsed, and the release's alarm.
+
 ## Consequences
 
 ADR-0018 extends the per-ticket FIFO with shared readiness/exclusive graph

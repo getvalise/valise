@@ -114,6 +114,7 @@ export async function claimTodo(
     provenance.agent,
     input.ttl_seconds ?? 30 * 60,
     provenance.sessionName ?? null,
+    provenance.session,
   );
 }
 
@@ -145,6 +146,7 @@ export async function updateTodo(
     input.renew_ttl_seconds ?? null,
     provenance.sessionName ?? null,
     input.summary ?? null,
+    provenance.session,
   );
   if (!updated.ok) return updated;
   // Pointers are content, like the title and the tags the console edits
@@ -160,6 +162,7 @@ export async function updateTodo(
       provenance.agent,
       input.token,
       provenance.sessionName ?? null,
+      provenance.session,
     );
   if (input.blocked_on === undefined) return updated;
   return stub.block(
@@ -170,6 +173,7 @@ export async function updateTodo(
     provenance.sessionName ?? null,
     // The summary describes the progress body when there is one.
     input.body === undefined ? (input.summary ?? null) : null,
+    provenance.session,
   );
 }
 
@@ -195,6 +199,7 @@ export async function completeTodo(
     token,
     summary,
     provenance.sessionName ?? null,
+    provenance.session,
   );
 }
 
@@ -302,6 +307,8 @@ export type ConsoleTodo = {
   refs: TodoRef[];
   state: TodoState;
   leaseHolder: string | null;
+  /** The holder's session id, when its client sent one. ADR-0002. */
+  holderSession: string | null;
   leaseExpiresAt: number | null;
   fencingToken: number;
   blockedOn: string | null;
@@ -350,8 +357,9 @@ export async function listTodos(
   const { results } = await todoListStatement(
     db,
     `SELECT todo_id, title, body, project, tags_json, refs_json, state,
-              lease_holder, lease_expires_at, fencing_token, blocked_on,
-              source_agent, source_client, source_session, source_session_name,
+              lease_holder, holder_session, lease_expires_at, fencing_token,
+              blocked_on, source_agent, source_client, source_session,
+              source_session_name,
                created_at, updated_at, completed_at`,
     `AND (? = 0 OR state <> 'done')
        AND (? = 0 OR state = 'blocked')
@@ -465,8 +473,9 @@ export async function getTodo(
   const row = await db
     .prepare(
       `SELECT todo_id, title, body, project, tags_json, refs_json, state,
-              lease_holder, lease_expires_at, fencing_token, blocked_on,
-              source_agent, source_client, source_session, source_session_name,
+              lease_holder, holder_session, lease_expires_at, fencing_token,
+              blocked_on, source_agent, source_client, source_session,
+              source_session_name,
               created_at, updated_at, completed_at
          FROM todos
         WHERE todo_id = ? AND user_id = ?`,
@@ -689,6 +698,7 @@ type TodoRow = {
   refs_json: string;
   state: string;
   lease_holder: string | null;
+  holder_session: string | null;
   lease_expires_at: number | null;
   fencing_token: number;
   blocked_on: string | null;
@@ -711,6 +721,7 @@ function consoleTodo(row: TodoRow): ConsoleTodo {
     refs: parseRefs(row.refs_json),
     state: todoState(row.state),
     leaseHolder: row.lease_holder,
+    holderSession: row.holder_session,
     leaseExpiresAt: row.lease_expires_at,
     fencingToken: row.fencing_token,
     blockedOn: row.blocked_on,

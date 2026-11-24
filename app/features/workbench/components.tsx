@@ -924,6 +924,7 @@ function SpecimenTodo({
     refs: [],
     state: done ? "done" : state === "done" ? "pending" : state,
     leaseHolder: null,
+    holderSession: null,
     leaseExpiresAt: null,
     fencingToken: 1,
     blockedOn: null,
