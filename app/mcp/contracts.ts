@@ -1256,13 +1256,37 @@ const assetText = {
   project: z.string().trim().min(1).max(200),
 };
 
+/**
+ * A file the client attached, as ChatGPT fills an argument named in the
+ * tool's `_meta["openai/fileParams"]`. OpenAI's tool scan refuses a file
+ * schema that leaves out any of these four properties.
+ * https://developers.openai.com/apps-sdk/reference, "Define file inputs".
+ */
+export const attachedFileInput = z
+  .object({
+    download_url: z
+      .string()
+      .max(4096)
+      .describe("The client's temporary download URL for the file."),
+    file_id: z.string().max(500).describe("The client's id for the file."),
+    mime_type: z.string().max(200).optional(),
+    file_name: z.string().max(500).optional(),
+  })
+  .describe(
+    "A file the user attached in this chat, filled in by clients that attach files to tool calls, such as ChatGPT. Valise downloads and stores it; nothing else needs sending. Never put a web page's URL here.",
+  );
+
 export const uploadAssetInput = z.object({
+  file: attachedFileInput.optional(),
   file_name: z
     .string()
     .trim()
     .min(1)
     .max(200)
-    .describe("The file's name, such as screenshot.png."),
+    .optional()
+    .describe(
+      "The file's name, such as screenshot.png. Required unless file is given.",
+    ),
   content_type: z
     .string()
     .trim()
@@ -1274,7 +1298,10 @@ export const uploadAssetInput = z.object({
     .int()
     .min(1)
     .max(25 * 1024 * 1024)
-    .describe("The exact byte count, which the upload must match."),
+    .optional()
+    .describe(
+      "The exact byte count, which the upload must match. Required unless file is given.",
+    ),
   sha256: z
     .string()
     .trim()
@@ -1297,17 +1324,27 @@ export const uploadAssetInput = z.object({
     ),
 });
 
+/**
+ * Pending with a PUT to send, or ready when the call carried an attached
+ * file Valise downloaded itself. ADR-0015, amendment of 2026-11-25.
+ */
 export const uploadAssetOutput = z.looseObject({
   id: assetId,
   folder: assetId.optional(),
-  state: z.literal("pending"),
-  upload: z.looseObject({
-    method: z.literal("PUT"),
-    url: z.string(),
-    headers: z.record(z.string(), z.string()),
-    expires_at: z.number(),
-    command: z.string(),
-  }),
+  state: z.enum(["pending", "ready"]),
+  upload: z
+    .looseObject({
+      method: z.literal("PUT"),
+      url: z.string(),
+      headers: z.record(z.string(), z.string()),
+      expires_at: z.number(),
+      command: z.string(),
+    })
+    .optional(),
+  file_name: z.string().optional(),
+  content_type: z.string().optional(),
+  size: z.number().optional(),
+  sha256: z.string().optional(),
   max_bytes: z.number(),
   next: z.string(),
 });

@@ -6,6 +6,7 @@ import {
   assetRef,
   assetReferences,
   assetUnpublishStatements,
+  type BeginAssetUpload,
   beginAssetUpload,
   finalizeAssetUpload,
   listAssets,
@@ -54,21 +55,45 @@ export async function uploadAssetFile(
   provenance: Provenance,
 ): Promise<Asset> {
   if (file.size === 0) throw new AssetRefused("That file is empty.");
-  const { asset } = await beginAssetUpload(
+  return storeAssetBytes(
     env,
     {
       fileName: file.name,
       contentType: file.type,
-      size: file.size,
       title: details.title,
       description: details.description,
       expiresInSeconds: details.expiresInSeconds,
     },
+    await file.arrayBuffer(),
     provenance,
   );
-  const bytes = await file.arrayBuffer();
+}
+
+/**
+ * Bytes already in this Worker, stored as a ready asset: begin, stage and
+ * finalize in one request, the path `PUT /uploads/{id}` runs for a remote
+ * client. A declared checksum is checked before any row is written. A
+ * finalize that fails leaves a pending row that the nightly cleanup removes
+ * once its upload expires, as an abandoned PUT does.
+ */
+export async function storeAssetBytes(
+  env: AssetEnv,
+  input: Omit<BeginAssetUpload, "size">,
+  bytes: ArrayBuffer,
+  provenance: Provenance,
+): Promise<Asset> {
+  const sha256 = await sha256Hex(bytes);
+  if (input.sha256 && input.sha256.toLowerCase() !== sha256)
+    throw new AssetRefused(
+      `The file hashes to ${sha256}, not the declared ${input.sha256}.`,
+    );
+  const { asset } = await beginAssetUpload(
+    env,
+    { ...input, size: bytes.byteLength },
+    provenance,
+  );
   await env.BUNDLES.put(uploadKey(provenance.userId, asset.assetId), bytes, {
-    customMetadata: { sha256: await sha256Hex(bytes) },
+    customMetadata: { sha256 },
   });
   const finalized = await finalizeAssetUpload(
     env,
