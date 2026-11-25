@@ -2,7 +2,7 @@
 
 # Valise
 
-One MCP endpoint that carries your skills, memories, and to-dos between models and agents.
+One MCP endpoint that carries your skills, memories, conversations and to-dos between models and agents.
 
 ![The Valise console: to-dos, memories and skills](docs/images/valise-console.gif)
 
@@ -11,13 +11,14 @@ People who work with several models at once (Claude on the phone, ChatGPT on the
 ## What it holds
 
 - **To-dos.** Tickets any agent can claim atomically, with a lease and a fencing token, then update with progress and close. Parent and dependency links decide what is ready. A client's own task list keeps the small steps; Valise holds the work that has to survive a session or be visible to another agent.
-- **Skills.** One version of record, served three ways: as SEP-2640 `skill://` resources for clients that speak the extension, as one MCP tool per skill for clients that do not, and through `list_skills` and `get_skill`. Skills can be imported from a Git repository and follow it upstream.
+- **Skills.** One version of record, served three ways: as SEP-2640 `skill://` resources for clients that speak the extension, as one MCP tool per skill for clients that do not, and through `list_skills` and `get_skill`. Skills can be imported from a Git repository and followed upstream.
 - **Memories.** Typed (decision, insight, fact, preference, reference, episode), grouped into subjects, written by agents through capture tools and reviewed by you in the console.
-- **Library.** Original files and saved sources (bookmarks, PDFs, books, page snapshots from the Chrome extension) with their extracted text.
+- **Library.** Original files and saved sources (store bookmarks, PDFs, books, page snapshots from the Chrome extension) with their extracted, searchable text.
 - **Transcripts.** Conversations from Claude Code, Codex and OpenCode, sent by the `valise` CLI.
+- **Hooks.** Add, test or adjust personalised hooks for your agent on a session start, errors, and more.
 - **One search** across all of it: BM25 over a single projection, exposed as the `search` and `fetch` pair ChatGPT expects and as typed tools everywhere else.
 
-The browser console at `/` manages all of the above, plus tokens, OAuth grants, people and invites.
+Manage all of the above with your agent or in the browser, plus tokens, OAuth grants, people and invites.
 
 ## Run your own
 
@@ -71,7 +72,7 @@ The [`clients/valise/`](clients/valise/README.md) plugin for Claude Code and Cod
 
 ## The `valise` CLI
 
-[`clients/valise-cli/`](clients/valise-cli/README.md) sends the conversations this machine holds from Claude Code, Codex and OpenCode to Valise as transcripts: every existing session once, then each new one as its client writes it. It is dependency-free Node 22 or later, signs in over a loopback OAuth client whose grant can only send and read transcripts, and keeps successful tool results and tool definitions on the machine ([ADR-0022](docs/adr/0022-transcripts-concept-and-cli-grant.md)).
+[`clients/valise-cli/`](clients/valise-cli/README.md) sends the conversations the machine holds from Claude Code, Codex and OpenCode to Valise as transcripts: every existing session once, then each new one as its client writes it. It is dependency-free Node 22 or later, signs in over a loopback OAuth client whose grant can only send and read transcripts, and keeps successful tool results and tool definitions on the machine ([ADR-0022](docs/adr/0022-transcripts-concept-and-cli-grant.md)).
 
 ```sh
 npm run cli:install                    # from a checkout: puts `valise` on PATH
