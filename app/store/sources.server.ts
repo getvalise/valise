@@ -9,6 +9,7 @@ import {
 } from "~/concepts/source-enrichment";
 import { captureImages } from "~/concepts/source-images";
 import { type Capture, captureBookmark } from "~/concepts/source-paste";
+import { querySources, type SourceQuery } from "~/concepts/source-query";
 import {
   deleteSource,
   listSourceRevisions,
@@ -43,6 +44,8 @@ export function sourceStore(
     get: (sourceId: string) => readSource(db, userId, sourceId),
     page: (archived: boolean, options?: SourcePageOptions) =>
       listSourcesPage(db, userId, archived, options),
+    /** `list_sources`: compact rows a keyset page at a time. */
+    query: (input: SourceQuery) => querySources(db, userId, input),
     article: (sourceId: string) => readSourceArticle(db, userId, sourceId),
     enrichment: (sourceId: string) =>
       readSourceEnrichment(db, userId, sourceId),

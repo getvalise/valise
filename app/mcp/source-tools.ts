@@ -1,5 +1,6 @@
 import type { McpServer } from "@modelcontextprotocol/server";
 import { assetIdOf, assetRef } from "~/concepts/assets";
+import { ListCursorError } from "~/concepts/list-cursor";
 import type { SourceArticleSummary } from "~/concepts/source-articles";
 import type { ImageCapture } from "~/concepts/source-images";
 import {
@@ -10,14 +11,42 @@ import {
   sourceIdOf,
   sourceRef,
 } from "~/concepts/sources";
-import { saveSourceInput, saveSourceOutput } from "~/mcp/contracts";
-import { textResult, toolError } from "~/mcp/results";
+import {
+  listSourcesInput,
+  listSourcesOutput,
+  saveSourceInput,
+  saveSourceOutput,
+} from "~/mcp/contracts";
+import { textResult, toolError, withoutEmpty } from "~/mcp/results";
 import type { TenantStore } from "~/store/tenant.server";
 
 const VOCABULARY_LIMIT = 50;
 
-/** `save_source`, ADR-0015. Reads go through search and fetch. */
+/**
+ * `save_source` and `list_sources`, ADR-0015. Finding a source by what it
+ * says goes through search; reading one whole goes through fetch.
+ */
 export function registerSourceTools(server: McpServer, store: TenantStore) {
+  server.registerTool(
+    "list_sources",
+    {
+      title: "Page through Valise sources",
+      description:
+        "Enumerate saved sources (bookmarks, documents, images, references), newest saved first, by project, kind, tags (all must match), archived (default false), or saved_since (inclusive) and saved_before (exclusive), Unix seconds. Returns compact rows with url and authors, never notes or page text; fetch an id for the whole source. Follow next_cursor with the same filters until null for a complete listing. To find sources about a topic or by an author, use search instead.",
+      inputSchema: listSourcesInput,
+      outputSchema: listSourcesOutput,
+    },
+    async (input) => {
+      try {
+        const page = await store.sources.query(input);
+        return textResult({ ...page, sources: page.sources.map(withoutEmpty) });
+      } catch (error) {
+        if (error instanceof ListCursorError) return toolError(error.message);
+        throw error;
+      }
+    },
+  );
+
   server.registerTool(
     "save_source",
     {

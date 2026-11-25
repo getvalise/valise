@@ -101,6 +101,7 @@ describe("MCP scopes", () => {
       "memories:write",
     ],
     ["list_subjects", {}, "memories:read"],
+    ["list_memories", {}, "memories:read"],
     ["save_subject", { name: "Scope test", kind: "topic" }, "memories:write"],
     [
       "edit_subject",
@@ -138,6 +139,7 @@ describe("MCP scopes", () => {
       { kind: "bookmark", title: "Scope", url: "https://example.com/" },
       "sources:write",
     ],
+    ["list_sources", {}, "sources:read"],
   ] as const)("requires %s", async (name, args, scope) => {
     const deniedToken = await bearerFor(
       MCP_SCOPES.find((candidate) => candidate !== scope) ?? "search:read",

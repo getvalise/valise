@@ -607,6 +607,25 @@ export const listReadyOutput = z.looseObject({
 });
 
 const unixSeconds = z.number().int().min(0).max(253402300799);
+// Null and "" start a listing too: a model that fills every field has no
+// other way to say "no cursor", and neither can be a real cursor. Anything
+// else that is not a next_cursor is still refused.
+const pageCursor = z
+  .string()
+  .max(4096)
+  .nullable()
+  .optional()
+  .describe(
+    "Opaque next_cursor from the preceding page. Repeat the same filters. Omit or pass null to start a new listing.",
+  );
+const pageLimit = z.number().int().min(1).max(100).optional();
+/** A page of `list_todos`, `list_memories` or `list_sources`. */
+const pageFields = {
+  generated_at: z.number(),
+  limit: z.number(),
+  next_cursor: z.string().nullable(),
+  has_more: z.boolean(),
+};
 const queryTodoState = z.enum(["pending", "claimed", "blocked", "done"]);
 export const listTodosInput = z
   .object({
@@ -622,18 +641,8 @@ export const listTodosInput = z
       .describe(
         "Exclusive Unix seconds on completed_at: with completed_since, the window [completed_since, completed_before). Implies done.",
       ),
-    // Null and "" start a listing too: a model that fills every field has no
-    // other way to say "no cursor", and neither can be a real cursor. Anything
-    // else that is not a next_cursor is still refused.
-    cursor: z
-      .string()
-      .max(4096)
-      .nullable()
-      .optional()
-      .describe(
-        "Opaque next_cursor from the preceding page. Repeat the same filters. Omit or pass null to start a new listing.",
-      ),
-    limit: z.number().int().min(1).max(100).optional(),
+    cursor: pageCursor,
+    limit: pageLimit,
   })
   .refine(
     (input) =>
@@ -691,6 +700,53 @@ export const listTodosOutput = z.looseObject({
       refs: z
         .array(z.looseObject({ kind: z.string(), value: z.string() }))
         .optional(),
+    }),
+  ),
+});
+/** `list_memories`. Rows leave out a null project and empty tags. */
+export const listMemoriesInput = z
+  .object({
+    project: z.string().trim().min(1).max(200).optional(),
+    memory_type: z
+      .string()
+      .trim()
+      .min(1)
+      .max(100)
+      .optional()
+      .describe("Such as user, feedback, project or reference. Any case."),
+    tags: z
+      .array(tag)
+      .max(20)
+      .optional()
+      .describe("Every tag listed must be on the memory."),
+    updated_since: unixSeconds
+      .optional()
+      .describe("Inclusive Unix seconds on updated_at."),
+    updated_before: unixSeconds
+      .optional()
+      .describe("Exclusive Unix seconds on updated_at."),
+    cursor: pageCursor,
+    limit: pageLimit,
+  })
+  .refine(
+    (input) =>
+      input.updated_since === undefined ||
+      input.updated_before === undefined ||
+      input.updated_before > input.updated_since,
+    "updated_before must be later than updated_since",
+  );
+export const listMemoriesOutput = z.looseObject({
+  ...pageFields,
+  memories: z.array(
+    z.looseObject({
+      id: memoryId,
+      title: z.string(),
+      summary: z.string().optional(),
+      memory_type: z.string(),
+      project: z.string().optional(),
+      tags: z.array(z.string()).optional(),
+      created_at: z.number(),
+      updated_at: z.number(),
     }),
   ),
 });
@@ -1538,3 +1594,56 @@ export const saveSourceOutput = z.union([
 ]);
 
 export type SaveSourceInput = z.infer<typeof saveSourceInput>;
+
+/**
+ * `list_sources`. Rows leave out a null url, project or archived_at, and
+ * empty tags or authors.
+ */
+export const listSourcesInput = z
+  .object({
+    project: z.string().trim().min(1).max(200).optional(),
+    kind: z
+      .enum(SOURCE_KINDS.map(([name]) => name) as [SourceKind, ...SourceKind[]])
+      .optional(),
+    tags: z
+      .array(tag)
+      .max(20)
+      .optional()
+      .describe("Every tag listed must be on the source."),
+    archived: z
+      .boolean()
+      .optional()
+      .describe("true lists archived sources instead of live ones."),
+    saved_since: unixSeconds
+      .optional()
+      .describe("Inclusive Unix seconds on created_at, when first saved."),
+    saved_before: unixSeconds
+      .optional()
+      .describe("Exclusive Unix seconds on created_at."),
+    cursor: pageCursor,
+    limit: pageLimit,
+  })
+  .refine(
+    (input) =>
+      input.saved_since === undefined ||
+      input.saved_before === undefined ||
+      input.saved_before > input.saved_since,
+    "saved_before must be later than saved_since",
+  );
+export const listSourcesOutput = z.looseObject({
+  ...pageFields,
+  sources: z.array(
+    z.looseObject({
+      id: sourceId,
+      title: z.string(),
+      url: z.string().optional(),
+      kind: z.string(),
+      project: z.string().optional(),
+      tags: z.array(z.string()).optional(),
+      authors: z.array(z.string()).optional(),
+      created_at: z.number(),
+      updated_at: z.number(),
+      archived_at: z.number().optional(),
+    }),
+  ),
+});

@@ -23,8 +23,10 @@ import {
   getBriefInput,
   getSkillInput,
   listHooksInput,
+  listMemoriesInput,
   listReadyInput,
   listSkillsInput,
+  listSourcesInput,
   listSubjectsInput,
   listTodosInput,
   proposeHookInput,
@@ -98,6 +100,7 @@ const toolRequirements = {
   edit_todo_tags: { schema: editTodoTagsInput, scope: "todos:write" },
   save_memory: { schema: saveMemoryInput, scope: "memories:write" },
   edit_memory: { schema: editMemoryInput, scope: "memories:write" },
+  list_memories: { schema: listMemoriesInput, scope: "memories:read" },
   list_subjects: { schema: listSubjectsInput, scope: "memories:read" },
   save_subject: { schema: saveSubjectInput, scope: "memories:write" },
   edit_subject: { schema: editSubjectInput, scope: "memories:write" },
@@ -112,6 +115,7 @@ const toolRequirements = {
   update_asset: { schema: updateAssetInput, scope: "assets:write" },
   get_asset_download: { schema: getAssetDownloadInput, scope: "assets:read" },
   save_source: { schema: saveSourceInput, scope: "sources:write" },
+  list_sources: { schema: listSourcesInput, scope: "sources:read" },
 } as const satisfies Record<
   string,
   {

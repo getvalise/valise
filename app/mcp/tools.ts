@@ -21,6 +21,7 @@ import {
   useReasons,
   useScore,
 } from "~/concepts/library-use";
+import { ListCursorError } from "~/concepts/list-cursor";
 import type { Provenance } from "~/concepts/memories";
 import { MemorySubjectError } from "~/concepts/memories";
 import { MemoryLinkError } from "~/concepts/memory-links";
@@ -72,6 +73,8 @@ import {
   getSkillOutput,
   listHooksInput,
   listHooksOutput,
+  listMemoriesInput,
+  listMemoriesOutput,
   listReadyInput,
   listReadyOutput,
   listSkillsInput,
@@ -1025,6 +1028,29 @@ export async function createServer(
         page,
         has_more: hasMore,
       });
+    },
+  );
+
+  server.registerTool(
+    "list_memories",
+    {
+      title: "Page through Valise memories",
+      description:
+        "Enumerate saved memories, newest saved first, by project, memory_type, tags (all must match), or updated_since (inclusive) and updated_before (exclusive), Unix seconds. Returns compact rows with a one-line summary, never bodies; fetch an id for the whole memory. Follow next_cursor with the same filters until null for a complete listing; an edit never moves a row between pages. To find memories about a topic, use search instead.",
+      inputSchema: listMemoriesInput,
+      outputSchema: listMemoriesOutput,
+    },
+    async (input) => {
+      try {
+        const page = await store.memories.query(input);
+        return textResult({
+          ...page,
+          memories: page.memories.map(withoutEmpty),
+        });
+      } catch (error) {
+        if (error instanceof ListCursorError) return toolError(error.message);
+        throw error;
+      }
     },
   );
 
