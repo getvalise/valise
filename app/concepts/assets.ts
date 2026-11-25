@@ -1119,7 +1119,8 @@ function requirePepper(env: AssetEnv): string {
   return env.TOKEN_PEPPER;
 }
 
-async function digest(pepper: string, message: string): Promise<string> {
+/** HMAC-SHA-256 under the pepper, base64url: every capability URL's signature. */
+export async function digest(pepper: string, message: string): Promise<string> {
   const key = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(pepper),
@@ -1135,7 +1136,7 @@ async function digest(pepper: string, message: string): Promise<string> {
   return base64Url(new Uint8Array(signature));
 }
 
-function sameDigest(stored: string | null, presented: string): boolean {
+export function sameDigest(stored: string | null, presented: string): boolean {
   if (stored === null) return false;
   const a = new TextEncoder().encode(stored);
   const b = new TextEncoder().encode(presented);

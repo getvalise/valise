@@ -14,6 +14,7 @@ export const MCP_SCOPES = [
   "sources:write",
   "transcripts:read",
   "transcripts:write",
+  "hooks:exec",
 ] as const;
 
 export type McpScope = (typeof MCP_SCOPES)[number];
@@ -30,6 +31,18 @@ export function normalizeMcpScopes(scopes: Iterable<string>): McpScope[] {
   return MCP_SCOPES.filter((scope) => requested.has(scope));
 }
 
+/**
+ * Scopes a client holds only by naming them, never through the whole-case
+ * grant: `hooks:exec` reads the approved hooks a machine runs (ADR-0023), so
+ * a connector that asked for `search:read` alone must not get it.
+ */
+export const NAMED_ONLY_SCOPES: readonly McpScope[] = ["hooks:exec"];
+
+/** What consent grants a client that names nothing beyond `search:read`. */
+export const WHOLE_CASE_SCOPES: readonly McpScope[] = MCP_SCOPES.filter(
+  (scope) => !NAMED_ONLY_SCOPES.includes(scope),
+);
+
 /** The scope the resource metadata requires, and the one connectors ask for. */
 export const REQUIRED_SCOPE = "search:read" satisfies McpScope;
 
@@ -39,11 +52,12 @@ export const REQUIRED_SCOPE = "search:read" satisfies McpScope;
  * minimum: claude.ai asks for `search:read` and then calls everything, which
  * is why consent grants the whole case (ADR-0004, V1-7). A request that names
  * more means it and gets exactly what it named (ADR-0022), so a Valise CLI
- * asking for `transcripts:write` holds that and nothing else.
+ * asking for `transcripts:write` holds that and nothing else. The whole case
+ * leaves out `NAMED_ONLY_SCOPES` (ADR-0023).
  */
 export function consentGrant(requested: Iterable<string>): McpScope[] {
   const named = normalizeMcpScopes(requested);
   return named.some((scope) => scope !== REQUIRED_SCOPE)
     ? named
-    : [...MCP_SCOPES];
+    : [...WHOLE_CASE_SCOPES];
 }

@@ -1,6 +1,6 @@
 import { env, SELF } from "cloudflare:test";
 import { describe, expect, it } from "vitest";
-import { MCP_SCOPES } from "~/auth/scopes";
+import { WHOLE_CASE_SCOPES } from "~/auth/scopes";
 import {
   listOAuthConnections,
   revokeOAuthConnection,
@@ -149,7 +149,7 @@ describe("OAuth provider", () => {
       {
         clientId: client.client_id,
         clientName: "Valise OAuth test",
-        scopes: [...MCP_SCOPES].sort(),
+        scopes: [...WHOLE_CASE_SCOPES].sort(),
       },
     ]);
     await expect(
@@ -395,7 +395,9 @@ describe("OAuth provider", () => {
 
     // A connector's minimum, or a request naming nothing the vocabulary
     // knows, keeps the one-consent grant of ADR-0004 V1-7.
-    const whole = await connectLoopback("search:read openid", [...MCP_SCOPES]);
+    const whole = await connectLoopback("search:read openid", [
+      ...WHOLE_CASE_SCOPES,
+    ]);
     expect(whole.page).toContain(
       "One approval covers the whole case. This client will not ask again:",
     );

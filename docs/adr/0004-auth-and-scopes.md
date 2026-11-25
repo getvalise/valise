@@ -19,6 +19,16 @@ claude.ai and ChatGPT connectors expect OAuth with PKCE and dynamic client regis
 
 ## Amendments
 
+- 2026-11-25, `hooks:exec`, the first scope a client holds only by naming it.
+  ADR-0023 adds `hooks:exec`: it reads the hook manifest, which hands out
+  approved code to run, and posts run reports. `NAMED_ONLY_SCOPES` in
+  `app/auth/scopes.ts` lists it, and `consentGrant()` gives a client that
+  names nothing beyond `search:read` `WHOLE_CASE_SCOPES`, the vocabulary
+  without it. claude.ai and ChatGPT therefore never hold it through the
+  one-consent grant of V1-7. The consent page says "One approval covers the
+  whole case" when the grant holds every whole-case scope. Like every scope
+  after the first seven, it is stored in `bearer_token_grants`, so no
+  migration.
 - 2026-10-25, Chrome extension OAuth. The capture extension connects with
   OAuth instead of a pasted console bearer, at the owner's request. Its
   callback is Chrome's `https://<extension-id>.chromiumapp.org/`, which

@@ -1808,6 +1808,51 @@ export const hookRunnableDecisions = sqliteTable(
   ],
 );
 
+/**
+ * One run of a runnable entry on one machine, as its runner reported it,
+ * ADR-0023. `run_id` is the runner's own id, so a report sent twice is one
+ * row. Feeds the manifest's cross-machine daily cost and run count and the
+ * brief's results line; kept 90 days, and never part of `spend_daily`, since
+ * a hook's model call is paid by the owner's own account.
+ */
+export const hookRuns = sqliteTable(
+  "hook_runs",
+  {
+    userId: text("user_id").notNull(),
+    runId: text("run_id").notNull(),
+    runnableId: text("runnable_id")
+      .notNull()
+      .references(() => hookRunnables.runnableId),
+    versionHash: text("version_hash").notNull(),
+    machine: text("machine").notNull(),
+    session: text("session"),
+    repo: text("repo"),
+    /** Unix seconds when the run started, as the runner saw it. */
+    startedAt: integer("started_at").notNull(),
+    durationMs: integer("duration_ms").notNull(),
+    outcome: text("outcome", {
+      enum: ["ok", "failed", "timeout", "violation"],
+    }).notNull(),
+    /** What the entry reported to `$VALISE_HOOK_REPORT`; null is unpriced. */
+    costMicrousd: integer("cost_microusd"),
+    /** The entry's own result line, at most 2 KiB. */
+    result: text("result"),
+    receivedAt: integer("received_at").notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.userId, table.runId] }),
+    index("hook_runs_runnable").on(
+      table.userId,
+      table.runnableId,
+      table.startedAt,
+    ),
+    check(
+      "hook_runs_outcome",
+      sql`${table.outcome} IN ('ok', 'failed', 'timeout', 'violation')`,
+    ),
+  ],
+);
+
 // --- Observability ----------------------------------------------------------
 
 // Both tables below keep time in milliseconds, unlike every other timestamp in

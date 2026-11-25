@@ -8,6 +8,12 @@ import { chromeExtensionId } from "~/auth/chrome-extension";
 import { bearerTokenProps } from "~/auth/principal";
 import { MCP_SCOPES, type McpScope } from "~/auth/scopes";
 import { resolveBearerToken } from "~/concepts/tokens";
+import {
+  HOOKS_MANIFEST_PATH,
+  HOOKS_RUNS_PATH,
+  handleHooks,
+  isHooksPath,
+} from "./hooks";
 import { mcpHandler } from "./mcp";
 import { handleTranscripts, TRANSCRIPTS_PATH } from "./transcripts";
 
@@ -31,6 +37,7 @@ export function isOAuthProviderPath(pathname: string, env: OAuthEnv): boolean {
   return (
     pathname === new URL(env.MCP_RESOURCE_URL).pathname ||
     pathname === TRANSCRIPTS_PATH ||
+    isHooksPath(pathname) ||
     pathname === "/authorize" ||
     pathname === "/token" ||
     pathname === "/register" ||
@@ -64,14 +71,21 @@ export function oauthOptions(
   defaultHandler: ExportedHandler<OAuthEnv>,
 ): OAuthProviderOptions<OAuthEnv> {
   return {
-    // Both routes take the same tokens: the provider validates a bearer
+    // Every route takes the same tokens: the provider validates a bearer
     // against the one configured resource, then hands the request on.
-    apiRoute: [new URL(env.MCP_RESOURCE_URL).pathname, TRANSCRIPTS_PATH],
+    apiRoute: [
+      new URL(env.MCP_RESOURCE_URL).pathname,
+      TRANSCRIPTS_PATH,
+      HOOKS_MANIFEST_PATH,
+      HOOKS_RUNS_PATH,
+    ],
     apiHandler: {
       fetch(request: Request, env: OAuthEnv, ctx: ExecutionContext) {
-        return new URL(request.url).pathname === TRANSCRIPTS_PATH
-          ? handleTranscripts(request, env, ctx)
-          : mcpHandler.fetch(request, env, ctx);
+        const { pathname } = new URL(request.url);
+        if (pathname === TRANSCRIPTS_PATH)
+          return handleTranscripts(request, env, ctx);
+        if (isHooksPath(pathname)) return handleHooks(request, env, ctx);
+        return mcpHandler.fetch(request, env, ctx);
       },
     },
     defaultHandler,

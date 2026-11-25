@@ -13,6 +13,11 @@ import {
 } from "~/concepts/attachments";
 import { readHookConfig, writeHookConfig } from "~/concepts/hook-config";
 import {
+  type RunReport,
+  readHookManifest,
+  recordHookRun,
+} from "~/concepts/hook-manifest";
+import {
   isRunnableName,
   listRunnables,
   type ProposeRunnableInput,
@@ -40,7 +45,11 @@ export function activityStore(data: Data, userId: string) {
 }
 
 /** The tenant's hook configuration, one document per tenant. */
-export function hookStore(data: Data, userId: string, provenance: Provenance) {
+export function hookStore(
+  data: Data & { TOKEN_PEPPER?: string },
+  userId: string,
+  provenance: Provenance,
+) {
   return Object.freeze({
     read: () => readHookConfig(data, userId),
     write: (document: string) => writeHookConfig(data, userId, document),
@@ -52,6 +61,10 @@ export function hookStore(data: Data, userId: string, provenance: Provenance) {
         readRunnableVersion(data.DB, userId, versionHash),
       propose: (input: ProposeRunnableInput) =>
         proposeRunnable(data, input, provenance),
+      /** What a machine runs: approved, enabled entries. `hooks:exec`. */
+      manifest: (origin: string) => readHookManifest(data, userId, origin),
+      /** One runner report; a violation suspends the approved version. */
+      recordRun: (report: RunReport) => recordHookRun(data.DB, userId, report),
     }),
   });
 }
