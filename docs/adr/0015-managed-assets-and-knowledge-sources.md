@@ -49,6 +49,7 @@ There is no PDF parsing, OCR, automatic webpage fetching, chunking, embedding, o
 | `update_asset` | `assets:write` | Edit descriptive metadata or retention, never original bytes; reject expiry on assets referenced by sources. |
 | `get_asset_download` | `assets:read` | Resolve a ready, unexpired asset ID to a short-lived download URL. |
 | `save_source` | `sources:write` | Create a source or append a revision with an expected revision for conflict detection. |
+| `list_sources` | `sources:read` | Page through sources' head metadata, newest saved first. Added 2026-11-24. |
 
 Add `assets:read`, `assets:write`, `sources:read`, and `sources:write` to the scope registry. Existing `search:read` remains a cross-concept grant to search and fetch authoritative text/metadata, including asset and source records. It does not grant binary downloads. `sources:read` supports source-specific reads outside the generic search pair. Linking an asset into a source additionally requires `assets:read`; a source reference does not grant access to the bytes. Consequently, the old "exactly one scope per tool" rule is amended where an operation accesses linked assets. Upload credentials are limited to the specific pending object.
 
@@ -80,6 +81,11 @@ Dogfood checks: save a bookmark with notes and find it from another client; uplo
 
 ## Amendments
 
+- 2026-11-24, `list_sources`. Owner request from the MeOS session: a
+  paginated listing of sources by project, kind, tags, archived state and
+  saved time, returning each head revision's title, url, kind, project,
+  tags and authors without notes, article text or assets. `sources:read` is
+  its scope. ADR-0003's amendment of the same date holds the contract.
 - 2026-11-24, hook files. ADR-0023 stores a runnable hook entry's files as
   assets with a new nullable `purpose` column set to `hook`. Such an asset
   has no search projection, is not listed in Library, is not reachable by an

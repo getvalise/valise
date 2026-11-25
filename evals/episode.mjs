@@ -8,6 +8,8 @@ const READ_ONLY = [
   "list_ready",
   "get_brief",
   "list_todos",
+  "list_memories",
+  "list_sources",
   "list_skills",
   "get_skill",
   "list_hooks",

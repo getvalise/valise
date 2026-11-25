@@ -28,6 +28,7 @@ import {
   listMemoryLinkTargets,
   type MemoryRelation,
 } from "~/concepts/memory-links";
+import { type MemoryQuery, queryMemories } from "~/concepts/memory-query";
 import { readOnboarding, setOnboardingDismissed } from "~/concepts/onboarding";
 import type { ListWindow } from "~/concepts/pagination";
 import {
@@ -286,6 +287,8 @@ function memoryStore(
       list: (filters: ListFilters = {}, window?: ListWindow) =>
         listMemories(db, userId, filters, window),
       count: (filters: ListFilters = {}) => countMemories(db, userId, filters),
+      /** `list_memories`: compact rows a keyset page at a time. */
+      query: (input: MemoryQuery) => queryMemories(db, userId, input),
       types: () => listMemoryTypes(db, userId),
       usage: () => readMemoryUsage(db, userId),
       revisions: (id: string) => listMemoryRevisions(db, userId, id),

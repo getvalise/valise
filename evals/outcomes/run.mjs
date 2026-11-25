@@ -395,6 +395,8 @@ const readOnly = new Set([
   "fetch",
   "get_brief",
   "list_todos",
+  "list_memories",
+  "list_sources",
   "list_ready",
   "list_skills",
   "get_skill",

@@ -110,10 +110,11 @@ export function withTag(filters: ListFilters, tag: string): ListFilters {
 /**
  * A row passes when no wanted tag is missing from `column`, a JSON array.
  * One placeholder, bound to `tagsParam(filters)`; an empty list passes all.
+ * A statement that numbers its parameters passes its own, such as `?9`.
  */
-export function everyTagSql(column: string): string {
+export function everyTagSql(column: string, placeholder = "?"): string {
   return `NOT EXISTS (
-            SELECT 1 FROM json_each(?) AS wanted
+            SELECT 1 FROM json_each(${placeholder}) AS wanted
              WHERE NOT EXISTS (
                SELECT 1 FROM json_each(${column}) AS have
                 WHERE lower(have.value) = lower(wanted.value)

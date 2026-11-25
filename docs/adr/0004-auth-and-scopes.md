@@ -252,3 +252,8 @@ claude.ai and ChatGPT connectors expect OAuth with PKCE and dynamic client regis
 ## Consequences
 
 Gained: every target client connects today; a leaked read-only token cannot write; provenance comes from auth context rather than caller-supplied strings. Given up: running our own authorization server means owning token lifecycle bugs; the DCR allowlist needs a line added whenever a new client family appears. Inherited: scope granularity is per-concept, not per-item; finer sharing (public skills, per-project tokens) is a future ADR.
+
+- 2026-11-24, list tools. `list_memories` uses `memories:read`, as
+  `list_subjects` does. `list_sources` uses `sources:read`, the first MCP tool
+  on that scope; before it only `GET /library/export` read with it. Neither
+  adds a scope. ADR-0003's amendment of the same date holds the contract.
