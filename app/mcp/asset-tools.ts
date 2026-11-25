@@ -35,21 +35,20 @@ export function registerAssetTools(
     {
       title: "Upload a file to Valise",
       description:
-        "Store a file, such as a screenshot or PDF, so another session or machine can fetch it later by id. Returns the asset id and a short-lived HTTP PUT URL: run the returned command to send the file's bytes, and a successful PUT stores the file. Never put file contents in a tool argument. Pass folder with a stored asset's id to keep the new file in that asset's folder, such as a page's stylesheet beside the page.",
+        "Store a file, such as a screenshot or PDF, so another session or machine can fetch it later by id. When the user attached the file in this chat and your client passes attachments as file, send it as file: Valise downloads and stores it, and the call returns it ready. Otherwise give file_name and size: the result has the asset id and a short-lived HTTP PUT URL, and running the returned command sends the bytes and stores the file. Never put file contents in a tool argument. Pass folder with a stored asset's id to keep the new file in that asset's folder, such as a page's stylesheet beside the page.",
       inputSchema: uploadAssetInput,
       outputSchema: uploadAssetOutput,
+      // ChatGPT fills `file` with a download URL for a file the user
+      // attached; other clients ignore the key. ADR-0015, 2026-11-25.
+      _meta: { "openai/fileParams": ["file"] },
     },
     async (input) => {
-      if (!origin) return toolError("This server has no upload origin.");
       try {
         const folderId =
           input.folder === undefined
             ? undefined
             : await library.joinableFolder(assetIdOf(input.folder) ?? "");
-        const { asset, token } = await library.beginUpload({
-          fileName: input.file_name,
-          contentType: input.content_type,
-          size: input.size,
+        const details = {
           sha256: input.sha256,
           title: input.title,
           description: input.description,
@@ -57,6 +56,37 @@ export function registerAssetTools(
           tags: input.tags,
           expiresInSeconds: input.expires_in_seconds,
           folderId,
+        };
+        if (input.file) {
+          const asset = await library.storeAttached(input.file, {
+            ...details,
+            fileName: input.file_name,
+            contentType: input.content_type,
+          });
+          return withCoverage(
+            textResult({
+              id: assetRef(asset.assetId),
+              ...(folderId ? { folder: assetRef(folderId) } : {}),
+              state: "ready" as const,
+              file_name: asset.fileName,
+              content_type: asset.contentType,
+              size: asset.size ?? asset.declaredSize,
+              sha256: asset.sha256 ?? undefined,
+              max_bytes: MAX_ASSET_BYTES,
+              next: "The file is stored. Keep the asset id; the chat's attachment link is not kept.",
+            }),
+          );
+        }
+        if (input.file_name === undefined || input.size === undefined)
+          return toolError(
+            "Give file_name and size for a PUT upload, or pass the attached file as file.",
+          );
+        if (!origin) return toolError("This server has no upload origin.");
+        const { asset, token } = await library.beginUpload({
+          fileName: input.file_name,
+          contentType: input.content_type,
+          size: input.size,
+          ...details,
         });
         const url = new URL(`/uploads/${asset.assetId}`, origin);
         url.searchParams.set("token", token);

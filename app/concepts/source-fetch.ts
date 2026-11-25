@@ -145,6 +145,7 @@ export async function fetchFollowing(
   start: URL,
   accept: string,
   fetcher: Fetcher = fetch,
+  timeoutMs = PAGE_TIMEOUT_MS,
 ): Promise<Response | null> {
   let url = start;
   try {
@@ -152,7 +153,7 @@ export async function fetchFollowing(
       const response = await fetcher(url.toString(), {
         redirect: "manual",
         headers: { "user-agent": FETCH_USER_AGENT, accept },
-        signal: AbortSignal.timeout(PAGE_TIMEOUT_MS),
+        signal: AbortSignal.timeout(timeoutMs),
       });
       const location = response.headers.get("location");
       if (response.status < 300 || response.status >= 400 || !location)

@@ -36,6 +36,10 @@ import {
   setAssetArchived,
   updateAsset,
 } from "~/concepts/assets";
+import {
+  type AttachedFile,
+  storeAttachedFile,
+} from "~/concepts/attached-files";
 import { listAuthors, readAuthor, sourcesByAuthor } from "~/concepts/authors";
 import {
   deleteAsset,
@@ -59,6 +63,7 @@ import {
 } from "~/concepts/library-use";
 import type { Provenance } from "~/concepts/memories";
 import { relatedLibraryItem } from "~/concepts/related-library";
+import type { Fetcher } from "~/concepts/source-fetch";
 import { rankedSearch } from "./search.server";
 
 /** The arguments a concept takes after its environment and owner. */
@@ -125,6 +130,12 @@ export function libraryStore(
     extraction: (assetId: string) => readAssetExtraction(db, userId, assetId),
     beginUpload: (input: BeginAssetUpload) =>
       beginAssetUpload(data, input, provenance),
+    /** A file the MCP client attached: downloaded here and stored ready. */
+    storeAttached: (
+      file: AttachedFile,
+      details: Parameters<typeof storeAttachedFile>[2],
+      fetcher?: Fetcher,
+    ) => storeAttachedFile(data, file, details, provenance, fetcher),
     update: (assetId: string, patch: AssetPatch) =>
       updateAsset(data, userId, assetId, patch),
     /** The folder an upload may join beside this asset; refuses others'. */

@@ -81,6 +81,29 @@ Dogfood checks: save a bookmark with notes and find it from another client; uplo
 
 ## Amendments
 
+- 2026-11-25, Valise downloads a file the client attached. ADR-0003's
+  amendment of the same date adds `upload_asset`'s `file` argument, which
+  ChatGPT fills through `openai/fileParams` with a temporary download URL.
+  `app/concepts/attached-files.ts` GETs that URL once, with no credentials,
+  through the bookmark fetcher's `fetchableUrl` and `fetchFollowing`: a
+  public https host name only, never an IP literal or a local name, at most
+  three redirects each held to the same rule, 30 s for the whole download,
+  and at most `MAX_ASSET_BYTES` (25 MiB) read, refused early when
+  `Content-Length` already says more. A 401, 403, 404 or 410 is reported as
+  an expired link with "attach the file again". Every refusal comes before
+  any row is written, so the call can be sent again unchanged. The bytes then
+  take the console upload's path, now `storeAssetBytes` in
+  `app/concepts/library.ts`: a declared `sha256` checked first, then begin,
+  staging key and `finalizeAssetUpload` in one request, which queues
+  processing as a PUT does. The client's `file_name` and `mime_type` win over
+  the response's `Content-Type` and the URL's last path segment. The download
+  URL and ChatGPT's `file_id` are not stored; the asset's source agent and
+  client record who uploaded it. A repeated call stores a second asset, as a
+  second PUT upload does. The PUT flow is unchanged for every other client.
+  `test/mcp/attached-files.worker.test.ts` injects the download and covers
+  the stored bytes, the absent credential and link, the type and name
+  fallbacks, the expired, oversized, empty, mismatched, non-https, private
+  and redirected cases, and the advertised schema.
 - 2026-11-24, `list_sources`. Owner request from the MeOS session: a
   paginated listing of sources by project, kind, tags, archived state and
   saved time, returning each head revision's title, url, kind, project,
