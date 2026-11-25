@@ -72,6 +72,10 @@ export const OMITTED = [
   "bearer_token_grants",
   "auth_events",
   "mcp_calls",
+  // Runner reports, ADR-0023: kept 90 days like a log. A restore loses at
+  // most the day's cross-machine cap counts; decisions they caused are in
+  // hook_runnable_decisions, which is backed up.
+  "hook_runs",
   "builtin_skill_sync",
   "builtin_skill_sweep",
   "vector_pending",

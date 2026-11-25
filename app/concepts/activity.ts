@@ -40,6 +40,8 @@ const ARGS_CAP = 8192;
 /** The log holds thirty days; the auth trail holds ninety. */
 const CALL_RETENTION_MS = 30 * 24 * 60 * 60 * 1000;
 const AUTH_RETENTION_MS = 90 * 24 * 60 * 60 * 1000;
+/** Runnable hook run reports, ADR-0023. */
+const HOOK_RUN_RETENTION_MS = 90 * 24 * 60 * 60 * 1000;
 
 export type McpCallRecord = {
   at: number;
@@ -193,8 +195,9 @@ export async function trimActivity(
   authEvents: number;
   sessions: number;
   embeddingUsage: number;
+  hookRuns: number;
 }> {
-  const [calls, authEvents, sessions, embeddingUsage] =
+  const [calls, authEvents, sessions, embeddingUsage, _spend, hookRuns] =
     await env.DB.batch<unknown>([
       env.DB.prepare("DELETE FROM mcp_calls WHERE at < ?").bind(
         now - CALL_RETENTION_MS,
@@ -207,12 +210,16 @@ export async function trimActivity(
       ),
       trimEmbeddingUsageStatement(env.DB),
       trimSpendStatement(env.DB),
+      env.DB.prepare("DELETE FROM hook_runs WHERE started_at < ?").bind(
+        Math.floor((now - HOOK_RUN_RETENTION_MS) / 1000),
+      ),
     ]);
   return {
     calls: calls.meta.changes ?? 0,
     authEvents: authEvents.meta.changes ?? 0,
     sessions: sessions.meta.changes ?? 0,
     embeddingUsage: embeddingUsage.meta.changes ?? 0,
+    hookRuns: hookRuns.meta.changes ?? 0,
   };
 }
 

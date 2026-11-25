@@ -294,3 +294,42 @@ flow, with its own interaction contract. Codex runs plugin command hooks only
 when it trusts the plugin, so runnable entries reach Claude Code first. The
 approval page's risk flags are pattern matches, a reading aid and not a
 sandbox; the owner's reading is the control.
+
+## Amendments
+
+- 2026-11-25, delivery as built. To-do
+  todo:tdo_03dd41f4-425d-4525-a94b-eedbe2c5c1f7.
+  - The two routes are `GET /mcp/hooks/manifest` and `POST /mcp/hooks/runs`,
+    not `/hooks/...`. They sit under `/mcp` beside `/mcp/transcripts`, so the
+    OAuth provider's API routes share one prefix, and nothing the provider
+    owns sits under the console's `/hooks` page. `workers/hooks.ts`.
+  - Hook file URLs are `GET /hook-files/{asset id}?expires=&signature=`,
+    signed for 10 minutes under the signature domain `hook-file:`, which
+    differs from the ADR-0015 download's `asset-download:`. That route
+    serves only `purpose = 'hook'` assets, and `/downloads/{id}` still serves
+    only `purpose IS NULL`. A hook-file signature cannot fetch a library
+    file, and an asset download signature cannot fetch a hook file. The
+    response carries `x-valise-sha256`. The runner still checks the hash of
+    what it received.
+  - `today` in each manifest entry is the reported cost and run count since
+    00:00 UTC, across machines.
+  - A run report is `{ run_id, name, version_hash, machine, session, repo,
+    started_at, duration_ms, outcome, cost_usd, result }`, and `outcome` is
+    one of `ok`, `failed`, `timeout`, `violation`. `run_id` is the runner's
+    own id, and `(user_id, run_id)` is the key, so a resent report is one
+    row and answers `recorded: false`. `result` is cut to 2 KiB of UTF-8. A
+    report naming a version that is not that entry's answers 404.
+  - A `violation` report records a `suspended` decision only when the
+    version is the approved one, and only in the batch that inserted the
+    run, so a resent report never suspends twice. Suspending only ever
+    removes what runs.
+  - `hook_runs` is migration 0069. It is in `OMITTED` in
+    `scripts/recovery-policy.mjs`, like `mcp_calls`: a restore loses at most
+    the day's cap counts, and any suspension a report caused is a decision
+    row, which is backed up. `trimActivity` deletes rows older than 90 days.
+  - Both routes record their call in `mcp_calls` through `observeCall`, as
+    method `hooks/manifest` or `hooks/runs` with required scope
+    `hooks:exec`. A machine fetching approved code shows in the logs tab
+    beside the agent that proposed it.
+  - Not in this change: the brief's results and failures lines, the console
+    view of runs, and the runner itself.

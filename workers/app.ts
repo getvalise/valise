@@ -16,6 +16,7 @@ import {
   sweepBuiltinSkills,
   syncBuiltinSkills,
 } from "~/concepts/builtin-skills";
+import { HOOK_FILE_PATH, serveHookFile } from "~/concepts/hook-manifest";
 import { cleanupLibrary } from "~/concepts/library";
 import { overnightMemoryReview } from "~/concepts/memory-review";
 import { checkAllUpstream } from "~/concepts/skills-upstream";
@@ -137,6 +138,14 @@ export default {
         : request.method === "GET" || request.method === "HEAD"
           ? serveAssetDownload(env, transfer[2], url)
           : new Response(null, { status: 405, headers: { allow: "GET" } });
+    }
+
+    // A hook file for a URL the hook manifest signed. ADR-0023.
+    const hookFile = HOOK_FILE_PATH.exec(url.pathname);
+    if (hookFile) {
+      return request.method === "GET"
+        ? serveHookFile(env, hookFile[1], url)
+        : new Response(null, { status: 405, headers: { allow: "GET" } });
     }
 
     if (url.pathname.startsWith("/archives/")) {
@@ -276,7 +285,7 @@ export default {
     ctx.waitUntil(
       meterJob(env, "trim", trimActivity).then((removed) => {
         console.log(
-          `trim: ${removed.calls} calls, ${removed.authEvents} auth events, ${removed.sessions} sessions, ${removed.embeddingUsage} embedding usage days`,
+          `trim: ${removed.calls} calls, ${removed.authEvents} auth events, ${removed.sessions} sessions, ${removed.embeddingUsage} embedding usage days, ${removed.hookRuns} hook runs`,
         );
       }),
     );

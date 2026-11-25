@@ -7,7 +7,7 @@ import {
   chromeExtensionGrant,
   chromeExtensionId,
 } from "~/auth/chrome-extension";
-import { consentGrant, MCP_SCOPES, type McpScope } from "~/auth/scopes";
+import { consentGrant, type McpScope, WHOLE_CASE_SCOPES } from "~/auth/scopes";
 import { recordAuthEvent } from "~/concepts/activity";
 import {
   type GoogleEnv,
@@ -188,6 +188,8 @@ const SCOPE_SENTENCES: Record<McpScope, string> = {
   "sources:write": "Save bookmarks, notes and file references as sources.",
   "transcripts:read": "Read the session transcripts your machines sent.",
   "transcripts:write": "Send session transcripts from this machine.",
+  "hooks:exec":
+    "Run the hooks you approved on this machine, and report how each run went.",
 };
 
 function consentPage(
@@ -217,10 +219,9 @@ function consentPage(
     user === null && googleHref !== null
       ? `<p class="auth-or">or</p><a class="button ghost google" href="${escapeHtml(googleHref)}"><img alt="" height="16" src="/google-g.svg" width="16">Continue with Google</a>`
       : "";
-  const coverage =
-    granted.length === MCP_SCOPES.length
-      ? "<p>One approval covers the whole case. This client will not ask again:</p>"
-      : "<p>This client asked for part of the case. It can do these things and nothing else:</p>";
+  const coverage = WHOLE_CASE_SCOPES.every((scope) => granted.includes(scope))
+    ? "<p>One approval covers the whole case. This client will not ask again:</p>"
+    : "<p>This client asked for part of the case. It can do these things and nothing else:</p>";
   return `<!doctype html>
 <html lang="en">
 <meta charset="utf-8">
